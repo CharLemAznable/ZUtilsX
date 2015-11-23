@@ -43,7 +43,6 @@
     XCTAssertEqualObjects([ZUXJson jsonStringFromObject:dict], dictJson);
     XCTAssertEqualObjects([ZUXJson objectFromJsonString:dictJson], dict);
     
-    ZUX_ENABLE_ALL_CATEGORIES;
     People *people = [[People alloc] init];
     people.name = @"John";
     people.age = 10;

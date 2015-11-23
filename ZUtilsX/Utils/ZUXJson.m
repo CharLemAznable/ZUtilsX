@@ -8,6 +8,7 @@
 
 #import "ZUXJson.h"
 #import "NSObject+ZUXJson.h"
+#import "ZUXCategory.h"
 #import "zarc.h"
 
 @implementation ZUXJson
@@ -24,17 +25,20 @@
 }
 
 + (id)objectFromJsonData:(NSData *)jsonData asClass:(Class)clazz {
+    ZUX_ENABLE_CATEGORY(ZUXJson_NSObject);
     return ZUX_AUTORELEASE([[clazz alloc] initWithJsonObject:
                             [self objectFromJsonData:jsonData]]);
 }
 
 + (id)objectFromJsonString:(NSString *)jsonString asClass:(Class)clazz {
+    ZUX_ENABLE_CATEGORY(ZUXJson_NSObject);
     return ZUX_AUTORELEASE([[clazz alloc] initWithJsonObject:
                             [self objectFromJsonString:jsonString]]);
 }
 
 + (NSData *)jsonDataFromObject:(id)object {
     if (![NSJSONSerialization isValidJSONObject:object]) {
+        ZUX_ENABLE_CATEGORY(ZUXJson_NSObject);
         id jsonObject = [object zuxJsonObject];
         if (![NSJSONSerialization isValidJSONObject:jsonObject])
             return [[jsonObject description] dataUsingEncoding:NSUTF8StringEncoding];
