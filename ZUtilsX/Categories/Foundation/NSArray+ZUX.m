@@ -27,3 +27,27 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 }
 
 @end
+
+@implementation NSArray (ZUXDirectory)
+
+- (BOOL)writeToUserFile:(NSString *)filePath {
+    return [self writeToUserFile:filePath inDirectory:ZUXDocument];
+}
+
++ (NSArray *)arrayWithContentsOfUserFile:(NSString *)filePath {
+    return [self arrayWithContentsOfUserFile:filePath inDirectory:ZUXDocument];
+}
+
+- (BOOL)writeToUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
+    if (![ZUXDirectory createDirectory:[filePath stringByDeletingLastPathComponent]
+                           inDirectory:directory]) return NO;
+    return [self writeToFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]
+                  atomically:YES];
+}
+
++ (NSArray *)arrayWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
+    if (![ZUXDirectory fileExists:filePath inDirectory:directory]) return nil;
+    return [NSArray arrayWithContentsOfFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]];
+}
+
+@end

@@ -20,7 +20,7 @@ static id _sharedInstance; \
 + (ZUX_INSTANCETYPE)sharedInstance { \
     static dispatch_once_t once_t; \
     dispatch_once(&once_t, ^{ \
-        _sharedInstance = [[self alloc] init]; \
+        if (!_sharedInstance) _sharedInstance = [[self alloc] init]; \
     }); \
     return _sharedInstance; \
 } \
@@ -28,12 +28,10 @@ static id _sharedInstance; \
     static dispatch_once_t once_t; \
     __block id alloc = nil; \
     dispatch_once(&once_t, ^{ \
-        alloc = [super allocWithZone:zone];\
+        if (!_sharedInstance) _sharedInstance = [super allocWithZone:zone];\
+        alloc = _sharedInstance; \
     }); \
     return alloc; \
-} \
-+ (ZUX_INSTANCETYPE)new { \
-    return [self alloc]; \
 } \
 - (id)copyWithZone:(struct _NSZone *)zone { \
     return ZUX_RETAIN(self); \

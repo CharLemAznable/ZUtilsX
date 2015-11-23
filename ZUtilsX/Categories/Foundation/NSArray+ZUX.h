@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ZUXCategory.h"
+#import "ZUXDirectory.h"
 #import "zobjc.h"
 
 ZUX_CATEGORY_H(ZUX_NSArray)
@@ -17,5 +18,15 @@ ZUX_CATEGORY_H(ZUX_NSArray)
 - (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)deepCopy NS_RETURNS_RETAINED;
 - (NSMutableArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)deepMutableCopy NS_RETURNS_RETAINED;
 - (ZUX_OBJECT_TYPE)objectAtIndex:(NSUInteger)index defaultValue:(ZUX_OBJECT_TYPE)defaultValue;
+
+@end
+
+@interface NSArray ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE) (ZUXDirectory)
+
+- (BOOL)writeToUserFile:(NSString *)filePath;
++ (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)arrayWithContentsOfUserFile:(NSString *)filePath;
+
+- (BOOL)writeToUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
++ (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)arrayWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
 
 @end

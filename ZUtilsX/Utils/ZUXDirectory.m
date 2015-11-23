@@ -14,12 +14,20 @@
     return [self fullFilePath:filePath inDirectory:ZUXDocument];
 }
 
-+ (NSString *)fullFilePath:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
-    return [[self directoryRoot:directory] stringByAppendingPathComponent:filePath];
-}
-
 + (BOOL)fileExists:(NSString *)filePath {
     return [self fileExists:filePath inDirectory:ZUXDocument];
+}
+
++ (BOOL)createDirectory:(NSString *)directoryPath {
+    return [self createDirectory:directoryPath inDirectory:ZUXDocument];
+}
+
++ (BOOL)deleteAllFiles {
+    return [self deleteAllFilesInDirectory:ZUXDocument];
+}
+
++ (NSString *)fullFilePath:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
+    return [[self directoryRoot:directory] stringByAppendingPathComponent:filePath];
 }
 
 + (BOOL)fileExists:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
@@ -27,14 +35,15 @@
     return [[NSFileManager defaultManager] fileExistsAtPath:fullFilePath];
 }
 
-+ (BOOL)createDirectory:(NSString *)directoryPath {
-    return [self createDirectory:directoryPath inDirectory:ZUXDocument];
-}
-
 + (BOOL)createDirectory:(NSString *)directoryPath inDirectory:(ZUXDirectoryType)directory {
-    return [[NSFileManager defaultManager] createDirectoryAtPath:[self fullFilePath:directoryPath
+    return [self fileExists:directoryPath inDirectory:directory]
+        || [[NSFileManager defaultManager] createDirectoryAtPath:[self fullFilePath:directoryPath
                                                                         inDirectory:directory]
                                      withIntermediateDirectories:YES attributes:nil error:nil];
+}
+
++ (BOOL)deleteAllFilesInDirectory:(ZUXDirectoryType)directory {
+    return [[NSFileManager defaultManager] removeItemAtPath:[self directoryRoot:directory] error:nil];
 }
 
 + (NSString *)documentDirectoryRoot {

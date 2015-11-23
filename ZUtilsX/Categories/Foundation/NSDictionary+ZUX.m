@@ -36,3 +36,27 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 }
 
 @end
+
+@implementation NSDictionary (ZUXDirectory)
+
+- (BOOL)writeToUserFile:(NSString *)filePath {
+    return [self writeToUserFile:filePath inDirectory:ZUXDocument];
+}
+
++ (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)filePath {
+    return [self dictionaryWithContentsOfUserFile:filePath inDirectory:ZUXDocument];
+}
+
+- (BOOL)writeToUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
+    if (![ZUXDirectory createDirectory:[filePath stringByDeletingLastPathComponent]
+                           inDirectory:directory]) return NO;
+    return [self writeToFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]
+                  atomically:YES];
+}
+
++ (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
+    if (![ZUXDirectory fileExists:filePath inDirectory:directory]) return nil;
+    return [NSDictionary dictionaryWithContentsOfFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]];
+}
+
+@end

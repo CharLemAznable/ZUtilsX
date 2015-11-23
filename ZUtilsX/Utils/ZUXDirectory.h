@@ -19,10 +19,12 @@ typedef NS_ENUM(NSUInteger, ZUXDirectoryType) {
 + (NSString *)fullFilePath:(NSString *)filePath;
 + (BOOL)fileExists:(NSString *)filePath;
 + (BOOL)createDirectory:(NSString *)directoryPath;
++ (BOOL)deleteAllFiles;
 
 + (NSString *)fullFilePath:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
 + (BOOL)fileExists:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
 + (BOOL)createDirectory:(NSString *)directoryPath inDirectory:(ZUXDirectoryType)directory;
++ (BOOL)deleteAllFilesInDirectory:(ZUXDirectoryType)directory;
 
 + (NSString *)documentDirectoryRoot;
 + (NSString *)cachesDirectoryRoot;

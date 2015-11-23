@@ -14,6 +14,13 @@
 #import "zadapt.h"
 #import "zconstant.h"
 
+#import "ZUXCategory.h"
+#import "ZUXSingleton.h"
+#import "ZUXGeometry.h"
+#import "ZUXRuntime.h"
+#import "ZUXJson.h"
+#import "ZUXDirectory.h"
+
 #import "ZUXView.h"
 #import "ZUXControl.h"
 #import "ZUXLabel.h"
@@ -46,11 +53,5 @@
 
 #import "MBProgressHUD.h"
 #import "UIView+MBProgressHUD.h"
-
-#import "ZUXCategory.h"
-#import "ZUXSingleton.h"
-#import "ZUXGeometry.h"
-#import "ZUXRuntime.h"
-#import "ZUXJson.h"
 
 #endif /* ZUtilsX_ZUtilsX_h */

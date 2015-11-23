@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
+#import "ZUXDirectory.h"
 
 ZUX_CATEGORY_H(ZUX_UIImage)
 
@@ -18,5 +19,15 @@ ZUX_CATEGORY_H(ZUX_UIImage)
 + (UIImage *)imageGradientRectWithColors:(NSArray *)colors locations:(NSArray *)locations direction:(CGVector)direction size:(CGSize)size;
 + (UIImage *)imageEllipseWithColor:(UIColor *)color size:(CGSize)size;
 + (UIImage *)imageForCurrentDeviceNamed:(NSString *)name;
+
+@end
+
+@interface UIImage (ZUXDirectory)
+
+- (BOOL)writeToUserFile:(NSString *)filePath;
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)filePath;
+
+- (BOOL)writeToUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
 
 @end

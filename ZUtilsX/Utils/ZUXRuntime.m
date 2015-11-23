@@ -7,6 +7,7 @@
 //
 
 #import "ZUXRuntime.h"
+#import "zarc.h"
 #import <objc/runtime.h>
 
 static NSDictionary *primitiveTypeDictionary = nil;
@@ -14,10 +15,10 @@ static NSDictionary *primitiveTypeDictionary = nil;
 ZUX_INLINE NSString *ZUX_GetPropertyClassName(Class cls, NSString *propertyName) {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        primitiveTypeDictionary = @{@"f":@"float", @"i":@"int", @"d":@"double",
-                                    @"l":@"long", @"c":@"BOOL", @"s":@"short",
-                                    @"q":@"long", @"I":@"NSInteger", @"Q":@"NSUInteger",
-                                    @"B":@"BOOL", @"@?":@"Block"};
+        primitiveTypeDictionary = ZUX_RETAIN((@{@"f":@"float", @"i":@"int", @"d":@"double",
+                                                @"l":@"long", @"c":@"BOOL", @"s":@"short",
+                                                @"q":@"long", @"I":@"NSInteger", @"Q":@"NSUInteger",
+                                                @"B":@"BOOL", @"@?":@"Block"}));
     });
     objc_property_t property = class_getProperty(cls, propertyName.UTF8String);
     if (property == NULL) return nil;

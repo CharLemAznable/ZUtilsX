@@ -117,3 +117,28 @@ ZUX_STATIC_INLINE CGGradientRef CreateGradientWithColorsAndLocations(NSArray *co
 }
 
 @end
+
+@implementation UIImage (ZUXDirectory)
+
+- (BOOL)writeToUserFile:(NSString *)filePath {
+    return [self writeToUserFile:filePath inDirectory:ZUXDocument];
+}
+
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)filePath {
+    return [self imageWithContentsOfUserFile:filePath inDirectory:ZUXDocument];
+}
+
+- (BOOL)writeToUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
+    if (![ZUXDirectory createDirectory:[filePath stringByDeletingLastPathComponent]
+                           inDirectory:directory]) return NO;
+    return [UIImagePNGRepresentation(self) writeToFile:
+            [ZUXDirectory fullFilePath:filePath inDirectory:directory]
+                                            atomically:YES];
+}
+
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
+    if (![ZUXDirectory fileExists:filePath inDirectory:directory]) return nil;
+    return [UIImage imageWithContentsOfFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]];
+}
+
+@end
