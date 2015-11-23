@@ -41,6 +41,7 @@
 #import "NSValue+ZUX.h"
 #import "NSExpression+ZUX.h"
 
+#import "UIDevice+ZUX.h"
 #import "UIView+ZUX.h"
 #import "UIControl+ZUX.h"
 #import "UILabel+ZUX.h"

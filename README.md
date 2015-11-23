@@ -91,6 +91,12 @@
         // 取数组元素值方法, 可指定默认返回值.
         -objectAtIndex:defaultValue:
 
+        // 读写应用程序目录中的文件.
+        -writeToUserFile:
+        +arrayWithContentsOfUserFile:
+        -writeToUserFile:inDirectory:
+        +arrayWithContentsOfUserFile:inDirectory:
+
 * NSDictionary+ZUX
 
         // 深拷贝字典.
@@ -104,6 +110,12 @@
 
         // 根据Key数组取子字典方法. (区别于-dictionaryWithValuesForKeys:方法, 字典中不包含的Key不会放入子字典.)
         -subDictionaryForKeys:
+
+        // 读写应用程序目录中的文件.
+        -writeToUserFile:
+        +dictionaryWithContentsOfUserFile:
+        -writeToUserFile:inDirectory:
+        +dictionaryWithContentsOfUserFile:inDirectory:
 
 - NSData+ZUX
 
@@ -188,6 +200,12 @@
         +expressionWithParametricFormat:
 
 #####Category (UIKit)
+
+- UIDevice+ZUX
+
+        // 添加读取设备型号方法.
+        -fullModel          // 如: iPhone7,1
+        -purifiedFullModel  // 如: iPhone 6Plus
 
 - UIView+ZUX
 
@@ -293,6 +311,12 @@
         //   - 5: -700-568h
         //   - 其他: @2x或无后缀
         -imageForCurrentDeviceNamed:
+
+        // 读写应用程序目录中的文件.
+        -writeToUserFile:
+        +imageWithContentsOfUserFile:
+        -writeToUserFile:inDirectory:
+        +imageWithContentsOfUserFile:inDirectory:
 
 - UIColor+ZUX
 
@@ -498,12 +522,14 @@
         +fullFilePath:
         +fileExists:
         +createDirectory:
+        +deleteAllFiles
 
         // 指定使用其他目录, 如Library/Caches或tmp目录.
         // 使用枚举ZUXDirectoryType指定目录类型.
         +fullFilePath:inDirectory:
         +fileExists:inDirectory:
         +createDirectory:inDirectory:
+        +deleteAllFilesInDirectory:
 
         // 应用根目录.
         // 使用枚举ZUXDirectoryType指定目录类型.

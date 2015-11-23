@@ -16,6 +16,8 @@
 		6A0F896F1C034E5C0003948C /* ZUXRuntimeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F896E1C034E5C0003948C /* ZUXRuntimeTest.m */; };
 		6A0F89711C03528D0003948C /* ZUXJsonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F89701C03528D0003948C /* ZUXJsonTest.m */; };
 		6A0F89731C0356B90003948C /* ZUXDirectoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F89721C0356B90003948C /* ZUXDirectoryTest.m */; };
+		6A0F89791C0359C80003948C /* UIDevice+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F89781C0359C80003948C /* UIDevice+ZUX.m */; };
+		6A0F897A1C0361CB0003948C /* UIDevice+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A0F89771C0359C80003948C /* UIDevice+ZUX.h */; };
 		6A63F9C71C02E05400AB3891 /* libZUtilsX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A63F9B21C02E00D00AB3891 /* libZUtilsX.a */; };
 		6A63FA1D1C02E0E000AB3891 /* NSArray+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9D01C02E0E000AB3891 /* NSArray+ZUX.m */; };
 		6A63FA1E1C02E0E000AB3891 /* NSCoder+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9D21C02E0E000AB3891 /* NSCoder+ZUX.m */; };
@@ -103,6 +105,7 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				6A0F897A1C0361CB0003948C /* UIDevice+ZUX.h in CopyFiles */,
 				6A0F89651C0347620003948C /* zobjc.h in CopyFiles */,
 				6A0F89661C0347620003948C /* zarc.h in CopyFiles */,
 				6A0F89671C0347620003948C /* zadapt.h in CopyFiles */,
@@ -166,6 +169,8 @@
 		6A0F896E1C034E5C0003948C /* ZUXRuntimeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXRuntimeTest.m; path = Utils/ZUXRuntimeTest.m; sourceTree = "<group>"; };
 		6A0F89701C03528D0003948C /* ZUXJsonTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXJsonTest.m; path = Utils/ZUXJsonTest.m; sourceTree = "<group>"; };
 		6A0F89721C0356B90003948C /* ZUXDirectoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXDirectoryTest.m; path = Utils/ZUXDirectoryTest.m; sourceTree = "<group>"; };
+		6A0F89771C0359C80003948C /* UIDevice+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+ZUX.h"; sourceTree = "<group>"; };
+		6A0F89781C0359C80003948C /* UIDevice+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+ZUX.m"; sourceTree = "<group>"; };
 		6A63F9B21C02E00D00AB3891 /* libZUtilsX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZUtilsX.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A63F9B51C02E00D00AB3891 /* ZUtilsX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZUtilsX.h; sourceTree = "<group>"; };
 		6A63F9C21C02E05400AB3891 /* ZUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -364,6 +369,8 @@
 		6A63F9E51C02E0E000AB3891 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				6A0F89771C0359C80003948C /* UIDevice+ZUX.h */,
+				6A0F89781C0359C80003948C /* UIDevice+ZUX.m */,
 				6A63F9EE1C02E0E000AB3891 /* UIView+ZUX.h */,
 				6A63F9EF1C02E0E000AB3891 /* UIView+ZUX.m */,
 				6A63F9E81C02E0E000AB3891 /* UIControl+ZUX.h */,
@@ -566,6 +573,7 @@
 				6A63FA1D1C02E0E000AB3891 /* NSArray+ZUX.m in Sources */,
 				6A63FA261C02E0E000AB3891 /* NSString+ZUX.m in Sources */,
 				6A63FA231C02E0E000AB3891 /* NSNumber+ZUX.m in Sources */,
+				6A0F89791C0359C80003948C /* UIDevice+ZUX.m in Sources */,
 				6A63FA341C02E0E000AB3891 /* ZUXJson.m in Sources */,
 				6A63FA2B1C02E0E000AB3891 /* UILabel+ZUX.m in Sources */,
 				6A63FA211C02E0E000AB3891 /* NSExpression+ZUX.m in Sources */,
