@@ -389,6 +389,13 @@
         backgroundImage
         linesSpacing // 文本行距
 
+        // 弹出菜单数据源
+        id<ZUXLabelDataSource> dataSource
+
+        ZUXLabelDataSource
+        -menuTitleOfCopyInLabel:
+        -menuLocationInLabel:
+
 - ZUXImageView
 
   扩展UIImageView, 可复制/保存图片.
@@ -398,6 +405,21 @@
         // 添加属性
         canCopy // 是否长按弹出复制菜单
         canSave // 是否长按弹出保存菜单
+
+        // 弹出菜单数据源
+        id<ZUXImageViewDataSource> dataSource
+
+        ZUXImageViewDataSource
+        -menuTitleOfCopyInImageView:
+        -menuTitleOfSaveInImageView:
+        -menuLocationInImageView:
+
+        // 弹出菜单功能托管
+        id<ZUXImageViewDelegate> delegate
+
+        ZUXImageViewDelegate
+        -saveImageSuccessInImageView:
+        -saveImageFailedInImageView:withError:
 
 - ZUXRefreshView
 
