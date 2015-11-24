@@ -267,7 +267,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
         end = [self indexOfString:@"${" fromIndex:start];
     }
     if (start < [self length])
-        [result appendString:[self substringWithRange:NSMakeRange(start, [self length])]];
+        [result appendString:[self substringFromIndex:start]];
     return ZUX_AUTORELEASE([result copy]);
 }
 

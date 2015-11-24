@@ -30,6 +30,8 @@
 @protocol ZUXImageViewDataSource <NSObject>
 
 @optional
+- (NSString *)menuTitleOfCopyInImageView:(ZUXImageView *)view;
+- (NSString *)menuTitleOfSaveInImageView:(ZUXImageView *)view;
 - (CGPoint)menuLocationInImageView:(ZUXImageView *)view;
 
 @end

@@ -51,12 +51,10 @@ ZUX_CATEGORY_M(ZUXJson_NSObject)
             && !isStructureTypeProperty(propertyAttrs);
             
         }, ^(id object, id propertyKey) {
-            NSString *propertyClassName = ZUX_GetPropertyClassName([object class], propertyKey);
-            if (!propertyClassName) return;
-            
             id value = ZUX_RETAIN([jsonObject valueForKey:propertyKey]);
             if (!value) return;
             
+            NSString *propertyClassName = ZUX_GetPropertyClassName([object class], propertyKey);
             Class propertyClass = NSClassFromString(propertyClassName);
             if (propertyClass) {
                 id newValue = [[propertyClass alloc] initWithJsonObject:value];

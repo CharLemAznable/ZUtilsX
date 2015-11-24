@@ -27,6 +27,7 @@
 @protocol ZUXLabelDataSource <NSObject>
 
 @optional
+- (NSString *)menuTitleOfCopyInLabel:(ZUXLabel *)view;
 - (CGPoint)menuLocationInLabel:(ZUXLabel *)view;
 
 @end

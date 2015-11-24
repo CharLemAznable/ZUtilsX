@@ -15,11 +15,13 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 @implementation NSDictionary (ZUX)
 
 - (NSDictionary *)deepCopy {
-    return [[NSDictionary alloc] initWithDictionary:self copyItems:YES];
+    return [[NSDictionary alloc] initWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithData:
+                                                     [NSKeyedArchiver archivedDataWithRootObject:self]]];
 }
 
 - (NSMutableDictionary *)deepMutableCopy {
-    return [[NSMutableDictionary alloc] initWithDictionary:self copyItems:YES];
+    return [[NSMutableDictionary alloc] initWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithData:
+                                                            [NSKeyedArchiver archivedDataWithRootObject:self]]];
 }
 
 - (id)objectForKey:(id)key defaultValue:(id)defaultValue {

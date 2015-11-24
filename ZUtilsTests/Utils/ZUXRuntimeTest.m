@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) int age;
 @property (nonatomic, strong) Detail *detail;
+@property (nonatomic, strong) id others;
 @end
 @implementation Person
 @end
@@ -32,6 +33,7 @@
     XCTAssertEqualObjects(ZUX_GetPropertyClassName([Person class], @"name"), @"NSString");
     XCTAssertEqualObjects(ZUX_GetPropertyClassName([Person class], @"age"), @"int");
     XCTAssertEqualObjects(ZUX_GetPropertyClassName([Person class], @"detail"), @"Detail");
+    XCTAssertNil(ZUX_GetPropertyClassName([Person class], @"others"));
 }
 
 @end

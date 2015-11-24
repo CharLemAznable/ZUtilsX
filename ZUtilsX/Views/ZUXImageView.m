@@ -64,8 +64,14 @@
         [gestureRecognizer.view becomeFirstResponder];
         
         UIMenuController *menuController = [UIMenuController sharedMenuController];
-        menuController.menuItems = @[ZUX_AUTORELEASE([[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(zuxCopy:)]),
-                                     ZUX_AUTORELEASE([[UIMenuItem alloc] initWithTitle:@"保存" action:@selector(zuxSave:)])];
+        NSString *copyTitle = [_dataSource respondsToSelector:@selector(menuTitleOfCopyInImageView:)]
+        ? [_dataSource menuTitleOfCopyInImageView:self] : @"复制";
+        NSString *saveTitle = [_dataSource respondsToSelector:@selector(menuTitleOfSaveInImageView:)]
+        ? [_dataSource menuTitleOfSaveInImageView:self] : @"保存";
+        menuController.menuItems = @[ZUX_AUTORELEASE([[UIMenuItem alloc] initWithTitle:copyTitle
+                                                                                action:@selector(zuxCopy:)]),
+                                     ZUX_AUTORELEASE([[UIMenuItem alloc] initWithTitle:saveTitle
+                                                                                action:@selector(zuxSave:)])];
         
         if ([_dataSource respondsToSelector:@selector(menuLocationInImageView:)]) {
             [menuController setTargetRect:ZUX_CGRectMake([_dataSource menuLocationInImageView:self], CGSizeZero)

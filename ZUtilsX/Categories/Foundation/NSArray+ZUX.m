@@ -8,17 +8,20 @@
 
 #import "NSArray+ZUX.h"
 #import "NSNull+ZUX.h"
+#import "zarc.h"
 
 ZUX_CATEGORY_M(ZUX_NSArray)
 
 @implementation NSArray (ZUX)
 
 - (NSArray *)deepCopy {
-    return [[NSArray alloc] initWithArray:self copyItems:YES];
+    return [[NSArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:
+                                           [NSKeyedArchiver archivedDataWithRootObject:self]]];
 }
 
 - (NSMutableArray *)deepMutableCopy {
-    return [[NSMutableArray alloc] initWithArray:self copyItems:YES];
+    return [[NSMutableArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:
+                                                  [NSKeyedArchiver archivedDataWithRootObject:self]]];
 }
 
 - (id)objectAtIndex:(NSUInteger)index defaultValue:(id)defaultValue {
