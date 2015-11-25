@@ -6,7 +6,7 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "zobjc.h"
 #import "ZUXCategory.h"
 
@@ -33,7 +33,18 @@ ZUX_CATEGORY_H(ZUX_NSString)
 - (BOOL)containsString:(NSString *)aString;
 - (BOOL)containsCaseInsensitiveString:(NSString *)aString;
 
-- (NSArray *)arrayBySplitsWithString:(NSString *)separatorString;
+- (BOOL)containsAnyOfStringInArray:(NSArray *)array;
+- (BOOL)containsAnyOfCaseInsensitiveStringInArray:(NSArray *)array;
+
+- (BOOL)containsAllOfStringInArray:(NSArray *)array;
+- (BOOL)containsAllOfCaseInsensitiveStringInArray:(NSArray *)array;
+
+- (NSArray *)arraySplitedByString:(NSString *)separator;
+- (NSArray *)arraySplitedByCharactersInSet:(NSCharacterSet *)separator;
+
+- (NSArray *)arraySplitedByString:(NSString *)separator filterEmptyItem:(BOOL)filterEmptyItem;
+- (NSArray *)arraySplitedByCharactersInSet:(NSCharacterSet *)separator filterEmptyItem:(BOOL)filterEmptyItem;
+
 + (ZUX_INSTANCETYPE)stringWithArray:(NSArray *)array;
 + (ZUX_INSTANCETYPE)stringWithArray:(NSArray *)array separator:(NSString *)separatorString;
 - (NSString *)appendWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
@@ -54,5 +65,7 @@ ZUX_CATEGORY_H(ZUX_NSString)
 + (NSString *)replaceUTF8ToUnicode:(NSString *)aUTF8String;
 
 - (NSString *)parametricStringWithObject:(id)object;
+
+- (CGSize)zuxSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size;
 
 @end

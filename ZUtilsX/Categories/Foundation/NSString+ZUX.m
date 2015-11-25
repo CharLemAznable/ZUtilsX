@@ -9,6 +9,7 @@
 #import "NSString+ZUX.h"
 #import "NSData+ZUX.h"
 #import "zarc.h"
+#import "zadapt.h"
 #include <CommonCrypto/CommonDigest.h>
 
 ZUX_CATEGORY_M(ZUX_NSString)
@@ -102,10 +103,48 @@ ZUX_CATEGORY_M(ZUX_NSString)
     return [self indexCaseInsensitiveOfString:aString] != NSNotFound;
 }
 
+- (BOOL)containsAnyOfStringInArray:(NSArray *)array {
+    for (NSString *item in array) if ([self containsString:item]) return YES;
+    return NO;
+}
+
+- (BOOL)containsAnyOfCaseInsensitiveStringInArray:(NSArray *)array {
+    for (NSString *item in array) if ([self containsCaseInsensitiveString:item]) return YES;
+    return NO;
+}
+
+- (BOOL)containsAllOfStringInArray:(NSArray *)array {
+    for (NSString *item in array) if (![self containsString:item]) return NO;
+    return YES;
+}
+
+- (BOOL)containsAllOfCaseInsensitiveStringInArray:(NSArray *)array {
+    for (NSString *item in array) if (![self containsCaseInsensitiveString:item]) return NO;
+    return YES;
+}
+
 #pragma mark - Split Methods.
 
-- (NSArray *)arrayBySplitsWithString:(NSString *)separatorString {
-    return [self componentsSeparatedByString:separatorString];
+- (NSArray *)arraySplitedByString:(NSString *)separator {
+    return [self arraySplitedByString:separator filterEmptyItem:YES];
+}
+
+- (NSArray *)arraySplitedByCharactersInSet:(NSCharacterSet *)separator {
+    return [self arraySplitedByCharactersInSet:separator filterEmptyItem:YES];
+}
+
+- (NSArray *)arraySplitedByString:(NSString *)separator filterEmptyItem:(BOOL)filterEmptyItem {
+    if ([self isEmpty]) return filterEmptyItem ? @[] : @[@""];
+    NSArray *components = [self componentsSeparatedByString:separator];
+    return filterEmptyItem ? [components filteredArrayUsingPredicate:
+                              [NSPredicate predicateWithFormat:@"SELF.length > 0"]] : components;
+}
+
+- (NSArray *)arraySplitedByCharactersInSet:(NSCharacterSet *)separator filterEmptyItem:(BOOL)filterEmptyItem {
+    if ([self isEmpty]) return filterEmptyItem ? @[] : @[@""];
+    NSArray *components = [self componentsSeparatedByCharactersInSet:separator];
+    return filterEmptyItem ? [components filteredArrayUsingPredicate:
+                              [NSPredicate predicateWithFormat:@"SELF.length > 0"]] : components;
 }
 
 #pragma mark - Append Methods.
@@ -157,27 +196,27 @@ ZUX_CATEGORY_M(ZUX_NSString)
 #pragma mark - Escape/Unescape Methods.
 
 - (NSString *)stringByEscapingForURLQuery {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-    return [self stringByAddingPercentEncodingWithAllowedCharacters:
-            [NSCharacterSet characterSetWithCharactersInString:@":/=,!$&'()*+;[]@#?% "]];
-#else
-    static CFStringRef toEscape = CFSTR(":/=,!$&'()*+;[]@#?% ");
-    return ZUX_AUTORELEASE((ZUX_BRIDGE_TRANSFER NSString *)
-                           CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                   (__bridge CFStringRef)self,
-                                                                   NULL,
-                                                                   toEscape,
-                                                                   kCFStringEncodingUTF8));
-#endif
+    if (IOS7_OR_LATER) {
+        return [self stringByAddingPercentEncodingWithAllowedCharacters:
+                [NSCharacterSet characterSetWithCharactersInString:@":/=,!$&'()*+;[]@#?% "]];
+    } else {
+        static CFStringRef toEscape = CFSTR(":/=,!$&'()*+;[]@#?% ");
+        return ZUX_AUTORELEASE((ZUX_BRIDGE_TRANSFER NSString *)
+                               CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                       (__bridge CFStringRef)self,
+                                                                       NULL,
+                                                                       toEscape,
+                                                                       kCFStringEncodingUTF8));
+    }
 }
 
 
 - (NSString *)stringByUnescapingFromURLQuery {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-    return [self stringByRemovingPercentEncoding];
-#else
-    return [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-#endif
+    if (IOS7_OR_LATER) {
+        return [self stringByRemovingPercentEncoding];
+    } else {
+        return [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
 }
 
 #pragma mark - Encode/Decode Methods.
@@ -269,6 +308,17 @@ ZUX_CATEGORY_M(ZUX_NSString)
     if (start < [self length])
         [result appendString:[self substringFromIndex:start]];
     return ZUX_AUTORELEASE([result copy]);
+}
+
+#pragma mark - Size caculator.
+
+- (CGSize)zuxSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size {
+    if (IOS7_OR_LATER) {
+        return [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
+                               attributes:@{ NSFontAttributeName:font } context:NULL].size;
+    } else {
+        return [self sizeWithFont:font constrainedToSize:size];
+    }
 }
 
 @end

@@ -23,6 +23,15 @@
 		6A1087E71C048D780062160C /* NSArrayZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1087E61C048D780062160C /* NSArrayZUXTest.m */; };
 		6A1087E91C048D8B0062160C /* NSDictionaryZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1087E81C048D8B0062160C /* NSDictionaryZUXTest.m */; };
 		6A1087EB1C0496110062160C /* NSStringZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1087EA1C0496110062160C /* NSStringZUXTest.m */; };
+		6A1794641C05BB1300FF5870 /* UITextView+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1794631C05BB1300FF5870 /* UITextView+ZUX.m */; };
+		6A1794671C05BB4300FF5870 /* UITextField+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1794661C05BB4300FF5870 /* UITextField+ZUX.m */; };
+		6A17946A1C05CF0B00FF5870 /* NSDate+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1794691C05CF0B00FF5870 /* NSDate+ZUX.m */; };
+		6A17946D1C05D45800FF5870 /* UITabBarItem+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A17946C1C05D45800FF5870 /* UITabBarItem+ZUX.m */; };
+		6A17946F1C05D58600FF5870 /* NSDateZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A17946E1C05D58600FF5870 /* NSDateZUXTest.m */; };
+		6A1794701C05D8A300FF5870 /* NSDate+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A1794681C05CF0B00FF5870 /* NSDate+ZUX.h */; };
+		6A1794711C05D8A300FF5870 /* UITextField+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A1794651C05BB4300FF5870 /* UITextField+ZUX.h */; };
+		6A1794721C05D8A300FF5870 /* UITextView+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A1794621C05BB1300FF5870 /* UITextView+ZUX.h */; };
+		6A1794731C05D8A300FF5870 /* UITabBarItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */; };
 		6A63F9C71C02E05400AB3891 /* libZUtilsX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A63F9B21C02E00D00AB3891 /* libZUtilsX.a */; };
 		6A63FA1D1C02E0E000AB3891 /* NSArray+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9D01C02E0E000AB3891 /* NSArray+ZUX.m */; };
 		6A63FA1E1C02E0E000AB3891 /* NSCoder+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9D21C02E0E000AB3891 /* NSCoder+ZUX.m */; };
@@ -110,6 +119,10 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				6A1794701C05D8A300FF5870 /* NSDate+ZUX.h in CopyFiles */,
+				6A1794711C05D8A300FF5870 /* UITextField+ZUX.h in CopyFiles */,
+				6A1794721C05D8A300FF5870 /* UITextView+ZUX.h in CopyFiles */,
+				6A1794731C05D8A300FF5870 /* UITabBarItem+ZUX.h in CopyFiles */,
 				6A0F897A1C0361CB0003948C /* UIDevice+ZUX.h in CopyFiles */,
 				6A0F89651C0347620003948C /* zobjc.h in CopyFiles */,
 				6A0F89661C0347620003948C /* zarc.h in CopyFiles */,
@@ -181,6 +194,15 @@
 		6A1087E61C048D780062160C /* NSArrayZUXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSArrayZUXTest.m; path = Categories/Foundation/NSArrayZUXTest.m; sourceTree = "<group>"; };
 		6A1087E81C048D8B0062160C /* NSDictionaryZUXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDictionaryZUXTest.m; path = Categories/Foundation/NSDictionaryZUXTest.m; sourceTree = "<group>"; };
 		6A1087EA1C0496110062160C /* NSStringZUXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSStringZUXTest.m; path = Categories/Foundation/NSStringZUXTest.m; sourceTree = "<group>"; };
+		6A1794621C05BB1300FF5870 /* UITextView+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+ZUX.h"; sourceTree = "<group>"; };
+		6A1794631C05BB1300FF5870 /* UITextView+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+ZUX.m"; sourceTree = "<group>"; };
+		6A1794651C05BB4300FF5870 /* UITextField+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+ZUX.h"; sourceTree = "<group>"; };
+		6A1794661C05BB4300FF5870 /* UITextField+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+ZUX.m"; sourceTree = "<group>"; };
+		6A1794681C05CF0B00FF5870 /* NSDate+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ZUX.h"; sourceTree = "<group>"; };
+		6A1794691C05CF0B00FF5870 /* NSDate+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ZUX.m"; sourceTree = "<group>"; };
+		6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+ZUX.h"; sourceTree = "<group>"; };
+		6A17946C1C05D45800FF5870 /* UITabBarItem+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarItem+ZUX.m"; sourceTree = "<group>"; };
+		6A17946E1C05D58600FF5870 /* NSDateZUXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDateZUXTest.m; path = Categories/Foundation/NSDateZUXTest.m; sourceTree = "<group>"; };
 		6A63F9B21C02E00D00AB3891 /* libZUtilsX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZUtilsX.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A63F9B51C02E00D00AB3891 /* ZUtilsX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZUtilsX.h; sourceTree = "<group>"; };
 		6A63F9C21C02E05400AB3891 /* ZUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -312,6 +334,7 @@
 				6A1087E61C048D780062160C /* NSArrayZUXTest.m */,
 				6A1087E81C048D8B0062160C /* NSDictionaryZUXTest.m */,
 				6A1087EA1C0496110062160C /* NSStringZUXTest.m */,
+				6A17946E1C05D58600FF5870 /* NSDateZUXTest.m */,
 			);
 			name = Foundation;
 			sourceTree = "<group>";
@@ -393,6 +416,8 @@
 				6A63F9E41C02E0E000AB3891 /* NSValue+ZUX.m */,
 				6A63F9D71C02E0E000AB3891 /* NSExpression+ZUX.h */,
 				6A63F9D81C02E0E000AB3891 /* NSExpression+ZUX.m */,
+				6A1794681C05CF0B00FF5870 /* NSDate+ZUX.h */,
+				6A1794691C05CF0B00FF5870 /* NSDate+ZUX.m */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -410,6 +435,12 @@
 				6A63F9ED1C02E0E000AB3891 /* UILabel+ZUX.m */,
 				6A63F9EA1C02E0E000AB3891 /* UIImage+ZUX.h */,
 				6A63F9EB1C02E0E000AB3891 /* UIImage+ZUX.m */,
+				6A1794651C05BB4300FF5870 /* UITextField+ZUX.h */,
+				6A1794661C05BB4300FF5870 /* UITextField+ZUX.m */,
+				6A1794621C05BB1300FF5870 /* UITextView+ZUX.h */,
+				6A1794631C05BB1300FF5870 /* UITextView+ZUX.m */,
+				6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */,
+				6A17946C1C05D45800FF5870 /* UITabBarItem+ZUX.m */,
 				6A63F9E61C02E0E000AB3891 /* UIColor+ZUX.h */,
 				6A63F9E71C02E0E000AB3891 /* UIColor+ZUX.m */,
 				6A63F9F01C02E0E000AB3891 /* UIViewController+ZUX.h */,
@@ -576,6 +607,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A63FA3A1C02E0E000AB3891 /* ZUXRefreshView.m in Sources */,
+				6A17946D1C05D45800FF5870 /* UITabBarItem+ZUX.m in Sources */,
 				6A63FA2D1C02E0E000AB3891 /* UIViewController+ZUX.m in Sources */,
 				6A63FA271C02E0E000AB3891 /* NSValue+ZUX.m in Sources */,
 				6A63FA1E1C02E0E000AB3891 /* NSCoder+ZUX.m in Sources */,
@@ -584,15 +616,18 @@
 				6A63FA3C1C02E0E000AB3891 /* ZUXView.m in Sources */,
 				6A63FA331C02E0E000AB3891 /* ZUXGeometry.m in Sources */,
 				6A63FA2C1C02E0E000AB3891 /* UIView+ZUX.m in Sources */,
+				6A1794641C05BB1300FF5870 /* UITextView+ZUX.m in Sources */,
 				6A63FA371C02E0E000AB3891 /* ZUXImageView.m in Sources */,
 				6A63FA391C02E0E000AB3891 /* ZUXPageControl.m in Sources */,
 				6A63FA2F1C02E0E000AB3891 /* ZUXTransform.m in Sources */,
 				6A63FA291C02E0E000AB3891 /* UIControl+ZUX.m in Sources */,
 				6A63FA311C02E0E000AB3891 /* UIView+MBProgressHUD.m in Sources */,
 				6A63FA321C02E0E000AB3891 /* ZUXDirectory.m in Sources */,
+				6A17946A1C05CF0B00FF5870 /* NSDate+ZUX.m in Sources */,
 				6A63FA221C02E0E000AB3891 /* NSNull+ZUX.m in Sources */,
 				6A63FA301C02E0E000AB3891 /* MBProgressHUD.m in Sources */,
 				6A63FA1F1C02E0E000AB3891 /* NSData+ZUX.m in Sources */,
+				6A1794671C05BB4300FF5870 /* UITextField+ZUX.m in Sources */,
 				6A63FA361C02E0E000AB3891 /* ZUXControl.m in Sources */,
 				6A63FA2A1C02E0E000AB3891 /* UIImage+ZUX.m in Sources */,
 				6A63FA251C02E0E000AB3891 /* NSObject+ZUXJson.m in Sources */,
@@ -623,6 +658,7 @@
 				6A1087E91C048D8B0062160C /* NSDictionaryZUXTest.m in Sources */,
 				6A0F89731C0356B90003948C /* ZUXDirectoryTest.m in Sources */,
 				6A0F896F1C034E5C0003948C /* ZUXRuntimeTest.m in Sources */,
+				6A17946F1C05D58600FF5870 /* NSDateZUXTest.m in Sources */,
 				6A1087E51C04871E0062160C /* NSObjectZUXJsonTest.m in Sources */,
 				6A0F896D1C034DA10003948C /* ZUXGeometryTest.m in Sources */,
 			);

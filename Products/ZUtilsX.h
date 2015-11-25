@@ -40,12 +40,16 @@
 #import "NSString+ZUX.h"
 #import "NSValue+ZUX.h"
 #import "NSExpression+ZUX.h"
+#import "NSDate+ZUX.h"
 
 #import "UIDevice+ZUX.h"
 #import "UIView+ZUX.h"
 #import "UIControl+ZUX.h"
 #import "UILabel+ZUX.h"
 #import "UIImage+ZUX.h"
+#import "UITextField+ZUX.h"
+#import "UITextView+ZUX.h"
+#import "UITabBarItem+ZUX.h"
 #import "UIColor+ZUX.h"
 #import "UIViewController+ZUX.h"
 

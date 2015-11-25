@@ -25,6 +25,7 @@
 - (ZUX_INSTANCETYPE)initWithView:(UIView *)view left:(id)left right:(id)right top:(id)top bottom:(id)bottom;
 - (ZUX_INSTANCETYPE)initWithView:(UIView *)view width:(id)width height:(id)height centerX:(id)centerX centerY:(id)centerY;
 - (ZUX_INSTANCETYPE)initWithView:(UIView *)view left:(id)left right:(id)right top:(id)top bottom:(id)bottom width:(id)width height:(id)height centerX:(id)centerX centerY:(id)centerY;
+
 - (BOOL)isEqualToTransform:(ZUXTransform *)transform;
 - (CGRect)transformRect;
 

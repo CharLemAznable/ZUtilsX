@@ -15,7 +15,7 @@
 
 @implementation ZUXDirectoryTest
 
-- (void)testZUXDirectory {
+- (void)testDirectory {
     XCTAssertFalse([ZUXDirectory fileExists:@"tempfile"]);
     XCTAssertTrue([ZUXDirectory createDirectory:@"tempfile"]);
     XCTAssertTrue([ZUXDirectory fileExists:@"tempfile"]);

@@ -15,7 +15,7 @@
 
 @implementation NSStringZUXTest
 
-- (void)testExample {
+- (void)testNSStringZUX {
     ZUX_ENABLE_CATEGORY(ZUX_NSString);
     
     NSDictionary *dict = @{@"last name":@"Doe", @"first name":@"John"};

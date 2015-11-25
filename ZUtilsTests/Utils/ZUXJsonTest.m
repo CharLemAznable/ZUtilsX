@@ -37,7 +37,7 @@
 
 @implementation ZUXJsonTest
 
-- (void)testZUXJson {
+- (void)testJson {
     NSDictionary *dict = @{@"key" : @"KEY", @"value" : @"VALUE"};
     NSString *dictJson = @"{\"key\":\"KEY\",\"value\":\"VALUE\"}";
     XCTAssertEqualObjects([ZUXJson jsonStringFromObject:dict], dictJson);

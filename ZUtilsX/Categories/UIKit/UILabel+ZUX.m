@@ -7,22 +7,23 @@
 //
 
 #import "UILabel+ZUX.h"
+#import "zadapt.h"
 
 ZUX_CATEGORY_M(ZUX_UILabel)
 
 @implementation UILabel (ZUX)
 
 - (CGSize)sizeThatConstraintToSize:(CGSize)size {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-    return [self.text boundingRectWithSize:size
-                                   options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
-                                attributes:@{ NSFontAttributeName:self.font }
-                                   context:NULL].size;
-#else
-    return [self.text sizeWithFont:self.font
-                 constrainedToSize:size
-                     lineBreakMode:self.lineBreakMode];
-#endif
+    if (IOS7_OR_LATER) {
+        return [self.text boundingRectWithSize:size
+                                       options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
+                                    attributes:@{ NSFontAttributeName:self.font }
+                                       context:NULL].size;
+    } else {
+        return [self.text sizeWithFont:self.font
+                     constrainedToSize:size
+                         lineBreakMode:self.lineBreakMode];
+    }
 }
 
 @end

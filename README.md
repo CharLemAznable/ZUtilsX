@@ -149,9 +149,16 @@
         // 判断是否包含子字符串.
         -containsString:
         -containsCaseInsensitiveString:
+        -containsAnyOfStringInArray:
+        -containsAnyOfCaseInsensitiveStringInArray:
+        -containsAllOfStringInArray:
+        -containsAllOfCaseInsensitiveStringInArray:
 
         // 切割字符串为数组.
-        -arrayBySplitsWithString:
+        -arraySplitedByString:
+        -arraySplitedByCharactersInSet:
+        -arraySplitedByString:filterEmptyItem:
+        -arraySplitedByCharactersInSet:filterEmptyItem:
 
         // 类构造方法, 根据NSArray构造字符串.
         +stringWithArray:
@@ -185,6 +192,9 @@
         // 参数化字符串方法, 替换字符串中的"${key}"为[object valueForKey:@"key"].
         -parametricStringWithObject:
 
+        // 计算字符串占据的尺寸(适配IOS7及以上的系统)
+        -zuxSizeWithFont:constrainedToSize:
+
 - NSValue+ZUX
 
         // 增加NSValue对结构类型的KVC处理.
@@ -198,6 +208,21 @@
 
         // NSExpression格式化参数构造方法, 替换${keyPath}为%K, 并添加绑定参数keyPath.
         +expressionWithParametricFormat:
+
+- NSDate+ZUX
+
+        // 获得毫秒单位时间间隔.
+        -timeIntervalMillsSinceDate:
+
+        // 添加只读属性.
+        timeIntervalMillsSinceNow
+        timeIntervalMillsSince1970
+
+        // 时间格式化工具方法.
+        -stringWithDateFormat:
+
+        // 字符串格式时间工具方法. (NSString)
+        -dateWithDateFormat:
 
 #####Category (UIKit)
 
@@ -317,6 +342,21 @@
         +imageWithContentsOfUserFile:
         -writeToUserFile:inDirectory:
         +imageWithContentsOfUserFile:inDirectory:
+
+- UITextField+ZUX
+
+        // 限制输入文本内容及长度.
+        -shouldChangeCharactersInRange:replacementString:limitWithLength:
+
+- UITextView+ZUX
+
+        // 限制输入文本内容及长度.
+        -shouldChangeCharactersInRange:replacementString:limitWithLength:
+
+- UITabBarItem+ZUX
+
+        // 实例化方法(适配IOS7以下的系统)
+        +tabBarItemWithTitle:image:selectedImage:
 
 - UIColor+ZUX
 
