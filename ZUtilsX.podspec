@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name          = "ZUtilsX"
-  s.version       = "0.0.1"
+  s.version       = "0.0.2"
   s.summary       = "Utils Code."
   s.description   = <<-DESC
-                    收集日常开发中积累的工具代码.
+                    工具代码集. 包含宏定义, 工具类, 向Foundation/UIKit添加的分类, 自定义工具视图, JSON工具类, MBProgressHUD工具类.
                     DESC
   s.homepage      = "https://github.com/CharLemAznable/ZUtilsX"
   s.license       = "MIT"
