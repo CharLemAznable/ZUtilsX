@@ -257,7 +257,6 @@
 		6A63F9FE1C02E0E000AB3891 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		6A63F9FF1C02E0E000AB3891 /* UIView+MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MBProgressHUD.h"; sourceTree = "<group>"; };
 		6A63FA001C02E0E000AB3891 /* UIView+MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MBProgressHUD.m"; sourceTree = "<group>"; };
-		6A63FA021C02E0E000AB3891 /* ZUXVerticalGridViewCellInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXVerticalGridViewCellInternal.h; sourceTree = "<group>"; };
 		6A63FA041C02E0E000AB3891 /* ZUXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXCategory.h; sourceTree = "<group>"; };
 		6A63FA051C02E0E000AB3891 /* ZUXDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXDirectory.h; sourceTree = "<group>"; };
 		6A63FA061C02E0E000AB3891 /* ZUXDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXDirectory.m; sourceTree = "<group>"; };
@@ -393,7 +392,6 @@
 				6A63F9CD1C02E0E000AB3891 /* Categories */,
 				6A63F9F71C02E0E000AB3891 /* Entities */,
 				6A63F9FC1C02E0E000AB3891 /* MBProgressHUD */,
-				6A63FA011C02E0E000AB3891 /* Privates */,
 				6A63F9B51C02E00D00AB3891 /* ZUtilsX.h */,
 			);
 			path = ZUtilsX;
@@ -497,14 +495,6 @@
 				6A63FA001C02E0E000AB3891 /* UIView+MBProgressHUD.m */,
 			);
 			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
-		6A63FA011C02E0E000AB3891 /* Privates */ = {
-			isa = PBXGroup;
-			children = (
-				6A63FA021C02E0E000AB3891 /* ZUXVerticalGridViewCellInternal.h */,
-			);
-			path = Privates;
 			sourceTree = "<group>";
 		};
 		6A63FA031C02E0E000AB3891 /* Utils */ = {

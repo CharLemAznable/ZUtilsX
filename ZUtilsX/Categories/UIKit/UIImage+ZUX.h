@@ -10,6 +10,9 @@
 #import "ZUXCategory.h"
 #import "ZUXDirectory.h"
 
+#ifndef ZUtilsX_UIImage_ZUX_h
+#define ZUtilsX_UIImage_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_UIImage)
 
 @interface UIImage (ZUX)
@@ -20,7 +23,7 @@ ZUX_CATEGORY_H(ZUX_UIImage)
 + (UIImage *)imageEllipseWithColor:(UIColor *)color size:(CGSize)size;
 + (UIImage *)imageForCurrentDeviceNamed:(NSString *)name;
 
-@end
+@end // UIImage (ZUX)
 
 @interface UIImage (ZUXDirectory)
 
@@ -30,4 +33,6 @@ ZUX_CATEGORY_H(ZUX_UIImage)
 - (BOOL)writeToUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
 + (UIImage *)imageWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
 
-@end
+@end // UIImage (ZUXDirectory)
+
+#endif /* ZUtilsX_UIImage_ZUX_h */

@@ -10,6 +10,9 @@
 #import "zobjc.h"
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_NSString_ZUX_h
+#define ZUtilsX_NSString_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_NSString)
 
 @interface NSString (ZUX)
@@ -69,3 +72,5 @@ ZUX_CATEGORY_H(ZUX_NSString)
 - (CGSize)zuxSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size;
 
 @end
+
+#endif /* ZUtilsX_NSString_ZUX_h */

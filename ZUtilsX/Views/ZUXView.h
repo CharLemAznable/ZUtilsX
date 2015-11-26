@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "zarc.h"
 
+#ifndef ZUtilsX_ZUXView_h
+#define ZUtilsX_ZUXView_h
+
 @interface ZUXView : UIView
 
 @property (nonatomic, ZUX_STRONG) UIImage *backgroundImage;
@@ -16,3 +19,5 @@
 - (void)zuxInitial;
 
 @end
+
+#endif /* ZUtilsX_ZUXView_h */

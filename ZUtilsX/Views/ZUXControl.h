@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "zarc.h"
 
+#ifndef ZUtilsX_ZUXControl_h
+#define ZUtilsX_ZUXControl_h
+
 extern float ZUXMinOperationInterval;
 
 @interface ZUXControl : UIControl
@@ -18,3 +21,5 @@ extern float ZUXMinOperationInterval;
 - (void)zuxInitial;
 
 @end
+
+#endif /* ZUtilsX_ZUXControl_h */

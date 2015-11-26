@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#ifndef ZUtilsX_ZUXJson_h
+#define ZUtilsX_ZUXJson_h
+
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface ZUXJson : NSObject
 
@@ -20,3 +23,5 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 + (NSString *)jsonStringFromObject:(id)object;
 
 @end
+
+#endif /* ZUtilsX_ZUXJson_h */

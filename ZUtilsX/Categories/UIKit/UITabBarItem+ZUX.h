@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_UITabBarItem_ZUX_h
+#define ZUtilsX_UITabBarItem_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_UITabBarItem)
 
 @interface UITabBarItem (ZUX)
@@ -16,3 +19,5 @@ ZUX_CATEGORY_H(ZUX_UITabBarItem)
 + (id)tabBarItemWithTitle:(NSString *)title image:(UIImage *)image selectedImage:(UIImage *)selectedImage;
 
 @end
+
+#endif /* ZUtilsX_UITabBarItem_ZUX_h */

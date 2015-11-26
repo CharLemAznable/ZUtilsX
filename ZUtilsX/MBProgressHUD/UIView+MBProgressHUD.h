@@ -9,6 +9,9 @@
 #import "MBProgressHUD.h"
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_UIView_MBProgressHUD_h
+#define ZUtilsX_UIView_MBProgressHUD_h
+
 ZUX_CATEGORY_H(ZUX_MBProgressHUD)
 
 /**
@@ -56,3 +59,5 @@ ZUX_CATEGORY_H(ZUX_MBProgressHUD)
 - (void)hideRecursiveHUD:(BOOL)animated;
 
 @end
+
+#endif /* ZUtilsX_UIView_MBProgressHUD_h */

@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_NSValue_ZUX_h
+#define ZUtilsX_NSValue_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_NSValue)
 
 @interface NSValue (ZUX)
@@ -17,3 +20,5 @@ ZUX_CATEGORY_H(ZUX_NSValue)
 - (id)valueForKeyPath:(NSString *)keyPath;
 
 @end
+
+#endif /* ZUtilsX_NSValue_ZUX_h */

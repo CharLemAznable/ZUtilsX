@@ -9,6 +9,9 @@
 #import "ZUXView.h"
 #import "zarc.h"
 
+#ifndef ZUtilsX_ZUXSearchBar_h
+#define ZUtilsX_ZUXSearchBar_h
+
 @protocol ZUXSearchBarDelegate;
 
 // ZUXSearchBar
@@ -30,3 +33,5 @@
 - (void)searchBar:(ZUXSearchBar *)bar searchWithText:(NSString *)searchText editEnded:(BOOL)ended;
 
 @end
+
+#endif /* ZUtilsX_ZUXSearchBar_h */

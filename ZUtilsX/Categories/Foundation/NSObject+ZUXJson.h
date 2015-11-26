@@ -10,6 +10,9 @@
 #import "ZUXCategory.h"
 #import "zobjc.h"
 
+#ifndef ZUtilsX_NSObject_ZUXJson_h
+#define ZUtilsX_NSObject_ZUXJson_h
+
 ZUX_CATEGORY_H(ZUXJson_NSObject)
 
 #if NS_BLOCKS_AVAILABLE
@@ -23,24 +26,26 @@ ZUX_CATEGORY_H(ZUXJson_NSObject)
 - (NSString *)zuxJsonString;
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject;
 
-@end
+@end // ZUXJsonable
 
 @interface NSObject (ZUXJson) <ZUXJsonable>
-@end
+@end // NSObject (ZUXJson)
 
 @interface NSNull (ZUXJson)
-@end
+@end // NSNull (ZUXJson)
 
 @interface NSNumber (ZUXJson)
-@end
+@end // NSNumber (ZUXJson)
 
 @interface NSString (ZUXJson)
-@end
+@end // NSString (ZUXJson)
 
 @interface NSArray (ZUXJson)
-@end
+@end // NSArray (ZUXJson)
 
 @interface NSDictionary (ZUXJson)
-@end
+@end // NSDictionary (ZUXJson)
 
-#endif
+#endif /* NS_BLOCKS_AVAILABLE */
+
+#endif /* ZUtilsX_NSObject_ZUXJson_h */

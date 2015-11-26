@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "zarc.h"
 
+#ifndef ZUtilsX_ZUXPageControl_h
+#define ZUtilsX_ZUXPageControl_h
+
 @interface ZUXPageControl : UIPageControl
 
 @property (nonatomic, ZUX_STRONG) UIColor *pageIndicatorColor;
 @property (nonatomic, ZUX_STRONG) UIColor *currentPageIndicatorColor;
 
 @end
+
+#endif /* ZUtilsX_ZUXPageControl_h */

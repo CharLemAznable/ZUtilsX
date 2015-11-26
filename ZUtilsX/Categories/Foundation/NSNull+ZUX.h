@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_NSNull_ZUX_h
+#define ZUtilsX_NSNull_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_NSNull)
 
 @interface NSNull (ZUX)
@@ -17,3 +20,5 @@ ZUX_CATEGORY_H(ZUX_NSNull)
 + (BOOL)isNotNull:(id)obj;
 
 @end
+
+#endif /* ZUtilsX_NSNull_ZUX_h */
