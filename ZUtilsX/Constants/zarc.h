@@ -44,9 +44,21 @@
 #endif
 
 #if IS_ARC
+# define ZUX_BRIDGE                     __bridge
+#else
+# define ZUX_BRIDGE
+#endif
+
+#if IS_ARC
 # define ZUX_BRIDGE_TRANSFER            __bridge_transfer
 #else
-# define ZUX_BRIDGE_TRANSFER            __bridge
+# define ZUX_BRIDGE_TRANSFER
+#endif
+
+#if IS_ARC
+# define ZUX_BRIDGE_RETAIN              __bridge_retained
+#else
+# define ZUX_BRIDGE_RETAIN
 #endif
 
 #if IS_ARC

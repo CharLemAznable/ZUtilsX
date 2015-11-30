@@ -36,6 +36,8 @@
 		6A1794711C05D8A300FF5870 /* UITextField+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A1794651C05BB4300FF5870 /* UITextField+ZUX.h */; };
 		6A1794721C05D8A300FF5870 /* UITextView+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A1794621C05BB1300FF5870 /* UITextView+ZUX.h */; };
 		6A1794731C05D8A300FF5870 /* UITabBarItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */; };
+		6A5B155B1C0C350F006B8673 /* ZUXBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B155A1C0C350F006B8673 /* ZUXBundle.m */; };
+		6A5B155C1C0C3C2F006B8673 /* ZUXBundle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A5B15591C0C350F006B8673 /* ZUXBundle.h */; };
 		6A63F9C71C02E05400AB3891 /* libZUtilsX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A63F9B21C02E00D00AB3891 /* libZUtilsX.a */; };
 		6A63FA1D1C02E0E000AB3891 /* NSArray+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9D01C02E0E000AB3891 /* NSArray+ZUX.m */; };
 		6A63FA1E1C02E0E000AB3891 /* NSCoder+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9D21C02E0E000AB3891 /* NSCoder+ZUX.m */; };
@@ -123,6 +125,7 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				6A5B155C1C0C3C2F006B8673 /* ZUXBundle.h in CopyFiles */,
 				6A1794701C05D8A300FF5870 /* NSDate+ZUX.h in CopyFiles */,
 				6A1794711C05D8A300FF5870 /* UITextField+ZUX.h in CopyFiles */,
 				6A1794721C05D8A300FF5870 /* UITextView+ZUX.h in CopyFiles */,
@@ -211,6 +214,8 @@
 		6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+ZUX.h"; sourceTree = "<group>"; };
 		6A17946C1C05D45800FF5870 /* UITabBarItem+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarItem+ZUX.m"; sourceTree = "<group>"; };
 		6A17946E1C05D58600FF5870 /* NSDateZUXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDateZUXTest.m; path = Categories/Foundation/NSDateZUXTest.m; sourceTree = "<group>"; };
+		6A5B15591C0C350F006B8673 /* ZUXBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXBundle.h; sourceTree = "<group>"; };
+		6A5B155A1C0C350F006B8673 /* ZUXBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXBundle.m; sourceTree = "<group>"; };
 		6A63F9B21C02E00D00AB3891 /* libZUtilsX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZUtilsX.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A63F9B51C02E00D00AB3891 /* ZUtilsX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZUtilsX.h; sourceTree = "<group>"; };
 		6A63F9C21C02E05400AB3891 /* ZUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -510,6 +515,8 @@
 				6A63FA0A1C02E0E000AB3891 /* ZUXJson.m */,
 				6A63FA051C02E0E000AB3891 /* ZUXDirectory.h */,
 				6A63FA061C02E0E000AB3891 /* ZUXDirectory.m */,
+				6A5B15591C0C350F006B8673 /* ZUXBundle.h */,
+				6A5B155A1C0C350F006B8673 /* ZUXBundle.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -651,6 +658,7 @@
 				6A63FA251C02E0E000AB3891 /* NSObject+ZUXJson.m in Sources */,
 				6A63FA241C02E0E000AB3891 /* NSObject+ZUX.m in Sources */,
 				6A63FA201C02E0E000AB3891 /* NSDictionary+ZUX.m in Sources */,
+				6A5B155B1C0C350F006B8673 /* ZUXBundle.m in Sources */,
 				6A63FA3B1C02E0E000AB3891 /* ZUXSearchBar.m in Sources */,
 				6A63FA281C02E0E000AB3891 /* UIColor+ZUX.m in Sources */,
 				6A63FA2E1C02E0E000AB3891 /* ZUXConstraint.m in Sources */,
@@ -780,6 +788,7 @@
 		6A63F9BC1C02E00D00AB3891 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -789,6 +798,7 @@
 		6A63F9BD1C02E00D00AB3891 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

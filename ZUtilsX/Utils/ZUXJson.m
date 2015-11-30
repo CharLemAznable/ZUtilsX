@@ -8,7 +8,6 @@
 
 #import "ZUXJson.h"
 #import "NSObject+ZUXJson.h"
-#import "ZUXCategory.h"
 #import "zarc.h"
 
 @implementation ZUXJson

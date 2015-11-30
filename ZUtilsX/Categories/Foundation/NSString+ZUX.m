@@ -203,7 +203,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
         static CFStringRef toEscape = CFSTR(":/=,!$&'()*+;[]@#?% ");
         return ZUX_AUTORELEASE((ZUX_BRIDGE_TRANSFER NSString *)
                                CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                       (__bridge CFStringRef)self,
+                                                                       (ZUX_BRIDGE CFStringRef)self,
                                                                        NULL,
                                                                        toEscape,
                                                                        kCFStringEncodingUTF8));

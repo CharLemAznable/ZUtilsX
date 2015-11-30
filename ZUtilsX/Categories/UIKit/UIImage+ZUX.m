@@ -83,8 +83,11 @@ ZUX_CATEGORY_M(ZUX_UIImage)
 }
 
 + (UIImage *)imageForCurrentDeviceNamed:(NSString *)name {
-    NSString *suffix = IS_IPHONE6P ? @"-800-Portrait-736h":(IS_IPHONE6 ? @"-800-667h":(IS_IPHONE5 ? @"-700-568h":@""));
-    return [self imageNamed:[NSString stringWithFormat:@"%@%@", name, suffix]];
+    return [self imageNamed:[self imageNameForCurrentDeviceNamed:name]];
+}
+
++ (NSString *)imageNameForCurrentDeviceNamed:(NSString *)name {
+    return [NSString stringWithFormat:@"%@%@", name, IS_IPHONE6P ? @"-800-Portrait-736h":(IS_IPHONE6 ? @"-800-667h":(IS_IPHONE5 ? @"-700-568h":@""))];
 }
 
 #pragma mark - inline function

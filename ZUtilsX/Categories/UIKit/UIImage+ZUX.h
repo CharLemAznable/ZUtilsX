@@ -22,6 +22,7 @@ ZUX_CATEGORY_H(ZUX_UIImage)
 + (UIImage *)imageGradientRectWithColors:(NSArray *)colors locations:(NSArray *)locations direction:(CGVector)direction size:(CGSize)size;
 + (UIImage *)imageEllipseWithColor:(UIColor *)color size:(CGSize)size;
 + (UIImage *)imageForCurrentDeviceNamed:(NSString *)name;
++ (NSString *)imageNameForCurrentDeviceNamed:(NSString *)name;
 
 @end // UIImage (ZUX)
 
