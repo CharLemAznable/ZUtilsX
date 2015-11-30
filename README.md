@@ -320,22 +320,23 @@
 - UIImage+ZUX
 
         // 生成矩形图像并指定颜色.
-        -imageRectWithColor:size:
+        +imageRectWithColor:size:
 
         // 生成渐变矩形图像.
-        -imageGradientRectWithStartColor:endColor:direction:size:
-        -imageGradientRectWithColors:locations:direction:size:
+        +imageGradientRectWithStartColor:endColor:direction:size:
+        +imageGradientRectWithColors:locations:direction:size:
 
         // 生成椭圆形图像并指定颜色.
-        -imageEllipseWithColor:size:
+        +imageEllipseWithColor:size:
 
-        // 获取对应当前设备尺寸的图片.
+        // 获取对应当前设备尺寸的图片名称或图片对象.
         // 依据不同尺寸图片命名后缀规则:
         //   - 6P: -800-Portrait-736h
         //   - 6: -800-667h
         //   - 5: -700-568h
         //   - 其他: @2x或无后缀
-        -imageForCurrentDeviceNamed:
+        +imageForCurrentDeviceNamed:
+        +imageNameForCurrentDeviceNamed:
 
         // 读写应用程序目录中的文件.
         -writeToUserFile:
@@ -599,3 +600,18 @@
         +cachesDirectoryRoot
         +temporaryDirectoryRoot
         +directoryRoot:
+
+- ZUXBundle
+
+    资源bundle工具.
+
+        // 读入bundle中的图片对象.
+        +imageWithName:bundle:
+        +imageForCurrentDeviceWithName:bundle:
+
+        // 获取bundle中plist文件的完整路径.
+        +plistPathWithName:bundle:
+
+        // 获取bundle中音频文件URL.
+        // 用于AudioServicesCreateSystemSoundID(CFURLRef, SystemSoundID*)
+        +audioURLWithName:type:bundle:
