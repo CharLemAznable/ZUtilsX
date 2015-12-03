@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_NSObject_ZUX_h
+#define ZUtilsX_NSObject_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_NSObject)
 
 @interface NSObject (ZUX)
@@ -21,3 +24,5 @@ ZUX_CATEGORY_H(ZUX_NSObject)
 - (void)removeObserver:(NSObject *)observer forKeyPaths:(NSArray *)keyPaths;
 
 @end
+
+#endif /* ZUtilsX_NSObject_ZUX_h */

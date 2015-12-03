@@ -43,7 +43,11 @@
 - (void)testNSObjectZUXJson {
     ZUX_ENABLE_CATEGORY(ZUXJson_NSObject);
     
+#ifdef ZUX_USE_JSONKIT
+    XCTAssertEqualObjects([@"JSON" zuxJsonString], @"\"JSON\"");
+#else
     XCTAssertEqualObjects([@"JSON" zuxJsonString], @"JSON");
+#endif
     
     JsonBean *jsonBean = [[JsonBean alloc] initWithJsonObject:@{@"field1":@[]}];
     XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field3\":0,\"field1\":[]}");

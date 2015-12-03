@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_NSExpression_ZUX_h
+#define ZUtilsX_NSExpression_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_NSExpression)
 
 @interface NSExpression (ZUX)
@@ -27,3 +30,5 @@ ZUX_CATEGORY_H(ZUX_NSExpression)
 + (NSExpression *)expressionWithParametricFormat:(NSString *)parametricFormat;
 
 @end
+
+#endif /* ZUtilsX_NSExpression_ZUX_h */

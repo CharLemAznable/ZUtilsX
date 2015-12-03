@@ -9,6 +9,9 @@
 #import "ZUXView.h"
 #import "zarc.h"
 
+#ifndef ZUtilsX_ZUXRefreshView_h
+#define ZUtilsX_ZUXRefreshView_h
+
 typedef NS_ENUM(NSInteger, ZUXRefreshState) {
     ZUXRefreshNormal,
     ZUXRefreshPulling,
@@ -49,3 +52,5 @@ typedef NS_ENUM(NSInteger, ZUXRefreshPullDirection) {
 - (void)refreshViewStartLoad:(ZUXRefreshView *)view;
 
 @end
+
+#endif /* ZUtilsX_ZUXRefreshView_h */

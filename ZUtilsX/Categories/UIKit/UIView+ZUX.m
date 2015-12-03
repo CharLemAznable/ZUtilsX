@@ -105,7 +105,7 @@ NSString *const zTransformViewBoundsKVOKey      = @"bounds";
 
 - (ZUX_INSTANCETYPE)initWithTransform:(ZUXTransform *)transform {
     if (self = [self init]) {
-        objc_setAssociatedObject(self, (__bridge const void *)(zLayoutTransformKey),
+        objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(zLayoutTransformKey),
                                  transform, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         if (transform && !transform.view) transform.view = self.superview; // default transform by superview
         [self p_AddObserversToTransform:transform];
@@ -141,14 +141,14 @@ NSString *const zTransformViewBoundsKVOKey      = @"bounds";
 - (void)zuxDealloc {
     [self p_RemoveFrameAndBoundsObserversFromView:self.zTransform.view];
     [self p_RemoveObserversFromTransform:self.zTransform];
-    objc_setAssociatedObject(self, (__bridge const void *)(zLayoutTransformKey),
+    objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(zLayoutTransformKey),
                              nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [self zuxDealloc];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
                         change:(NSDictionary *)change context:(void *)context {
-    if (![zLayoutKVOContext isEqual:(__bridge id)(context)]) {
+    if (![zLayoutKVOContext isEqual:(ZUX_BRIDGE id)(context)]) {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         return;
     }
@@ -168,16 +168,16 @@ NSString *const zTransformViewBoundsKVOKey      = @"bounds";
 #pragma mark - Properties Methods.
 
 - (ZUXTransform *)zTransform {
-    return objc_getAssociatedObject(self, (__bridge const void *)(zLayoutTransformKey));
+    return objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)(zLayoutTransformKey));
 }
 
 - (void)setZTransform:(ZUXTransform *)zTransform {
-    ZUXTransform *oriTransform = objc_getAssociatedObject(self, (__bridge const void *)(zLayoutTransformKey));
+    ZUXTransform *oriTransform = objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)(zLayoutTransformKey));
     if ([oriTransform isEqualToTransform:zTransform]) return;
     
     [self p_RemoveFrameAndBoundsObserversFromView:oriTransform.view];
     [self p_RemoveObserversFromTransform:oriTransform];
-    objc_setAssociatedObject(self, (__bridge const void *)(zLayoutTransformKey),
+    objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(zLayoutTransformKey),
                              zTransform, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     if (zTransform && !zTransform.view) zTransform.view = self.superview; // default transform by superview
     [self p_AddObserversToTransform:zTransform];
@@ -261,7 +261,7 @@ NSString *const zTransformViewBoundsKVOKey      = @"bounds";
 #pragma mark - Private Methods.
 
 - (ZUXTransform *)p_ZTransform {
-    if (!objc_getAssociatedObject(self, (__bridge const void *)zLayoutTransformKey)) {
+    if (!objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)zLayoutTransformKey)) {
         [self setZTransform:ZUX_AUTORELEASE([[ZUXTransform alloc] init])];
     }
     return self.zTransform;
@@ -270,12 +270,12 @@ NSString *const zTransformViewBoundsKVOKey      = @"bounds";
 - (void)p_AddFrameAndBoundsObserversToView:(UIView *)view {
     [view addObserver:self forKeyPaths:@[zTransformViewFrameKVOKey, zTransformViewBoundsKVOKey]
               options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
-              context:(__bridge void *)(zLayoutKVOContext)];
+              context:(ZUX_BRIDGE void *)(zLayoutKVOContext)];
 }
 
 - (void)p_RemoveFrameAndBoundsObserversFromView:(UIView *)view {
     [view removeObserver:self forKeyPaths:@[zTransformViewFrameKVOKey, zTransformViewBoundsKVOKey]
-                 context:(__bridge void *)(zLayoutKVOContext)];
+                 context:(ZUX_BRIDGE void *)(zLayoutKVOContext)];
 }
 
 - (void)p_AddObserversToTransform:(ZUXTransform *)transform {
@@ -285,7 +285,7 @@ NSString *const zTransformViewBoundsKVOKey      = @"bounds";
                                               zTransformCenterXKVOKey, zTransformCenterYKVOKey,
                                               zTransformViewKVOKey]
                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
-                   context:(__bridge void *)(zLayoutKVOContext)];
+                   context:(ZUX_BRIDGE void *)(zLayoutKVOContext)];
 }
 
 - (void)p_RemoveObserversFromTransform:(ZUXTransform *)transform {
@@ -294,7 +294,7 @@ NSString *const zTransformViewBoundsKVOKey      = @"bounds";
                                                  zTransformWidthKVOKey, zTransformHeightKVOKey,
                                                  zTransformCenterXKVOKey, zTransformCenterYKVOKey,
                                                  zTransformViewKVOKey]
-                      context:(__bridge void *)(zLayoutKVOContext)];
+                      context:(ZUX_BRIDGE void *)(zLayoutKVOContext)];
 }
 
 @end // UIView (ZUXAutoLayout) end
@@ -304,9 +304,9 @@ NSString *const zTransformViewBoundsKVOKey      = @"bounds";
 CGFloat ZUXAnimateZoomRatio = 2;
 
 ZUX_INLINE ZUXAnimation ZUXAnimationMake(ZUXAnimateType type,
-                              ZUXAnimateDirection direction,
-                              NSTimeInterval duration,
-                              NSTimeInterval delay) {
+                                         ZUXAnimateDirection direction,
+                                         NSTimeInterval duration,
+                                         NSTimeInterval delay) {
     ZUXAnimation animation;
     animation.type      = type;
     animation.direction = direction;
@@ -316,8 +316,8 @@ ZUX_INLINE ZUXAnimation ZUXAnimationMake(ZUXAnimateType type,
 }
 
 ZUX_INLINE ZUXAnimation ZUXImmediateAnimationMake(ZUXAnimateType type,
-                                       ZUXAnimateDirection direction,
-                                       NSTimeInterval duration) {
+                                                  ZUXAnimateDirection direction,
+                                                  NSTimeInterval duration) {
     return ZUXAnimationMake(type, direction, duration, 0);
 }
 

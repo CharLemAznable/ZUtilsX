@@ -11,6 +11,9 @@
 #import "zobjc.h"
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_NSNumber_ZUX_h
+#define ZUtilsX_NSNumber_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_NSNumber)
 
 @interface NSNumber (ZUX)
@@ -20,3 +23,5 @@ ZUX_CATEGORY_H(ZUX_NSNumber)
 - (CGFloat)cgfloatValue;
 
 @end
+
+#endif /* ZUtilsX_NSNumber_ZUX_h */

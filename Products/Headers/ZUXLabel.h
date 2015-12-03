@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "zarc.h"
 
+#ifndef ZUtilsX_ZUXLabel_h
+#define ZUtilsX_ZUXLabel_h
+
 @protocol ZUXLabelDataSource;
 
 // ZUXLabel
@@ -31,3 +34,5 @@
 - (CGPoint)menuLocationInLabel:(ZUXLabel *)view;
 
 @end
+
+#endif /* ZUtilsX_ZUXLabel_h */

@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_NSData_ZUX_h
+#define ZUtilsX_NSData_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_NSData)
 
 @interface NSData (ZUX)
@@ -17,3 +20,5 @@ ZUX_CATEGORY_H(ZUX_NSData)
 + (NSData *)dataWithBase64String:(NSString *)base64String;
 
 @end
+
+#endif /* ZUtilsX_NSData_ZUX_h */

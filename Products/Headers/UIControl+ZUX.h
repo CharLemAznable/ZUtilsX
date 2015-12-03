@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_UIControl_ZUX_h
+#define ZUtilsX_UIControl_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_UIControl)
 
 @interface UIControl (ZUX)
@@ -32,3 +35,5 @@ ZUX_CATEGORY_H(ZUX_UIControl)
 - (CGFloat)shadowSizeForState:(UIControlState)state;
 
 @end
+
+#endif /* ZUtilsX_UIControl_ZUX_h */

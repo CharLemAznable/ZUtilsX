@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_UITextView_ZUX_h
+#define ZUtilsX_UITextView_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_UITextView)
 
 @interface UITextView (ZUX)
@@ -18,3 +21,5 @@ ZUX_CATEGORY_H(ZUX_UITextView)
                       limitWithLength:(NSUInteger)length;
 
 @end
+
+#endif /* ZUtilsX_UITextView_ZUX_h */

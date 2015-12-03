@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_UIColor_ZUX_h
+#define ZUtilsX_UIColor_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_UIColor)
 
 @interface UIColor (ZUX)
@@ -26,3 +29,5 @@ ZUX_CATEGORY_H(ZUX_UIColor)
 + (UIColor *)colorWithRGBAHexString:(NSString *)hexString;
 
 @end
+
+#endif /* ZUtilsX_UIColor_ZUX_h */

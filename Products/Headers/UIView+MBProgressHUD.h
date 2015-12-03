@@ -9,6 +9,9 @@
 #import "MBProgressHUD.h"
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_UIView_MBProgressHUD_h
+#define ZUtilsX_UIView_MBProgressHUD_h
+
 ZUX_CATEGORY_H(ZUX_MBProgressHUD)
 
 /**
@@ -16,8 +19,8 @@ ZUX_CATEGORY_H(ZUX_MBProgressHUD)
  */
 @interface UIView (MBProgressHUD)
 
-@property (MB_STRONG) UIFont* hudLabelFont;
-@property (MB_STRONG) UIFont* hudDetailsLabelFont;
+@property (MB_STRONG) UIFont *hudLabelFont;
+@property (MB_STRONG) UIFont *hudDetailsLabelFont;
 
 /**
  * Finds the top-most HUD subview and returns it.
@@ -41,8 +44,8 @@ ZUX_CATEGORY_H(ZUX_MBProgressHUD)
  */
 @interface UIView (RecursiveMBProgressHUD)
 
-@property (MB_STRONG) UIFont* recursiveHudLabelFont;
-@property (MB_STRONG) UIFont* recursiveHudDetailsLabelFont;
+@property (MB_STRONG) UIFont *recursiveHudLabelFont;
+@property (MB_STRONG) UIFont *recursiveHudDetailsLabelFont;
 
 /**
  * Finds the top-most HUD subview RECURSIVE in subviews and returns it.
@@ -56,3 +59,5 @@ ZUX_CATEGORY_H(ZUX_MBProgressHUD)
 - (void)hideRecursiveHUD:(BOOL)animated;
 
 @end
+
+#endif /* ZUtilsX_UIView_MBProgressHUD_h */

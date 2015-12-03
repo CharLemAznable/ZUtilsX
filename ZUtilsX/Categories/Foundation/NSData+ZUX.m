@@ -75,7 +75,7 @@ static const short _base64DecodingTable[256] = {
     }
     
     NSInteger outputLength = inputLength * 3 / 4;
-    NSMutableData* data = [NSMutableData dataWithLength:outputLength];
+    NSMutableData *data = [NSMutableData dataWithLength:outputLength];
     uint8_t *output = data.mutableBytes;
     
     NSInteger inputPoint = 0;

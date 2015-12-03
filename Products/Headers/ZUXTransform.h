@@ -10,6 +10,9 @@
 #import "zobjc.h"
 #import "zarc.h"
 
+#ifndef ZUtilsX_ZUXTransform_h
+#define ZUtilsX_ZUXTransform_h
+
 @interface ZUXTransform : NSObject
 
 @property (nonatomic, ZUX_STRONG) id left;
@@ -30,3 +33,5 @@
 - (CGRect)transformRect;
 
 @end
+
+#endif /* ZUtilsX_ZUXTransform_h */
