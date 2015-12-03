@@ -23,15 +23,15 @@ ZUX_INLINE NSString *ZUX_GetPropertyClassName(Class cls, NSString *propertyName)
     objc_property_t property = class_getProperty(cls, propertyName.UTF8String);
     if (property == NULL) return nil;
     
-    NSString* propertyAttr = @(property_getAttributes(property));
-    NSScanner* scanner = [NSScanner scannerWithString:propertyAttr];
+    NSString *propertyAttr = @(property_getAttributes(property));
+    NSScanner *scanner = [NSScanner scannerWithString:propertyAttr];
     [scanner scanUpToString:@"T" intoString:nil];
     [scanner scanString:@"T" intoString:nil];
     NSString *propertyClassName = nil;
     if ([scanner scanString:@"@\"" intoString:&propertyClassName]) {
         [scanner scanUpToCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"\"<"]
                                 intoString:&propertyClassName];
-    } else if ([scanner scanString:@"{" intoString: &propertyClassName]) {
+    } else if ([scanner scanString:@"{" intoString:&propertyClassName]) {
         [scanner scanCharactersFromSet:[NSCharacterSet alphanumericCharacterSet]
                             intoString:&propertyClassName];
     } else {

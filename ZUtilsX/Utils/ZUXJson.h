@@ -11,7 +11,9 @@
 #ifndef ZUtilsX_ZUXJson_h
 #define ZUtilsX_ZUXJson_h
 
-NS_CLASS_AVAILABLE(10_7, 5_0)
+// You can define ZUX_USE_JSONKIT to use JSONKit.
+//#define ZUX_USE_JSONKIT
+
 @interface ZUXJson : NSObject
 
 + (id)objectFromJsonData:(NSData *)jsonData;

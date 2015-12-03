@@ -82,7 +82,7 @@ ZUX_STATIC_INLINE void enumerateObjectPropertiesWithVerifierAndProcessor
         }
         
         [[class zuxJsonPropertyNames] enumerateObjectsUsingBlock:
-         ^(id  _Nonnull propertyName, NSUInteger idx, BOOL * _Nonnull stop) {
+         ^(id _Nonnull propertyName, NSUInteger idx, BOOL *_Nonnull stop) {
              objc_property_t property = class_getProperty([object class], [propertyName UTF8String]);
              NSString* propertyAttrs = @(property_getAttributes(property));
              

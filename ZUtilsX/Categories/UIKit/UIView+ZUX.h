@@ -26,10 +26,10 @@ ZUX_CATEGORY_H(ZUX_UIView)
 
 // Border.
 @property CGFloat   borderWidth;
-@property UIColor*  borderColor;
+@property UIColor  *borderColor;
 
 // Shadow
-@property UIColor*  shadowColor;
+@property UIColor  *shadowColor;
 @property float     shadowOpacity;
 @property CGSize    shadowOffset;
 @property CGFloat   shadowSize;

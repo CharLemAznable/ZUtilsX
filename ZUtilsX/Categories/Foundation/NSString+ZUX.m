@@ -50,7 +50,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
 
 - (NSComparisonResult)compareToVersionString:(NSString *)version {
     // Break version into fields (separated by '.')
-    NSMutableArray *leftFields  = [NSMutableArray arrayWithArray:[self  componentsSeparatedByString:@"."]];
+    NSMutableArray *leftFields  = [NSMutableArray arrayWithArray:[self    componentsSeparatedByString:@"."]];
     NSMutableArray *rightFields = [NSMutableArray arrayWithArray:[version componentsSeparatedByString:@"."]];
     
     // Implict ".0" in case version doesn't have the same number of '.'
