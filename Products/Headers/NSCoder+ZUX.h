@@ -10,6 +10,9 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_NSCoder_ZUX_h
+#define ZUtilsX_NSCoder_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_NSCoder)
 
 @interface NSCoder (ZUX)
@@ -18,3 +21,5 @@ ZUX_CATEGORY_H(ZUX_NSCoder)
 - (CGFloat)decodeCGFloatForKey:(NSString *)key;
 
 @end
+
+#endif /* ZUtilsX_NSCoder_ZUX_h */

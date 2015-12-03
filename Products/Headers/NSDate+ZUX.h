@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_NSDate_ZUX_h
+#define ZUtilsX_NSDate_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_NSDate)
 
 typedef long long ZUXTimeIntervalMills;
@@ -21,10 +24,12 @@ typedef long long ZUXTimeIntervalMills;
 
 - (NSString *)stringWithDateFormat:(NSString *)dateFormat;
 
-@end
+@end // NSDate (ZUX)
 
 @interface NSString (ZUXDate)
 
 - (NSDate *)dateWithDateFormat:(NSString *)dateFormat;
 
-@end
+@end // NSString (ZUXDate)
+
+#endif /* ZUtilsX_NSDate_ZUX_h */

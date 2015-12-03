@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_UITextField_ZUX_h
+#define ZUtilsX_UITextField_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_UITextField)
 
 @interface UITextField (ZUX)
@@ -18,3 +21,5 @@ ZUX_CATEGORY_H(ZUX_UITextField)
                       limitWithLength:(NSUInteger)length;
 
 @end
+
+#endif /* ZUtilsX_UITextField_ZUX_h */

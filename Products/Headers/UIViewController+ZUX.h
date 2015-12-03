@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_UIViewController_ZUX_h
+#define ZUtilsX_UIViewController_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_UIViewController)
 
 @interface UIViewController (ZUX)
 
 @end
+
+#endif /* ZUtilsX_UIViewController_ZUX_h */

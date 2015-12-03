@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "zobjc.h"
 
+#ifndef ZUtilsX_ZUXConstraint_h
+#define ZUtilsX_ZUXConstraint_h
+
 #if NS_BLOCKS_AVAILABLE
 
 typedef CGFloat (^ZUXConstraintBlock)(UIView *view);
@@ -43,4 +46,6 @@ typedef CGFloat (^ZUXConstraintBlock)(UIView *view);
 
 @end
 
-#endif
+#endif /* NS_BLOCKS_AVAILABLE */
+
+#endif /* ZUtilsX_ZUXConstraint_h */

@@ -8,7 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-NS_CLASS_AVAILABLE(10_7, 5_0)
+#ifndef ZUtilsX_ZUXJson_h
+#define ZUtilsX_ZUXJson_h
+
+// You can define ZUX_USE_JSONKIT to use JSONKit.
+//#define ZUX_USE_JSONKIT
+
 @interface ZUXJson : NSObject
 
 + (id)objectFromJsonData:(NSData *)jsonData;
@@ -20,3 +25,5 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 + (NSString *)jsonStringFromObject:(id)object;
 
 @end
+
+#endif /* ZUtilsX_ZUXJson_h */

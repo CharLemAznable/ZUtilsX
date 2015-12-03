@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "zarc.h"
 
+#ifndef ZUtilsX_ZUXImageView_h
+#define ZUtilsX_ZUXImageView_h
+
 @protocol ZUXImageViewDataSource;
 
 @protocol ZUXImageViewDelegate;
@@ -44,3 +47,5 @@
 - (void)saveImageFailedInImageView:(ZUXImageView *)view withError:(NSError *)error;
 
 @end
+
+#endif /* ZUtilsX_ZUXImageView_h */

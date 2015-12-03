@@ -11,6 +11,9 @@
 #import "zarc.h"
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_UIView_ZUX_h
+#define ZUtilsX_UIView_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_UIView)
 
 @interface UIView (ZUX)
@@ -23,15 +26,15 @@ ZUX_CATEGORY_H(ZUX_UIView)
 
 // Border.
 @property CGFloat   borderWidth;
-@property UIColor*  borderColor;
+@property UIColor  *borderColor;
 
 // Shadow
-@property UIColor*  shadowColor;
+@property UIColor  *shadowColor;
 @property float     shadowOpacity;
 @property CGSize    shadowOffset;
 @property CGFloat   shadowSize;
 
-@end // UIView (ZUX) end
+@end // UIView (ZUX)
 
 @class ZUXTransform;
 
@@ -51,7 +54,7 @@ ZUX_CATEGORY_H(ZUX_UIView)
 
 - (ZUX_INSTANCETYPE)initWithTransform:(ZUXTransform *)transform;
 
-@end // UIView (ZUXAutoLayout) end
+@end // UIView (ZUXAutoLayout)
 
 typedef NS_OPTIONS(NSUInteger, ZUXAnimateType) {
     ZUXAnimateMove      = 1 <<  0, // animate by adjust self translate-transform
@@ -100,4 +103,6 @@ ZUX_EXTERN ZUXAnimation ZUXImmediateAnimationMake(ZUXAnimateType type,
 - (void)zuxAnimate:(ZUXAnimation)animation;
 - (void)zuxAnimate:(ZUXAnimation)animation completion:(void (^)())completion;
 
-@end // UIView (ZUXAnimate) end
+@end // UIView (ZUXAnimate)
+
+#endif /* ZUtilsX_UIView_ZUX_h */

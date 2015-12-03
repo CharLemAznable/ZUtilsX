@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 
+#ifndef ZUtilsX_UIDevice_ZUX_h
+#define ZUtilsX_UIDevice_ZUX_h
+
 ZUX_CATEGORY_H(ZUX_UIDevice)
 
 @interface UIDevice (ZUX)
@@ -17,3 +20,5 @@ ZUX_CATEGORY_H(ZUX_UIDevice)
 - (NSString *)purifiedFullModel;
 
 @end
+
+#endif /* ZUtilsX_UIDevice_ZUX_h */

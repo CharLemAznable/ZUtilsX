@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#ifndef ZUtilsX_ZUXDirectory_h
+#define ZUtilsX_ZUXDirectory_h
+
 typedef NS_ENUM(NSUInteger, ZUXDirectoryType) {
     ZUXDocument     = 0,
     ZUXCaches       = 1,
@@ -32,3 +35,5 @@ typedef NS_ENUM(NSUInteger, ZUXDirectoryType) {
 + (NSString *)directoryRoot:(ZUXDirectoryType)directory;
 
 @end
+
+#endif /* ZUtilsX_ZUXDirectory_h */

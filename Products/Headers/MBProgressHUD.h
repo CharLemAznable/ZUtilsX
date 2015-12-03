@@ -30,6 +30,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+#ifndef ZUtilsX_MBProgressHUD_h
+#define ZUtilsX_MBProgressHUD_h
+
 @protocol MBProgressHUDDelegate;
 
 
@@ -519,3 +522,5 @@ typedef void (^MBProgressHUDCompletionBlock)();
 @property (nonatomic, MB_STRONG) UIColor *progressColor;
 
 @end
+
+#endif /* ZUtilsX_MBProgressHUD_h */
