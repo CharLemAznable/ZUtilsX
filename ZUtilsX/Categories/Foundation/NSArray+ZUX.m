@@ -42,14 +42,14 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 }
 
 - (BOOL)writeToUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
-    if (![ZUXDirectory createDirectory:[filePath stringByDeletingLastPathComponent]
-                           inDirectory:directory]) return NO;
+    if (ZUX_EXPECT_F(![ZUXDirectory createDirectory:[filePath stringByDeletingLastPathComponent]
+                                        inDirectory:directory])) return NO;
     return [self writeToFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]
                   atomically:YES];
 }
 
 + (NSArray *)arrayWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
-    if (![ZUXDirectory fileExists:filePath inDirectory:directory]) return nil;
+    if (ZUX_EXPECT_F(![ZUXDirectory fileExists:filePath inDirectory:directory])) return nil;
     return [NSArray arrayWithContentsOfFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]];
 }
 

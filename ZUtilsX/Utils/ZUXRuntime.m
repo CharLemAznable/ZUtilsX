@@ -7,6 +7,7 @@
 //
 
 #import "ZUXRuntime.h"
+#import "zobjc.h"
 #import "zarc.h"
 #import <objc/runtime.h>
 
@@ -21,7 +22,7 @@ ZUX_INLINE NSString *ZUX_GetPropertyClassName(Class cls, NSString *propertyName)
                                                 @"B":@"BOOL", @"@?":@"Block"}));
     });
     objc_property_t property = class_getProperty(cls, propertyName.UTF8String);
-    if (property == NULL) return nil;
+    if (ZUX_EXPECT_F(property == NULL)) return nil;
     
     NSString *propertyAttr = @(property_getAttributes(property));
     NSScanner *scanner = [NSScanner scannerWithString:propertyAttr];

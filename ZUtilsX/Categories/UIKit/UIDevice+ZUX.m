@@ -7,6 +7,7 @@
 //
 
 #import "UIDevice+ZUX.h"
+#import "zobjc.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
@@ -18,7 +19,7 @@ ZUX_CATEGORY_M(ZUX_UIDevice)
     static NSString *_fullModel = nil;
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        if (_fullModel) return;
+        if (ZUX_EXPECT_F(_fullModel)) return;
         size_t size;
         sysctlbyname("hw.machine", NULL, &size, NULL, 0);
         char *machine = malloc(size);
@@ -34,7 +35,7 @@ ZUX_CATEGORY_M(ZUX_UIDevice)
     static NSString *_purifiedFullModel = nil;
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        if (_purifiedFullModel) return;
+        if (ZUX_EXPECT_F(_purifiedFullModel)) return;
         NSString *fullModel = [self fullModel];
         if ([fullModel isEqualToString:@"iPhone1,1"])   _purifiedFullModel = @"iPhone";
         if ([fullModel isEqualToString:@"iPhone1,2"])   _purifiedFullModel = @"iPhone 3G";

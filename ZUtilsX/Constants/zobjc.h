@@ -37,6 +37,16 @@
 # define ZUX_INSTANCETYPE               id
 #endif
 
+#if defined (__GNUC__) && (__GNUC__ >= 4)
+# define ZUX_EXPECTED(cond, expect)     __builtin_expect((long)(cond), (expect))
+# define ZUX_EXPECT_T(cond)             ZUX_EXPECTED(cond, 1U)
+# define ZUX_EXPECT_F(cond)             ZUX_EXPECTED(cond, 0U)
+#else
+# define ZUX_EXPECTED(cond, expect)     (cond)
+# define ZUX_EXPECT_T(cond)             (cond)
+# define ZUX_EXPECT_F(cond)             (cond)
+#endif
+
 #if __has_feature(objc_kindof)
 # define ZUX_KINDOF(exp)                __kindof exp
 #else

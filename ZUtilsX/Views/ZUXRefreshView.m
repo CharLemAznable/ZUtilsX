@@ -7,6 +7,7 @@
 //
 
 #import "ZUXRefreshView.h"
+#import "zobjc.h"
 
 @implementation ZUXRefreshView
 
@@ -39,7 +40,7 @@
         
     } else if (scrollView.isDragging) {
         BOOL _loading = NO;
-        if ([_delegate respondsToSelector:@selector(refreshViewIsLoading:)]) {
+        if (ZUX_EXPECT_T([_delegate respondsToSelector:@selector(refreshViewIsLoading:)])) {
             _loading = [_delegate refreshViewIsLoading:self];
         }
         
@@ -56,13 +57,13 @@
 
 - (void)didEndDragging:(UIScrollView *)scrollView {
     BOOL _loading = NO;
-    if ([_delegate respondsToSelector:@selector(refreshViewIsLoading:)]) {
+    if (ZUX_EXPECT_T([_delegate respondsToSelector:@selector(refreshViewIsLoading:)])) {
         _loading = [_delegate refreshViewIsLoading:self];
     }
     
     CGFloat pullingOffset = [self p_PullingOffsetInScrollView:scrollView];
     if (pullingOffset >= _pullingMargin && !_loading) {
-        if ([_delegate respondsToSelector:@selector(refreshViewStartLoad:)]) {
+        if (ZUX_EXPECT_T([_delegate respondsToSelector:@selector(refreshViewStartLoad:)])) {
             [_delegate refreshViewStartLoad:self];
         }
         

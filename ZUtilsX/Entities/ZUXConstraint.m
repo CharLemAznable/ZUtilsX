@@ -18,12 +18,12 @@
 }
 
 - (ZUX_INSTANCETYPE)init {
-    if (self = [super init]) _block = nil;
+    if (ZUX_EXPECT_T(self = [super init])) _block = nil;
     return self;
 }
 
 - (ZUX_INSTANCETYPE)initWithBlock:(ZUXConstraintBlock)block {
-    if (self = [super init]) _block = ZUX_BLOCK_COPY(block);
+    if (ZUX_EXPECT_T(self = [super init])) _block = ZUX_BLOCK_COPY(block);
     return self;
 }
 
@@ -32,7 +32,7 @@
 }
 
 - (void)dealloc {
-    if (_block) ZUX_BLOCK_RELEASE(_block);
+    if (ZUX_EXPECT_T(_block)) ZUX_BLOCK_RELEASE(_block);
     ZUX_SUPER_DEALLOC;
 }
 
@@ -43,7 +43,7 @@
 }
 
 - (BOOL)isEqualToConstraint:(ZUXConstraint *)constraint {
-    if (self == constraint) return YES;
+    if (constraint == self) return YES;
     if (_block == nil && constraint.block == nil) return YES;
     if (_block == nil || constraint.block == nil) return NO;
     return _block == constraint.block;

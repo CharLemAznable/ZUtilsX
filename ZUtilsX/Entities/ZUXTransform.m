@@ -38,7 +38,7 @@
                              top:(id)top bottom:(id)bottom
                            width:(id)width height:(id)height
                          centerX:(id)centerX centerY:(id)centerY {
-    if (self = [super init]) {
+    if (ZUX_EXPECT_T(self = [super init])) {
         _view = view;
         _left = ZUX_RETAIN(left);
         _right = ZUX_RETAIN(right);
@@ -72,7 +72,7 @@
 }
 
 - (BOOL)isEqualToTransform:(ZUXTransform *)transform {
-    if (self == transform) return YES;
+    if (transform == self) return YES;
     return
     ((_view == nil && transform.view == nil) || [_view isEqual:transform.view]) &&
     ((_left == nil && transform.left == nil) || [_left isEqual:transform.left]) &&
@@ -87,7 +87,7 @@
 
 - (CGRect)transformRect {
     CGRect result = CGRectZero;
-    if (!_view) return result;
+    if (ZUX_EXPECT_F(!_view)) return result;
     constraintOriginAndSize(_view, _view.bounds.size.width,
                             _left, _right, _width, _centerX,
                             &result.origin.x, &result.size.width);

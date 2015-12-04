@@ -562,9 +562,10 @@
 - ZUXJson
 
     添加JSON工具方法.
-    当IOS版本在5.0之前时, 默认使用JSONKit, 否则默认使用NSJSONSerialization.
-    预定义ZUX_USE_JSONKIT后, 使用JSONKit.
-    修改JSONKit, 支持ARC, 不支持Serializing with block.
+
+        // 当IOS版本在5.0之前时, 默认使用JSONKit, 否则默认使用NSJSONSerialization.
+        // 预定义ZUX_USE_JSONKIT后, 使用JSONKit.
+        // 修改JSONKit, 支持ARC.
 
         // 由JSON数据获取集合类型对象.
         +objectFromJsonData:

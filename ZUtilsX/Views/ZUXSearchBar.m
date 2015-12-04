@@ -69,7 +69,7 @@ CGSize searchBarTextFieldDefaultSize = {300, 30};
 }
 
 - (void)setSearchTextField:(UITextField *)searchTextField {
-    if ([_searchTextField isEqual:searchTextField]) return;
+    if (ZUX_EXPECT_F([_searchTextField isEqual:searchTextField])) return;
     
     [_searchTextField.superview addSubview:searchTextField];
     [_searchTextField removeFromSuperview];
@@ -104,7 +104,7 @@ CGSize searchBarTextFieldDefaultSize = {300, 30};
 #pragma mark - User Event
 
 - (void)maskTouched:(id)sender {
-    if (![sender isEqual:_mask]) return;
+    if (ZUX_EXPECT_F(![sender isEqual:_mask])) return;
     
     [_searchTextField resignFirstResponder];
     [self addSubview:_searchTextField];

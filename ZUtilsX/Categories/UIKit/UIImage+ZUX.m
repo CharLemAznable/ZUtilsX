@@ -48,14 +48,14 @@ ZUX_CATEGORY_M(ZUX_UIImage)
  */
 + (UIImage *)imageGradientRectWithColors:(NSArray *)colors locations:(NSArray *)locations
                                direction:(CGVector)direction size:(CGSize)size {
-    if ([colors count] < 2) return nil;
+    if (ZUX_EXPECT_F([colors count] < 2)) return nil;
     
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGGradientRef gradient = CreateGradientWithColorsAndLocations(colors, locations);
-    if (gradient) {
+    if (ZUX_EXPECT_T(gradient)) {
         CGPoint start = CGPointMake(size.width * MAX(0, -direction.dx), size.height * MAX(0, -direction.dy));
         CGPoint end = CGPointMake(size.width * MAX(0, direction.dx), size.height * MAX(0, direction.dy));
         CGContextDrawLinearGradient(context, gradient, start, end,
@@ -111,7 +111,7 @@ ZUX_STATIC_INLINE CGGradientRef CreateGradientWithColorsAndLocations(NSArray *co
         [gradientColors addObject:(id)[(UIColor *)object CGColor]];
     }];
     
-    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)gradientColors, gradientLocations);
+    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (ZUX_BRIDGE CFArrayRef)gradientColors, gradientLocations);
     
     ZUX_RELEASE(gradientColors);
     if (gradientLocations) free(gradientLocations);
@@ -132,15 +132,15 @@ ZUX_STATIC_INLINE CGGradientRef CreateGradientWithColorsAndLocations(NSArray *co
 }
 
 - (BOOL)writeToUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
-    if (![ZUXDirectory createDirectory:[filePath stringByDeletingLastPathComponent]
-                           inDirectory:directory]) return NO;
+    if (ZUX_EXPECT_F(![ZUXDirectory createDirectory:[filePath stringByDeletingLastPathComponent]
+                                        inDirectory:directory])) return NO;
     return [UIImagePNGRepresentation(self) writeToFile:
             [ZUXDirectory fullFilePath:filePath inDirectory:directory]
                                             atomically:YES];
 }
 
 + (UIImage *)imageWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
-    if (![ZUXDirectory fileExists:filePath inDirectory:directory]) return nil;
+    if (ZUX_EXPECT_F(![ZUXDirectory fileExists:filePath inDirectory:directory])) return nil;
     return [UIImage imageWithContentsOfFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]];
 }
 

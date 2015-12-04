@@ -41,7 +41,7 @@ ZUX_STATIC_INLINE void swizzleClassMethod(Class clazz, SEL oriSelector, SEL newS
         forKeyPaths:(NSArray *)keyPaths
             options:(NSKeyValueObservingOptions)options
             context:(void *)context {
-    if (!keyPaths) return;
+    if (ZUX_EXPECT_F(!keyPaths)) return;
     for (id keyPath in keyPaths) {
         NSString *k = [keyPath isKindOfClass:[NSString class]] ? keyPath : [keyPath description];
         [self addObserver:observer forKeyPath:k options:options context:context];
@@ -51,7 +51,7 @@ ZUX_STATIC_INLINE void swizzleClassMethod(Class clazz, SEL oriSelector, SEL newS
 - (void)removeObserver:(NSObject *)observer
            forKeyPaths:(NSArray *)keyPaths
                context:(void *)context {
-    if (!keyPaths) return;
+    if (ZUX_EXPECT_F(!keyPaths)) return;
     for (id keyPath in keyPaths) {
         NSString *k = [keyPath isKindOfClass:[NSString class]] ? keyPath : [keyPath description];
         [self removeObserver:observer forKeyPath:k context:context];

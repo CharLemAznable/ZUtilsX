@@ -40,11 +40,13 @@ ZUX_CATEGORY_M(ZUX_NSString)
 #pragma mark - Compare Methods.
 
 - (BOOL)isCaseInsensitiveEqual:(id)object {
-    if (object == nil) return NO;
-    return NSOrderedSame == [self compare:[object description] options:NSCaseInsensitiveSearch];
+    if (object == self) return YES;
+    if (!object || ![object isKindOfClass:[self class]]) return NO;
+    return [self isCaseInsensitiveEqualToString:object];
 }
 
 - (BOOL)isCaseInsensitiveEqualToString:(NSString *)aString {
+    if (aString == self) return YES;
     return NSOrderedSame == [self compare:aString options:NSCaseInsensitiveSearch];
 }
 
@@ -134,14 +136,14 @@ ZUX_CATEGORY_M(ZUX_NSString)
 }
 
 - (NSArray *)arraySplitedByString:(NSString *)separator filterEmptyItem:(BOOL)filterEmptyItem {
-    if ([self isEmpty]) return filterEmptyItem ? @[] : @[@""];
+    if (ZUX_EXPECT_F([self isEmpty])) return filterEmptyItem ? @[] : @[@""];
     NSArray *components = [self componentsSeparatedByString:separator];
     return filterEmptyItem ? [components filteredArrayUsingPredicate:
                               [NSPredicate predicateWithFormat:@"SELF.length > 0"]] : components;
 }
 
 - (NSArray *)arraySplitedByCharactersInSet:(NSCharacterSet *)separator filterEmptyItem:(BOOL)filterEmptyItem {
-    if ([self isEmpty]) return filterEmptyItem ? @[] : @[@""];
+    if (ZUX_EXPECT_F([self isEmpty])) return filterEmptyItem ? @[] : @[@""];
     NSArray *components = [self componentsSeparatedByCharactersInSet:separator];
     return filterEmptyItem ? [components filteredArrayUsingPredicate:
                               [NSPredicate predicateWithFormat:@"SELF.length > 0"]] : components;
@@ -154,7 +156,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
 }
 
 + (ZUX_INSTANCETYPE)stringWithArray:(NSArray *)array separator:(NSString *)separatorString {
-    if (!array) return @"";
+    if (ZUX_EXPECT_F(!array)) return @"";
     
     NSMutableString *result = [NSMutableString string];
     for (int i = 0; i < [array count]; i++) {
@@ -244,9 +246,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
 }
 
 - (NSString *)base64EncodedString  {
-    if ([self length] == 0) {
-        return nil;
-    }
+    if (ZUX_EXPECT_F([self length] == 0)) return nil;
     
     ZUX_ENABLE_CATEGORY(ZUX_NSData);
     return [[self dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString];

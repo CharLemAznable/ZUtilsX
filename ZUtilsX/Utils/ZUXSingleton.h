@@ -20,7 +20,8 @@ static id _sharedInstance; \
 + (ZUX_INSTANCETYPE)sharedInstance { \
     static dispatch_once_t once_t; \
     dispatch_once(&once_t, ^{ \
-        if (!_sharedInstance) _sharedInstance = [[self alloc] init]; \
+        if (ZUX_EXPECT_F(_sharedInstance)) return; \
+        _sharedInstance = [[self alloc] init]; \
     }); \
     return _sharedInstance; \
 } \
@@ -28,7 +29,7 @@ static id _sharedInstance; \
     static dispatch_once_t once_t; \
     __block id alloc = nil; \
     dispatch_once(&once_t, ^{ \
-        if (!_sharedInstance) _sharedInstance = [super allocWithZone:zone];\
+        if (ZUX_EXPECT_T(!_sharedInstance)) _sharedInstance = [super allocWithZone:zone];\
         alloc = _sharedInstance; \
     }); \
     return alloc; \

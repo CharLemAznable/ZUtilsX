@@ -243,14 +243,14 @@ NSString *const zShadowSizesKey     = @"zShadowSizes";
 }
 
 - (id)p_PropertyForAssociateKey:(NSString *)key {
-    return objc_getAssociatedObject(self, (__bridge const void *)(key));
+    return objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)(key));
 }
 
 - (void)p_SetPropertyWithValue:(id)value forAssociateKey:(NSString *)key {
-    id originalValue = objc_getAssociatedObject(self, (__bridge const void *)(key));
-    if ([value isEqual:originalValue]) return;
+    id originalValue = objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)(key));
+    if (ZUX_EXPECT_F([value isEqual:originalValue])) return;
     
-    objc_setAssociatedObject(self, (__bridge const void *)(key), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(key), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

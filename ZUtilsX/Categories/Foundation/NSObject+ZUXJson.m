@@ -44,7 +44,7 @@ ZUX_CATEGORY_M(ZUXJson_NSObject)
 }
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
-    if (self = [self init]) {
+    if (ZUX_EXPECT_T(self = [self init])) {
         enumerateObjectPropertiesWithVerifierAndProcessor(self, ^BOOL(NSString *propertyAttrs) {
             return !isWeakReferenceProperty(propertyAttrs)
             && !isReadOnlyProperty(propertyAttrs)
@@ -133,8 +133,7 @@ ZUX_STATIC_INLINE bool isStructureTypeProperty(NSString *propertyAttrs) {
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
     if ([jsonObject isKindOfClass:[NSNumber class]]) {
-        self = [self initWithDouble:[jsonObject doubleValue]];
-        return self;
+        return [self initWithDouble:[jsonObject doubleValue]];
     }
     return nil;
 }
@@ -149,8 +148,7 @@ ZUX_STATIC_INLINE bool isStructureTypeProperty(NSString *propertyAttrs) {
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
     if ([jsonObject isKindOfClass:[NSString class]]) {
-        self = [self initWithString:jsonObject];
-        return self;
+        return [self initWithString:jsonObject];
     }
     return nil;
 }
@@ -174,8 +172,7 @@ ZUX_STATIC_INLINE bool isStructureTypeProperty(NSString *propertyAttrs) {
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
     if ([jsonObject isKindOfClass:[NSArray class]]) {
-        self = [self initWithArray:jsonObject copyItems:YES];
-        return self;
+        return [self initWithArray:jsonObject copyItems:YES];
     }
     return nil;
 }
@@ -199,8 +196,7 @@ ZUX_STATIC_INLINE bool isStructureTypeProperty(NSString *propertyAttrs) {
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
     if ([jsonObject isKindOfClass:[NSDictionary class]]) {
-        self = [self initWithDictionary:jsonObject copyItems:YES];
-        return self;
+        return [self initWithDictionary:jsonObject copyItems:YES];
     }
     return nil;
 }

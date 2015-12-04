@@ -75,7 +75,7 @@
     if (![self isValidJSONObject:object]) {
         ZUX_ENABLE_CATEGORY(ZUXJson_NSObject);
         id jsonObject = [object zuxJsonObject];
-        if (![self isValidJSONObject:jsonObject]) {
+        if (ZUX_EXPECT_F(![self isValidJSONObject:jsonObject])) {
             return [[jsonObject description] dataUsingEncoding:NSUTF8StringEncoding];
         }
 #if JSONKIT_ENABLED

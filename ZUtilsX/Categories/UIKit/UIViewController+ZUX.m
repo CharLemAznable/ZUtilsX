@@ -34,7 +34,7 @@ ZUX_CATEGORY_M(ZUX_UIViewController)
     if (!viewClassName || [@"UIView" isEqualToString:viewClassName]) return;
     
     Class viewClass = NSClassFromString(viewClassName);
-    if (![viewClass isSubclassOfClass:[UIView class]]) return;
+    if (ZUX_EXPECT_F(![viewClass isSubclassOfClass:[UIView class]])) return;
     
     self.view = ZUX_AUTORELEASE([[viewClass alloc] initWithFrame:self.view.frame]);
 }

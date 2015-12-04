@@ -17,12 +17,12 @@
 @implementation ZUXLabel
 
 - (ZUX_INSTANCETYPE)init {
-    if (self = [super init]) [self zuxInitial];
+    if (ZUX_EXPECT_T(self = [super init])) [self zuxInitial];
     return self;
 }
 
 - (ZUX_INSTANCETYPE)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
+    if (ZUX_EXPECT_T(self = [super initWithCoder:aDecoder])) {
         _canCopy = [aDecoder decodeBoolForKey:@"canCopy"];
         _backgroundImage = ZUX_RETAIN([aDecoder decodeObjectOfClass:[UIImage class] forKey:@"backgroundImage"]);
         ZUX_ENABLE_CATEGORY(ZUX_NSCoder);
@@ -32,7 +32,7 @@
 }
 
 - (ZUX_INSTANCETYPE)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) [self zuxInitial];
+    if (ZUX_EXPECT_T(self = [super initWithFrame:frame])) [self zuxInitial];
     return self;
 }
 
@@ -122,7 +122,7 @@
 }
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage {
-    if ([_backgroundImage isEqual:backgroundImage]) return;
+    if (ZUX_EXPECT_F([_backgroundImage isEqual:backgroundImage])) return;
     
     ZUX_RELEASE(_backgroundImage);
     _backgroundImage = ZUX_RETAIN(backgroundImage);
@@ -179,8 +179,8 @@ ZUX_STATIC_INLINE NSDictionary *NSAttributedStringAttributesFromZUXLinesSpacingL
         mutableAttributes[(NSString *)kCTParagraphStyleAttributeName] = paragraphStyle;
         ZUX_RELEASE(paragraphStyle);
     } else {
-        CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)label.font.fontName, label.font.pointSize, NULL);
-        mutableAttributes[(NSString *)kCTFontAttributeName] = (__bridge id)font;
+        CTFontRef font = CTFontCreateWithName((ZUX_BRIDGE CFStringRef)label.font.fontName, label.font.pointSize, NULL);
+        mutableAttributes[(NSString *)kCTFontAttributeName] = (ZUX_BRIDGE id)font;
         CFRelease(font);
         
         mutableAttributes[(NSString *)kCTForegroundColorAttributeName] = (id)label.textColor.CGColor;
@@ -197,7 +197,7 @@ ZUX_STATIC_INLINE NSDictionary *NSAttributedStringAttributesFromZUXLinesSpacingL
                 .value = (const void *)&lineSpacing}
         };
         CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(paragraphStyles, 2);
-        mutableAttributes[(NSString *)kCTParagraphStyleAttributeName] = (__bridge id)paragraphStyle;
+        mutableAttributes[(NSString *)kCTParagraphStyleAttributeName] = (ZUX_BRIDGE id)paragraphStyle;
         CFRelease(paragraphStyle);
     }
     return [NSDictionary dictionaryWithDictionary:mutableAttributes];

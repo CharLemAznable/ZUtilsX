@@ -13,12 +13,12 @@
 @implementation ZUXImageView
 
 - (ZUX_INSTANCETYPE)init {
-    if (self = [super init]) [self zuxInitial];
+    if (ZUX_EXPECT_T(self = [super init])) [self zuxInitial];
     return self;
 }
 
 - (ZUX_INSTANCETYPE)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
+    if (ZUX_EXPECT_T(self = [super initWithCoder:aDecoder])) {
         _canCopy = [aDecoder decodeBoolForKey:@"canCopy"];
         _canSave = [aDecoder decodeBoolForKey:@"canSave"];
     }
@@ -26,17 +26,17 @@
 }
 
 - (ZUX_INSTANCETYPE)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) [self zuxInitial];
+    if (ZUX_EXPECT_T(self = [super initWithFrame:frame])) [self zuxInitial];
     return self;
 }
 
 - (ZUX_INSTANCETYPE)initWithImage:(UIImage *)image {
-    if (self = [super initWithImage:image]) [self zuxInitial];
+    if (ZUX_EXPECT_T(self = [super initWithImage:image])) [self zuxInitial];
     return self;
 }
 
 - (ZUX_INSTANCETYPE)initWithImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage {
-    if (self = [super initWithImage:image highlightedImage:highlightedImage]) [self zuxInitial];
+    if (ZUX_EXPECT_T(self = [super initWithImage:image highlightedImage:highlightedImage])) [self zuxInitial];
     return self;
 }
 

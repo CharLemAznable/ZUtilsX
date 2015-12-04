@@ -8,6 +8,7 @@
 
 #import "ZUXPageControl.h"
 #import "UIImage+ZUX.h"
+#import "zobjc.h"
 
 @interface ZUXPageControl () {
     UIImage *_pageIndicatorImage;
@@ -53,7 +54,7 @@
 }
 
 - (void)setPageIndicatorColor:(UIColor *)pageIndicatorColor {
-    if ([_pageIndicatorColor isEqual:pageIndicatorColor]) return;
+    if (ZUX_EXPECT_F([_pageIndicatorColor isEqual:pageIndicatorColor])) return;
     
     ZUX_RELEASE(_pageIndicatorColor);
     _pageIndicatorColor = ZUX_RETAIN(pageIndicatorColor);
@@ -65,7 +66,7 @@
 }
 
 - (void)setCurrentPageIndicatorColor:(UIColor *)currentPageIndicatorColor {
-    if ([_currentPageIndicatorColor isEqual:currentPageIndicatorColor]) return;
+    if (ZUX_EXPECT_F([_currentPageIndicatorColor isEqual:currentPageIndicatorColor])) return;
     
     ZUX_RELEASE(_currentPageIndicatorColor);
     _currentPageIndicatorColor = ZUX_RETAIN(currentPageIndicatorColor);

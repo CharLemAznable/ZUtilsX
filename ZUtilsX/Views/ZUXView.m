@@ -12,19 +12,19 @@
 @implementation ZUXView
 
 - (ZUX_INSTANCETYPE)init {
-    if (self = [super init]) [self zuxInitial];
+    if (ZUX_EXPECT_T(self = [super init])) [self zuxInitial];
     return self;
 }
 
 - (ZUX_INSTANCETYPE)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
+    if (ZUX_EXPECT_T(self = [super initWithCoder:aDecoder])) {
         _backgroundImage = ZUX_RETAIN([aDecoder decodeObjectOfClass:[UIImage class] forKey:@"backgroundImage"]);
     }
     return self;
 }
 
 - (ZUX_INSTANCETYPE)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) [self zuxInitial];
+    if (ZUX_EXPECT_T(self = [super initWithFrame:frame])) [self zuxInitial];
     return self;
 }
 
@@ -48,7 +48,7 @@
 }
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage {
-    if ([_backgroundImage isEqual:backgroundImage]) return;
+    if (ZUX_EXPECT_F([_backgroundImage isEqual:backgroundImage])) return;
     
     ZUX_RELEASE(_backgroundImage);
     _backgroundImage = ZUX_RETAIN(backgroundImage);
