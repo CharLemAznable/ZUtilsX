@@ -227,7 +227,6 @@
         minute
         second
         weekday
-        weekdayOrdinal
 
         // 时间格式化工具方法.
         -stringWithDateFormat:

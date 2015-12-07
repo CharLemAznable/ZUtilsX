@@ -30,7 +30,6 @@ typedef long long ZUXTimeIntervalMills;
 @property (readonly) NSInteger minute;
 @property (readonly) NSInteger second;
 @property (readonly) NSInteger weekday;
-@property (readonly) NSInteger weekdayOrdinal;
 
 @end // NSDate (ZUX)
 

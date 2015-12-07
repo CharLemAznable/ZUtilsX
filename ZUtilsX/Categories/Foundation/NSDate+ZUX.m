@@ -8,6 +8,7 @@
 
 #import "NSDate+ZUX.h"
 #import "zarc.h"
+#import "zadapt.h"
 
 ZUX_CATEGORY_M(ZUX_NSDate)
 
@@ -30,15 +31,14 @@ ZUX_CATEGORY_M(ZUX_NSDate)
     return [[NSCalendar currentCalendar] components:calendarUnit fromDate:self].componentName; \
 }
 
-ZUXNSDateComponent_implement(NSEraCalendarUnit, era);
-ZUXNSDateComponent_implement(NSYearCalendarUnit, year);
-ZUXNSDateComponent_implement(NSMonthCalendarUnit, month);
-ZUXNSDateComponent_implement(NSDayCalendarUnit, day);
-ZUXNSDateComponent_implement(NSHourCalendarUnit, hour);
-ZUXNSDateComponent_implement(NSMinuteCalendarUnit, minute);
-ZUXNSDateComponent_implement(NSSecondCalendarUnit, second);
-ZUXNSDateComponent_implement(NSWeekdayCalendarUnit, weekday);
-ZUXNSDateComponent_implement(NSWeekdayOrdinalCalendarUnit, weekdayOrdinal);
+ZUXNSDateComponent_implement(ZUXCalendarUnitEra, era);
+ZUXNSDateComponent_implement(ZUXCalendarUnitYear, year);
+ZUXNSDateComponent_implement(ZUXCalendarUnitMonth, month);
+ZUXNSDateComponent_implement(ZUXCalendarUnitDay, day);
+ZUXNSDateComponent_implement(ZUXCalendarUnitHour, hour);
+ZUXNSDateComponent_implement(ZUXCalendarUnitMinute, minute);
+ZUXNSDateComponent_implement(ZUXCalendarUnitSecond, second);
+ZUXNSDateComponent_implement(ZUXCalendarUnitWeekday, weekday);
 
 @end
 
