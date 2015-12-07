@@ -218,6 +218,17 @@
         timeIntervalMillsSinceNow
         timeIntervalMillsSince1970
 
+        // 添加只读属性.
+        era
+        year
+        month
+        day
+        hour
+        minute
+        second
+        weekday
+        weekdayOrdinal
+
         // 时间格式化工具方法.
         -stringWithDateFormat:
 
