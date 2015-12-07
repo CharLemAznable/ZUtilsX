@@ -254,6 +254,9 @@
         shadowOffset
         shadowSize.
 
+        // 添加截图方法.
+        -imageRepresentation
+
         // 添加属性: (Layout, animatable)
         zTransform
         zLeft

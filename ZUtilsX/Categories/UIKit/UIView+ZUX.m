@@ -81,6 +81,14 @@ ZUX_CATEGORY_M(ZUX_UIView)
     self.layer.shadowRadius = shadowSize;
 }
 
+- (UIImage *)imageRepresentation {
+    UIGraphicsBeginImageContext(self.bounds.size);
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 @end // UIView (ZUX) end
 
 #pragma mark -
