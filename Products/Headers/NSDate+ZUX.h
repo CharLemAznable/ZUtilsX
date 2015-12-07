@@ -22,14 +22,27 @@ typedef long long ZUXTimeIntervalMills;
 @property (readonly) ZUXTimeIntervalMills timeIntervalMillsSinceNow;
 @property (readonly) ZUXTimeIntervalMills timeIntervalMillsSince1970;
 
-- (NSString *)stringWithDateFormat:(NSString *)dateFormat;
+@property (readonly) NSInteger era;
+@property (readonly) NSInteger year;
+@property (readonly) NSInteger month;
+@property (readonly) NSInteger day;
+@property (readonly) NSInteger hour;
+@property (readonly) NSInteger minute;
+@property (readonly) NSInteger second;
+@property (readonly) NSInteger weekday;
 
 @end // NSDate (ZUX)
 
-@interface NSString (ZUXDate)
+@interface NSDate (ZUXStringDate)
+
+- (NSString *)stringWithDateFormat:(NSString *)dateFormat;
+
+@end // NSDate (ZUXStringDate)
+
+@interface NSString (ZUXStringDate)
 
 - (NSDate *)dateWithDateFormat:(NSString *)dateFormat;
 
-@end // NSString (ZUXDate)
+@end // NSString (ZUXStringDate)
 
 #endif /* ZUtilsX_NSDate_ZUX_h */

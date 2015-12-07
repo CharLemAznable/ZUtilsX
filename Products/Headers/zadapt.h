@@ -26,43 +26,65 @@
 #define statusBarFix                    (IOS7_OR_LATER ? 0 : 20)
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
-# define ZUXTextAlignmentLeft            NSTextAlignmentLeft
-# define ZUXTextAlignmentCenter          NSTextAlignmentCenter
-# define ZUXTextAlignmentRight           NSTextAlignmentRight
-# define ZUXLineBreakByWordWrapping      NSLineBreakByWordWrapping
-# define ZUXLineBreakByCharWrapping      NSLineBreakByCharWrapping
-# define ZUXLineBreakByClipping          NSLineBreakByClipping
-# define ZUXLineBreakByTruncatingHead    NSLineBreakByTruncatingHead
-# define ZUXLineBreakByTruncatingTail    NSLineBreakByTruncatingTail
-# define ZUXLineBreakByTruncatingMiddle  NSLineBreakByTruncatingMiddle
-# define zkCTTextAlignmentLeft           kCTTextAlignmentLeft
-# define zkCTTextAlignmentRight          kCTTextAlignmentRight
-# define zkCTTextAlignmentCenter         kCTTextAlignmentCenter
-# define zkCTTextAlignmentJustified      kCTTextAlignmentJustified
-# define zkCTTextAlignmentNatural        kCTTextAlignmentNatural
+# define ZUXTextAlignmentLeft               NSTextAlignmentLeft
+# define ZUXTextAlignmentCenter             NSTextAlignmentCenter
+# define ZUXTextAlignmentRight              NSTextAlignmentRight
+# define ZUXLineBreakByWordWrapping         NSLineBreakByWordWrapping
+# define ZUXLineBreakByCharWrapping         NSLineBreakByCharWrapping
+# define ZUXLineBreakByClipping             NSLineBreakByClipping
+# define ZUXLineBreakByTruncatingHead       NSLineBreakByTruncatingHead
+# define ZUXLineBreakByTruncatingTail       NSLineBreakByTruncatingTail
+# define ZUXLineBreakByTruncatingMiddle     NSLineBreakByTruncatingMiddle
+# define zkCTTextAlignmentLeft              kCTTextAlignmentLeft
+# define zkCTTextAlignmentRight             kCTTextAlignmentRight
+# define zkCTTextAlignmentCenter            kCTTextAlignmentCenter
+# define zkCTTextAlignmentJustified         kCTTextAlignmentJustified
+# define zkCTTextAlignmentNatural           kCTTextAlignmentNatural
 #else
-# define ZUXTextAlignmentLeft            UITextAlignmentLeft
-# define ZUXTextAlignmentCenter          UITextAlignmentCenter
-# define ZUXTextAlignmentRight           UITextAlignmentRight
-# define ZUXLineBreakByWordWrapping      UILineBreakModeWordWrap
-# define ZUXLineBreakByCharWrapping      UILineBreakModeCharacterWrap
-# define ZUXLineBreakByClipping          UILineBreakModeClip
-# define ZUXLineBreakByTruncatingHead    UILineBreakModeHeadTruncation
-# define ZUXLineBreakByTruncatingTail    UILineBreakModeTailTruncation
-# define ZUXLineBreakByTruncatingMiddle  UILineBreakModeMiddleTruncation
-# define zkCTTextAlignmentLeft           kCTLeftTextAlignment
-# define zkCTTextAlignmentRight          kCTRightTextAlignment
-# define zkCTTextAlignmentCenter         kCTCenterTextAlignment
-# define zkCTTextAlignmentJustified      kCTJustifiedTextAlignment
-# define zkCTTextAlignmentNatural        kCTNaturalTextAlignment
+# define ZUXTextAlignmentLeft               UITextAlignmentLeft
+# define ZUXTextAlignmentCenter             UITextAlignmentCenter
+# define ZUXTextAlignmentRight              UITextAlignmentRight
+# define ZUXLineBreakByWordWrapping         UILineBreakModeWordWrap
+# define ZUXLineBreakByCharWrapping         UILineBreakModeCharacterWrap
+# define ZUXLineBreakByClipping             UILineBreakModeClip
+# define ZUXLineBreakByTruncatingHead       UILineBreakModeHeadTruncation
+# define ZUXLineBreakByTruncatingTail       UILineBreakModeTailTruncation
+# define ZUXLineBreakByTruncatingMiddle     UILineBreakModeMiddleTruncation
+# define zkCTTextAlignmentLeft              kCTLeftTextAlignment
+# define zkCTTextAlignmentRight             kCTRightTextAlignment
+# define zkCTTextAlignmentCenter            kCTCenterTextAlignment
+# define zkCTTextAlignmentJustified         kCTJustifiedTextAlignment
+# define zkCTTextAlignmentNatural           kCTNaturalTextAlignment
 #endif
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-# define ZUXFontAttributeName            NSFontAttributeName
-# define ZUXForegroundColorAttributeName NSForegroundColorAttributeName
+# define ZUXFontAttributeName               NSFontAttributeName
+# define ZUXForegroundColorAttributeName    NSForegroundColorAttributeName
 #else
-# define ZUXFontAttributeName            UITextAttributeFont
-# define ZUXForegroundColorAttributeName UITextAttributeTextColor
+# define ZUXFontAttributeName               UITextAttributeFont
+# define ZUXForegroundColorAttributeName    UITextAttributeTextColor
+#endif
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
+# define ZUXCalendarUnitEra                 NSCalendarUnitEra
+# define ZUXCalendarUnitYear                NSCalendarUnitYear
+# define ZUXCalendarUnitMonth               NSCalendarUnitMonth
+# define ZUXCalendarUnitDay                 NSCalendarUnitDay
+# define ZUXCalendarUnitHour                NSCalendarUnitHour
+# define ZUXCalendarUnitMinute              NSCalendarUnitMinute
+# define ZUXCalendarUnitSecond              NSCalendarUnitSecond
+# define ZUXCalendarUnitWeekday             NSCalendarUnitWeekday
+# define ZUXCalendarUnitWeekdayOrdinal      NSCalendarUnitWeekdayOrdinal
+#else
+# define ZUXCalendarUnitEra                 NSEraCalendarUnit
+# define ZUXCalendarUnitYear                NSYearCalendarUnit
+# define ZUXCalendarUnitMonth               NSMonthCalendarUnit
+# define ZUXCalendarUnitDay                 NSDayCalendarUnit
+# define ZUXCalendarUnitHour                NSHourCalendarUnit
+# define ZUXCalendarUnitMinute              NSMinuteCalendarUnit
+# define ZUXCalendarUnitSecond              NSSecondCalendarUnit
+# define ZUXCalendarUnitWeekday             NSWeekdayCalendarUnit
+# define ZUXCalendarUnitWeekdayOrdinal      NSWeekdayOrdinalCalendarUnit
 #endif
 
 #endif /* ZUtilsX_zadapt_h */

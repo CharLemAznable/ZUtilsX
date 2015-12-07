@@ -28,11 +28,14 @@ ZUX_CATEGORY_H(ZUX_UIView)
 @property CGFloat   borderWidth;
 @property UIColor  *borderColor;
 
-// Shadow
+// Shadow.
 @property UIColor  *shadowColor;
 @property float     shadowOpacity;
 @property CGSize    shadowOffset;
 @property CGFloat   shadowSize;
+
+// Screenshots.
+- (UIImage *)imageRepresentation;
 
 @end // UIView (ZUX)
 
