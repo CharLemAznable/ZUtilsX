@@ -198,10 +198,10 @@ ZUX_CATEGORY_M(ZUX_NSString)
 #pragma mark - Escape/Unescape Methods.
 
 - (NSString *)stringByEscapingForURLQuery {
-    if (IOS7_OR_LATER) {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
         return [self stringByAddingPercentEncodingWithAllowedCharacters:
                 [NSCharacterSet characterSetWithCharactersInString:@":/=,!$&'()*+;[]@#?% "]];
-    } else {
+#else
         static CFStringRef toEscape = CFSTR(":/=,!$&'()*+;[]@#?% ");
         return ZUX_AUTORELEASE((ZUX_BRIDGE_TRANSFER NSString *)
                                CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
@@ -209,16 +209,16 @@ ZUX_CATEGORY_M(ZUX_NSString)
                                                                        NULL,
                                                                        toEscape,
                                                                        kCFStringEncodingUTF8));
-    }
+#endif
 }
 
 
 - (NSString *)stringByUnescapingFromURLQuery {
-    if (IOS7_OR_LATER) {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
         return [self stringByRemovingPercentEncoding];
-    } else {
+#else
         return [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    }
+#endif
 }
 
 #pragma mark - Encode/Decode Methods.
@@ -313,12 +313,12 @@ ZUX_CATEGORY_M(ZUX_NSString)
 #pragma mark - Size caculator.
 
 - (CGSize)zuxSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size {
-    if (IOS7_OR_LATER) {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
         return [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
                                attributes:@{ NSFontAttributeName:font } context:NULL].size;
-    } else {
+#else
         return [self sizeWithFont:font constrainedToSize:size];
-    }
+#endif
 }
 
 @end

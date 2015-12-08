@@ -93,27 +93,25 @@ ZUX_CATEGORY_M(ZUX_UIView)
 
 #pragma mark -
 
-NSString *const zLayoutTransformKey             = @"ZLayoutTransformKey";
-
-NSString *const zLayoutKVOContext               = @"ZLayoutKVOContext";
-NSString *const zTransformKVOKey                = @"zTransform";
-NSString *const zTransformLeftKVOKey            = @"left";
-NSString *const zTransformRightKVOKey           = @"right";
-NSString *const zTransformTopKVOKey             = @"top";
-NSString *const zTransformBottomKVOKey          = @"bottom";
-NSString *const zTransformWidthKVOKey           = @"width";
-NSString *const zTransformHeightKVOKey          = @"height";
-NSString *const zTransformCenterXKVOKey         = @"centerX";
-NSString *const zTransformCenterYKVOKey         = @"centerY";
-NSString *const zTransformViewKVOKey            = @"view";
-NSString *const zTransformViewFrameKVOKey       = @"frame";
-NSString *const zTransformViewBoundsKVOKey      = @"bounds";
+NSString *const zLayoutKVOContext           = @"ZLayoutKVOContext";
+NSString *const zTransformKVOKey            = @"zTransform";
+NSString *const zTransformLeftKVOKey        = @"left";
+NSString *const zTransformRightKVOKey       = @"right";
+NSString *const zTransformTopKVOKey         = @"top";
+NSString *const zTransformBottomKVOKey      = @"bottom";
+NSString *const zTransformWidthKVOKey       = @"width";
+NSString *const zTransformHeightKVOKey      = @"height";
+NSString *const zTransformCenterXKVOKey     = @"centerX";
+NSString *const zTransformCenterYKVOKey     = @"centerY";
+NSString *const zTransformViewKVOKey        = @"view";
+NSString *const zTransformViewFrameKVOKey   = @"frame";
+NSString *const zTransformViewBoundsKVOKey  = @"bounds";
 
 @implementation UIView (ZUXAutoLayout)
 
 - (ZUX_INSTANCETYPE)initWithTransform:(ZUXTransform *)transform {
     if (ZUX_EXPECT_T(self = [self init])) {
-        objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(zLayoutTransformKey),
+        objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(zTransformKVOKey),
                                  transform, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         if (transform && !transform.view) transform.view = self.superview; // default transform by superview
         [self p_AddObserversToTransform:transform];
@@ -149,7 +147,7 @@ NSString *const zTransformViewBoundsKVOKey      = @"bounds";
 - (void)zuxDealloc {
     [self p_RemoveFrameAndBoundsObserversFromView:self.zTransform.view];
     [self p_RemoveObserversFromTransform:self.zTransform];
-    objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(zLayoutTransformKey),
+    objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(zTransformKVOKey),
                              nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [self zuxDealloc];
 }
@@ -176,22 +174,32 @@ NSString *const zTransformViewBoundsKVOKey      = @"bounds";
 #pragma mark - Properties Methods.
 
 - (ZUXTransform *)zTransform {
-    return objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)(zLayoutTransformKey));
+    return [self propertyForAssociateKey:zTransformKVOKey];
 }
 
 - (void)setZTransform:(ZUXTransform *)zTransform {
-    ZUXTransform *oriTransform = objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)(zLayoutTransformKey));
-    if (ZUX_EXPECT_F([oriTransform isEqualToTransform:zTransform])) return;
-    
-    [self p_RemoveFrameAndBoundsObserversFromView:oriTransform.view];
-    [self p_RemoveObserversFromTransform:oriTransform];
-    objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(zLayoutTransformKey),
-                             zTransform, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (zTransform && !zTransform.view) zTransform.view = self.superview; // default transform by superview
-    [self p_AddObserversToTransform:zTransform];
-    [self p_AddFrameAndBoundsObserversToView:zTransform.view];
-    
-    if (zTransform) self.frame = [zTransform transformRect];
+    [self setProperty:zTransform forAssociateKey:zTransformKVOKey];
+}
+
+- (void)willChangeValueForKey:(NSString *)key {
+    [super willChangeValueForKey:key];
+    if ([key isEqualToString:zTransformKVOKey]) {
+        ZUXTransform *oriTransform = self.zTransform;
+        [self p_RemoveFrameAndBoundsObserversFromView:oriTransform.view];
+        [self p_RemoveObserversFromTransform:oriTransform];
+    }
+}
+
+- (void)didChangeValueForKey:(NSString *)key {
+    [super didChangeValueForKey:key];
+    if ([key isEqualToString:zTransformKVOKey]) {
+        ZUXTransform *newTransform = self.zTransform;
+        // default transform by superview
+        if (newTransform && !newTransform.view) newTransform.view = self.superview;
+        [self p_AddObserversToTransform:newTransform];
+        [self p_AddFrameAndBoundsObserversToView:newTransform.view];
+        if (newTransform) self.frame = [newTransform transformRect];
+    }
 }
 
 - (id)zLeft {
@@ -269,10 +277,10 @@ NSString *const zTransformViewBoundsKVOKey      = @"bounds";
 #pragma mark - Private Methods.
 
 - (ZUXTransform *)p_ZTransform {
-    if (ZUX_EXPECT_F(!objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)zLayoutTransformKey))) {
-        [self setZTransform:ZUX_AUTORELEASE([[ZUXTransform alloc] init])];
-    }
-    return self.zTransform;
+    if (ZUX_EXPECT_T(self.zTransform)) return self.zTransform;
+    ZUXTransform *transform = [[ZUXTransform alloc] init];
+    [self setZTransform:transform];
+    return ZUX_AUTORELEASE(transform);
 }
 
 - (void)p_AddFrameAndBoundsObserversToView:(UIView *)view {

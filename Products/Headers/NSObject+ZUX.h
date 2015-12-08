@@ -23,6 +23,9 @@ ZUX_CATEGORY_H(ZUX_NSObject)
 - (void)removeObserver:(NSObject *)observer forKeyPaths:(NSArray *)keyPaths context:(void *)context;
 - (void)removeObserver:(NSObject *)observer forKeyPaths:(NSArray *)keyPaths;
 
+- (id)propertyForAssociateKey:(NSString *)key;
+- (void)setProperty:(id)property forAssociateKey:(NSString *)key;
+
 @end
 
 #endif /* ZUtilsX_NSObject_ZUX_h */

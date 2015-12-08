@@ -140,25 +140,27 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 }
 
 - (ZUX_INSTANCETYPE)zuxInit {
-    [self p_SetPropertyWithValue:[NSMutableDictionary dictionary] forAssociateKey:zBorderWidthsKey];
-    [self p_SetPropertyWithValue:[NSMutableDictionary dictionary] forAssociateKey:zBorderColorsKey];
+    ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+    [self setProperty:[NSMutableDictionary dictionary] forAssociateKey:zBorderWidthsKey];
+    [self setProperty:[NSMutableDictionary dictionary] forAssociateKey:zBorderColorsKey];
     
-    [self p_SetPropertyWithValue:[NSMutableDictionary dictionary] forAssociateKey:zShadowColorsKey];
-    [self p_SetPropertyWithValue:[NSMutableDictionary dictionary] forAssociateKey:zShadowOpacitiesKey];
-    [self p_SetPropertyWithValue:[NSMutableDictionary dictionary] forAssociateKey:zShadowOffsetsKey];
-    [self p_SetPropertyWithValue:[NSMutableDictionary dictionary] forAssociateKey:zShadowSizesKey];
+    [self setProperty:[NSMutableDictionary dictionary] forAssociateKey:zShadowColorsKey];
+    [self setProperty:[NSMutableDictionary dictionary] forAssociateKey:zShadowOpacitiesKey];
+    [self setProperty:[NSMutableDictionary dictionary] forAssociateKey:zShadowOffsetsKey];
+    [self setProperty:[NSMutableDictionary dictionary] forAssociateKey:zShadowSizesKey];
     
     return [self zuxInit];
 }
 
 - (void)zuxDealloc {
-    [self p_SetPropertyWithValue:nil forAssociateKey:zBorderWidthsKey];
-    [self p_SetPropertyWithValue:nil forAssociateKey:zBorderColorsKey];
+    ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+    [self setProperty:nil forAssociateKey:zBorderWidthsKey];
+    [self setProperty:nil forAssociateKey:zBorderColorsKey];
     
-    [self p_SetPropertyWithValue:nil forAssociateKey:zShadowColorsKey];
-    [self p_SetPropertyWithValue:nil forAssociateKey:zShadowOpacitiesKey];
-    [self p_SetPropertyWithValue:nil forAssociateKey:zShadowOffsetsKey];
-    [self p_SetPropertyWithValue:nil forAssociateKey:zShadowSizesKey];
+    [self setProperty:nil forAssociateKey:zShadowColorsKey];
+    [self setProperty:nil forAssociateKey:zShadowOpacitiesKey];
+    [self setProperty:nil forAssociateKey:zShadowOffsetsKey];
+    [self setProperty:nil forAssociateKey:zShadowSizesKey];
     
     [self zuxDealloc];
 }
@@ -212,45 +214,23 @@ NSString *const zShadowOpacitiesKey = @"zShadowOpacities";
 NSString *const zShadowOffsetsKey   = @"zShadowOffsets";
 NSString *const zShadowSizesKey     = @"zShadowSizes";
 
-- (NSMutableDictionary *)zBorderWidths {
-    return [self p_PropertyForAssociateKey:zBorderWidthsKey];
+#define ZUXAttribute_implement(attribute) \
+- (NSMutableDictionary *)attribute { \
+    ZUX_ENABLE_CATEGORY(ZUX_NSObject); \
+    return [self propertyForAssociateKey:attribute##Key]; \
 }
 
-- (NSMutableDictionary *)zBorderColors {
-    return [self p_PropertyForAssociateKey:zBorderColorsKey];
-}
-
-- (NSMutableDictionary *)zShadowColors {
-    return [self p_PropertyForAssociateKey:zShadowColorsKey];
-}
-
-- (NSMutableDictionary *)zShadowOpacities {
-    return [self p_PropertyForAssociateKey:zShadowOpacitiesKey];
-}
-
-- (NSMutableDictionary *)zShadowOffsets {
-    return [self p_PropertyForAssociateKey:zShadowOffsetsKey];
-}
-
-- (NSMutableDictionary *)zShadowSizes {
-    return [self p_PropertyForAssociateKey:zShadowSizesKey];
-}
+ZUXAttribute_implement(zBorderWidths)
+ZUXAttribute_implement(zBorderColors)
+ZUXAttribute_implement(zShadowColors)
+ZUXAttribute_implement(zShadowOpacities)
+ZUXAttribute_implement(zShadowOffsets)
+ZUXAttribute_implement(zShadowSizes)
 
 #pragma mark - Private Methods.
 
 - (NSString *)keyForState:(UIControlState)state {
     return [NSString stringWithFormat:@"%d", (unsigned int)state];
-}
-
-- (id)p_PropertyForAssociateKey:(NSString *)key {
-    return objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)(key));
-}
-
-- (void)p_SetPropertyWithValue:(id)value forAssociateKey:(NSString *)key {
-    id originalValue = objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)(key));
-    if (ZUX_EXPECT_F([value isEqual:originalValue])) return;
-    
-    objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(key), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

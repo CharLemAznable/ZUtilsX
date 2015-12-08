@@ -45,7 +45,6 @@ ZUXNSDateComponent_implement(ZUXCalendarUnitWeekday, weekday);
 @implementation NSDate (ZUXStringDate)
 
 - (NSString *)stringWithDateFormat:(NSString *)dateFormat {
-    [[[NSCalendar currentCalendar] components:NSEraCalendarUnit fromDate:self] valueForKey:@"era"];
     NSDateFormatter *formatter = ZUX_AUTORELEASE([[NSDateFormatter alloc] init]);
     formatter.dateFormat = dateFormat;
     return [formatter stringFromDate:self];

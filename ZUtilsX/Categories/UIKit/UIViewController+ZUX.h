@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "zarc.h"
 #import "ZUXCategory.h"
 
 #ifndef ZUtilsX_UIViewController_ZUX_h
@@ -15,6 +16,9 @@
 ZUX_CATEGORY_H(ZUX_UIViewController)
 
 @interface UIViewController (ZUX)
+
+@property(nonatomic) UIStatusBarStyle statusBarStyle;
+- (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle animated:(BOOL)animated;
 
 @end
 

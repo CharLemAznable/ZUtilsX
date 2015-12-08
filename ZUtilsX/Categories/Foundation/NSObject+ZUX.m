@@ -8,6 +8,7 @@
 
 #import "NSObject+ZUX.h"
 #import "zobjc.h"
+#import "zarc.h"
 #import <objc/runtime.h>
 
 ZUX_CATEGORY_M(ZUX_NSObject)
@@ -61,6 +62,20 @@ ZUX_STATIC_INLINE void swizzleClassMethod(Class clazz, SEL oriSelector, SEL newS
 - (void)removeObserver:(NSObject *)observer
            forKeyPaths:(NSArray *)keyPaths {
     [self removeObserver:observer forKeyPaths:keyPaths context:NULL];
+}
+
+- (id)propertyForAssociateKey:(NSString *)key {
+    return objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)(key));
+}
+
+- (void)setProperty:(id)property forAssociateKey:(NSString *)key {
+    id originalProperty = objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)(key));
+    if (ZUX_EXPECT_F([property isEqual:originalProperty])) return;
+    
+    [self willChangeValueForKey:key];
+    objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(key),
+                             property, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [self didChangeValueForKey:key];
 }
 
 @end

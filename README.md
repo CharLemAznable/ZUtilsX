@@ -2,6 +2,8 @@
 
 收集日常开发中积累的工具代码.
 
+        pod "ZUtilsX", "~> 0.0.5"
+
 #####Constant
 
 * 判断当前设备类型.
@@ -45,6 +47,10 @@
         -addObserver:forKeyPaths:options:context:
         -removeObserver:forKeyPaths:context:
         -removeObserver:forKeyPaths:
+
+        // 关联对象方法, 添加实例变量, 内存管理策略OBJC_ASSOCIATION_RETAIN_NONATOMIC.
+        -propertyForAssociateKey:
+        -setProperty:forAssociateKey:
 
 * NSObject+ZUXJson
 
@@ -383,6 +389,12 @@
         +colorWithRGBAHexString:
 
 - UIViewController+ZUX
+
+        // 添加属性.
+        statusBarStyle
+
+        // 添加方法.
+        -setStatusBarStyle:animated:
 
         // 激活此Category后, UIViewController的子类将自动按照其覆盖声明的主view属性类型, 创建UIView子类的对象, 并自动注入控制器的主view属性.
         @interface XView : UIView
