@@ -111,4 +111,4 @@ static ZUXConstraintBlock quarterHeightBlock = ^CGFloat(UIView *view) {
 
 @end
 
-#endif
+#endif // NS_BLOCKS_AVAILABLE

@@ -123,6 +123,8 @@
 		6A63FA611C02E2F400AB3891 /* MBProgressHUD.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9FD1C02E0E000AB3891 /* MBProgressHUD.h */; };
 		6A63FA621C02E2F400AB3891 /* UIView+MBProgressHUD.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9FF1C02E0E000AB3891 /* UIView+MBProgressHUD.h */; };
 		6A63FA641C02E30B00AB3891 /* ZUtilsX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9B51C02E00D00AB3891 /* ZUtilsX.h */; };
+		6A6A3D861C191E9600847DEF /* UINavigationBar+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */; };
+		6A6A3D871C1961FB00847DEF /* UINavigationBar+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +144,7 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				6A6A3D871C1961FB00847DEF /* UINavigationBar+ZUX.h in CopyFiles */,
 				6A5332581C1090160088F2B0 /* ZUXJSONKit.h in CopyFiles */,
 				6A5B155C1C0C3C2F006B8673 /* ZUXBundle.h in CopyFiles */,
 				6A1794701C05D8A300FF5870 /* NSDate+ZUX.h in CopyFiles */,
@@ -307,6 +310,8 @@
 		6A63FA1A1C02E0E000AB3891 /* ZUXSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXSearchBar.m; sourceTree = "<group>"; };
 		6A63FA1B1C02E0E000AB3891 /* ZUXView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXView.h; sourceTree = "<group>"; };
 		6A63FA1C1C02E0E000AB3891 /* ZUXView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXView.m; sourceTree = "<group>"; };
+		6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ZUX.h"; sourceTree = "<group>"; };
+		6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ZUX.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -498,6 +503,8 @@
 				6A63F9E71C02E0E000AB3891 /* UIColor+ZUX.m */,
 				6A63F9F01C02E0E000AB3891 /* UIViewController+ZUX.h */,
 				6A63F9F11C02E0E000AB3891 /* UIViewController+ZUX.m */,
+				6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */,
+				6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -712,6 +719,7 @@
 				6A63FA231C02E0E000AB3891 /* NSNumber+ZUX.m in Sources */,
 				6A0F89791C0359C80003948C /* UIDevice+ZUX.m in Sources */,
 				6A63FA341C02E0E000AB3891 /* ZUXJson.m in Sources */,
+				6A6A3D861C191E9600847DEF /* UINavigationBar+ZUX.m in Sources */,
 				6A63FA2B1C02E0E000AB3891 /* UILabel+ZUX.m in Sources */,
 				6A63FA211C02E0E000AB3891 /* NSExpression+ZUX.m in Sources */,
 			);
@@ -902,6 +910,7 @@
 				6A5337C71C16D7EA00EFE10C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6A63F9AD1C02E00D00AB3891 /* Build configuration list for PBXProject "ZUtilsX" */ = {
 			isa = XCConfigurationList;

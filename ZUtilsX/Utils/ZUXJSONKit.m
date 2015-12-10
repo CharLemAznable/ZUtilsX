@@ -187,7 +187,7 @@ ZUX_CATEGORY_M(ZUX_JSONKit)
 
 #define JK_ENCODE_CACHE_SLOTS  (1024UL)
 
-#if       defined (__GNUC__) && (__GNUC__ >= 4)
+#if defined (__GNUC__) && (__GNUC__ >= 4)
 #define JK_ATTRIBUTES(attr, ...)        __attribute__((attr, ##__VA_ARGS__))
 #define JK_EXPECTED(cond, expect)       __builtin_expect((long)(cond), (expect))
 #define JK_EXPECT_T(cond)               JK_EXPECTED(cond, 1U)
@@ -213,19 +213,19 @@ ZUX_CATEGORY_M(ZUX_JSONKit)
 #define JK_WARN_UNUSED_CONST_NONNULL_ARGS(arg, ...)   JK_ATTRIBUTES(warn_unused_result, const, nonnull(arg, ##__VA_ARGS__))
 #define JK_WARN_UNUSED_PURE_NONNULL_ARGS(arg, ...)    JK_ATTRIBUTES(warn_unused_result, pure, nonnull(arg, ##__VA_ARGS__))
 
-#if       defined (__GNUC__) && (__GNUC__ >= 4) && (__GNUC_MINOR__ >= 3)
+#if defined (__GNUC__) && (__GNUC__ >= 4) && (__GNUC_MINOR__ >= 3)
 #define JK_ALLOC_SIZE_NON_NULL_ARGS_WARN_UNUSED(as, nn, ...) JK_ATTRIBUTES(warn_unused_result, nonnull(nn, ##__VA_ARGS__), alloc_size(as))
-#else  // defined (__GNUC__) && (__GNUC__ >= 4) && (__GNUC_MINOR__ >= 3)
+#else
 #define JK_ALLOC_SIZE_NON_NULL_ARGS_WARN_UNUSED(as, nn, ...) JK_ATTRIBUTES(warn_unused_result, nonnull(nn, ##__VA_ARGS__))
-#endif // defined (__GNUC__) && (__GNUC__ >= 4) && (__GNUC_MINOR__ >= 3)
+#endif
 
-#if !(__OBJC2__  &&  __LP64__)
+#if !(__OBJC2__ && __LP64__)
 #define JK_SUPPORT_TAGGED_POINTERS 0
 #else
 #define JK_SUPPORT_TAGGED_POINTERS 1
 #endif
 
-#if !JK_SUPPORT_TAGGED_POINTERS  ||  !TARGET_OS_IPHONE
+#if !JK_SUPPORT_TAGGED_POINTERS || !TARGET_OS_IPHONE
 #define JK_SUPPORT_MSB_TAGGED_POINTERS 0
 #else
 #define JK_SUPPORT_MSB_TAGGED_POINTERS 1
@@ -1076,7 +1076,7 @@ static JKHashTableEntry *_JKDictionaryHashTableEntryForKey(JKDictionary *diction
 #ifndef __clang_analyzer__
     aKey     = [aKey     copy];      // Why on earth would clang complain that this -copy "might leak",
     anObject = ZUX_RETAIN(anObject); // but this -retain doesn't!?
-#endif // __clang_analyzer__
+#endif
     _JKDictionaryAddObject(self, CFHash((ZUX_BRIDGE CFTypeRef)(aKey)),
                            (ZUX_BRIDGE void *)aKey, (ZUX_BRIDGE void *)anObject);
     mutations = (mutations == NSUIntegerMax) ? 1UL : mutations + 1UL;
@@ -1763,7 +1763,7 @@ JK_STATIC_INLINE void jk_parse_skip_whitespace(JKParseState *parseState) {
         }
         break;
     }
-#endif
+#endif // __clang_analyzer__
 }
 
 static int jk_parse_next_token(JKParseState *parseState) {
@@ -2498,7 +2498,7 @@ JK_STATIC_INLINE uintptr_t jk_get_tagged_pointer_tag(const void *objectPtr) {
     return(((uintptr_t)objectPtr) & 0x0F);
 #endif
 }
-#endif
+#endif // JK_SUPPORT_TAGGED_POINTERS
 
 JK_STATIC_INLINE int jk_object_class(JKEncodeState *encodeState, id object) {
 #if JK_SUPPORT_TAGGED_POINTERS
@@ -2524,7 +2524,7 @@ JK_STATIC_INLINE int jk_object_class(JKEncodeState *encodeState, id object) {
         }
     }
     else {
-#endif
+#endif // JK_SUPPORT_TAGGED_POINTERS
         void     *objectISA = *((void **)((ZUX_BRIDGE void *)object));
         
         if (JK_EXPECT_T(objectISA == encodeState->fastClassLookup.stringClass)) { return(JKClassString); }
@@ -2559,7 +2559,7 @@ JK_STATIC_INLINE BOOL jk_object_is_string(JKEncodeState *encodeState, id object)
         else if (JK_EXPECT_T([object isKindOfClass:[NSString class]]))          { encodeState->fastTagLookup.stringClass   = objectTag; return(YES); }
     }
     else {
-#endif
+#endif // JK_SUPPORT_TAGGED_POINTERS
         void     *objectISA = *((void **)((ZUX_BRIDGE void *)object));
         
         if (JK_EXPECT_T(objectISA == encodeState->fastClassLookup.stringClass)) {                                                       return(YES); }

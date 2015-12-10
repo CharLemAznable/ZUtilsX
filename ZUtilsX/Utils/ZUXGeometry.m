@@ -11,3 +11,11 @@
 ZUX_INLINE CGRect ZUX_CGRectMake(CGPoint origin, CGSize size) {
     return CGRectMake(origin.x, origin.y, size.width, size.height);
 }
+
+ZUX_INLINE CGSize ZUX_CGSizeFromUIOffset(UIOffset offset) {
+    return CGSizeMake(offset.horizontal, offset.vertical);
+}
+
+ZUX_INLINE UIOffset ZUX_UIOffsetFromCGSize(CGSize size) {
+    return UIOffsetMake(size.width, size.height);
+}

@@ -15,7 +15,7 @@
 
 ZUX_CATEGORY_M(ZUX_UIViewController)
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 90000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 
 @interface UIViewController (ZUX_Private)
 
@@ -29,7 +29,7 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
     return root.childViewControllerForStatusBarStyle ?: root;
 }
 
-#endif
+#endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 
 @implementation UIViewController (ZUX)
 
@@ -57,7 +57,7 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 }
 
 - (UIStatusBarStyle)statusBarStyle {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 90000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
     return [controllerForStatusBarStyle() p_StatusBarStyle];
 #else
     return [UIApplication sharedApplication].statusBarStyle;
@@ -65,7 +65,7 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 }
 
 - (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 90000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
     UIViewController *controller = controllerForStatusBarStyle();
     [controller setP_StatusBarStyle:statusBarStyle];
     [controller setNeedsStatusBarAppearanceUpdate];
@@ -75,7 +75,7 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 }
 
 - (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle animated:(BOOL)animated {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 90000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
     UIViewController *controller = controllerForStatusBarStyle();
     [controller setP_StatusBarStyle:statusBarStyle];
     [controller setNeedsStatusBarAppearanceUpdate];
@@ -86,7 +86,7 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 
 @end
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 90000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 
 @implementation UIViewController (ZUX_Private)
 
@@ -126,4 +126,4 @@ NSString *const p_StatusBarStyleKey = @"p_StatusBarStyle";
 
 @end
 
-#endif
+#endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000

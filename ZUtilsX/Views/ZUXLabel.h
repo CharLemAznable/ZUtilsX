@@ -14,7 +14,6 @@
 
 @protocol ZUXLabelDataSource;
 
-// ZUXLabel
 @interface ZUXLabel : UILabel
 
 @property (nonatomic, ZUX_WEAK) id<ZUXLabelDataSource> dataSource;
@@ -24,15 +23,14 @@
 
 - (void)zuxInitial;
 
-@end
+@end // ZUXLabel
 
-// ZUXLabelDataSource
 @protocol ZUXLabelDataSource <NSObject>
 
 @optional
 - (NSString *)menuTitleOfCopyInLabel:(ZUXLabel *)view;
 - (CGPoint)menuLocationInLabel:(ZUXLabel *)view;
 
-@end
+@end // ZUXLabelDataSource
 
 #endif /* ZUtilsX_ZUXLabel_h */

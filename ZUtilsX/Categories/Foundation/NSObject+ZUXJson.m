@@ -203,4 +203,4 @@ ZUX_STATIC_INLINE bool isStructureTypeProperty(NSString *propertyAttrs) {
 
 @end
 
-#endif
+#endif // NS_BLOCKS_AVAILABLE

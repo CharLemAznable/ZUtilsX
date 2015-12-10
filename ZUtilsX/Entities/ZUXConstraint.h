@@ -46,6 +46,6 @@ typedef CGFloat (^ZUXConstraintBlock)(UIView *view);
 
 @end
 
-#endif /* NS_BLOCKS_AVAILABLE */
+#endif // NS_BLOCKS_AVAILABLE
 
 #endif /* ZUtilsX_ZUXConstraint_h */

@@ -22,7 +22,7 @@ ZUX_CATEGORY_M(ZUX_NSCoder)
     return [self decodeDoubleForKey:key];
 }
 
-#else
+#else // defined(__LP64__) && __LP64__
 
 - (void)encodeCGFloat:(CGFloat)realv forKey:(NSString *)key {
     [self encodeFloat:realv forKey:key];
@@ -32,6 +32,6 @@ ZUX_CATEGORY_M(ZUX_NSCoder)
     return [self decodeFloatForKey:key];
 }
 
-#endif
+#endif // defined(__LP64__) && __LP64__
 
 @end

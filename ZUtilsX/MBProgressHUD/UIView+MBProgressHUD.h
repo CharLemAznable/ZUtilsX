@@ -37,7 +37,7 @@ ZUX_CATEGORY_H(ZUX_MBProgressHUD)
 - (void)showTextHUDWithText:(NSString *)text detailText:(NSString *)detailText hideAfterDelay:(NSTimeInterval)delay;
 - (void)hideHUD:(BOOL)animated;
 
-@end
+@end // UIView (MBProgressHUD)
 
 /**
  * MBProgressHUD RECURSIVE in current view and its subviews.
@@ -58,6 +58,6 @@ ZUX_CATEGORY_H(ZUX_MBProgressHUD)
 - (void)showTextRecursiveHUDWithText:(NSString *)text detailText:(NSString *)detailText hideAfterDelay:(NSTimeInterval)delay;
 - (void)hideRecursiveHUD:(BOOL)animated;
 
-@end
+@end // UIView (RecursiveMBProgressHUD)
 
 #endif /* ZUtilsX_UIView_MBProgressHUD_h */

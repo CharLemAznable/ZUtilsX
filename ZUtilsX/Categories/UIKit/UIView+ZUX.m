@@ -89,7 +89,7 @@ ZUX_CATEGORY_M(ZUX_UIView)
     return image;
 }
 
-@end // UIView (ZUX) end
+@end
 
 #pragma mark -
 
@@ -313,7 +313,7 @@ NSString *const zTransformViewBoundsKVOKey  = @"bounds";
                       context:(ZUX_BRIDGE void *)(zLayoutKVOContext)];
 }
 
-@end // UIView (ZUXAutoLayout) end
+@end
 
 #pragma mark -
 
@@ -425,4 +425,4 @@ ZUX_STATIC_INLINE CGVector ZUXAnimateTranslateVector(UIView *view, ZUXAnimation 
     return vector;
 }
 
-@end // UIView (ZUXAnimate) end
+@end

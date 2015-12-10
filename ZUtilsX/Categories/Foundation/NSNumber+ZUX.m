@@ -27,7 +27,7 @@ ZUX_CATEGORY_M(ZUX_NSNumber)
     return [self doubleValue];
 }
 
-#else
+#else // defined(__LP64__) && __LP64__
 
 - (ZUX_INSTANCETYPE)initWithCGFloat:(CGFloat)value {
     return [self initWithFloat:value];
@@ -37,6 +37,6 @@ ZUX_CATEGORY_M(ZUX_NSNumber)
     return [self floatValue];
 }
 
-#endif
+#endif // defined(__LP64__) && __LP64__
 
 @end
