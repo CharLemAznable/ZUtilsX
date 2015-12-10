@@ -11,6 +11,8 @@
 #import "zadapt.h"
 #import "ZUXGeometry.h"
 
+ZUX_CATEGORY_M(ZUX_UINavigationBar)
+
 @implementation UINavigationBar (ZUX)
 
 #define APPEARANCE [self appearance]

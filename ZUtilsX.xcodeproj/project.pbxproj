@@ -52,7 +52,6 @@
 		6A1794731C05D8A300FF5870 /* UITabBarItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */; };
 		6A5332551C108F910088F2B0 /* ZUXJSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5332541C108F910088F2B0 /* ZUXJSONKit.m */; };
 		6A5332571C108FF90088F2B0 /* ZUXJSONKitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5332561C108FF90088F2B0 /* ZUXJSONKitTest.m */; };
-		6A5332581C1090160088F2B0 /* ZUXJSONKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A5332531C108F910088F2B0 /* ZUXJSONKit.h */; };
 		6A5B155B1C0C350F006B8673 /* ZUXBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B155A1C0C350F006B8673 /* ZUXBundle.m */; };
 		6A5B155C1C0C3C2F006B8673 /* ZUXBundle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A5B15591C0C350F006B8673 /* ZUXBundle.h */; };
 		6A63F9C71C02E05400AB3891 /* libZUtilsX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A63F9B21C02E00D00AB3891 /* libZUtilsX.a */; };
@@ -125,6 +124,8 @@
 		6A63FA641C02E30B00AB3891 /* ZUtilsX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9B51C02E00D00AB3891 /* ZUtilsX.h */; };
 		6A6A3D861C191E9600847DEF /* UINavigationBar+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */; };
 		6A6A3D871C1961FB00847DEF /* UINavigationBar+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */; };
+		6A6A3D941C1983C700847DEF /* ZUXColorDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */; };
+		6A6A3D951C19840D00847DEF /* ZUXColorDictionary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,8 +145,8 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				6A6A3D951C19840D00847DEF /* ZUXColorDictionary.h in CopyFiles */,
 				6A6A3D871C1961FB00847DEF /* UINavigationBar+ZUX.h in CopyFiles */,
-				6A5332581C1090160088F2B0 /* ZUXJSONKit.h in CopyFiles */,
 				6A5B155C1C0C3C2F006B8673 /* ZUXBundle.h in CopyFiles */,
 				6A1794701C05D8A300FF5870 /* NSDate+ZUX.h in CopyFiles */,
 				6A1794711C05D8A300FF5870 /* UITextField+ZUX.h in CopyFiles */,
@@ -312,6 +313,8 @@
 		6A63FA1C1C02E0E000AB3891 /* ZUXView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXView.m; sourceTree = "<group>"; };
 		6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ZUX.h"; sourceTree = "<group>"; };
 		6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ZUX.m"; sourceTree = "<group>"; };
+		6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXColorDictionary.h; sourceTree = "<group>"; };
+		6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXColorDictionary.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -516,6 +519,8 @@
 				6A63F9F91C02E0E000AB3891 /* ZUXConstraint.m */,
 				6A63F9FA1C02E0E000AB3891 /* ZUXTransform.h */,
 				6A63F9FB1C02E0E000AB3891 /* ZUXTransform.m */,
+				6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */,
+				6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -711,6 +716,7 @@
 				6A63FA241C02E0E000AB3891 /* NSObject+ZUX.m in Sources */,
 				6A63FA201C02E0E000AB3891 /* NSDictionary+ZUX.m in Sources */,
 				6A5B155B1C0C350F006B8673 /* ZUXBundle.m in Sources */,
+				6A6A3D941C1983C700847DEF /* ZUXColorDictionary.m in Sources */,
 				6A63FA3B1C02E0E000AB3891 /* ZUXSearchBar.m in Sources */,
 				6A63FA281C02E0E000AB3891 /* UIColor+ZUX.m in Sources */,
 				6A63FA2E1C02E0E000AB3891 /* ZUXConstraint.m in Sources */,

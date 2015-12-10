@@ -31,9 +31,13 @@
 #pragma mark - private functions.
 
 NSString *bundleFilePath(NSString *bundleName, NSString *dirName, NSString *fileName, NSString *suffix) {
-    return [[[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:
-              [NSString stringWithFormat:@"%@.bundle", bundleName]] stringByAppendingPathComponent:
-             dirName] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", fileName, suffix]];
+    // if bundleName is nil, search file in mainBundle, ignore the sub directory(dirName).
+    if (!bundleName) return [[NSBundle mainBundle] pathForResource:fileName ofType:suffix];
+    
+    return [[[[[NSBundle mainBundle] resourcePath]
+              stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.bundle", bundleName]]
+             stringByAppendingPathComponent:dirName]
+            stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", fileName, suffix]];
 }
 
 @end
