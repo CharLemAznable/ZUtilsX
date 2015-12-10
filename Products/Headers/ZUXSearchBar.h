@@ -14,7 +14,6 @@
 
 @protocol ZUXSearchBarDelegate;
 
-// ZUXSearchBar
 @interface ZUXSearchBar : ZUXView
 
 @property (nonatomic, ZUX_WEAK) id<ZUXSearchBarDelegate> delegate;
@@ -22,9 +21,8 @@
 @property (nonatomic, ZUX_STRONG) UITextField *searchTextField;
 @property (nonatomic, copy) NSString *searchText;
 
-@end
+@end // ZUXSearchBar
 
-// ZUXSearchBarDelegate
 @protocol ZUXSearchBarDelegate <NSObject>
 
 @optional
@@ -32,6 +30,6 @@
 - (void)searchBarDidEndInput:(ZUXSearchBar *)bar;
 - (void)searchBar:(ZUXSearchBar *)bar searchWithText:(NSString *)searchText editEnded:(BOOL)ended;
 
-@end
+@end // ZUXSearchBarDelegate
 
 #endif /* ZUtilsX_ZUXSearchBar_h */

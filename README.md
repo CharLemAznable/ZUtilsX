@@ -2,7 +2,7 @@
 
 收集日常开发中积累的工具代码.
 
-        pod "ZUtilsX", "~> 0.0.5"
+        pod "ZUtilsX", "~> 0.0.6"
 
 #####Constant
 
@@ -414,6 +414,24 @@
         }
         @end
 
+- UINavigationBar+ZUX
+
+        // 添加自定义样式方法, 可自定义背景图片, tint颜色, 字体, 字色, 文字阴影.
+        +backgroundImageForBarMetrics:
+        +setBackgroundImage:forBarMetrics:
+        +tintColor
+        +setTintColor:
+        +textFont
+        +setTextFont:
+        +textColor
+        +setTextColor:
+        +textShadowColor
+        +setTextShadowColor:
+        +textShadowOffset
+        +setTextShadowOffset:
+        +textShadowSize
+        +setTextShadowSize:
+
 #####View
 
 - ZUXView
@@ -576,6 +594,8 @@
     添加二维坐标工具方法.
 
         CGRect ZUX_CGRectMake(CGPoint, CGSize);
+        CGSize ZUX_CGSizeFromUIOffset(UIOffset offset);
+        UIOffset ZUX_UIOffsetFromCGSize(CGSize size);
 
 - ZUXRuntime
 

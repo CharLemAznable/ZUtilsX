@@ -46,6 +46,6 @@ ZUX_CATEGORY_H(ZUXJson_NSObject)
 @interface NSDictionary (ZUXJson)
 @end // NSDictionary (ZUXJson)
 
-#endif /* NS_BLOCKS_AVAILABLE */
+#endif // NS_BLOCKS_AVAILABLE
 
 #endif /* ZUtilsX_NSObject_ZUXJson_h */

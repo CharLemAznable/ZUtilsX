@@ -16,7 +16,6 @@
 
 @protocol ZUXImageViewDelegate;
 
-// ZUXImageView
 @interface ZUXImageView : UIImageView
 
 @property (nonatomic, ZUX_WEAK) id<ZUXImageViewDataSource> dataSource;
@@ -26,9 +25,7 @@
 
 - (void)zuxInitial;
 
-@end
-
-// ZUXImageViewDataSource
+@end // ZUXImageView
 
 @protocol ZUXImageViewDataSource <NSObject>
 
@@ -37,15 +34,14 @@
 - (NSString *)menuTitleOfSaveInImageView:(ZUXImageView *)view;
 - (CGPoint)menuLocationInImageView:(ZUXImageView *)view;
 
-@end
+@end // ZUXImageViewDataSource
 
-// ZUXImageViewDelegate
 @protocol ZUXImageViewDelegate <NSObject>
 
 @optional
 - (void)saveImageSuccessInImageView:(ZUXImageView *)view;
 - (void)saveImageFailedInImageView:(ZUXImageView *)view withError:(NSError *)error;
 
-@end
+@end // ZUXImageViewDelegate
 
 #endif /* ZUtilsX_ZUXImageView_h */

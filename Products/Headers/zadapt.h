@@ -40,7 +40,10 @@
 # define zkCTTextAlignmentCenter            kCTTextAlignmentCenter
 # define zkCTTextAlignmentJustified         kCTTextAlignmentJustified
 # define zkCTTextAlignmentNatural           kCTTextAlignmentNatural
-#else
+
+# define ZUXFontAttributeName               NSFontAttributeName
+# define ZUXForegroundColorAttributeName    NSForegroundColorAttributeName
+#else // __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
 # define ZUXTextAlignmentLeft               UITextAlignmentLeft
 # define ZUXTextAlignmentCenter             UITextAlignmentCenter
 # define ZUXTextAlignmentRight              UITextAlignmentRight
@@ -55,15 +58,10 @@
 # define zkCTTextAlignmentCenter            kCTCenterTextAlignment
 # define zkCTTextAlignmentJustified         kCTJustifiedTextAlignment
 # define zkCTTextAlignmentNatural           kCTNaturalTextAlignment
-#endif
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-# define ZUXFontAttributeName               NSFontAttributeName
-# define ZUXForegroundColorAttributeName    NSForegroundColorAttributeName
-#else
 # define ZUXFontAttributeName               UITextAttributeFont
 # define ZUXForegroundColorAttributeName    UITextAttributeTextColor
-#endif
+#endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 # define ZUXCalendarUnitEra                 NSCalendarUnitEra
@@ -75,7 +73,7 @@
 # define ZUXCalendarUnitSecond              NSCalendarUnitSecond
 # define ZUXCalendarUnitWeekday             NSCalendarUnitWeekday
 # define ZUXCalendarUnitWeekdayOrdinal      NSCalendarUnitWeekdayOrdinal
-#else
+#else // __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 # define ZUXCalendarUnitEra                 NSEraCalendarUnit
 # define ZUXCalendarUnitYear                NSYearCalendarUnit
 # define ZUXCalendarUnitMonth               NSMonthCalendarUnit
@@ -85,6 +83,6 @@
 # define ZUXCalendarUnitSecond              NSSecondCalendarUnit
 # define ZUXCalendarUnitWeekday             NSWeekdayCalendarUnit
 # define ZUXCalendarUnitWeekdayOrdinal      NSWeekdayOrdinalCalendarUnit
-#endif
+#endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 
 #endif /* ZUtilsX_zadapt_h */
