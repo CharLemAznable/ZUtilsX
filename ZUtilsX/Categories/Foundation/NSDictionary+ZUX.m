@@ -8,6 +8,7 @@
 
 #import "NSDictionary+ZUX.h"
 #import "NSNull+ZUX.h"
+#import "ZUXBundle.h"
 #import "zarc.h"
 
 ZUX_CATEGORY_M(ZUX_NSDictionary)
@@ -39,6 +40,24 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 
 @end
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+@implementation NSDictionary (ZUXSubscript)
+
+- (id)objectForKeyedSubscript:(id)key {
+    return [self objectForKey:key];
+}
+
+@end
+
+@implementation NSMutableDictionary (ZUXSubscript)
+
+- (void)setObject:(id)obj forKeyedSubscript:(id<NSCopying>)key {
+    [self setObject:obj forKey:key];
+}
+
+@end
+#endif
+
 @implementation NSDictionary (ZUXDirectory)
 
 - (BOOL)writeToUserFile:(NSString *)filePath {
@@ -59,6 +78,18 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 + (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
     if (ZUX_EXPECT_F(![ZUXDirectory fileExists:filePath inDirectory:directory])) return nil;
     return [NSDictionary dictionaryWithContentsOfFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]];
+}
+
+@end
+
+@implementation NSDictionary (ZUXBundle)
+
++ (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName {
+    return [self dictionaryWithContentsOfUserFile:fileName bundle:bundleName subpath:nil];
+}
+
++ (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath {
+    return [self dictionaryWithContentsOfFile:[ZUXBundle plistPathWithName:fileName bundle:bundleName subpath:subpath]];
 }
 
 @end

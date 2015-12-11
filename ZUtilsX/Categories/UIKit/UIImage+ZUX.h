@@ -36,4 +36,11 @@ ZUX_CATEGORY_H(ZUX_UIImage)
 
 @end // UIImage (ZUXDirectory)
 
+@interface UIImage (ZUXBundle)
+
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
+
+@end // UIImage (ZUXBundle)
+
 #endif /* ZUtilsX_UIImage_ZUX_h */

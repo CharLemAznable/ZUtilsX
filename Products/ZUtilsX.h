@@ -20,6 +20,7 @@
 #import "ZUXRuntime.h"
 #import "ZUXJson.h"
 #import "ZUXDirectory.h"
+#import "ZUXBundle.h"
 
 #import "ZUXView.h"
 #import "ZUXControl.h"
@@ -52,9 +53,11 @@
 #import "UITabBarItem+ZUX.h"
 #import "UIColor+ZUX.h"
 #import "UIViewController+ZUX.h"
+#import "UINavigationBar+ZUX.h"
 
 #import "ZUXConstraint.h"
 #import "ZUXTransform.h"
+#import "ZUXColorDictionary.h"
 
 #import "MBProgressHUD.h"
 #import "UIView+MBProgressHUD.h"

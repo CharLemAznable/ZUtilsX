@@ -25,6 +25,20 @@ ZUX_CATEGORY_H(ZUX_NSDictionary)
 
 @end // NSDictionary (ZUX)
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+@interface NSDictionary ZUX_COVARIANT_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) (ZUXSubscript)
+
+- (ZUX_OBJECT_TYPE)objectForKeyedSubscript:(ZUX_KEY_TYPE)key;
+
+@end // NSDictionary (ZUXSubscript)
+
+@interface NSMutableDictionary ZUX_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) (ZUXSubscript)
+
+- (void)setObject:(ZUX_OBJECT_TYPE)obj forKeyedSubscript:(ZUX_KEY_TYPE <NSCopying>)key;
+
+@end
+#endif
+
 @interface NSDictionary ZUX_COVARIANT_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) (ZUXDirectory)
 
 - (BOOL)writeToUserFile:(NSString *)filePath;
@@ -34,5 +48,12 @@ ZUX_CATEGORY_H(ZUX_NSDictionary)
 + (NSDictionary ZUX_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) *)dictionaryWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
 
 @end // NSDictionary (ZUXDirectory)
+
+@interface NSDictionary ZUX_COVARIANT_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) (ZUXBundle)
+
++ (NSDictionary ZUX_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) *)dictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
++ (NSDictionary ZUX_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) *)dictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
+
+@end // NSDictionary (ZUXBundle)
 
 #endif /* ZUtilsX_NSDictionary_ZUX_h */

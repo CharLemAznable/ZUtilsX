@@ -30,7 +30,9 @@ ZUX_CATEGORY_M(ZUX_UIColor)
 
 + (UIColor *)colorWithRGBAHexString:(NSString *)hexString {
     NSString *str = [[hexString trim] uppercaseString];
-    if (ZUX_EXPECT_F([str length] < 8)) return nil;
+    if (ZUX_EXPECT_F([str length] < 6)) return nil;
+    if (ZUX_EXPECT_F([str length] < 8))
+        str = [[str substringWithRange:NSMakeRange(0, 6)] appendWithObjects:@"FF", nil];
     
     unsigned int red, green, blue, alpha;
     [[NSScanner scannerWithString:[str substringWithRange:NSMakeRange(0, 2)]] scanHexInt:&red];

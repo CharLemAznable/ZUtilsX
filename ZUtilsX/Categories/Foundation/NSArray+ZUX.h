@@ -24,6 +24,20 @@ ZUX_CATEGORY_H(ZUX_NSArray)
 
 @end // NSArray (ZUX)
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+@interface NSArray ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE) (ZUXSubscript)
+
+- (ZUX_OBJECT_TYPE)objectAtIndexedSubscript:(NSUInteger)idx;
+
+@end // NSArray (ZUXSubscript)
+
+@interface NSMutableArray ZUX_GENERIC(ZUX_OBJECT_TYPE) (ZUXSubscript)
+
+- (void)setObject:(ZUX_OBJECT_TYPE)obj atIndexedSubscript:(NSUInteger)idx;
+
+@end // NSMutableArray (ZUXSubscript)
+#endif
+
 @interface NSArray ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE) (ZUXDirectory)
 
 - (BOOL)writeToUserFile:(NSString *)filePath;
@@ -33,5 +47,12 @@ ZUX_CATEGORY_H(ZUX_NSArray)
 + (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)arrayWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
 
 @end // NSArray (ZUXDirectory)
+
+@interface NSArray ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE) (ZUXBundle)
+
++ (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)arrayWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
++ (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)arrayWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
+
+@end // NSArray (ZUXBundle)
 
 #endif /* ZUtilsX_NSArray_ZUX_h */

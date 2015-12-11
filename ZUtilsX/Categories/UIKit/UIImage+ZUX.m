@@ -7,6 +7,7 @@
 //
 
 #import "UIImage+ZUX.h"
+#import "ZUXBundle.h"
 #import "zobjc.h"
 #import "zarc.h"
 #import "zadapt.h"
@@ -142,6 +143,18 @@ ZUX_STATIC_INLINE CGGradientRef CreateGradientWithColorsAndLocations(NSArray *co
 + (UIImage *)imageWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
     if (ZUX_EXPECT_F(![ZUXDirectory fileExists:filePath inDirectory:directory])) return nil;
     return [UIImage imageWithContentsOfFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]];
+}
+
+@end
+
+@implementation UIImage (ZUXBundle)
+
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName {
+    return [self imageWithContentsOfUserFile:fileName bundle:bundleName subpath:nil];
+}
+
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath {
+    return [ZUXBundle imageWithName:fileName bundle:bundleName subpath:subpath];
 }
 
 @end

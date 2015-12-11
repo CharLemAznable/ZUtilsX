@@ -7,6 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZUXCategory.h"
+
+#ifndef ZUtilsX_UINavigationBar_ZUX_h
+#define ZUtilsX_UINavigationBar_ZUX_h
+
+ZUX_CATEGORY_H(ZUX_UINavigationBar)
 
 @interface UINavigationBar (ZUX)
 
@@ -34,3 +40,5 @@
 #endif
 
 @end
+
+#endif /* ZUtilsX_UINavigationBar_ZUX_h */

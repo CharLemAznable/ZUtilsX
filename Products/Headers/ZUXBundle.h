@@ -11,16 +11,17 @@
 #ifndef ZUtilsX_ZUXBundle_h
 #define ZUtilsX_ZUXBundle_h
 
-static NSString *ZUXBundleImageDirectory = @"images";
-static NSString *ZUXBundleDocumentDirectory = @"files";
-static NSString *ZUXBundleAudioDirectory = @"audios";
-
 @interface ZUXBundle : NSObject
 
 + (UIImage *)imageWithName:(NSString *)imageName bundle:(NSString *)bundleName;
 + (UIImage *)imageForCurrentDeviceWithName:(NSString *)imageName bundle:(NSString *)bundleName;
 + (NSString *)plistPathWithName:(NSString *)fileName bundle:(NSString *)bundleName;
 + (NSURL *)audioURLWithName:(NSString *)fileName type:(NSString *)fileType bundle:(NSString *)bundleName;
+
++ (UIImage *)imageWithName:(NSString *)imageName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
++ (UIImage *)imageForCurrentDeviceWithName:(NSString *)imageName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
++ (NSString *)plistPathWithName:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
++ (NSURL *)audioURLWithName:(NSString *)fileName type:(NSString *)fileType bundle:(NSString *)bundleName subpath:(NSString *)subpath;
 
 @end
 

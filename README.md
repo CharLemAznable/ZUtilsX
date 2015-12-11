@@ -2,7 +2,7 @@
 
 收集日常开发中积累的工具代码.
 
-        pod "ZUtilsX", "~> 0.0.6"
+        pod "ZUtilsX", "~> 0.0.7"
 
 #####Constant
 
@@ -97,11 +97,21 @@
         // 取数组元素值方法, 可指定默认返回值.
         -objectAtIndex:defaultValue:
 
-        // 读写应用程序目录中的文件.
+        // 在SDK < 6.0时, 添加下标读写方法.
+        // (NSArray)
+        -objectAtIndexedSubscript:
+        // (NSMutableArray)
+        -setObject:atIndexedSubscript:
+
+        // 读写应用程序沙盒中的文件.
         -writeToUserFile:
         +arrayWithContentsOfUserFile:
         -writeToUserFile:inDirectory:
         +arrayWithContentsOfUserFile:inDirectory:
+
+        // 读取应用程序Bundle中的文件.
+        +arrayWithContentsOfUserFile:bundle:
+        +arrayWithContentsOfUserFile:bundle:subpath:
 
 * NSDictionary+ZUX
 
@@ -117,11 +127,21 @@
         // 根据Key数组取子字典方法. (区别于-dictionaryWithValuesForKeys:方法, 字典中不包含的Key不会放入子字典.)
         -subDictionaryForKeys:
 
-        // 读写应用程序目录中的文件.
+        // 在SDK < 6.0时, 添加下标读写方法.
+        // (NSDictionary)
+        -objectForKeyedSubscript:
+        // (NSMutableDictionary)
+        -setObject:forKeyedSubscript:
+
+        // 读写应用程序沙盒中的文件.
         -writeToUserFile:
         +dictionaryWithContentsOfUserFile:
         -writeToUserFile:inDirectory:
         +dictionaryWithContentsOfUserFile:inDirectory:
+
+        // 读取应用程序Bundle中的文件.
+        +dictionaryWithContentsOfUserFile:bundle:
+        +dictionaryWithContentsOfUserFile:bundle:subpath:
 
 - NSData+ZUX
 
@@ -357,11 +377,15 @@
         +imageForCurrentDeviceNamed:
         +imageNameForCurrentDeviceNamed:
 
-        // 读写应用程序目录中的文件.
+        // 读写应用程序沙盒中的文件.
         -writeToUserFile:
         +imageWithContentsOfUserFile:
         -writeToUserFile:inDirectory:
         +imageWithContentsOfUserFile:inDirectory:
+
+        // 读取应用程序Bundle中的文件.
+        +imageWithContentsOfUserFile:bundle:
+        +imageWithContentsOfUserFile:bundle:subpath:
 
 - UITextField+ZUX
 
@@ -571,6 +595,10 @@
 
   视图变换类, 用于自适应UIView的所有变换式定义.
 
+- ZUXColorDictionary
+
+  颜色字典类, 用于加载配置文件中的颜色表.
+
 #####Utils
 
 - ZUXCategory
@@ -653,14 +681,20 @@
 - ZUXBundle
 
     资源bundle工具.
+    当bundle参数为nil时, 在当前App Bundle中寻找资源文件; 否则在对应bundle中的子目录中寻找.
+    当subpath参数为nil时, 在bundle根目录中寻找.
 
         // 读入bundle中的图片对象.
         +imageWithName:bundle:
+        +imageWithName:bundle:subpath:
         +imageForCurrentDeviceWithName:bundle:
+        +imageForCurrentDeviceWithName:bundle:subpath:
 
         // 获取bundle中plist文件的完整路径.
         +plistPathWithName:bundle:
+        +plistPathWithName:bundle:subpath:
 
         // 获取bundle中音频文件URL.
         // 用于AudioServicesCreateSystemSoundID(CFURLRef, SystemSoundID*)
         +audioURLWithName:type:bundle:
+        +audioURLWithName:type:bundle:subpath:
