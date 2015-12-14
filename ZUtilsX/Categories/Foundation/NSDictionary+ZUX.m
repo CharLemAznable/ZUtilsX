@@ -56,7 +56,7 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 }
 
 @end
-#endif
+#endif // __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
 
 @implementation NSDictionary (ZUXDirectory)
 

@@ -36,7 +36,7 @@ ZUX_CATEGORY_H(ZUX_NSArray)
 - (void)setObject:(ZUX_OBJECT_TYPE)obj atIndexedSubscript:(NSUInteger)idx;
 
 @end // NSMutableArray (ZUXSubscript)
-#endif
+#endif // __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
 
 @interface NSArray ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE) (ZUXDirectory)
 

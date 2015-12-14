@@ -125,6 +125,11 @@
 		6A63FA611C02E2F400AB3891 /* MBProgressHUD.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9FD1C02E0E000AB3891 /* MBProgressHUD.h */; };
 		6A63FA621C02E2F400AB3891 /* UIView+MBProgressHUD.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9FF1C02E0E000AB3891 /* UIView+MBProgressHUD.h */; };
 		6A63FA641C02E30B00AB3891 /* ZUtilsX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9B51C02E00D00AB3891 /* ZUtilsX.h */; };
+		6A648B531C1E5C7A0077F276 /* UITabBar+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A648B521C1E5C7A0077F276 /* UITabBar+ZUX.m */; };
+		6A648B551C1E612E0077F276 /* zappearance.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A648B541C1E5F5F0077F276 /* zappearance.h */; };
+		6A648B561C1E612E0077F276 /* UITabBar+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A648B511C1E5C7A0077F276 /* UITabBar+ZUX.h */; };
+		6A648B591C1E86CE0077F276 /* UIBarItem+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A648B581C1E86CE0077F276 /* UIBarItem+ZUX.m */; };
+		6A648B5A1C1E8C2F0077F276 /* UIBarItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A648B571C1E86CE0077F276 /* UIBarItem+ZUX.h */; };
 		6A6A3D861C191E9600847DEF /* UINavigationBar+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */; };
 		6A6A3D871C1961FB00847DEF /* UINavigationBar+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */; };
 		6A6A3D941C1983C700847DEF /* ZUXColorDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */; };
@@ -148,6 +153,9 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				6A648B5A1C1E8C2F0077F276 /* UIBarItem+ZUX.h in CopyFiles */,
+				6A648B551C1E612E0077F276 /* zappearance.h in CopyFiles */,
+				6A648B561C1E612E0077F276 /* UITabBar+ZUX.h in CopyFiles */,
 				6A6A3D951C19840D00847DEF /* ZUXColorDictionary.h in CopyFiles */,
 				6A6A3D871C1961FB00847DEF /* UINavigationBar+ZUX.h in CopyFiles */,
 				6A5B155C1C0C3C2F006B8673 /* ZUXBundle.h in CopyFiles */,
@@ -317,6 +325,11 @@
 		6A63FA1A1C02E0E000AB3891 /* ZUXSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXSearchBar.m; sourceTree = "<group>"; };
 		6A63FA1B1C02E0E000AB3891 /* ZUXView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXView.h; sourceTree = "<group>"; };
 		6A63FA1C1C02E0E000AB3891 /* ZUXView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXView.m; sourceTree = "<group>"; };
+		6A648B511C1E5C7A0077F276 /* UITabBar+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+ZUX.h"; sourceTree = "<group>"; };
+		6A648B521C1E5C7A0077F276 /* UITabBar+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+ZUX.m"; sourceTree = "<group>"; };
+		6A648B541C1E5F5F0077F276 /* zappearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zappearance.h; sourceTree = "<group>"; };
+		6A648B571C1E86CE0077F276 /* UIBarItem+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarItem+ZUX.h"; sourceTree = "<group>"; };
+		6A648B581C1E86CE0077F276 /* UIBarItem+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarItem+ZUX.m"; sourceTree = "<group>"; };
 		6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ZUX.h"; sourceTree = "<group>"; };
 		6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ZUX.m"; sourceTree = "<group>"; };
 		6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXColorDictionary.h; sourceTree = "<group>"; };
@@ -495,6 +508,7 @@
 		6A63F9E51C02E0E000AB3891 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				6A648B541C1E5F5F0077F276 /* zappearance.h */,
 				6A0F89771C0359C80003948C /* UIDevice+ZUX.h */,
 				6A0F89781C0359C80003948C /* UIDevice+ZUX.m */,
 				6A63F9EE1C02E0E000AB3891 /* UIView+ZUX.h */,
@@ -509,14 +523,18 @@
 				6A1794661C05BB4300FF5870 /* UITextField+ZUX.m */,
 				6A1794621C05BB1300FF5870 /* UITextView+ZUX.h */,
 				6A1794631C05BB1300FF5870 /* UITextView+ZUX.m */,
-				6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */,
-				6A17946C1C05D45800FF5870 /* UITabBarItem+ZUX.m */,
 				6A63F9E61C02E0E000AB3891 /* UIColor+ZUX.h */,
 				6A63F9E71C02E0E000AB3891 /* UIColor+ZUX.m */,
 				6A63F9F01C02E0E000AB3891 /* UIViewController+ZUX.h */,
 				6A63F9F11C02E0E000AB3891 /* UIViewController+ZUX.m */,
 				6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */,
 				6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */,
+				6A648B511C1E5C7A0077F276 /* UITabBar+ZUX.h */,
+				6A648B521C1E5C7A0077F276 /* UITabBar+ZUX.m */,
+				6A648B571C1E86CE0077F276 /* UIBarItem+ZUX.h */,
+				6A648B581C1E86CE0077F276 /* UIBarItem+ZUX.m */,
+				6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */,
+				6A17946C1C05D45800FF5870 /* UITabBarItem+ZUX.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -700,7 +718,9 @@
 			files = (
 				6A63FA3A1C02E0E000AB3891 /* ZUXRefreshView.m in Sources */,
 				6A17946D1C05D45800FF5870 /* UITabBarItem+ZUX.m in Sources */,
+				6A648B591C1E86CE0077F276 /* UIBarItem+ZUX.m in Sources */,
 				6A63FA2D1C02E0E000AB3891 /* UIViewController+ZUX.m in Sources */,
+				6A648B531C1E5C7A0077F276 /* UITabBar+ZUX.m in Sources */,
 				6A63FA271C02E0E000AB3891 /* NSValue+ZUX.m in Sources */,
 				6A63FA1E1C02E0E000AB3891 /* NSCoder+ZUX.m in Sources */,
 				6A63FA351C02E0E000AB3891 /* ZUXRuntime.m in Sources */,

@@ -92,10 +92,11 @@ ZUX_STATIC_INLINE NSDictionary *buildColorDictionary(NSDictionary *srcDictionary
     NSMutableDictionary *dstDictionary = ZUX_AUTORELEASE([[NSMutableDictionary alloc] init]);
     [srcDictionary enumerateKeysAndObjectsUsingBlock:
      ^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-         [dstDictionary setObject:
-          [obj isKindOfClass:[UIColor class]]
-          ? obj : ([obj isKindOfClass:[NSString class]]
-                   ? [UIColor colorWithRGBAHexString:obj] : nil) forKey:key];
+         if ([obj isKindOfClass:[UIColor class]]) {
+             [dstDictionary setObject:obj forKey:key];
+         } else if ([obj isKindOfClass:[NSString class]]) {
+             [dstDictionary setObject:[UIColor colorWithRGBAHexString:obj] forKey:key];
+         }
      }];
     return ZUX_AUTORELEASE([dstDictionary copy]);
 }

@@ -9,6 +9,7 @@
 #import "UITabBarItem+ZUX.h"
 #import "zarc.h"
 #import "zadapt.h"
+#import "zappearance.h"
 
 ZUX_CATEGORY_M(ZUX_UITabBarItem)
 
@@ -23,6 +24,14 @@ ZUX_CATEGORY_M(ZUX_UITabBarItem)
         [tabBarItem setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:image];
         return ZUX_AUTORELEASE(tabBarItem);
 #endif
+}
+
++ (UIOffset)titlePositionAdjustment {
+    return [APPEARANCE titlePositionAdjustment];
+}
+
++ (void)setTitlePositionAdjustment:(UIOffset)titlePositionAdjustment {
+    [APPEARANCE setTitlePositionAdjustment:titlePositionAdjustment];
 }
 
 @end

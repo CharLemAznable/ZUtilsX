@@ -7,15 +7,13 @@
 //
 
 #import "UINavigationBar+ZUX.h"
-#import "zarc.h"
-#import "zadapt.h"
 #import "ZUXGeometry.h"
+#import "zadapt.h"
+#import "zappearance.h"
 
 ZUX_CATEGORY_M(ZUX_UINavigationBar)
 
 @implementation UINavigationBar (ZUX)
-
-#define APPEARANCE [self appearance]
 
 + (UIImage *)backgroundImageForBarMetrics:(UIBarMetrics)barMetrics {
     return [APPEARANCE backgroundImageForBarMetrics:barMetrics];
@@ -33,14 +31,6 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
     [APPEARANCE setTintColor:tintColor];
 }
 
-#define TitleTextAttributeForKey(key) \
-[[APPEARANCE titleTextAttributes] objectForKey:(key)]
-
-#define SetTitleTextAttributeForKey(key, value) \
-NSMutableDictionary *attributes = ZUX_AUTORELEASE([[APPEARANCE titleTextAttributes] mutableCopy]); \
-[attributes setObject:(value) forKey:(key)]; \
-[APPEARANCE setTitleTextAttributes:attributes];
-
 + (UIFont *)textFont {
     return TitleTextAttributeForKey(ZUXFontAttributeName);
 }
@@ -57,12 +47,9 @@ NSMutableDictionary *attributes = ZUX_AUTORELEASE([[APPEARANCE titleTextAttribut
     SetTitleTextAttributeForKey(ZUXForegroundColorAttributeName, textColor);
 }
 
-#define TitleShadowAttribute \
-TitleTextAttributeForKey(NSShadowAttributeName) ?: ZUX_AUTORELEASE([[NSShadow alloc] init])
-
 + (UIColor *)textShadowColor {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
-    return ((NSShadow *)TitleTextAttributeForKey(NSShadowAttributeName)).shadowColor;
+    return TitleShadowAttribute.shadowColor;
 #else
     return TitleTextAttributeForKey(UITextAttributeTextShadowColor);
 #endif
@@ -70,9 +57,9 @@ TitleTextAttributeForKey(NSShadowAttributeName) ?: ZUX_AUTORELEASE([[NSShadow al
 
 + (void)setTextShadowColor:(UIColor *)textShadowColor {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
-    NSShadow *shadow = TitleShadowAttribute;
+    NSShadow *shadow = DefaultTitleShadowAttribute;
     [shadow setShadowColor:textShadowColor];
-    SetTitleTextAttributeForKey(NSShadowAttributeName, shadow);
+    SetTitleShadowAttribute(shadow);
 #else
     SetTitleTextAttributeForKey(UITextAttributeTextShadowColor, textShadowColor);
 #endif
@@ -80,7 +67,7 @@ TitleTextAttributeForKey(NSShadowAttributeName) ?: ZUX_AUTORELEASE([[NSShadow al
 
 + (CGSize)textShadowOffset {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
-    return ((NSShadow *)TitleTextAttributeForKey(NSShadowAttributeName)).shadowOffset;
+    return TitleShadowAttribute.shadowOffset;
 #else
     return ZUX_CGSizeFromUIOffset([TitleTextAttributeForKey(UITextAttributeTextShadowOffset) UIOffsetValue]);
 #endif
@@ -88,9 +75,9 @@ TitleTextAttributeForKey(NSShadowAttributeName) ?: ZUX_AUTORELEASE([[NSShadow al
 
 + (void)setTextShadowOffset:(CGSize)textShadowOffset {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
-    NSShadow *shadow = TitleShadowAttribute;
+    NSShadow *shadow = DefaultTitleShadowAttribute;
     [shadow setShadowOffset:textShadowOffset];
-    SetTitleTextAttributeForKey(NSShadowAttributeName, shadow);
+    SetTitleShadowAttribute(shadow);
 #else
     NSValue *offsetValue = [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)];
     SetTitleTextAttributeForKey(UITextAttributeTextShadowOffset, offsetValue);
@@ -98,17 +85,15 @@ TitleTextAttributeForKey(NSShadowAttributeName) ?: ZUX_AUTORELEASE([[NSShadow al
 }
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
-
 + (CGFloat)textShadowSize {
-    return ((NSShadow *)TitleTextAttributeForKey(NSShadowAttributeName)).shadowBlurRadius;
+    return TitleShadowAttribute.shadowBlurRadius;
 }
 
 + (void)setTextShadowSize:(CGFloat)textShadowSize {
-    NSShadow *shadow = TitleShadowAttribute;
+    NSShadow *shadow = DefaultTitleShadowAttribute;
     [shadow setShadowBlurRadius:textShadowSize];
-    SetTitleTextAttributeForKey(NSShadowAttributeName, shadow);
+    SetTitleShadowAttribute(shadow);
 }
-
 #endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
 
 @end

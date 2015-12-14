@@ -397,11 +397,6 @@
         // 限制输入文本内容及长度.
         -shouldChangeCharactersInRange:replacementString:limitWithLength:
 
-- UITabBarItem+ZUX
-
-        // 实例化方法(适配IOS7以下的系统)
-        +tabBarItemWithTitle:image:selectedImage:
-
 - UIColor+ZUX
 
         // 根据255格式颜色生成UIColor.
@@ -455,6 +450,39 @@
         +setTextShadowOffset:
         +textShadowSize
         +setTextShadowSize:
+
+- UITabBar+ZUX
+
+        // 添加自定义样式方法, 可自定义背景图片, 选中项背景图片, 选中项tint颜色.
+        +backgroundImage
+        +setBackgroundImage:
+        +selectionIndicatorImage
+        +setSelectionIndicatorImage:
+        +selectedImageTintColor
+        +setSelectedImageTintColor:
+
+- UIBarItem+ZUX
+
+        // 添加自定义样式方法, 可自定义字体, 字色, 文字阴影.
+        +textFontForState:
+        +setTextFont:forState:
+        +textColorForState:
+        +setTextColor:forState:
+        +textShadowColorForState:
+        +setTextShadowColor:forState:
+        +textShadowOffsetForState:
+        +setTextShadowOffset:forState:
+        +textShadowSizeForState:
+        +setTextShadowSize:forState:
+
+- UITabBarItem+ZUX
+
+        // 实例化方法(适配IOS7以下的系统)
+        +tabBarItemWithTitle:image:selectedImage:
+
+        // 添加自定义样式方法, 可自定义文字位置偏移.
+        +titlePositionAdjustment
+        +setTitlePositionAdjustment:
 
 #####View
 

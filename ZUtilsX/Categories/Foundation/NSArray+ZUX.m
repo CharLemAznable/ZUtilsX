@@ -48,7 +48,7 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 }
 
 @end
-#endif
+#endif // __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
 
 @implementation NSArray (ZUXDirectory)
 

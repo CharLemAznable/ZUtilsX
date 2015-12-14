@@ -18,6 +18,9 @@ ZUX_CATEGORY_H(ZUX_UITabBarItem)
 
 + (id)tabBarItemWithTitle:(NSString *)title image:(UIImage *)image selectedImage:(UIImage *)selectedImage;
 
++ (UIOffset)titlePositionAdjustment;
++ (void)setTitlePositionAdjustment:(UIOffset)titlePositionAdjustment;
+
 @end
 
 #endif /* ZUtilsX_UITabBarItem_ZUX_h */

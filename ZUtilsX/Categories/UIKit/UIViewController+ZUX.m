@@ -16,7 +16,6 @@
 ZUX_CATEGORY_M(ZUX_UIViewController)
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-
 @interface UIViewController (ZUX_Private)
 
 - (UIStatusBarStyle)p_StatusBarStyle;
@@ -28,7 +27,6 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
     UIViewController *root = [UIApplication sharedApplication].keyWindow.rootViewController;
     return root.childViewControllerForStatusBarStyle ?: root;
 }
-
 #endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 
 @implementation UIViewController (ZUX)
@@ -87,7 +85,6 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 @end
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-
 @implementation UIViewController (ZUX_Private)
 
 + (void)load {
@@ -125,5 +122,4 @@ NSString *const p_StatusBarStyleKey = @"p_StatusBarStyle";
 }
 
 @end
-
 #endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000

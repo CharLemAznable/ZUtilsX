@@ -12,10 +12,7 @@ ZUX_CATEGORY_M(ZUX_UITextView)
 
 @implementation UITextView (ZUX)
 
-- (BOOL)shouldChangeCharactersInRange:(NSRange)range
-                    replacementString:(NSString *)string
-                      limitWithLength:(NSUInteger)length {
-    
+- (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string limitWithLength:(NSUInteger)length {
     NSString *toBeString = [self.text stringByReplacingCharactersInRange:range withString:string];
     if (self.markedTextRange != nil || toBeString.length <= length || range.length == 1) return YES;
     self.text = [toBeString substringToIndex:length];
