@@ -133,6 +133,8 @@
 		6A648B5D1C1E94AD0077F276 /* ZUXKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A648B5C1C1E94AD0077F276 /* ZUXKeychain.m */; };
 		6A648B5E1C1EAF970077F276 /* ZUXKeychain.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A648B5B1C1E94AD0077F276 /* ZUXKeychain.h */; };
 		6A648B601C1EB3F10077F276 /* ZUXKeychainTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A648B5F1C1EB3F10077F276 /* ZUXKeychainTest.m */; };
+		6A648B671C1EC5E40077F276 /* UIApplication+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A648B661C1EC5E40077F276 /* UIApplication+ZUX.m */; };
+		6A648B681C1EE59A0077F276 /* UIApplication+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A648B651C1EC5E40077F276 /* UIApplication+ZUX.h */; };
 		6A6A3D861C191E9600847DEF /* UINavigationBar+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */; };
 		6A6A3D871C1961FB00847DEF /* UINavigationBar+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */; };
 		6A6A3D941C1983C700847DEF /* ZUXColorDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */; };
@@ -156,6 +158,7 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				6A648B681C1EE59A0077F276 /* UIApplication+ZUX.h in CopyFiles */,
 				6A648B5E1C1EAF970077F276 /* ZUXKeychain.h in CopyFiles */,
 				6A648B5A1C1E8C2F0077F276 /* UIBarItem+ZUX.h in CopyFiles */,
 				6A648B551C1E612E0077F276 /* zappearance.h in CopyFiles */,
@@ -337,6 +340,8 @@
 		6A648B5B1C1E94AD0077F276 /* ZUXKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXKeychain.h; sourceTree = "<group>"; };
 		6A648B5C1C1E94AD0077F276 /* ZUXKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXKeychain.m; sourceTree = "<group>"; };
 		6A648B5F1C1EB3F10077F276 /* ZUXKeychainTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXKeychainTest.m; path = Utils/ZUXKeychainTest.m; sourceTree = "<group>"; };
+		6A648B651C1EC5E40077F276 /* UIApplication+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+ZUX.h"; sourceTree = "<group>"; };
+		6A648B661C1EC5E40077F276 /* UIApplication+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+ZUX.m"; sourceTree = "<group>"; };
 		6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ZUX.h"; sourceTree = "<group>"; };
 		6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ZUX.m"; sourceTree = "<group>"; };
 		6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXColorDictionary.h; sourceTree = "<group>"; };
@@ -519,6 +524,8 @@
 				6A648B541C1E5F5F0077F276 /* zappearance.h */,
 				6A0F89771C0359C80003948C /* UIDevice+ZUX.h */,
 				6A0F89781C0359C80003948C /* UIDevice+ZUX.m */,
+				6A648B651C1EC5E40077F276 /* UIApplication+ZUX.h */,
+				6A648B661C1EC5E40077F276 /* UIApplication+ZUX.m */,
 				6A63F9EE1C02E0E000AB3891 /* UIView+ZUX.h */,
 				6A63F9EF1C02E0E000AB3891 /* UIView+ZUX.m */,
 				6A63F9E81C02E0E000AB3891 /* UIControl+ZUX.h */,
@@ -759,6 +766,7 @@
 				6A5B155B1C0C350F006B8673 /* ZUXBundle.m in Sources */,
 				6A648B5D1C1E94AD0077F276 /* ZUXKeychain.m in Sources */,
 				6A6A3D941C1983C700847DEF /* ZUXColorDictionary.m in Sources */,
+				6A648B671C1EC5E40077F276 /* UIApplication+ZUX.m in Sources */,
 				6A63FA3B1C02E0E000AB3891 /* ZUXSearchBar.m in Sources */,
 				6A63FA281C02E0E000AB3891 /* UIColor+ZUX.m in Sources */,
 				6A63FA2E1C02E0E000AB3891 /* ZUXConstraint.m in Sources */,

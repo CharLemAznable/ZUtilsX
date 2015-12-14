@@ -73,6 +73,12 @@
 # define ZUXCalendarUnitSecond              NSCalendarUnitSecond
 # define ZUXCalendarUnitWeekday             NSCalendarUnitWeekday
 # define ZUXCalendarUnitWeekdayOrdinal      NSCalendarUnitWeekdayOrdinal
+
+# define ZUXUserNotificationType            UIUserNotificationType            
+# define ZUXUserNotificationTypeNone        UIUserNotificationTypeNone
+# define ZUXUserNotificationTypeBadge       UIUserNotificationTypeBadge
+# define ZUXUserNotificationTypeSound       UIUserNotificationTypeSound
+# define ZUXUserNotificationTypeAlert       UIUserNotificationTypeAlert
 #else // __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 # define ZUXCalendarUnitEra                 NSEraCalendarUnit
 # define ZUXCalendarUnitYear                NSYearCalendarUnit
@@ -83,6 +89,12 @@
 # define ZUXCalendarUnitSecond              NSSecondCalendarUnit
 # define ZUXCalendarUnitWeekday             NSWeekdayCalendarUnit
 # define ZUXCalendarUnitWeekdayOrdinal      NSWeekdayOrdinalCalendarUnit
+
+# define ZUXUserNotificationType            UIRemoteNotificationType
+# define ZUXUserNotificationTypeNone        UIRemoteNotificationTypeNone
+# define ZUXUserNotificationTypeBadge       UIRemoteNotificationTypeBadge
+# define ZUXUserNotificationTypeSound       UIRemoteNotificationTypeSound
+# define ZUXUserNotificationTypeAlert       UIRemoteNotificationTypeAlert
 #endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 
 #endif /* ZUtilsX_zadapt_h */

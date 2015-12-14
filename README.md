@@ -268,6 +268,18 @@
         -fullModel          // 如: iPhone7,1
         -purifiedFullModel  // 如: iPhone 6Plus
 
+- UIApplication+ZUX
+
+        // 远程通知注册与检测方法.
+        +registerUserNotificationTypes:categories:
+        -registerUserNotificationTypes:categories:
+        +registerUserNotificationTypes:
+        -registerUserNotificationTypes:
+        +noneNotificationTypeRegisted
+        -noneNotificationTypeRegisted
+        +notificationTypeRegisted:
+        -notificationTypeRegisted:
+
 - UIView+ZUX
 
         // 添加属性: (Layer)

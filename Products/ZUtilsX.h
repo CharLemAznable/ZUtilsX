@@ -46,6 +46,7 @@
 
 #import "zappearance.h"
 #import "UIDevice+ZUX.h"
+#import "UIApplication+ZUX.h"
 #import "UIView+ZUX.h"
 #import "UIControl+ZUX.h"
 #import "UILabel+ZUX.h"
