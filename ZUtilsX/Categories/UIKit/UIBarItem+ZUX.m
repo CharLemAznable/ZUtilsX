@@ -11,6 +11,8 @@
 #import "zadapt.h"
 #import "zappearance.h"
 
+ZUX_CATEGORY_M(ZUX_UIBarItem)
+
 @implementation UIBarItem (ZUX)
 
 + (UIFont *)textFontForState:(UIControlState)state {

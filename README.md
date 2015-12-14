@@ -2,7 +2,7 @@
 
 收集日常开发中积累的工具代码.
 
-        pod "ZUtilsX", "~> 0.0.7"
+        pod "ZUtilsX", "~> 0.0.8"
 
 #####Constant
 
@@ -726,3 +726,11 @@
         // 用于AudioServicesCreateSystemSoundID(CFURLRef, SystemSoundID*)
         +audioURLWithName:type:bundle:
         +audioURLWithName:type:bundle:subpath:
+
+- ZUXKeychain
+
+    keychain工具, 重构自SFHFKeychainUtils, 支持ARC.
+
+        +passwordForUsername:andService:error:
+        +storePassword:forUsername:andService:updateExisting:error:
+        +deletePasswordForUsername:andService:error:

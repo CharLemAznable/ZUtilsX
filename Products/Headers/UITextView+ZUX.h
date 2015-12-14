@@ -16,9 +16,7 @@ ZUX_CATEGORY_H(ZUX_UITextView)
 
 @interface UITextView (ZUX)
 
-- (BOOL)shouldChangeCharactersInRange:(NSRange)range
-                    replacementString:(NSString *)string
-                      limitWithLength:(NSUInteger)length;
+- (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string limitWithLength:(NSUInteger)length;
 
 @end
 

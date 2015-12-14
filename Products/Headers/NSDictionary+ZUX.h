@@ -37,7 +37,7 @@ ZUX_CATEGORY_H(ZUX_NSDictionary)
 - (void)setObject:(ZUX_OBJECT_TYPE)obj forKeyedSubscript:(ZUX_KEY_TYPE <NSCopying>)key;
 
 @end
-#endif
+#endif // __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
 
 @interface NSDictionary ZUX_COVARIANT_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) (ZUXDirectory)
 
