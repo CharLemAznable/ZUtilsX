@@ -22,15 +22,19 @@ ZUX_CATEGORY_M(ZUX_UIApplication)
                            categories:(NSSet<UIUserNotificationCategory *> *)categories {
     [self registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:types categories:categories]];
 }
-#else // __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
+#endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
+
 + (void)registerUserNotificationTypes:(ZUXUserNotificationType)types {
     [[self sharedApplication] registerUserNotificationTypes:types];
 }
 
 - (void)registerUserNotificationTypes:(ZUXUserNotificationType)types {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
+    [self registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:types categories:nil]];
+#else
     [self registerForRemoteNotificationTypes:types];
+#endif
 }
-#endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 
 + (BOOL)noneNotificationTypeRegisted {
     return [[self sharedApplication] noneNotificationTypeRegisted];

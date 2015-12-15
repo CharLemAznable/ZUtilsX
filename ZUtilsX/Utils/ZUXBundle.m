@@ -44,7 +44,7 @@
     return [NSURL fileURLWithPath:bundleFilePath(fileName, fileType, bundleName, subpath)];
 }
 
-#pragma mark - private functions.
+#pragma mark - private functions -
 
 NSString *bundleFilePath(NSString *fileName, NSString *fileType, NSString *bundleName, NSString *subpath) {
     NSBundle *bundle = [NSBundle bundleForClass:[ZUXBundle class]];

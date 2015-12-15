@@ -159,7 +159,7 @@ typedef struct JKParseState JKParseState; // Opaque internal, private type.
 @end
     
 ////////////
-#pragma mark Deserializing methods
+#pragma mark - Deserializing methods -
 ////////////
     
 @interface NSString (JSONKitDeserializing)
@@ -182,7 +182,7 @@ typedef struct JKParseState JKParseState; // Opaque internal, private type.
 @end
     
 ////////////
-#pragma mark Serializing methods
+#pragma mark - Serializing methods -
 ////////////
     
 @interface NSString (JSONKitSerializing)

@@ -15,7 +15,7 @@ ZUX_CATEGORY_M(ZUX_UIView)
 
 @implementation UIView (ZUX)
 
-#pragma mark - Properties Methods.
+#pragma mark - Properties Methods -
 
 - (BOOL)maskToBounds {
     return self.layer.masksToBounds;
@@ -91,7 +91,7 @@ ZUX_CATEGORY_M(ZUX_UIView)
 
 @end
 
-#pragma mark -
+#pragma mark - AutoLayout -
 
 NSString *const zLayoutKVOContext           = @"ZLayoutKVOContext";
 NSString *const zTransformKVOKey            = @"zTransform";
@@ -120,7 +120,7 @@ NSString *const zTransformViewBoundsKVOKey  = @"bounds";
     return self;
 }
 
-#pragma mark - Swizzle & Override Methods.
+#pragma mark - Swizzle & Override Methods -
 
 + (void)load {
     [super load];
@@ -171,7 +171,7 @@ NSString *const zTransformViewBoundsKVOKey  = @"bounds";
     }
 }
 
-#pragma mark - Properties Methods.
+#pragma mark - Properties Methods -
 
 - (ZUXTransform *)zTransform {
     return [self propertyForAssociateKey:zTransformKVOKey];
@@ -274,7 +274,7 @@ NSString *const zTransformViewBoundsKVOKey  = @"bounds";
     [self p_ZTransform].view = zView;
 }
 
-#pragma mark - Private Methods.
+#pragma mark - Private Methods -
 
 - (ZUXTransform *)p_ZTransform {
     if (ZUX_EXPECT_T(self.zTransform)) return self.zTransform;
@@ -315,7 +315,7 @@ NSString *const zTransformViewBoundsKVOKey  = @"bounds";
 
 @end
 
-#pragma mark -
+#pragma mark - Animate -
 
 CGFloat ZUXAnimateZoomRatio = 2;
 
@@ -394,7 +394,7 @@ ZUX_INLINE ZUXAnimation ZUXImmediateAnimationMake(ZUXAnimateType type,
                      } completion:^(BOOL finished) { completion(); }];
 }
 
-#pragma mark - ZUXAnimate Implement Methods.
+#pragma mark - ZUXAnimate Implement Methods -
 
 ZUX_STATIC_INLINE bool hasZUXAnimateType(ZUXAnimation animation, ZUXAnimateType type)
 { return animation.type & type; }

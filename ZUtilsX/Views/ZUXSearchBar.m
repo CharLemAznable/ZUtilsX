@@ -101,7 +101,7 @@ CGSize searchBarTextFieldDefaultSize = {300, 30};
     _searchTextField.text = searchText;
 }
 
-#pragma mark - User Event
+#pragma mark - User Event -
 
 - (void)maskTouched:(id)sender {
     if (ZUX_EXPECT_F(![sender isEqual:_mask])) return;
@@ -114,7 +114,7 @@ CGSize searchBarTextFieldDefaultSize = {300, 30};
            completion:^{ [_mask removeFromSuperview]; }];
 }
 
-#pragma mark - UITextFieldDelegate
+#pragma mark - UITextFieldDelegate -
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [[UIApplication sharedApplication].keyWindow addSubview:_mask];
@@ -141,7 +141,7 @@ CGSize searchBarTextFieldDefaultSize = {300, 30};
     return YES;
 }
 
-#pragma mark - UITextFieldTextDidChangeNotification
+#pragma mark - UITextFieldTextDidChangeNotification -
 
 - (void)searchTextFieldTextDidChange:(NSNotification *)notification {
     UITextField *textField = (UITextField *)notification.object;

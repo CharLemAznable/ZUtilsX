@@ -97,7 +97,7 @@
     return result;
 }
 
-#pragma mark - transform implementation functions.
+#pragma mark - transform implementation functions -
 
 ZUX_STATIC_INLINE void constraintOriginAndSize(UIView *view, CGFloat viewSize,
                             id marginConstraint1, id marginConstraint2,

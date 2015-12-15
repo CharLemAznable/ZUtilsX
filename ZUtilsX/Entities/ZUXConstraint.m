@@ -49,7 +49,7 @@
     return _block == constraint.block;
 }
 
-#pragma mark - Some Convenience Constraints.
+#pragma mark - Some Convenience Constraints -
 
 #define ZUXConstraint_implement(constraint, block) \
 + (ZUXConstraint *)constraint { \
@@ -70,7 +70,7 @@ ZUXConstraint_implement(aThirdHeightConstraint, aThirdHeightBlock)
 ZUXConstraint_implement(quarterWidthConstraint, quarterWidthBlock)
 ZUXConstraint_implement(quarterHeightConstraint, quarterHeightBlock)
 
-#pragma mark - multi singleton instances.
+#pragma mark - multi singleton instances
 
 static ZUXConstraint *nilConstraint = nil;
 static ZUXConstraint *fullWidthConstraint = nil;
@@ -82,7 +82,7 @@ static ZUXConstraint *aThirdHeightConstraint = nil;
 static ZUXConstraint *quarterWidthConstraint = nil;
 static ZUXConstraint *quarterHeightConstraint = nil;
 
-#pragma mark - static constraint blocks.
+#pragma mark - static constraint blocks
 
 static ZUXConstraintBlock fullWidthBlock = ^CGFloat(UIView *view) {
     return view.bounds.size.width;

@@ -84,7 +84,7 @@
     return [_colors objectForKey:key];
 }
 
-#pragma mark - implementation functions.
+#pragma mark - implementation functions -
 
 ZUX_STATIC_INLINE NSDictionary *buildColorDictionary(NSDictionary *srcDictionary) {
     if (ZUX_EXPECT_F(!srcDictionary)) return nil;

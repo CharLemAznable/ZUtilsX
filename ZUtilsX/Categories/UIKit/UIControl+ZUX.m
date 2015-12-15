@@ -18,7 +18,7 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 
 @implementation UIControl (ZUX)
 
-#pragma mark - Border Width With UIControlState Methods.
+#pragma mark - Border Width With UIControlState Methods -
 
 - (void)setBorderWidth:(CGFloat)width forState:(UIControlState)state {
     ZUX_ENABLE_CATEGORY(ZUX_UIView);
@@ -36,7 +36,7 @@ ZUX_CATEGORY_M(ZUX_UIControl)
             cgfloatValue];
 }
 
-#pragma mark - Border Color With UIControlState Methods.
+#pragma mark - Border Color With UIControlState Methods -
 
 - (void)setBorderColor:(UIColor *)color forState:(UIControlState)state {
     ZUX_ENABLE_CATEGORY(ZUX_UIView);
@@ -51,7 +51,7 @@ ZUX_CATEGORY_M(ZUX_UIControl)
                                                [self keyForState:UIControlStateNormal]]];
 }
 
-#pragma mark - Shadow Color With UIControlState Methods.
+#pragma mark - Shadow Color With UIControlState Methods -
 
 - (void)setShadowColor:(UIColor *)color forState:(UIControlState)state {
     ZUX_ENABLE_CATEGORY(ZUX_UIView);
@@ -66,7 +66,7 @@ ZUX_CATEGORY_M(ZUX_UIControl)
                                                [self keyForState:UIControlStateNormal]]];
 }
 
-#pragma mark - Shadow Opacity With UIControlState Methods.
+#pragma mark - Shadow Opacity With UIControlState Methods -
 
 - (void)setShadowOpacity:(float)opacity forState:(UIControlState)state {
     ZUX_ENABLE_CATEGORY(ZUX_UIView);
@@ -82,7 +82,7 @@ ZUX_CATEGORY_M(ZUX_UIControl)
             floatValue];
 }
 
-#pragma mark - Shadow Offset With UIControlState Methods.
+#pragma mark - Shadow Offset With UIControlState Methods -
 
 - (void)setShadowOffset:(CGSize)offset forState:(UIControlState)state {
     ZUX_ENABLE_CATEGORY(ZUX_UIView);
@@ -98,7 +98,7 @@ ZUX_CATEGORY_M(ZUX_UIControl)
             CGSizeValue];
 }
 
-#pragma mark - Shadow Size With UIControlState Methods.
+#pragma mark - Shadow Size With UIControlState Methods -
 
 - (void)setShadowSize:(CGFloat)size forState:(UIControlState)state {
     ZUX_ENABLE_CATEGORY(ZUX_UIView);
@@ -116,7 +116,7 @@ ZUX_CATEGORY_M(ZUX_UIControl)
             cgfloatValue];
 }
 
-#pragma mark - Swizzle Methods.
+#pragma mark - Swizzle Methods -
    
 + (void)load {
     [super load];
@@ -204,7 +204,7 @@ ZUX_CATEGORY_M(ZUX_UIControl)
     self.shadowSize     = [self shadowSizeForState:state];
 }
 
-#pragma mark - Associated Value Methods.
+#pragma mark - Associated Value Methods -
 
 NSString *const zBorderWidthsKey    = @"zBorderWidths";
 NSString *const zBorderColorsKey    = @"zBorderColors";
@@ -227,7 +227,7 @@ ZUXAttribute_implement(zShadowOpacities)
 ZUXAttribute_implement(zShadowOffsets)
 ZUXAttribute_implement(zShadowSizes)
 
-#pragma mark - Private Methods.
+#pragma mark - Private Methods -
 
 - (NSString *)keyForState:(UIControlState)state {
     return [NSString stringWithFormat:@"%d", (unsigned int)state];

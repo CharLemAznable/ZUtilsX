@@ -154,7 +154,7 @@
     return originalSize;
 }
 
-#pragma mark - inline functions
+#pragma mark - inline functions -
 
 ZUX_STATIC_INLINE CTTextAlignment CTTextAlignmentFromZUXLinesSpacingLabel(ZUXLabel *label) {
     switch (label.textAlignment) {

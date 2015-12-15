@@ -71,7 +71,7 @@
     }
 }
 
-#pragma mark - private functions.
+#pragma mark - private functions -
 
 NSString *searchPath(NSSearchPathDirectory directory) {
     return [NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES) objectAtIndex:0];

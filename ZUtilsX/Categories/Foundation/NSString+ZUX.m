@@ -16,7 +16,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
 
 @implementation NSString (ZUX)
 
-#pragma mark - Empty Methods.
+#pragma mark - Empty Methods -
 
 - (BOOL)isEmpty {
     return [self length] == 0;
@@ -26,7 +26,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
     return [self length] != 0;
 }
 
-#pragma Trim Methods.
+#pragma mark - Trim Methods -
 
 - (NSString *)trim {
     return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -37,7 +37,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
     return [str isEmpty] ? nil : str;
 }
 
-#pragma mark - Compare Methods.
+#pragma mark - Compare Methods -
 
 - (BOOL)isCaseInsensitiveEqual:(id)object {
     if (object == self) return YES;
@@ -77,7 +77,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
     return NSOrderedSame;
 }
 
-#pragma mark - Index Methods.
+#pragma mark - Index Methods -
 
 - (NSUInteger)indexOfString:(NSString *)aString {
     return [self rangeOfString:aString].location;
@@ -95,7 +95,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
     return [[self substringFromIndex:startPos] rangeOfString:aString options:NSCaseInsensitiveSearch].location;
 }
 
-#pragma mark - Contain Methods.
+#pragma mark - Contain Methods -
 
 - (BOOL)containsString:(NSString *)aString {
     return [self indexOfString:aString] != NSNotFound;
@@ -125,7 +125,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
     return YES;
 }
 
-#pragma mark - Split Methods.
+#pragma mark - Split Methods -
 
 - (NSArray *)arraySplitedByString:(NSString *)separator {
     return [self arraySplitedByString:separator filterEmptyItem:YES];
@@ -149,7 +149,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
                               [NSPredicate predicateWithFormat:@"SELF.length > 0"]] : components;
 }
 
-#pragma mark - Append Methods.
+#pragma mark - Append Methods -
 
 + (ZUX_INSTANCETYPE)stringWithArray:(NSArray *)array {
     return [self stringWithArray:array separator:@""];
@@ -183,7 +183,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
     return [NSString stringWithArray:temp];
 }
 
-#pragma mark - Replace Methods.
+#pragma mark - Replace Methods -
 
 - (NSString *)stringByReplacingString:(NSString *)searchString withString:(NSString *)replacement {
     return [self stringByReplacingOccurrencesOfString:searchString withString:replacement
@@ -195,7 +195,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
                                               options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
 }
 
-#pragma mark - Escape/Unescape Methods.
+#pragma mark - Escape/Unescape Methods -
 
 - (NSString *)stringByEscapingForURLQuery {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
@@ -221,7 +221,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
 #endif
 }
 
-#pragma mark - Encode/Decode Methods.
+#pragma mark - Encode/Decode Methods -
 
 - (NSString *)MD5Sum {
     const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
@@ -290,7 +290,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
     return s;
 }
 
-#pragma mark - Parametric builder.
+#pragma mark - Parametric builder -
 
 - (NSString *)parametricStringWithObject:(id)object {
     NSMutableString *result = [NSMutableString string];
@@ -310,7 +310,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
     return ZUX_AUTORELEASE([result copy]);
 }
 
-#pragma mark - Size caculator.
+#pragma mark - Size caculator -
 
 - (CGSize)zuxSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000

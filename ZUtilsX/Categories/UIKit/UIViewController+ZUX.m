@@ -31,7 +31,7 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 
 @implementation UIViewController (ZUX)
 
-#pragma mark - Swizzle & Override Methods.
+#pragma mark - Swizzle & Override Methods -
 
 + (void)load {
     [super load];

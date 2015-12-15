@@ -83,7 +83,7 @@
     [UIView commitAnimations];
 }
 
-#pragma mark - Private Methods
+#pragma mark - Private Methods -
 
 - (CGFloat)p_PullingOffsetInScrollView:(UIScrollView *)scrollView {
     switch (_direction) {

@@ -91,7 +91,7 @@ ZUX_CATEGORY_M(ZUX_UIImage)
     return [NSString stringWithFormat:@"%@%@", name, IS_IPHONE6P ? @"-800-Portrait-736h":(IS_IPHONE6 ? @"-800-667h":(IS_IPHONE5 ? @"-700-568h":@""))];
 }
 
-#pragma mark - inline function
+#pragma mark - inline function -
 
 ZUX_STATIC_INLINE CGGradientRef CreateGradientWithColorsAndLocations(NSArray *colors, NSArray *locations) {
     NSUInteger colorsCount = [colors count];
