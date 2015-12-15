@@ -36,7 +36,7 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
 }
 
 + (void)setTextFont:(UIFont *)textFont {
-    SetTitleTextAttributeForKey(ZUXFontAttributeName, textFont);
+    SetTitleTextAttributeForKey(textFont, ZUXFontAttributeName);
 }
 
 + (UIColor *)textColor {
@@ -44,7 +44,7 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
 }
 
 + (void)setTextColor:(UIColor *)textColor {
-    SetTitleTextAttributeForKey(ZUXForegroundColorAttributeName, textColor);
+    SetTitleTextAttributeForKey(textColor, ZUXForegroundColorAttributeName);
 }
 
 + (UIColor *)textShadowColor {
@@ -61,7 +61,7 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
     [shadow setShadowColor:textShadowColor];
     SetTitleShadowAttribute(shadow);
 #else
-    SetTitleTextAttributeForKey(UITextAttributeTextShadowColor, textShadowColor);
+    SetTitleTextAttributeForKey(textShadowColor, UITextAttributeTextShadowColor);
 #endif
 }
 
@@ -80,7 +80,7 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
     SetTitleShadowAttribute(shadow);
 #else
     NSValue *offsetValue = [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)];
-    SetTitleTextAttributeForKey(UITextAttributeTextShadowOffset, offsetValue);
+    SetTitleTextAttributeForKey(offsetValue, UITextAttributeTextShadowOffset);
 #endif
 }
 

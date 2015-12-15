@@ -2,7 +2,7 @@
 
 收集日常开发中积累的工具代码.
 
-        pod "ZUtilsX", "~> 0.0.8"
+        pod "ZUtilsX", "~> 0.0.9"
 
 #####Constant
 
@@ -495,6 +495,96 @@
         // 添加自定义样式方法, 可自定义文字位置偏移.
         +titlePositionAdjustment
         +setTitlePositionAdjustment:
+
+- UIBarButtonItem+ZUX
+
+        // 添加自定义样式方法.
+        // tint颜色
+        +tintColor
+        +setTintColor:
+        +tintColorWhenContainedIn:
+        +setTintColor:whenContainedIn:
+
+        // 背景图片
+        +defaultBackgroundImage
+        +setDefaultBackgroundImage:
+        +defaultBackgroundImageWhenContainedIn:
+        +setDefaultBackgroundImage:whenContainedIn:
+        +backgroundImageForState:barMetrics:
+        +setBackgroundImage:forState:barMetrics:
+        +backgroundImageForState:barMetrics:whenContainedIn:
+        +setBackgroundImage:forState:barMetrics:whenContainedIn:
+
+        +defaultBackgroundImageForStyle:
+        +setDefaultBackgroundImage:forStyle:
+        +defaultBackgroundImageForStyle:whenContainedIn:
+        +setDefaultBackgroundImage:forStyle:whenContainedIn:
+        +backgroundImageForState:style:barMetrics:
+        +setBackgroundImage:forState:style:barMetrics:
+        +backgroundImageForState:style:barMetrics:whenContainedIn:
+        +setBackgroundImage:forState:style:barMetrics:whenContainedIn:
+
+        // 背景位置偏移
+        +defaultBackgroundVerticalPositionAdjustment
+        +setDefaultBackgroundVerticalPositionAdjustment:
+        +defaultBackgroundVerticalPositionAdjustmentWhenContainedIn:
+        +setDefaultBackgroundVerticalPositionAdjustment:whenContainedIn:
+        +backgroundVerticalPositionAdjustmentForBarMetrics:
+        +setBackgroundVerticalPositionAdjustment:forBarMetrics:
+        +backgroundVerticalPositionAdjustmentForBarMetrics:whenContainedIn:
+        +setBackgroundVerticalPositionAdjustment:forBarMetrics:whenContainedIn:
+
+        // 文字位置偏移
+        +defaultTitlePositionAdjustment
+        +setDefaultTitlePositionAdjustment:
+        +defaultTitlePositionAdjustmentWhenContainedIn:
+        +setDefaultTitlePositionAdjustment:whenContainedIn:
+        +titlePositionAdjustmentForBarMetrics:
+        +setTitlePositionAdjustment:forBarMetrics:
+        +titlePositionAdjustmentForBarMetrics:whenContainedIn:
+        +setTitlePositionAdjustment:forBarMetrics:whenContainedIn:
+
+        // 返回按钮背景图片
+        +defaultBackButtonBackgroundImage
+        +setDefaultBackButtonBackgroundImage:
+        +defaultBackButtonBackgroundImageWhenContainedIn:
+        +setDefaultBackButtonBackgroundImage:whenContainedIn:
+        +backButtonBackgroundImageForState:barMetrics:
+        +setBackButtonBackgroundImage:forState:barMetrics:
+        +backButtonBackgroundImageForState:barMetrics:whenContainedIn:
+        +setBackButtonBackgroundImage:forState:barMetrics:whenContainedIn:
+
+        // 返回按钮背景位置偏移
+        +defaultBackButtonBackgroundVerticalPositionAdjustment
+        +setDefaultBackButtonBackgroundVerticalPositionAdjustment:
+        +defaultBackButtonBackgroundVerticalPositionAdjustmentWhenContainedIn:
+        +setDefaultBackButtonBackgroundVerticalPositionAdjustment:whenContainedIn:
+        +backButtonBackgroundVerticalPositionAdjustmentForBarMetrics:
+        +setBackButtonBackgroundVerticalPositionAdjustment:forBarMetrics:
+        +backButtonBackgroundVerticalPositionAdjustmentForBarMetrics:whenContainedIn:
+        +setBackButtonBackgroundVerticalPositionAdjustment:forBarMetrics:whenContainedIn:
+
+        // 返回按钮文字位置偏移
+        +defaultBackButtonTitlePositionAdjustment
+        +setDefaultBackButtonTitlePositionAdjustment:
+        +defaultBackButtonTitlePositionAdjustmentWhenContainedIn:
+        +setDefaultBackButtonTitlePositionAdjustment:whenContainedIn:
+        +backButtonTitlePositionAdjustmentForBarMetrics:
+        +setBackButtonTitlePositionAdjustment:forBarMetrics:
+        +backButtonTitlePositionAdjustmentForBarMetrics:whenContainedIn:
+        +setBackButtonTitlePositionAdjustment:forBarMetrics:whenContainedIn:
+
+        // 字体, 字色, 文字阴影
+        +textFontForState:whenContainedIn:
+        +setTextFont:forState:whenContainedIn:
+        +textColorForState:whenContainedIn:
+        +setTextColor:forState:whenContainedIn:
+        +textShadowColorForState:whenContainedIn:
+        +setTextShadowColor:forState:whenContainedIn:
+        +textShadowOffsetForState:whenContainedIn:
+        +setTextShadowOffset:forState:whenContainedIn:
+        +textShadowSizeForState:whenContainedIn:
+        +setTextShadowSize:forState:whenContainedIn:
 
 #####View
 

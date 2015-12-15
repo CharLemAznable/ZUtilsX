@@ -22,10 +22,10 @@ ZUX_CATEGORY_H(ZUX_UIApplication)
                            categories:(NSSet<UIUserNotificationCategory *> *)categories;
 - (void)registerUserNotificationTypes:(ZUXUserNotificationType)types
                            categories:(NSSet<UIUserNotificationCategory *> *)categories;
-#else
+#endif
+
 + (void)registerUserNotificationTypes:(ZUXUserNotificationType)types;
 - (void)registerUserNotificationTypes:(ZUXUserNotificationType)types;
-#endif
 
 + (BOOL)noneNotificationTypeRegisted;
 - (BOOL)noneNotificationTypeRegisted;

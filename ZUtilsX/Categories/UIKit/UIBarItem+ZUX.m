@@ -16,26 +16,26 @@ ZUX_CATEGORY_M(ZUX_UIBarItem)
 @implementation UIBarItem (ZUX)
 
 + (UIFont *)textFontForState:(UIControlState)state {
-    return TitleTextAttributeForKeyForState(ZUXFontAttributeName, state);
+    return TitleTextAttributeForKeyAndState(ZUXFontAttributeName, state);
 }
 
 + (void)setTextFont:(UIFont *)textFont forState:(UIControlState)state {
-    SetTitleTextAttributeForKeyForState(ZUXFontAttributeName, textFont, state);
+    SetTitleTextAttributeForKeyAndState(textFont, ZUXFontAttributeName, state);
 }
 
 + (UIColor *)textColorForState:(UIControlState)state {
-    return TitleTextAttributeForKeyForState(ZUXForegroundColorAttributeName, state);
+    return TitleTextAttributeForKeyAndState(ZUXForegroundColorAttributeName, state);
 }
 
 + (void)setTextColor:(UIColor *)textColor forState:(UIControlState)state {
-    SetTitleTextAttributeForKeyForState(ZUXForegroundColorAttributeName, textColor, state);
+    SetTitleTextAttributeForKeyAndState(textColor, ZUXForegroundColorAttributeName, state);
 }
 
 + (UIColor *)textShadowColorForState:(UIControlState)state {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
     return TitleShadowAttributeForState(state).shadowColor;
 #else
-    return TitleTextAttributeForKeyForState(UITextAttributeTextShadowColor, state);
+    return TitleTextAttributeForKeyAndState(UITextAttributeTextShadowColor, state);
 #endif
 }
 
@@ -45,7 +45,7 @@ ZUX_CATEGORY_M(ZUX_UIBarItem)
     [shadow setShadowColor:textShadowColor];
     SetTitleShadowAttributeForState(shadow, state);
 #else
-    SetTitleTextAttributeForKeyForState(UITextAttributeTextShadowColor, textShadowColor, state);
+    SetTitleTextAttributeForKeyAndState(textShadowColor, UITextAttributeTextShadowColor, state);
 #endif
 }
 
@@ -53,7 +53,7 @@ ZUX_CATEGORY_M(ZUX_UIBarItem)
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
     return TitleShadowAttributeForState(state).shadowOffset;
 #else
-    return ZUX_CGSizeFromUIOffset([TitleTextAttributeForKeyForState(UITextAttributeTextShadowOffset, state) UIOffsetValue]);
+    return ZUX_CGSizeFromUIOffset([TitleTextAttributeForKeyAndState(UITextAttributeTextShadowOffset, state) UIOffsetValue]);
 #endif
 }
 
@@ -64,7 +64,7 @@ ZUX_CATEGORY_M(ZUX_UIBarItem)
     SetTitleShadowAttributeForState(shadow, state);
 #else
     NSValue *offsetValue = [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)];
-    SetTitleTextAttributeForKeyForState(UITextAttributeTextShadowOffset, offsetValue, state);
+    SetTitleTextAttributeForKeyAndState(offsetValue, UITextAttributeTextShadowOffset, state);
 #endif
 }
 

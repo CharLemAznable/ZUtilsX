@@ -44,7 +44,6 @@
 #import "NSExpression+ZUX.h"
 #import "NSDate+ZUX.h"
 
-#import "zappearance.h"
 #import "UIDevice+ZUX.h"
 #import "UIApplication+ZUX.h"
 #import "UIView+ZUX.h"
@@ -59,6 +58,7 @@
 #import "UITabBar+ZUX.h"
 #import "UIBarItem+ZUX.h"
 #import "UITabBarItem+ZUX.h"
+#import "UIBarButtonItem+ZUX.h"
 
 #import "ZUXConstraint.h"
 #import "ZUXTransform.h"
