@@ -4,6 +4,8 @@
 
         pod "ZUtilsX", "~> 0.0.10"
 
+[ZIP压缩包下载](https://raw.githubusercontent.com/CharLemAznable/ZUtilsX/master/ZUtilsX.zip)
+
 #####Constant
 
 * 判断当前设备类型.
