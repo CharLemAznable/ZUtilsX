@@ -7,11 +7,31 @@
 //
 
 #import "UITabBar+ZUX.h"
+#import "zadapt.h"
 #import "zappearance.h"
 
 ZUX_CATEGORY_M(ZUX_UITabBar)
 
 @implementation UITabBar (ZUX)
+
++ (BOOL)isTranslucent {
+    return
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    IOS7_OR_LATER ?
+#endif
+    [APPEARANCE isTranslucent]
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    : NO
+#endif
+    ;
+}
+
++ (void)setTranslucent:(BOOL)translucent {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    if (IOS7_OR_LATER)
+#endif
+        [APPEARANCE setTranslucent:translucent];
+}
 
 + (UIImage *)backgroundImage {
     return [APPEARANCE backgroundImage];
@@ -30,18 +50,26 @@ ZUX_CATEGORY_M(ZUX_UITabBar)
 }
 
 + (UIColor *)selectedImageTintColor {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-    return [APPEARANCE tintColor];
-#else
-    return [APPEARANCE selectedImageTintColor];
+    return
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
+    IOS8_OR_LATER ?
 #endif
+    [APPEARANCE tintColor]
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
+    : [APPEARANCE selectedImageTintColor]
+#endif
+    ;
 }
 
 + (void)setSelectedImageTintColor:(UIColor *)selectedImageTintColor {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-    [APPEARANCE setTintColor:selectedImageTintColor];
-#else
-    [APPEARANCE setSelectedImageTintColor:selectedImageTintColor];
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
+    if (IOS8_OR_LATER) {
+#endif
+        [APPEARANCE setTintColor:selectedImageTintColor];
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
+    } else {
+        [APPEARANCE setSelectedImageTintColor:selectedImageTintColor];
+    }
 #endif
 }
 

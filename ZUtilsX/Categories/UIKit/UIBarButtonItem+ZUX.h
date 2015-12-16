@@ -34,7 +34,6 @@ ZUX_CATEGORY_H(ZUX_UIBarButtonItem)
 + (UIImage *)backgroundImageForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass;
 + (void)setBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass;
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
 #pragma mark - backgroundImage with style -
 
 + (UIImage *)defaultBackgroundImageForStyle:(UIBarButtonItemStyle)style;
@@ -45,7 +44,6 @@ ZUX_CATEGORY_H(ZUX_UIBarButtonItem)
 + (void)setBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics;
 + (UIImage *)backgroundImageForState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass;
 + (void)setBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass;
-#endif
 
 #pragma mark - backgroundVerticalPositionAdjustment -
 
@@ -116,10 +114,8 @@ ZUX_CATEGORY_H(ZUX_UIBarButtonItem)
 + (CGSize)textShadowOffsetForState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass;
 + (void)setTextShadowOffset:(CGSize)textShadowOffset forState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass;
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
 + (CGFloat)textShadowSizeForState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass;
 + (void)setTextShadowSize:(CGFloat)textShadowSize forState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass;
-#endif
 
 @end
 

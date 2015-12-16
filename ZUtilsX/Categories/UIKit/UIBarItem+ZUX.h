@@ -28,10 +28,8 @@ ZUX_CATEGORY_H(ZUX_UIBarItem)
 + (CGSize)textShadowOffsetForState:(UIControlState)state;
 + (void)setTextShadowOffset:(CGSize)textShadowOffset forState:(UIControlState)state;
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
 + (CGFloat)textShadowSizeForState:(UIControlState)state;
 + (void)setTextShadowSize:(CGFloat)textShadowSize forState:(UIControlState)state;
-#endif
 
 @end
 

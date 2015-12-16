@@ -15,20 +15,28 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
 
 @implementation UINavigationBar (ZUX)
 
-+ (UIImage *)backgroundImageForBarMetrics:(UIBarMetrics)barMetrics {
-    return [APPEARANCE backgroundImageForBarMetrics:barMetrics];
-}
-
-+ (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics {
-    [APPEARANCE setBackgroundImage:backgroundImage forBarMetrics:barMetrics];
-}
-
 + (BOOL)isTranslucent {
     return [APPEARANCE isTranslucent];
 }
 
 + (void)setTranslucent:(BOOL)translucent {
     [APPEARANCE setTranslucent:translucent];
+}
+
++ (UIImage *)defaultBackgroundImage {
+    return [self backgroundImageForBarMetrics:UIBarMetricsDefault];
+}
+
++ (void)setDefaultBackgroundImage:(UIImage *)backgroundImage {
+    [self setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
+}
+
++ (UIImage *)backgroundImageForBarMetrics:(UIBarMetrics)barMetrics {
+    return [APPEARANCE backgroundImageForBarMetrics:barMetrics];
+}
+
++ (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics {
+    [APPEARANCE setBackgroundImage:backgroundImage forBarMetrics:barMetrics];
 }
 
 + (UIColor *)tintColor {
@@ -56,52 +64,80 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
 }
 
 + (UIColor *)textShadowColor {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
-    return TitleShadowAttribute.shadowColor;
-#else
-    return TitleTextAttributeForKey(UITextAttributeTextShadowColor);
+    return
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    IOS6_OR_LATER ?
 #endif
+    TitleShadowAttribute.shadowColor
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    : TitleTextAttributeForKey(UITextAttributeTextShadowColor)
+#endif
+    ;
 }
 
 + (void)setTextShadowColor:(UIColor *)textShadowColor {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
-    NSShadow *shadow = DefaultTitleShadowAttribute;
-    [shadow setShadowColor:textShadowColor];
-    SetTitleShadowAttribute(shadow);
-#else
-    SetTitleTextAttributeForKey(textShadowColor, UITextAttributeTextShadowColor);
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    if (IOS6_OR_LATER) {
+#endif
+        NSShadow *shadow = DefaultTitleShadowAttribute;
+        [shadow setShadowColor:textShadowColor];
+        SetTitleShadowAttribute(shadow);
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    } else {
+        SetTitleTextAttributeForKey(textShadowColor, UITextAttributeTextShadowColor);
+    }
 #endif
 }
 
 + (CGSize)textShadowOffset {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
-    return TitleShadowAttribute.shadowOffset;
-#else
-    return ZUX_CGSizeFromUIOffset([TitleTextAttributeForKey(UITextAttributeTextShadowOffset) UIOffsetValue]);
+    return
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    IOS6_OR_LATER ?
 #endif
+    TitleShadowAttribute.shadowOffset
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    : ZUX_CGSizeFromUIOffset([TitleTextAttributeForKey(UITextAttributeTextShadowOffset) UIOffsetValue])
+#endif
+    ;
 }
 
 + (void)setTextShadowOffset:(CGSize)textShadowOffset {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
-    NSShadow *shadow = DefaultTitleShadowAttribute;
-    [shadow setShadowOffset:textShadowOffset];
-    SetTitleShadowAttribute(shadow);
-#else
-    NSValue *offsetValue = [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)];
-    SetTitleTextAttributeForKey(offsetValue, UITextAttributeTextShadowOffset);
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    if (IOS6_OR_LATER) {
+#endif
+        NSShadow *shadow = DefaultTitleShadowAttribute;
+        [shadow setShadowOffset:textShadowOffset];
+        SetTitleShadowAttribute(shadow);
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    } else {
+        NSValue *offsetValue = [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)];
+        SetTitleTextAttributeForKey(offsetValue, UITextAttributeTextShadowOffset);
+    }
 #endif
 }
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
 + (CGFloat)textShadowSize {
-    return TitleShadowAttribute.shadowBlurRadius;
+    return
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    IOS6_OR_LATER ?
+#endif
+    TitleShadowAttribute.shadowBlurRadius
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    : 0
+#endif
+    ;
 }
 
 + (void)setTextShadowSize:(CGFloat)textShadowSize {
-    NSShadow *shadow = DefaultTitleShadowAttribute;
-    [shadow setShadowBlurRadius:textShadowSize];
-    SetTitleShadowAttribute(shadow);
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    if (IOS6_OR_LATER) {
+#endif
+        NSShadow *shadow = DefaultTitleShadowAttribute;
+        [shadow setShadowBlurRadius:textShadowSize];
+        SetTitleShadowAttribute(shadow);
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    }
+#endif
 }
-#endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
 
 @end

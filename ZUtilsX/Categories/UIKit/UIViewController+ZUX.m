@@ -15,7 +15,6 @@
 
 ZUX_CATEGORY_M(ZUX_UIViewController)
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 @interface UIViewController (ZUX_Private)
 
 - (UIStatusBarStyle)p_StatusBarStyle;
@@ -27,7 +26,6 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
     UIViewController *root = [UIApplication sharedApplication].keyWindow.rootViewController;
     return root.childViewControllerForStatusBarStyle ?: root;
 }
-#endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 
 @implementation UIViewController (ZUX)
 
@@ -55,36 +53,37 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 }
 
 - (UIStatusBarStyle)statusBarStyle {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-    return [controllerForStatusBarStyle() p_StatusBarStyle];
-#else
-    return [UIApplication sharedApplication].statusBarStyle;
+    return
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    IOS7_OR_LATER ?
 #endif
+    [controllerForStatusBarStyle() p_StatusBarStyle]
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    : [UIApplication sharedApplication].statusBarStyle
+#endif
+    ;
 }
 
 - (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-    UIViewController *controller = controllerForStatusBarStyle();
-    [controller setP_StatusBarStyle:statusBarStyle];
-    [controller setNeedsStatusBarAppearanceUpdate];
-#else
-    [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle];
-#endif
+    [self setStatusBarStyle:statusBarStyle animated:NO];
 }
 
 - (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle animated:(BOOL)animated {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-    UIViewController *controller = controllerForStatusBarStyle();
-    [controller setP_StatusBarStyle:statusBarStyle];
-    [controller setNeedsStatusBarAppearanceUpdate];
-#else
-    [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle animated:animated];
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    if (IOS7_OR_LATER) {
+#endif
+        UIViewController *controller = controllerForStatusBarStyle();
+        [controller setP_StatusBarStyle:statusBarStyle];
+        [controller setNeedsStatusBarAppearanceUpdate];
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    } else {
+        [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle animated:animated];
+    }
 #endif
 }
 
 @end
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 @implementation UIViewController (ZUX_Private)
 
 + (void)load {
@@ -122,4 +121,3 @@ NSString *const p_StatusBarStyleKey = @"p_StatusBarStyle";
 }
 
 @end
-#endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000

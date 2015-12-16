@@ -16,11 +16,13 @@ ZUX_CATEGORY_H(ZUX_UINavigationBar)
 
 @interface UINavigationBar (ZUX)
 
-+ (UIImage *)backgroundImageForBarMetrics:(UIBarMetrics)barMetrics;
-+ (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics;
-
 + (BOOL)isTranslucent;
 + (void)setTranslucent:(BOOL)translucent;
+
++ (UIImage *)defaultBackgroundImage;
++ (void)setDefaultBackgroundImage:(UIImage *)backgroundImage;
++ (UIImage *)backgroundImageForBarMetrics:(UIBarMetrics)barMetrics;
++ (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics;
 
 + (UIColor *)tintColor;
 + (void)setTintColor:(UIColor *)tintColor;
@@ -37,10 +39,8 @@ ZUX_CATEGORY_H(ZUX_UINavigationBar)
 + (CGSize)textShadowOffset;
 + (void)setTextShadowOffset:(CGSize)textShadowOffset;
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
 + (CGFloat)textShadowSize;
 + (void)setTextShadowSize:(CGFloat)textShadowSize;
-#endif
 
 @end
 

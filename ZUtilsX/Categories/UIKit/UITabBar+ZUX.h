@@ -16,6 +16,9 @@ ZUX_CATEGORY_H(ZUX_UITabBar)
 
 @interface UITabBar (ZUX)
 
++ (BOOL)isTranslucent;
++ (void)setTranslucent:(BOOL)translucent;
+
 + (UIImage *)backgroundImage;
 + (void)setBackgroundImage:(UIImage *)backgroundImage;
 

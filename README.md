@@ -2,7 +2,7 @@
 
 收集日常开发中积累的工具代码.
 
-        pod "ZUtilsX", "~> 0.0.9"
+        pod "ZUtilsX", "~> 0.0.10"
 
 #####Constant
 
@@ -271,14 +271,14 @@
 - UIApplication+ZUX
 
         // 远程通知注册与检测方法.
-        +registerUserNotificationTypes:categories:
-        -registerUserNotificationTypes:categories:
         +registerUserNotificationTypes:
         -registerUserNotificationTypes:
-        +noneNotificationTypeRegisted
-        -noneNotificationTypeRegisted
+        +registerUserNotificationTypes:categories:
+        -registerUserNotificationTypes:categories:
         +notificationTypeRegisted:
         -notificationTypeRegisted:
+        +noneNotificationTypeRegisted
+        -noneNotificationTypeRegisted
 
 - UIView+ZUX
 
@@ -447,7 +447,11 @@
 
 - UINavigationBar+ZUX
 
-        // 添加自定义样式方法, 可自定义背景图片, tint颜色, 字体, 字色, 文字阴影.
+        // 添加自定义样式方法, 可自定义透明模式, 背景图片, tint颜色, 字体, 字色, 文字阴影.
+        +isTranslucent
+        +setTranslucent:
+        +defaultBackgroundImage
+        +setDefaultBackgroundImage:
         +backgroundImageForBarMetrics:
         +setBackgroundImage:forBarMetrics:
         +tintColor
@@ -465,7 +469,9 @@
 
 - UITabBar+ZUX
 
-        // 添加自定义样式方法, 可自定义背景图片, 选中项背景图片, 选中项tint颜色.
+        // 添加自定义样式方法, 可自定义透明模式, 背景图片, 选中项背景图片, 选中项tint颜色.
+        +isTranslucent
+        +setTranslucent:
         +backgroundImage
         +setBackgroundImage:
         +selectionIndicatorImage
@@ -766,8 +772,8 @@
 
     添加JSON工具方法.
 
-        // 当IOS版本在5.0之前时, 默认使用JSONKit, 否则默认使用NSJSONSerialization.
-        // 预定义ZUX_USE_JSONKIT后, 使用JSONKit.
+        // 默认使用NSJSONSerialization.
+        // 设置布尔值ZUX_USE_JSONKIT为真值后, 使用JSONKit.
         // 修改JSONKit, 支持ARC.
 
         // 由JSON数据获取集合类型对象.
