@@ -198,10 +198,13 @@ ZUX_CATEGORY_M(ZUX_NSString)
 #pragma mark - Escape/Unescape Methods -
 
 - (NSString *)stringByEscapingForURLQuery {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    if (IOS7_OR_LATER) {
+#endif
         return [self stringByAddingPercentEncodingWithAllowedCharacters:
                 [NSCharacterSet characterSetWithCharactersInString:@":/=,!$&'()*+;[]@#?% "]];
-#else
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    } else {
         static CFStringRef toEscape = CFSTR(":/=,!$&'()*+;[]@#?% ");
         return ZUX_AUTORELEASE((ZUX_BRIDGE_TRANSFER NSString *)
                                CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
@@ -209,16 +212,21 @@ ZUX_CATEGORY_M(ZUX_NSString)
                                                                        NULL,
                                                                        toEscape,
                                                                        kCFStringEncodingUTF8));
+    }
 #endif
 }
 
 
 - (NSString *)stringByUnescapingFromURLQuery {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-        return [self stringByRemovingPercentEncoding];
-#else
-        return [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    return
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    IOS7_OR_LATER ?
 #endif
+    [self stringByRemovingPercentEncoding]
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    : [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+#endif
+    ;
 }
 
 #pragma mark - Encode/Decode Methods -
@@ -313,12 +321,16 @@ ZUX_CATEGORY_M(ZUX_NSString)
 #pragma mark - Size caculator -
 
 - (CGSize)zuxSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-        return [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
-                               attributes:@{ NSFontAttributeName:font } context:NULL].size;
-#else
-        return [self sizeWithFont:font constrainedToSize:size];
+    return
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    IOS7_OR_LATER ?
 #endif
+    [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
+                    attributes:@{ NSFontAttributeName:font } context:NULL].size
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    : [self sizeWithFont:font constrainedToSize:size]
+#endif
+    ;
 }
 
 @end

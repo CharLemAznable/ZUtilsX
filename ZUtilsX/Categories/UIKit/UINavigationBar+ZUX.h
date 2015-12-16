@@ -19,6 +19,9 @@ ZUX_CATEGORY_H(ZUX_UINavigationBar)
 + (UIImage *)backgroundImageForBarMetrics:(UIBarMetrics)barMetrics;
 + (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics;
 
++ (BOOL)isTranslucent;
++ (void)setTranslucent:(BOOL)translucent;
+
 + (UIColor *)tintColor;
 + (void)setTintColor:(UIColor *)tintColor;
 

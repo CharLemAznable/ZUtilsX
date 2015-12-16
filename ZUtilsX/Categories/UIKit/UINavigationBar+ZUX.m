@@ -23,6 +23,14 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
     [APPEARANCE setBackgroundImage:backgroundImage forBarMetrics:barMetrics];
 }
 
++ (BOOL)isTranslucent {
+    return [APPEARANCE isTranslucent];
+}
+
++ (void)setTranslucent:(BOOL)translucent {
+    [APPEARANCE setTranslucent:translucent];
+}
+
 + (UIColor *)tintColor {
     return [APPEARANCE tintColor];
 }

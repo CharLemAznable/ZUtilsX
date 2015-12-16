@@ -17,21 +17,18 @@ ZUX_CATEGORY_H(ZUX_UIApplication)
 
 @interface UIApplication (ZUX)
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
++ (void)registerUserNotificationTypes:(ZUXUserNotificationType)types;
+- (void)registerUserNotificationTypes:(ZUXUserNotificationType)types;
 + (void)registerUserNotificationTypes:(ZUXUserNotificationType)types
                            categories:(NSSet<UIUserNotificationCategory *> *)categories;
 - (void)registerUserNotificationTypes:(ZUXUserNotificationType)types
                            categories:(NSSet<UIUserNotificationCategory *> *)categories;
-#endif
-
-+ (void)registerUserNotificationTypes:(ZUXUserNotificationType)types;
-- (void)registerUserNotificationTypes:(ZUXUserNotificationType)types;
-
-+ (BOOL)noneNotificationTypeRegisted;
-- (BOOL)noneNotificationTypeRegisted;
 
 + (BOOL)notificationTypeRegisted:(ZUXUserNotificationType)type;
 - (BOOL)notificationTypeRegisted:(ZUXUserNotificationType)type;
+
++ (BOOL)noneNotificationTypeRegisted;
+- (BOOL)noneNotificationTypeRegisted;
 
 @end
 
