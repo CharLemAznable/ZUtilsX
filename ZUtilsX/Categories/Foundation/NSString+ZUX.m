@@ -199,12 +199,7 @@ ZUX_CATEGORY_M(ZUX_NSString)
 
 - (NSString *)stringByEscapingForURLQuery {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    if (IOS7_OR_LATER) {
-#endif
-        return [self stringByAddingPercentEncodingWithAllowedCharacters:
-                [NSCharacterSet characterSetWithCharactersInString:@":/=,!$&'()*+;[]@#?% "]];
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    } else {
+    if (!IOS7_OR_LATER) {
         static CFStringRef toEscape = CFSTR(":/=,!$&'()*+;[]@#?% ");
         return ZUX_AUTORELEASE((ZUX_BRIDGE_TRANSFER NSString *)
                                CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
@@ -214,19 +209,17 @@ ZUX_CATEGORY_M(ZUX_NSString)
                                                                        kCFStringEncodingUTF8));
     }
 #endif
+    return [self stringByAddingPercentEncodingWithAllowedCharacters:
+            [NSCharacterSet characterSetWithCharactersInString:@":/=,!$&'()*+;[]@#?% "]];
 }
 
 
 - (NSString *)stringByUnescapingFromURLQuery {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    IOS7_OR_LATER ?
+    !IOS7_OR_LATER ? [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] :
 #endif
-    [self stringByRemovingPercentEncoding]
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    : [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-#endif
-    ;
+    [self stringByRemovingPercentEncoding];
 }
 
 #pragma mark - Encode/Decode Methods -
@@ -323,14 +316,10 @@ ZUX_CATEGORY_M(ZUX_NSString)
 - (CGSize)zuxSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    IOS7_OR_LATER ?
+    !IOS7_OR_LATER ? [self sizeWithFont:font constrainedToSize:size] :
 #endif
     [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
-                    attributes:@{ NSFontAttributeName:font } context:NULL].size
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    : [self sizeWithFont:font constrainedToSize:size]
-#endif
-    ;
+                    attributes:@{ NSFontAttributeName:font } context:NULL].size;
 }
 
 @end

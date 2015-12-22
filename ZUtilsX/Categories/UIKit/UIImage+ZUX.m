@@ -16,6 +16,10 @@ ZUX_CATEGORY_M(ZUX_UIImage)
 
 @implementation UIImage (ZUX)
 
++ (UIImage *)imagePointWithColor:(UIColor *)color {
+    return [self imageRectWithColor:color size:CGSizeMake(1, 1)];
+}
+
 + (UIImage *)imageRectWithColor:(UIColor *)color size:(CGSize)size {
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     UIGraphicsBeginImageContext(rect.size);
@@ -89,6 +93,53 @@ ZUX_CATEGORY_M(ZUX_UIImage)
 
 + (NSString *)imageNameForCurrentDeviceNamed:(NSString *)name {
     return [NSString stringWithFormat:@"%@%@", name, IS_IPHONE6P ? @"-800-Portrait-736h":(IS_IPHONE6 ? @"-800-667h":(IS_IPHONE5 ? @"-700-568h":@""))];
+}
+
+- (UIColor *)dominantColor {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_6_1
+    int bitmapInfo = kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedLast;
+#else
+    int bitmapInfo = kCGImageAlphaPremultipliedLast;
+#endif
+    
+    CGSize thumbSize=CGSizeMake(MAX(self.size.width / 4, 1), MAX(self.size.height / 4, 1));
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(NULL, thumbSize.width, thumbSize.height,
+                                                 8, thumbSize.width*4, colorSpace, bitmapInfo);
+    CGRect drawRect = CGRectMake(0, 0, thumbSize.width, thumbSize.height);
+    CGContextDrawImage(context, drawRect, self.CGImage);
+    CGColorSpaceRelease(colorSpace);
+    
+    unsigned char *data = CGBitmapContextGetData(context);
+    if (!data) { CGContextRelease(context); return nil; }
+    
+    NSCountedSet *colorSet = [NSCountedSet setWithCapacity:thumbSize.width * thumbSize.height];
+    for (int x = 0; x < thumbSize.width; x++) {
+        for (int y = 0; y < thumbSize.height; y++) {
+            int offset = 4 * (x * y);
+            [colorSet addObject:@[@(data[offset]),
+                                  @(data[offset+1]),
+                                  @(data[offset+2]),
+                                  @(data[offset+3])]];
+        }
+    }
+    CGContextRelease(context);
+
+    NSEnumerator *enumerator = [colorSet objectEnumerator];
+    NSArray *curColor = nil;
+    NSArray *maxColor = nil;
+    NSUInteger maxCount = 0;
+    
+    while ((curColor = [enumerator nextObject]) != nil) {
+        NSUInteger tmpCount = [colorSet countForObject:curColor];
+        if (tmpCount < maxCount) continue;
+        maxCount = tmpCount;
+        maxColor = curColor;
+    }
+    return [UIColor colorWithRed:([maxColor[0] intValue]/255.f)
+                           green:([maxColor[1] intValue]/255.f)
+                            blue:([maxColor[2] intValue]/255.f)
+                           alpha:([maxColor[3] intValue]/255.f)];
 }
 
 #pragma mark - inline function -

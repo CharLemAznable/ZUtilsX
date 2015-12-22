@@ -138,6 +138,7 @@
 		6A6A3D871C1961FB00847DEF /* UINavigationBar+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */; };
 		6A6A3D941C1983C700847DEF /* ZUXColorDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */; };
 		6A6A3D951C19840D00847DEF /* ZUXColorDictionary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */; };
+		6A7B861D1C29496E00FF864E /* UIImageZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B861C1C29496E00FF864E /* UIImageZUXTest.m */; };
 		6AE7ABEA1C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7ABE91C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m */; };
 		6AE7ABEB1C20006B0061A235 /* UIBarButtonItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6AE7ABE81C1FD8BE0061A235 /* UIBarButtonItem+ZUX.h */; };
 /* End PBXBuildFile section */
@@ -347,6 +348,7 @@
 		6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ZUX.m"; sourceTree = "<group>"; };
 		6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXColorDictionary.h; sourceTree = "<group>"; };
 		6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXColorDictionary.m; sourceTree = "<group>"; };
+		6A7B861C1C29496E00FF864E /* UIImageZUXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageZUXTest.m; path = Categories/UIKit/UIImageZUXTest.m; sourceTree = "<group>"; };
 		6AE7ABE81C1FD8BE0061A235 /* UIBarButtonItem+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+ZUX.h"; sourceTree = "<group>"; };
 		6AE7ABE91C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+ZUX.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -420,6 +422,7 @@
 		6A1763791C06B81900EC52FE /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				6A7B861C1C29496E00FF864E /* UIImageZUXTest.m */,
 				6A17637A1C06B83800EC52FE /* UIColorZUXTest.m */,
 				6A17637C1C06D85000EC52FE /* UIViewControllerZUXTest.m */,
 			);
@@ -806,6 +809,7 @@
 				6A1763801C06DAB600EC52FE /* ZUXConstraintTest.m in Sources */,
 				6A17637D1C06D85000EC52FE /* UIViewControllerZUXTest.m in Sources */,
 				6A0F896F1C034E5C0003948C /* ZUXRuntimeTest.m in Sources */,
+				6A7B861D1C29496E00FF864E /* UIImageZUXTest.m in Sources */,
 				6A17946F1C05D58600FF5870 /* NSDateZUXTest.m in Sources */,
 				6A1087E51C04871E0062160C /* NSObjectZUXJsonTest.m in Sources */,
 				6A0F896D1C034DA10003948C /* ZUXGeometryTest.m in Sources */,

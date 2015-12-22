@@ -52,16 +52,16 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
     self.view = ZUX_AUTORELEASE([[viewClass alloc] initWithFrame:self.view.frame]);
 }
 
+- (UINavigationBar *)navigationBar {
+    return self.navigationController.navigationBar;
+}
+
 - (UIStatusBarStyle)statusBarStyle {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    IOS7_OR_LATER ?
+    !IOS7_OR_LATER ? [UIApplication sharedApplication].statusBarStyle :
 #endif
-    [controllerForStatusBarStyle() p_StatusBarStyle]
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    : [UIApplication sharedApplication].statusBarStyle
-#endif
-    ;
+    [controllerForStatusBarStyle() p_StatusBarStyle];
 }
 
 - (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle {
@@ -70,16 +70,14 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 
 - (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle animated:(BOOL)animated {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    if (IOS7_OR_LATER) {
-#endif
-        UIViewController *controller = controllerForStatusBarStyle();
-        [controller setP_StatusBarStyle:statusBarStyle];
-        [controller setNeedsStatusBarAppearanceUpdate];
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    } else {
+    if (!IOS7_OR_LATER) {
         [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle animated:animated];
+        return;
     }
 #endif
+    UIViewController *controller = controllerForStatusBarStyle();
+    [controller setP_StatusBarStyle:statusBarStyle];
+    [controller setNeedsStatusBarAppearanceUpdate];
 }
 
 @end

@@ -88,49 +88,31 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
 + (UIImage *)backgroundImageForState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    IOS6_OR_LATER ?
+    !IOS6_OR_LATER ? [APPEARANCE backgroundImageForState:state barMetrics:barMetrics] :
 #endif
-    [APPEARANCE backgroundImageForState:state style:style barMetrics:barMetrics]
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    : [APPEARANCE backgroundImageForState:state barMetrics:barMetrics]
-#endif
-    ;
+    [APPEARANCE backgroundImageForState:state style:style barMetrics:barMetrics];
 }
 
 + (void)setBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (IOS6_OR_LATER) {
+    if (!IOS6_OR_LATER) [APPEARANCE setBackgroundImage:backgroundImage forState:state barMetrics:barMetrics]; else
 #endif
-        [APPEARANCE setBackgroundImage:backgroundImage forState:state style:style barMetrics:barMetrics];
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    } else {
-        [APPEARANCE setBackgroundImage:backgroundImage forState:state barMetrics:barMetrics];
-    }
-#endif
+    [APPEARANCE setBackgroundImage:backgroundImage forState:state style:style barMetrics:barMetrics];
 }
 
 + (UIImage *)backgroundImageForState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    IOS6_OR_LATER ?
+    !IOS6_OR_LATER ? [APPEARANCE_IN_CLASS(containerClass) backgroundImageForState:state barMetrics:barMetrics] :
 #endif
-    [APPEARANCE_IN_CLASS(containerClass) backgroundImageForState:state style:style barMetrics:barMetrics]
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    : [APPEARANCE_IN_CLASS(containerClass) backgroundImageForState:state barMetrics:barMetrics]
-#endif
-    ;
+    [APPEARANCE_IN_CLASS(containerClass) backgroundImageForState:state style:style barMetrics:barMetrics];
 }
 
 + (void)setBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (IOS6_OR_LATER) {
+    if (!IOS6_OR_LATER) [APPEARANCE_IN_CLASS(containerClass) setBackgroundImage:backgroundImage forState:state barMetrics:barMetrics]; else
 #endif
-        [APPEARANCE_IN_CLASS(containerClass) setBackgroundImage:backgroundImage forState:state style:style barMetrics:barMetrics];
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    } else {
-        [APPEARANCE_IN_CLASS(containerClass) setBackgroundImage:backgroundImage forState:state barMetrics:barMetrics];
-    }
-#endif
+    [APPEARANCE_IN_CLASS(containerClass) setBackgroundImage:backgroundImage forState:state style:style barMetrics:barMetrics];
 }
 
 #pragma mark - backgroundVerticalPositionAdjustment -
@@ -324,78 +306,59 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
 + (UIColor *)textShadowColorForState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    IOS6_OR_LATER ?
+    !IOS6_OR_LATER ? TitleTextAttributeForKeyAndStateInClass(UITextAttributeTextShadowColor, state, containerClass) :
 #endif
-    TitleShadowAttributeForStateInClass(state, containerClass).shadowColor
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    : TitleTextAttributeForKeyAndStateInClass(UITextAttributeTextShadowColor, state, containerClass)
-#endif
-    ;
+    TitleShadowAttributeForStateInClass(state, containerClass).shadowColor;
 }
 
 + (void)setTextShadowColor:(UIColor *)textShadowColor forState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (IOS6_OR_LATER) {
-#endif
-        NSShadow *shadow = DefaultTitleShadowAttributeForStateInClass(state, containerClass);
-        [shadow setShadowColor:textShadowColor];
-        SetTitleShadowAttributeForStateInClass(shadow, state, containerClass);
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    } else {
+    if (!IOS6_OR_LATER) {
         SetTitleTextAttributeForKeyAndStateInClass(textShadowColor, UITextAttributeTextShadowColor, state, containerClass);
+        return;
     }
 #endif
+    NSShadow *shadow = DefaultTitleShadowAttributeForStateInClass(state, containerClass);
+    [shadow setShadowColor:textShadowColor];
+    SetTitleShadowAttributeForStateInClass(shadow, state, containerClass);
 }
 
 + (CGSize)textShadowOffsetForState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    IOS6_OR_LATER ?
+    !IOS6_OR_LATER ? ZUX_CGSizeFromUIOffset([TitleTextAttributeForKeyAndStateInClass(UITextAttributeTextShadowOffset, state, containerClass) UIOffsetValue]) :
 #endif
-    TitleShadowAttributeForStateInClass(state, containerClass).shadowOffset
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    : ZUX_CGSizeFromUIOffset([TitleTextAttributeForKeyAndStateInClass(UITextAttributeTextShadowOffset, state, containerClass) UIOffsetValue])
-#endif
-    ;
+    TitleShadowAttributeForStateInClass(state, containerClass).shadowOffset;
 }
 
 + (void)setTextShadowOffset:(CGSize)textShadowOffset forState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (IOS6_OR_LATER) {
-#endif
-        NSShadow *shadow = DefaultTitleShadowAttributeForStateInClass(state, containerClass);
-        [shadow setShadowOffset:textShadowOffset];
-        SetTitleShadowAttributeForStateInClass(shadow, state, containerClass);
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    } else {
+    if (!IOS6_OR_LATER) {
         NSValue *offsetValue = [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)];
         SetTitleTextAttributeForKeyAndStateInClass(offsetValue, UITextAttributeTextShadowOffset, state, containerClass);
+        return;
     }
 #endif
+    NSShadow *shadow = DefaultTitleShadowAttributeForStateInClass(state, containerClass);
+    [shadow setShadowOffset:textShadowOffset];
+    SetTitleShadowAttributeForStateInClass(shadow, state, containerClass);
 }
 
 + (CGFloat)textShadowSizeForState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    IOS6_OR_LATER ?
+    !IOS6_OR_LATER ? 0 :
 #endif
-    TitleShadowAttributeForStateInClass(state, containerClass).shadowBlurRadius
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    : 0
-#endif
-    ;
+    TitleShadowAttributeForStateInClass(state, containerClass).shadowBlurRadius;
 }
 
 + (void)setTextShadowSize:(CGFloat)textShadowSize forState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (IOS6_OR_LATER) {
+    if (!IOS6_OR_LATER) return;
 #endif
-        NSShadow *shadow = DefaultTitleShadowAttributeForStateInClass(state, containerClass);
-        [shadow setShadowBlurRadius:textShadowSize];
-        SetTitleShadowAttributeForStateInClass(shadow, state, containerClass);
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    }
-#endif
+    NSShadow *shadow = DefaultTitleShadowAttributeForStateInClass(state, containerClass);
+    [shadow setShadowBlurRadius:textShadowSize];
+    SetTitleShadowAttributeForStateInClass(shadow, state, containerClass);
 }
 
 @end

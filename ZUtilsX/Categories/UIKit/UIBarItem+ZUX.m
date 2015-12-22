@@ -15,97 +15,188 @@ ZUX_CATEGORY_M(ZUX_UIBarItem)
 
 @implementation UIBarItem (ZUX)
 
+#pragma mark - textFont -
+
+- (UIFont *)textFontForState:(UIControlState)state {
+    return titleTextAttributeForStateAndKey(self, state, ZUXFontAttributeName);
+}
+
+- (void)setTextFont:(UIFont *)textFont forState:(UIControlState)state {
+    setTitleTextAttributeForStateAndKey(self, state, ZUXFontAttributeName, textFont);
+}
+
 + (UIFont *)textFontForState:(UIControlState)state {
-    return TitleTextAttributeForKeyAndState(ZUXFontAttributeName, state);
+    return titleTextAttributeForStateAndKey(APPEARANCE, state, ZUXFontAttributeName);
 }
 
 + (void)setTextFont:(UIFont *)textFont forState:(UIControlState)state {
-    SetTitleTextAttributeForKeyAndState(textFont, ZUXFontAttributeName, state);
+    setTitleTextAttributeForStateAndKey(APPEARANCE, state, ZUXFontAttributeName, textFont);
+}
+
+#pragma mark - textColor -
+
+- (UIColor *)textColorForState:(UIControlState)state {
+    return titleTextAttributeForStateAndKey(self, state, ZUXForegroundColorAttributeName);
+}
+
+- (void)setTextColor:(UIColor *)textColor forState:(UIControlState)state {
+    setTitleTextAttributeForStateAndKey(self, state, ZUXForegroundColorAttributeName, textColor);
 }
 
 + (UIColor *)textColorForState:(UIControlState)state {
-    return TitleTextAttributeForKeyAndState(ZUXForegroundColorAttributeName, state);
+    return titleTextAttributeForStateAndKey(APPEARANCE, state, ZUXForegroundColorAttributeName);
 }
 
 + (void)setTextColor:(UIColor *)textColor forState:(UIControlState)state {
-    SetTitleTextAttributeForKeyAndState(textColor, ZUXForegroundColorAttributeName, state);
+    setTitleTextAttributeForStateAndKey(APPEARANCE, state, ZUXForegroundColorAttributeName, textColor);
+}
+
+#pragma mark - textShadowColor -
+
+- (UIColor *)textShadowColorForState:(UIControlState)state {
+    return
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    !IOS6_OR_LATER ? titleTextAttributeForStateAndKey(self, state, UITextAttributeTextShadowColor) :
+#endif
+    titleShadowAttributeForState(self, state).shadowColor;
+}
+
+- (void)setTextShadowColor:(UIColor *)textShadowColor forState:(UIControlState)state {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    if (!IOS6_OR_LATER) {
+        setTitleTextAttributeForStateAndKey(self, state, UITextAttributeTextShadowColor, textShadowColor);
+        return;
+    }
+#endif
+    NSShadow *shadow = defaultTitleShadowAttributeForState(self, state);
+    [shadow setShadowColor:textShadowColor];
+    setTitleShadowAttributeForState(self, state, shadow);
 }
 
 + (UIColor *)textShadowColorForState:(UIControlState)state {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    IOS6_OR_LATER ?
+    !IOS6_OR_LATER ? titleTextAttributeForStateAndKey(APPEARANCE, state, UITextAttributeTextShadowColor) :
 #endif
-    TitleShadowAttributeForState(state).shadowColor
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    : TitleTextAttributeForKeyAndState(UITextAttributeTextShadowColor, state)
-#endif
-    ;
+    titleShadowAttributeForState(APPEARANCE, state).shadowColor;
 }
 
 + (void)setTextShadowColor:(UIColor *)textShadowColor forState:(UIControlState)state {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (IOS6_OR_LATER) {
-#endif
-        NSShadow *shadow = DefaultTitleShadowAttributeForState(state);
-        [shadow setShadowColor:textShadowColor];
-        SetTitleShadowAttributeForState(shadow, state);
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    } else {
-        SetTitleTextAttributeForKeyAndState(textShadowColor, UITextAttributeTextShadowColor, state);
+    if (!IOS6_OR_LATER) {
+        setTitleTextAttributeForStateAndKey(APPEARANCE, state, UITextAttributeTextShadowColor, textShadowColor);
+        return;
     }
 #endif
+    NSShadow *shadow = defaultTitleShadowAttributeForState(APPEARANCE, state);
+    [shadow setShadowColor:textShadowColor];
+    setTitleShadowAttributeForState(APPEARANCE, state, shadow);
+}
+
+#pragma mark - textShadowOffset -
+
+- (CGSize)textShadowOffsetForState:(UIControlState)state {
+    return
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    !IOS6_OR_LATER ? ZUX_CGSizeFromUIOffset
+    ([titleTextAttributeForStateAndKey(self, state, UITextAttributeTextShadowOffset) UIOffsetValue]) :
+#endif
+    titleShadowAttributeForState(self, state).shadowOffset;
+}
+
+- (void)setTextShadowOffset:(CGSize)textShadowOffset forState:(UIControlState)state {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    if (!IOS6_OR_LATER) {
+        setTitleTextAttributeForStateAndKey(self, state, UITextAttributeTextShadowOffset,
+                                            [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)]);
+        return;
+    }
+#endif
+    NSShadow *shadow = defaultTitleShadowAttributeForState(self, state);
+    [shadow setShadowOffset:textShadowOffset];
+    setTitleShadowAttributeForState(self, state, shadow);
 }
 
 + (CGSize)textShadowOffsetForState:(UIControlState)state {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    IOS6_OR_LATER ?
+    !IOS6_OR_LATER ? ZUX_CGSizeFromUIOffset
+    ([titleTextAttributeForStateAndKey(APPEARANCE, state, UITextAttributeTextShadowOffset) UIOffsetValue]) :
 #endif
-    TitleShadowAttributeForState(state).shadowOffset
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    : ZUX_CGSizeFromUIOffset([TitleTextAttributeForKeyAndState(UITextAttributeTextShadowOffset, state) UIOffsetValue])
-#endif
-    ;
+    titleShadowAttributeForState(APPEARANCE, state).shadowOffset;
 }
 
 + (void)setTextShadowOffset:(CGSize)textShadowOffset forState:(UIControlState)state {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (IOS6_OR_LATER) {
-#endif
-        NSShadow *shadow = DefaultTitleShadowAttributeForState(state);
-        [shadow setShadowOffset:textShadowOffset];
-        SetTitleShadowAttributeForState(shadow, state);
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    } else {
-        NSValue *offsetValue = [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)];
-        SetTitleTextAttributeForKeyAndState(offsetValue, UITextAttributeTextShadowOffset, state);
+    if (!IOS6_OR_LATER) {
+        setTitleTextAttributeForStateAndKey(APPEARANCE, state, UITextAttributeTextShadowOffset,
+                                            [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)]);
+        return;
     }
 #endif
+    NSShadow *shadow = defaultTitleShadowAttributeForState(APPEARANCE, state);
+    [shadow setShadowOffset:textShadowOffset];
+    setTitleShadowAttributeForState(APPEARANCE, state, shadow);
+}
+
+#pragma mark - textShadowSize -
+
+- (CGFloat)textShadowSizeForState:(UIControlState)state {
+    return
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    !IOS6_OR_LATER ? 0 :
+#endif
+    titleShadowAttributeForState(self, state).shadowBlurRadius;
+}
+
+- (void)setTextShadowSize:(CGFloat)textShadowSize forState:(UIControlState)state {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+    if (!IOS6_OR_LATER) return;
+#endif
+    NSShadow *shadow = defaultTitleShadowAttributeForState(self, state);
+    [shadow setShadowBlurRadius:textShadowSize];
+    setTitleShadowAttributeForState(self, state, shadow);
 }
 
 + (CGFloat)textShadowSizeForState:(UIControlState)state {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    IOS6_OR_LATER ?
+    !IOS6_OR_LATER ? 0 :
 #endif
-    TitleShadowAttributeForState(state).shadowBlurRadius
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    : 0
-#endif
-    ;
+    titleShadowAttributeForState(APPEARANCE, state).shadowBlurRadius;
 }
 
 + (void)setTextShadowSize:(CGFloat)textShadowSize forState:(UIControlState)state {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (IOS6_OR_LATER) {
+    if (!IOS6_OR_LATER) return;
 #endif
-        NSShadow *shadow = DefaultTitleShadowAttributeForState(state);
-        [shadow setShadowBlurRadius:textShadowSize];
-        SetTitleShadowAttributeForState(shadow, state);
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    }
-#endif
+    NSShadow *shadow = defaultTitleShadowAttributeForState(APPEARANCE, state);
+    [shadow setShadowBlurRadius:textShadowSize];
+    setTitleShadowAttributeForState(APPEARANCE, state, shadow);
+}
+
+#pragma mark - inline implementation -
+
+ZUX_STATIC_INLINE id titleTextAttributeForStateAndKey(id instance, UIControlState state, NSString *key) {
+    return [[instance titleTextAttributesForState:state] objectForKey:key];
+}
+
+ZUX_STATIC_INLINE void setTitleTextAttributeForStateAndKey(id instance, UIControlState state, NSString *key, id value) {
+    NSMutableDictionary *attributes = ZUX_AUTORELEASE([[instance titleTextAttributesForState:state] mutableCopy]);
+    [attributes setObject:value forKey:key];
+    [instance setTitleTextAttributes:attributes forState:state];
+}
+
+ZUX_STATIC_INLINE NSShadow *titleShadowAttributeForState(id instance, UIControlState state) {
+    return titleTextAttributeForStateAndKey(instance, state, NSShadowAttributeName);
+}
+
+ZUX_STATIC_INLINE NSShadow *defaultTitleShadowAttributeForState(id instance, UIControlState state) {
+    return titleShadowAttributeForState(instance, state) ?: ZUX_AUTORELEASE([[NSShadow alloc] init]);
+}
+
+ZUX_STATIC_INLINE void setTitleShadowAttributeForState(id instance, UIControlState state, NSShadow *shadow) {
+    setTitleTextAttributeForStateAndKey(instance, state, NSShadowAttributeName, shadow);
 }
 
 @end

@@ -17,20 +17,16 @@ ZUX_CATEGORY_M(ZUX_UITabBar)
 + (BOOL)isTranslucent {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    IOS7_OR_LATER ?
+    !IOS7_OR_LATER ? NO :
 #endif
-    [APPEARANCE isTranslucent]
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    : NO
-#endif
-    ;
+    [APPEARANCE isTranslucent];
 }
 
 + (void)setTranslucent:(BOOL)translucent {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    if (IOS7_OR_LATER)
+    if (!IOS7_OR_LATER) return;
 #endif
-        [APPEARANCE setTranslucent:translucent];
+    [APPEARANCE setTranslucent:translucent];
 }
 
 + (UIImage *)backgroundImage {
@@ -49,28 +45,43 @@ ZUX_CATEGORY_M(ZUX_UITabBar)
     [APPEARANCE setSelectionIndicatorImage:selectionIndicatorImage];
 }
 
++ (UIColor *)tintColor {
+    return [APPEARANCE tintColor];
+}
+
++ (void)setTintColor:(UIColor *)tintColor {
+    [APPEARANCE setTintColor:tintColor];
+}
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
+- (UIColor *)selectedImageTintColor {
+    return [self tintColor];
+}
+
+- (void)setSelectedImageTintColor:(UIColor *)selectedImageTintColor {
+    [self setTintColor:selectedImageTintColor];
+}
+#endif
+
 + (UIColor *)selectedImageTintColor {
-    return
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-    IOS8_OR_LATER ?
-#endif
-    [APPEARANCE tintColor]
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-    : [APPEARANCE selectedImageTintColor]
-#endif
-    ;
+    return [APPEARANCE selectedImageTintColor];
 }
 
 + (void)setSelectedImageTintColor:(UIColor *)selectedImageTintColor {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-    if (IOS8_OR_LATER) {
-#endif
-        [APPEARANCE setTintColor:selectedImageTintColor];
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-    } else {
-        [APPEARANCE setSelectedImageTintColor:selectedImageTintColor];
-    }
-#endif
+    [APPEARANCE setSelectedImageTintColor:selectedImageTintColor];
 }
 
 @end
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
+@implementation UITabBar (ZUXTranslucent)
+
+- (BOOL)isTranslucent {
+    return NO;
+}
+
+- (void)setTranslucent:(BOOL)translucent {
+}
+
+@end
+#endif

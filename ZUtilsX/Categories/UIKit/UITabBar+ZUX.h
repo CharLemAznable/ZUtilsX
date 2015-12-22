@@ -25,9 +25,23 @@ ZUX_CATEGORY_H(ZUX_UITabBar)
 + (UIImage *)selectionIndicatorImage;
 + (void)setSelectionIndicatorImage:(UIImage *)selectionIndicatorImage;
 
++ (UIColor *)tintColor;
++ (void)setTintColor:(UIColor *)tintColor;
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
+@property (nonatomic, strong) UIColor *selectedImageTintColor;
+#endif
 + (UIColor *)selectedImageTintColor;
 + (void)setSelectedImageTintColor:(UIColor *)selectedImageTintColor;
 
 @end
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
+@interface UITabBar (ZUXTranslucent)
+
+@property(nonatomic,getter=isTranslucent) BOOL translucent;
+
+@end
+#endif
 
 #endif /* ZUtilsX_UITabBar_ZUX_h */

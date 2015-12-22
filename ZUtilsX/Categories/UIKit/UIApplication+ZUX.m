@@ -29,14 +29,11 @@ ZUX_CATEGORY_M(ZUX_UIApplication)
 - (void)registerUserNotificationTypes:(ZUXUserNotificationType)types
                            categories:(NSSet<UIUserNotificationCategory *> *)categories {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-    IOS8_OR_LATER ?
+    !IOS8_OR_LATER ? [self registerForRemoteNotificationTypes:types] :
 #endif
     [self registerUserNotificationSettings:
-     [UIUserNotificationSettings settingsForTypes:userNotificationType(types) categories:categories]]
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-    : [self registerForRemoteNotificationTypes:types];
-#endif
-    ;
+     [UIUserNotificationSettings settingsForTypes:userNotificationType(types)
+                                       categories:categories]];
 }
 
 + (BOOL)notificationTypeRegisted:(ZUXUserNotificationType)type {
@@ -47,13 +44,9 @@ ZUX_CATEGORY_M(ZUX_UIApplication)
     return type != ZUXUserNotificationTypeNone &&
     (
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-     IOS8_OR_LATER ?
+     !IOS8_OR_LATER ? type == ([self enabledRemoteNotificationTypes] & type) :
 #endif
-     userNotificationType(type) == ([self currentUserNotificationSettings].types & userNotificationType(type))
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-     : type == ([self enabledRemoteNotificationTypes] & type)
-#endif
-     );
+     userNotificationType(type) == ([self currentUserNotificationSettings].types & userNotificationType(type)));
 }
 
 + (BOOL)noneNotificationTypeRegisted {
@@ -63,13 +56,9 @@ ZUX_CATEGORY_M(ZUX_UIApplication)
 - (BOOL)noneNotificationTypeRegisted {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-    IOS8_OR_LATER ?
+    !IOS8_OR_LATER ? UIRemoteNotificationTypeNone == [self enabledRemoteNotificationTypes] :
 #endif
-    UIUserNotificationTypeNone == [self currentUserNotificationSettings].types
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-    : UIRemoteNotificationTypeNone == [self enabledRemoteNotificationTypes]
-#endif
-    ;
+    UIUserNotificationTypeNone == [self currentUserNotificationSettings].types;
 }
 
 ZUX_STATIC_INLINE UIUserNotificationType userNotificationType(ZUXUserNotificationType type) {

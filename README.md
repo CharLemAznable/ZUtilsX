@@ -372,6 +372,9 @@
 
 - UIImage+ZUX
 
+        // 生成点图像并指定颜色.
+        +imagePointWithColor:
+
         // 生成矩形图像并指定颜色.
         +imageRectWithColor:size:
 
@@ -390,6 +393,9 @@
         //   - 其他: @2x或无后缀
         +imageForCurrentDeviceNamed:
         +imageNameForCurrentDeviceNamed:
+
+        // 获取图片主色调.
+        -dominantColor
 
         // 读写应用程序沙盒中的文件.
         -writeToUserFile:
@@ -424,6 +430,7 @@
 - UIViewController+ZUX
 
         // 添加属性.
+        navigationBar
         statusBarStyle
 
         // 添加方法.
@@ -449,23 +456,48 @@
 
 - UINavigationBar+ZUX
 
-        // 添加自定义样式方法, 可自定义透明模式, 背景图片, tint颜色, 字体, 字色, 文字阴影.
+        // 添加自定义样式方法, 可自定义透明模式, tint颜色, 背景颜色/图片, 字体, 字色, 文字阴影.
         +isTranslucent
         +setTranslucent:
+        +tintColor
+        +setTintColor:
+
+        -defaultBackgroundColor
+        -setDefaultBackgroundColor:
+        +defaultBackgroundColor
+        +setDefaultBackgroundColor:
+        +backgroundColorForBarMetrics:
+        +setBackgroundColor:forBarMetrics:
+
+        -defaultBackgroundImage
+        -setDefaultBackgroundImage:
         +defaultBackgroundImage
         +setDefaultBackgroundImage:
         +backgroundImageForBarMetrics:
         +setBackgroundImage:forBarMetrics:
-        +tintColor
-        +setTintColor:
+
+        -textFont
+        -setTextFont:
         +textFont
         +setTextFont:
+
+        -textColor
+        -setTextColor:
         +textColor
         +setTextColor:
+
+        -textShadowColor
+        -setTextShadowColor:
         +textShadowColor
         +setTextShadowColor:
+
+        -textShadowOffset
+        -setTextShadowOffset:
         +textShadowOffset
         +setTextShadowOffset:
+
+        -textShadowSize
+        -setTextShadowSize:
         +textShadowSize
         +setTextShadowSize:
 
@@ -478,20 +510,36 @@
         +setBackgroundImage:
         +selectionIndicatorImage
         +setSelectionIndicatorImage:
+        +tintColor
+        +setTintColor:
         +selectedImageTintColor
         +setSelectedImageTintColor:
 
 - UIBarItem+ZUX
 
         // 添加自定义样式方法, 可自定义字体, 字色, 文字阴影.
+        -textFontForState:
+        -setTextFont:forState:
         +textFontForState:
         +setTextFont:forState:
+
+        -textColorForState:
+        -setTextColor:forState:
         +textColorForState:
         +setTextColor:forState:
+
+        -textShadowColorForState:
+        -setTextShadowColor:forState:
         +textShadowColorForState:
         +setTextShadowColor:forState:
+
+        -textShadowOffsetForState:
+        -setTextShadowOffset:forState:
         +textShadowOffsetForState:
         +setTextShadowOffset:forState:
+
+        -textShadowSizeForState:
+        -setTextShadowSize:forState:
         +textShadowSizeForState:
         +setTextShadowSize:forState:
 
