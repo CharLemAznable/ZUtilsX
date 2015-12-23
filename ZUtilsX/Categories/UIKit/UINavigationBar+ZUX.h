@@ -23,17 +23,21 @@ ZUX_CATEGORY_H(ZUX_UINavigationBar)
 + (UIColor *)tintColor;
 + (void)setTintColor:(UIColor *)tintColor;
 
-@property (nonatomic, ZUX_STRONG) UIColor *defaultBackgroundColor;
-+ (UIColor *)defaultBackgroundColor;
-+ (void)setDefaultBackgroundColor:(UIColor *)backgroundColor;
-+ (UIColor *)backgroundColorForBarMetrics:(UIBarMetrics)barMetrics;
-+ (void)setBackgroundColor:(UIColor *)backgroundColor forBarMetrics:(UIBarMetrics)barMetrics;
-
 @property (nonatomic, ZUX_STRONG) UIImage *defaultBackgroundImage;
+
 + (UIImage *)defaultBackgroundImage;
 + (void)setDefaultBackgroundImage:(UIImage *)backgroundImage;
 + (UIImage *)backgroundImageForBarMetrics:(UIBarMetrics)barMetrics;
 + (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics;
+
+@property (nonatomic, ZUX_STRONG) UIColor *defaultBackgroundColor;
+- (UIColor *)backgroundColorForBarMetrics:(UIBarMetrics)barMetrics;
+- (void)setBackgroundColor:(UIColor *)backgroundColor forBarMetrics:(UIBarMetrics)barMetrics;
+
++ (UIColor *)defaultBackgroundColor;
++ (void)setDefaultBackgroundColor:(UIColor *)backgroundColor;
++ (UIColor *)backgroundColorForBarMetrics:(UIBarMetrics)barMetrics;
++ (void)setBackgroundColor:(UIColor *)backgroundColor forBarMetrics:(UIBarMetrics)barMetrics;
 
 @property (nonatomic, ZUX_STRONG) UIFont *textFont;
 + (UIFont *)textFont;

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
+#import "zarc.h"
 
 #ifndef ZUtilsX_UITabBar_ZUX_h
 #define ZUtilsX_UITabBar_ZUX_h
@@ -29,7 +30,7 @@ ZUX_CATEGORY_H(ZUX_UITabBar)
 + (void)setTintColor:(UIColor *)tintColor;
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
-@property (nonatomic, strong) UIColor *selectedImageTintColor;
+@property (nonatomic, ZUX_STRONG) UIColor *selectedImageTintColor;
 #endif
 + (UIColor *)selectedImageTintColor;
 + (void)setSelectedImageTintColor:(UIColor *)selectedImageTintColor;
@@ -39,7 +40,7 @@ ZUX_CATEGORY_H(ZUX_UITabBar)
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
 @interface UITabBar (ZUXTranslucent)
 
-@property(nonatomic,getter=isTranslucent) BOOL translucent;
+@property (nonatomic, getter=isTranslucent) BOOL translucent;
 
 @end
 #endif

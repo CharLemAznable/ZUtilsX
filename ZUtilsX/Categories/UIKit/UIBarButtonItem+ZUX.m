@@ -35,12 +35,28 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
 
 #pragma mark - backgroundImage -
 
+- (UIImage *)defaultBackgroundImage {
+    return backgroundImageForStateAndBarMetrics(self, UIControlStateNormal, UIBarMetricsDefault);
+}
+
+- (void)setDefaultBackgroundImage:(UIImage *)backgroundImage {
+    setBackgroundImageForStateAndBarMetrics(self, backgroundImage, UIControlStateNormal, UIBarMetricsDefault);
+}
+
 + (UIImage *)defaultBackgroundImage {
     return [self backgroundImageForState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 }
 
 + (void)setDefaultBackgroundImage:(UIImage *)backgroundImage {
     [self setBackgroundImage:backgroundImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+}
+
++ (UIImage *)backgroundImageForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
+    return backgroundImageForStateAndBarMetrics(APPEARANCE, state, barMetrics);
+}
+
++ (void)setBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
+    setBackgroundImageForStateAndBarMetrics(APPEARANCE, backgroundImage, state, barMetrics);
 }
 
 + (UIImage *)defaultBackgroundImageWhenContainedIn:(Class<UIAppearanceContainer>)containerClass {
@@ -51,23 +67,76 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
     [self setBackgroundImage:backgroundImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault whenContainedIn:containerClass];
 }
 
-+ (UIImage *)backgroundImageForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
-    return [APPEARANCE backgroundImageForState:state barMetrics:barMetrics];
-}
-
-+ (void)setBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
-    [APPEARANCE setBackgroundImage:backgroundImage forState:state barMetrics:barMetrics];
-}
-
 + (UIImage *)backgroundImageForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    return [APPEARANCE_IN_CLASS(containerClass) backgroundImageForState:state barMetrics:barMetrics];
+    return backgroundImageForStateAndBarMetrics(APPEARANCE_IN_CLASS(containerClass), state, barMetrics);
 }
 
 + (void)setBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    [APPEARANCE_IN_CLASS(containerClass) setBackgroundImage:backgroundImage forState:state barMetrics:barMetrics];
+    setBackgroundImageForStateAndBarMetrics(APPEARANCE_IN_CLASS(containerClass), backgroundImage, state, barMetrics);
+}
+
+#pragma mark - backgroundColor -
+
+- (UIColor *)defaultBackgroundColor {
+    return [self backgroundColorForState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+}
+
+- (void)setDefaultBackgroundColor:(UIColor *)backgroundColor {
+    [self setBackgroundColor:backgroundColor forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+}
+
+- (UIColor *)backgroundColorForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
+    return backgroundColorForStateAndBarMetrics(self, state, barMetrics);
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
+    setBackgroundColorForStateAndBarMetrics(self, backgroundColor, state, barMetrics);
+}
+
++ (UIColor *)defaultBackgroundColor {
+    return [self backgroundColorForState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+}
+
++ (void)setDefaultBackgroundColor:(UIColor *)backgroundColor {
+    [self setBackgroundColor:backgroundColor forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+}
+
++ (UIColor *)backgroundColorForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
+    return backgroundColorForStateAndBarMetrics(APPEARANCE, state, barMetrics);
+}
+
++ (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
+    setBackgroundColorForStateAndBarMetrics(APPEARANCE, backgroundColor, state, barMetrics);
+}
+
++ (UIColor *)defaultBackgroundColorWhenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    return [self backgroundColorForState:UIControlStateNormal barMetrics:UIBarMetricsDefault
+                         whenContainedIn:containerClass];
+}
+
++ (void)setDefaultBackgroundColor:(UIColor *)backgroundColor whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    [self setBackgroundColor:backgroundColor forState:UIControlStateNormal barMetrics:UIBarMetricsDefault
+             whenContainedIn:containerClass];
+}
+
++ (UIColor *)backgroundColorForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    return backgroundColorForStateAndBarMetrics(APPEARANCE_IN_CLASS(containerClass), state, barMetrics);
+}
+
++ (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    setBackgroundColorForStateAndBarMetrics(APPEARANCE_IN_CLASS(containerClass), backgroundColor, state, barMetrics);
 }
 
 #pragma mark - backgroundImage with style -
+
+- (UIImage *)defaultBackgroundImageForStyle:(UIBarButtonItemStyle)style {
+    return backgroundImageForStateAndStyleAndBarMetrics(self, UIControlStateNormal, style, UIBarMetricsDefault);
+}
+
+- (void)setDefaultBackgroundImage:(UIImage *)backgroundImage forStyle:(UIBarButtonItemStyle)style {
+    setBackgroundImageForStateAndStyleAndBarMetrics
+    (self, backgroundImage, UIControlStateNormal, style, UIBarMetricsDefault);
+}
 
 + (UIImage *)defaultBackgroundImageForStyle:(UIBarButtonItemStyle)style {
     return [self backgroundImageForState:UIControlStateNormal style:style barMetrics:UIBarMetricsDefault];
@@ -77,45 +146,96 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
     [self setBackgroundImage:backgroundImage forState:UIControlStateNormal style:style barMetrics:UIBarMetricsDefault];
 }
 
-+ (UIImage *)defaultBackgroundImageForStyle:(UIBarButtonItemStyle)style whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    return [self backgroundImageForState:UIControlStateNormal style:style barMetrics:UIBarMetricsDefault whenContainedIn:containerClass];
-}
-
-+ (void)setDefaultBackgroundImage:(UIImage *)backgroundImage forStyle:(UIBarButtonItemStyle)style whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    [self setBackgroundImage:backgroundImage forState:UIControlStateNormal style:style barMetrics:UIBarMetricsDefault whenContainedIn:containerClass];
-}
-
 + (UIImage *)backgroundImageForState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics {
-    return
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    !IOS6_OR_LATER ? [APPEARANCE backgroundImageForState:state barMetrics:barMetrics] :
-#endif
-    [APPEARANCE backgroundImageForState:state style:style barMetrics:barMetrics];
+    return backgroundImageForStateAndStyleAndBarMetrics(APPEARANCE, state, style, barMetrics);
 }
 
 + (void)setBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (!IOS6_OR_LATER) [APPEARANCE setBackgroundImage:backgroundImage forState:state barMetrics:barMetrics]; else
-#endif
-    [APPEARANCE setBackgroundImage:backgroundImage forState:state style:style barMetrics:barMetrics];
+    setBackgroundImageForStateAndStyleAndBarMetrics
+    (APPEARANCE, backgroundImage, state, style, barMetrics);
+}
+
++ (UIImage *)defaultBackgroundImageForStyle:(UIBarButtonItemStyle)style whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    return [self backgroundImageForState:UIControlStateNormal style:style barMetrics:UIBarMetricsDefault
+                         whenContainedIn:containerClass];
+}
+
++ (void)setDefaultBackgroundImage:(UIImage *)backgroundImage forStyle:(UIBarButtonItemStyle)style whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    [self setBackgroundImage:backgroundImage forState:UIControlStateNormal style:style barMetrics:UIBarMetricsDefault
+             whenContainedIn:containerClass];
 }
 
 + (UIImage *)backgroundImageForState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    return
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    !IOS6_OR_LATER ? [APPEARANCE_IN_CLASS(containerClass) backgroundImageForState:state barMetrics:barMetrics] :
-#endif
-    [APPEARANCE_IN_CLASS(containerClass) backgroundImageForState:state style:style barMetrics:barMetrics];
+    return backgroundImageForStateAndStyleAndBarMetrics(APPEARANCE_IN_CLASS(containerClass), state, style, barMetrics);
 }
 
 + (void)setBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (!IOS6_OR_LATER) [APPEARANCE_IN_CLASS(containerClass) setBackgroundImage:backgroundImage forState:state barMetrics:barMetrics]; else
-#endif
-    [APPEARANCE_IN_CLASS(containerClass) setBackgroundImage:backgroundImage forState:state style:style barMetrics:barMetrics];
+    setBackgroundImageForStateAndStyleAndBarMetrics
+    (APPEARANCE_IN_CLASS(containerClass), backgroundImage, state, style, barMetrics);
+}
+
+#pragma mark - backgroundColor with style -
+
+- (UIColor *)defaultBackgroundColorForStyle:(UIBarButtonItemStyle)style {
+    return [self backgroundColorForState:UIControlStateNormal style:style barMetrics:UIBarMetricsDefault];
+}
+
+- (void)setDefaultBackgroundColor:(UIColor *)backgroundColor forStyle:(UIBarButtonItemStyle)style {
+    [self setBackgroundColor:backgroundColor forState:UIControlStateNormal style:style barMetrics:UIBarMetricsDefault];
+}
+
+- (UIColor *)backgroundColorForState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics {
+    return backgroundColorForStateAndStyleAndBarMetrics(self, state, style, barMetrics);
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics {
+    setBackgroundColorForStateAndStyleAndBarMetrics(self, backgroundColor, state, style, barMetrics);
+}
+
++ (UIColor *)defaultBackgroundColorForStyle:(UIBarButtonItemStyle)style {
+    return [self backgroundColorForState:UIControlStateNormal style:style barMetrics:UIBarMetricsDefault];
+}
+
++ (void)setDefaultBackgroundColor:(UIColor *)backgroundColor forStyle:(UIBarButtonItemStyle)style {
+    [self setBackgroundColor:backgroundColor forState:UIControlStateNormal style:style barMetrics:UIBarMetricsDefault];
+}
+
++ (UIColor *)backgroundColorForState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics {
+    return backgroundColorForStateAndStyleAndBarMetrics(APPEARANCE, state, style, barMetrics);
+}
+
++ (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics {
+    setBackgroundColorForStateAndStyleAndBarMetrics(APPEARANCE, backgroundColor, state, style, barMetrics);
+}
+
++ (UIColor *)defaultBackgroundColorForStyle:(UIBarButtonItemStyle)style whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    return [self backgroundColorForState:UIControlStateNormal style:style barMetrics:UIBarMetricsDefault
+                         whenContainedIn:containerClass];
+}
+
++ (void)setDefaultBackgroundColor:(UIColor *)backgroundColor forStyle:(UIBarButtonItemStyle)style whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    [self setBackgroundColor:backgroundColor forState:UIControlStateNormal style:style barMetrics:UIBarMetricsDefault
+             whenContainedIn:containerClass];
+}
+
++ (UIColor *)backgroundColorForState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    return backgroundColorForStateAndStyleAndBarMetrics(APPEARANCE_IN_CLASS(containerClass), state, style, barMetrics);
+}
+
++ (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    setBackgroundColorForStateAndStyleAndBarMetrics
+    (APPEARANCE_IN_CLASS(containerClass), backgroundColor, state, style, barMetrics);
 }
 
 #pragma mark - backgroundVerticalPositionAdjustment -
+
+- (CGFloat)defaultBackgroundVerticalPositionAdjustment {
+    return backgroundVerticalPositionAdjustmentForBarMetrics(self, UIBarMetricsDefault);
+}
+
+- (void)setDefaultBackgroundVerticalPositionAdjustment:(CGFloat)adjustment {
+    setBackgroundVerticalPositionAdjustmentForBarMetrics(self, adjustment, UIBarMetricsDefault);
+}
 
 + (CGFloat)defaultBackgroundVerticalPositionAdjustment {
     return [self backgroundVerticalPositionAdjustmentForBarMetrics:UIBarMetricsDefault];
@@ -123,6 +243,14 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
 
 + (void)setDefaultBackgroundVerticalPositionAdjustment:(CGFloat)adjustment {
     [self setBackgroundVerticalPositionAdjustment:adjustment forBarMetrics:UIBarMetricsDefault];
+}
+
++ (CGFloat)backgroundVerticalPositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics {
+    return backgroundVerticalPositionAdjustmentForBarMetrics(APPEARANCE, barMetrics);
+}
+
++ (void)setBackgroundVerticalPositionAdjustment:(CGFloat)adjustment forBarMetrics:(UIBarMetrics)barMetrics {
+    setBackgroundVerticalPositionAdjustmentForBarMetrics(APPEARANCE, adjustment, barMetrics);
 }
 
 + (CGFloat)defaultBackgroundVerticalPositionAdjustmentWhenContainedIn:(Class<UIAppearanceContainer>)containerClass {
@@ -133,23 +261,23 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
     [self setBackgroundVerticalPositionAdjustment:adjustment forBarMetrics:UIBarMetricsDefault whenContainedIn:containerClass];
 }
 
-+ (CGFloat)backgroundVerticalPositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics {
-    return [APPEARANCE backgroundVerticalPositionAdjustmentForBarMetrics:barMetrics];
-}
-
-+ (void)setBackgroundVerticalPositionAdjustment:(CGFloat)adjustment forBarMetrics:(UIBarMetrics)barMetrics {
-    [APPEARANCE setBackgroundVerticalPositionAdjustment:adjustment forBarMetrics:barMetrics];
-}
-
 + (CGFloat)backgroundVerticalPositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    return [APPEARANCE_IN_CLASS(containerClass) backgroundVerticalPositionAdjustmentForBarMetrics:barMetrics];
+    return backgroundVerticalPositionAdjustmentForBarMetrics(APPEARANCE_IN_CLASS(containerClass), barMetrics);
 }
 
 + (void)setBackgroundVerticalPositionAdjustment:(CGFloat)adjustment forBarMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    [APPEARANCE_IN_CLASS(containerClass) setBackgroundVerticalPositionAdjustment:adjustment forBarMetrics:barMetrics];
+    setBackgroundVerticalPositionAdjustmentForBarMetrics(APPEARANCE_IN_CLASS(containerClass), adjustment, barMetrics);
 }
 
 #pragma mark - titlePositionAdjustment -
+
+- (UIOffset)defaultTitlePositionAdjustment {
+    return titlePositionAdjustmentForBarMetrics(self, UIBarMetricsDefault);
+}
+
+- (void)setDefaultTitlePositionAdjustment:(UIOffset)adjustment {
+    setTitlePositionAdjustmentForBarMetrics(self, adjustment, UIBarMetricsDefault);
+}
 
 + (UIOffset)defaultTitlePositionAdjustment {
     return [self titlePositionAdjustmentForBarMetrics:UIBarMetricsDefault];
@@ -157,6 +285,14 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
 
 + (void)setDefaultTitlePositionAdjustment:(UIOffset)adjustment {
     [self setTitlePositionAdjustment:adjustment forBarMetrics:UIBarMetricsDefault];
+}
+
++ (UIOffset)titlePositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics {
+    return titlePositionAdjustmentForBarMetrics(APPEARANCE, barMetrics);
+}
+
++ (void)setTitlePositionAdjustment:(UIOffset)adjustment forBarMetrics:(UIBarMetrics)barMetrics {
+    setTitlePositionAdjustmentForBarMetrics(APPEARANCE, adjustment, barMetrics);
 }
 
 + (UIOffset)defaultTitlePositionAdjustmentWhenContainedIn:(Class<UIAppearanceContainer>)containerClass {
@@ -167,23 +303,23 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
     [self setTitlePositionAdjustment:adjustment forBarMetrics:UIBarMetricsDefault whenContainedIn:containerClass];
 }
 
-+ (UIOffset)titlePositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics {
-    return [APPEARANCE titlePositionAdjustmentForBarMetrics:barMetrics];
-}
-
-+ (void)setTitlePositionAdjustment:(UIOffset)adjustment forBarMetrics:(UIBarMetrics)barMetrics {
-    [APPEARANCE setTitlePositionAdjustment:adjustment forBarMetrics:barMetrics];
-}
-
 + (UIOffset)titlePositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    return [APPEARANCE_IN_CLASS(containerClass) titlePositionAdjustmentForBarMetrics:barMetrics];
+    return titlePositionAdjustmentForBarMetrics(APPEARANCE_IN_CLASS(containerClass), barMetrics);
 }
 
 + (void)setTitlePositionAdjustment:(UIOffset)adjustment forBarMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    [APPEARANCE_IN_CLASS(containerClass) setTitlePositionAdjustment:adjustment forBarMetrics:barMetrics];
+    setTitlePositionAdjustmentForBarMetrics(APPEARANCE_IN_CLASS(containerClass), adjustment, barMetrics);
 }
 
 #pragma mark - backButtonBackgroundImage -
+
+- (UIImage *)defaultBackButtonBackgroundImage {
+    return backButtonBackgroundImageForStateAndBarMetrics(self, UIControlStateNormal, UIBarMetricsDefault);
+}
+
+- (void)setDefaultBackButtonBackgroundImage:(UIImage *)backgroundImage {
+    setBackButtonBackgroundImageForStateAndBarMetrics(self, backgroundImage, UIControlStateNormal, UIBarMetricsDefault);
+}
 
 + (UIImage *)defaultBackButtonBackgroundImage {
     return [self backButtonBackgroundImageForState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
@@ -191,6 +327,14 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
 
 + (void)setDefaultBackButtonBackgroundImage:(UIImage *)backgroundImage {
     [self setBackButtonBackgroundImage:backgroundImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+}
+
++ (UIImage *)backButtonBackgroundImageForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
+    return backButtonBackgroundImageForStateAndBarMetrics(APPEARANCE, state, barMetrics);
+}
+
++ (void)setBackButtonBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
+    setBackButtonBackgroundImageForStateAndBarMetrics(APPEARANCE, backgroundImage, state, barMetrics);
 }
 
 + (UIImage *)defaultBackButtonBackgroundImageWhenContainedIn:(Class<UIAppearanceContainer>)containerClass {
@@ -201,23 +345,75 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
     [self setBackButtonBackgroundImage:backgroundImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault whenContainedIn:containerClass];
 }
 
-+ (UIImage *)backButtonBackgroundImageForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
-    return [APPEARANCE backButtonBackgroundImageForState:state barMetrics:barMetrics];
-}
-
-+ (void)setBackButtonBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
-    [APPEARANCE setBackButtonBackgroundImage:backgroundImage forState:state barMetrics:barMetrics];
-}
-
 + (UIImage *)backButtonBackgroundImageForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    return [APPEARANCE_IN_CLASS(containerClass) backButtonBackgroundImageForState:state barMetrics:barMetrics];
+    return backButtonBackgroundImageForStateAndBarMetrics(APPEARANCE_IN_CLASS(containerClass), state, barMetrics);
 }
 
 + (void)setBackButtonBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    [APPEARANCE_IN_CLASS(containerClass) setBackButtonBackgroundImage:backgroundImage forState:state barMetrics:barMetrics];
+    setBackButtonBackgroundImageForStateAndBarMetrics
+    (APPEARANCE_IN_CLASS(containerClass), backgroundImage, state, barMetrics);
+}
+
+#pragma mark - backButtonBackgroundColor -
+
+- (UIColor *)defaultBackButtonBackgroundColor {
+    return [self backButtonBackgroundColorForState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+}
+
+- (void)setDefaultBackButtonBackgroundColor:(UIColor *)backgroundColor {
+    [self setBackButtonBackgroundColor:backgroundColor forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+}
+
+- (UIColor *)backButtonBackgroundColorForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
+    return backButtonBackgroundColorForStateAndBarMetrics(self, state, barMetrics);
+}
+
+- (void)setBackButtonBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
+    setBackButtonBackgroundColorForStateAndBarMetrics(self, backgroundColor, state, barMetrics);
+}
+
++ (UIColor *)defaultBackButtonBackgroundColor {
+    return [self backButtonBackgroundColorForState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+}
+
++ (void)setDefaultBackButtonBackgroundColor:(UIColor *)backgroundColor {
+    [self setBackButtonBackgroundColor:backgroundColor forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+}
+
++ (UIColor *)backButtonBackgroundColorForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
+    return backButtonBackgroundColorForStateAndBarMetrics(APPEARANCE, state, barMetrics);
+}
+
++ (void)setBackButtonBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics {
+    setBackButtonBackgroundColorForStateAndBarMetrics(APPEARANCE, backgroundColor, state, barMetrics);
+}
+
++ (UIColor *)defaultBackButtonBackgroundColorWhenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    return [self backButtonBackgroundColorForState:UIControlStateNormal barMetrics:UIBarMetricsDefault whenContainedIn:containerClass];
+}
+
++ (void)setDefaultBackButtonBackgroundColor:(UIColor *)backgroundColor whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    [self setBackButtonBackgroundColor:backgroundColor forState:UIControlStateNormal barMetrics:UIBarMetricsDefault whenContainedIn:containerClass];
+}
+
++ (UIColor *)backButtonBackgroundColorForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    return backButtonBackgroundColorForStateAndBarMetrics(APPEARANCE_IN_CLASS(containerClass), state, barMetrics);
+}
+
++ (void)setBackButtonBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    setBackButtonBackgroundColorForStateAndBarMetrics
+    (APPEARANCE_IN_CLASS(containerClass), backgroundColor, state, barMetrics);
 }
 
 #pragma mark - backButtonBackgroundVerticalPositionAdjustment -
+
+- (CGFloat)defaultBackButtonBackgroundVerticalPositionAdjustment {
+    return backButtonBackgroundVerticalPositionAdjustmentForBarMetrics(self, UIBarMetricsDefault);
+}
+
+- (void)setDefaultBackButtonBackgroundVerticalPositionAdjustment:(CGFloat)adjustment {
+    setBackButtonBackgroundVerticalPositionAdjustmentForBarMetrics(self, adjustment, UIBarMetricsDefault);
+}
 
 + (CGFloat)defaultBackButtonBackgroundVerticalPositionAdjustment {
     return [self backButtonBackgroundVerticalPositionAdjustmentForBarMetrics:UIBarMetricsDefault];
@@ -227,31 +423,42 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
     [self setBackButtonBackgroundVerticalPositionAdjustment:adjustment forBarMetrics:UIBarMetricsDefault];
 }
 
-+ (CGFloat)defaultBackButtonBackgroundVerticalPositionAdjustmentWhenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    return [self backButtonBackgroundVerticalPositionAdjustmentForBarMetrics:UIBarMetricsDefault whenContainedIn:containerClass];
-}
-
-+ (void)setDefaultBackButtonBackgroundVerticalPositionAdjustment:(CGFloat)adjustment whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    [self setBackButtonBackgroundVerticalPositionAdjustment:adjustment forBarMetrics:UIBarMetricsDefault whenContainedIn:containerClass];
-}
-
 + (CGFloat)backButtonBackgroundVerticalPositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics {
-    return [APPEARANCE backButtonBackgroundVerticalPositionAdjustmentForBarMetrics:barMetrics];
+    return backButtonBackgroundVerticalPositionAdjustmentForBarMetrics(APPEARANCE, barMetrics);
 }
 
 + (void)setBackButtonBackgroundVerticalPositionAdjustment:(CGFloat)adjustment forBarMetrics:(UIBarMetrics)barMetrics {
-    [APPEARANCE setBackButtonBackgroundVerticalPositionAdjustment:adjustment forBarMetrics:barMetrics];
+    setBackButtonBackgroundVerticalPositionAdjustmentForBarMetrics(APPEARANCE, adjustment, barMetrics);
+}
+
++ (CGFloat)defaultBackButtonBackgroundVerticalPositionAdjustmentWhenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    return [self backButtonBackgroundVerticalPositionAdjustmentForBarMetrics:UIBarMetricsDefault
+                                                             whenContainedIn:containerClass];
+}
+
++ (void)setDefaultBackButtonBackgroundVerticalPositionAdjustment:(CGFloat)adjustment whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
+    [self setBackButtonBackgroundVerticalPositionAdjustment:adjustment forBarMetrics:UIBarMetricsDefault
+                                            whenContainedIn:containerClass];
 }
 
 + (CGFloat)backButtonBackgroundVerticalPositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    return [APPEARANCE_IN_CLASS(containerClass) backButtonBackgroundVerticalPositionAdjustmentForBarMetrics:barMetrics];
+    return backButtonBackgroundVerticalPositionAdjustmentForBarMetrics(APPEARANCE_IN_CLASS(containerClass), barMetrics);
 }
 
 + (void)setBackButtonBackgroundVerticalPositionAdjustment:(CGFloat)adjustment forBarMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    [APPEARANCE_IN_CLASS(containerClass) setBackButtonBackgroundVerticalPositionAdjustment:adjustment forBarMetrics:barMetrics];
+    setBackButtonBackgroundVerticalPositionAdjustmentForBarMetrics
+    (APPEARANCE_IN_CLASS(containerClass), adjustment, barMetrics);
 }
 
 #pragma mark - backButtonTitlePositionAdjustment -
+
+- (UIOffset)defaultBackButtonTitlePositionAdjustment {
+    return backButtonTitlePositionAdjustmentForBarMetrics(self, UIBarMetricsDefault);
+}
+
+- (void)setDefaultBackButtonTitlePositionAdjustment:(UIOffset)adjustment {
+    setBackButtonTitlePositionAdjustmentForBarMetrics(self, adjustment, UIBarMetricsDefault);
+}
 
 + (UIOffset)defaultBackButtonTitlePositionAdjustment {
     return [self backButtonTitlePositionAdjustmentForBarMetrics:UIBarMetricsDefault];
@@ -259,6 +466,14 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
 
 + (void)setDefaultBackButtonTitlePositionAdjustment:(UIOffset)adjustment {
     [self setBackButtonTitlePositionAdjustment:adjustment forBarMetrics:UIBarMetricsDefault];
+}
+
++ (UIOffset)backButtonTitlePositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics {
+    return backButtonTitlePositionAdjustmentForBarMetrics(APPEARANCE, barMetrics);
+}
+
++ (void)setBackButtonTitlePositionAdjustment:(UIOffset)adjustment forBarMetrics:(UIBarMetrics)barMetrics {
+    setBackButtonTitlePositionAdjustmentForBarMetrics(APPEARANCE, adjustment, barMetrics);
 }
 
 + (UIOffset)defaultBackButtonTitlePositionAdjustmentWhenContainedIn:(Class<UIAppearanceContainer>)containerClass {
@@ -269,79 +484,76 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
     [self setBackButtonTitlePositionAdjustment:adjustment forBarMetrics:UIBarMetricsDefault whenContainedIn:containerClass];
 }
 
-+ (UIOffset)backButtonTitlePositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics {
-    return [APPEARANCE backButtonTitlePositionAdjustmentForBarMetrics:barMetrics];
-}
-
-+ (void)setBackButtonTitlePositionAdjustment:(UIOffset)adjustment forBarMetrics:(UIBarMetrics)barMetrics {
-    [APPEARANCE setBackButtonTitlePositionAdjustment:adjustment forBarMetrics:barMetrics];
-}
-
 + (UIOffset)backButtonTitlePositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    return [APPEARANCE_IN_CLASS(containerClass) backButtonTitlePositionAdjustmentForBarMetrics:barMetrics];
+    return backButtonTitlePositionAdjustmentForBarMetrics(APPEARANCE_IN_CLASS(containerClass), barMetrics);
 }
 
 + (void)setBackButtonTitlePositionAdjustment:(UIOffset)adjustment forBarMetrics:(UIBarMetrics)barMetrics whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    [APPEARANCE_IN_CLASS(containerClass) setBackButtonTitlePositionAdjustment:adjustment forBarMetrics:barMetrics];
+    setBackButtonTitlePositionAdjustmentForBarMetrics(APPEARANCE_IN_CLASS(containerClass), adjustment, barMetrics);
 }
 
 #pragma mark - text attributes with container -
 
 + (UIFont *)textFontForState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    return TitleTextAttributeForKeyAndStateInClass(ZUXFontAttributeName, state, containerClass);
+    return titleTextAttributeForStateAndKey(APPEARANCE_IN_CLASS(containerClass), state, ZUXFontAttributeName);
 }
 
 + (void)setTextFont:(UIFont *)textFont forState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    SetTitleTextAttributeForKeyAndStateInClass(textFont, ZUXFontAttributeName, state, containerClass);
+    setTitleTextAttributeForStateAndKey(APPEARANCE_IN_CLASS(containerClass), state, ZUXFontAttributeName, textFont);
 }
 
 + (UIColor *)textColorForState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    return TitleTextAttributeForKeyAndStateInClass(ZUXForegroundColorAttributeName, state, containerClass);
+    return titleTextAttributeForStateAndKey(APPEARANCE_IN_CLASS(containerClass), state, ZUXForegroundColorAttributeName);
 }
 
 + (void)setTextColor:(UIColor *)textColor forState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
-    SetTitleTextAttributeForKeyAndStateInClass(textColor, ZUXForegroundColorAttributeName, state, containerClass);
+    setTitleTextAttributeForStateAndKey(APPEARANCE_IN_CLASS(containerClass), state, ZUXForegroundColorAttributeName, textColor);
 }
 
 + (UIColor *)textShadowColorForState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    !IOS6_OR_LATER ? TitleTextAttributeForKeyAndStateInClass(UITextAttributeTextShadowColor, state, containerClass) :
+    !IOS6_OR_LATER ? titleTextAttributeForStateAndKey
+    (APPEARANCE_IN_CLASS(containerClass), state, UITextAttributeTextShadowColor) :
 #endif
-    TitleShadowAttributeForStateInClass(state, containerClass).shadowColor;
+    titleShadowAttributeForState(APPEARANCE_IN_CLASS(containerClass), state).shadowColor;
 }
 
 + (void)setTextShadowColor:(UIColor *)textShadowColor forState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
     if (!IOS6_OR_LATER) {
-        SetTitleTextAttributeForKeyAndStateInClass(textShadowColor, UITextAttributeTextShadowColor, state, containerClass);
+        setTitleTextAttributeForStateAndKey
+        (APPEARANCE_IN_CLASS(containerClass), state, UITextAttributeTextShadowColor, textShadowColor);
         return;
     }
 #endif
-    NSShadow *shadow = DefaultTitleShadowAttributeForStateInClass(state, containerClass);
+    NSShadow *shadow = defaultTitleShadowAttributeForState(APPEARANCE_IN_CLASS(containerClass), state);
     [shadow setShadowColor:textShadowColor];
-    SetTitleShadowAttributeForStateInClass(shadow, state, containerClass);
+    setTitleShadowAttributeForState(APPEARANCE_IN_CLASS(containerClass), state, shadow);
 }
 
 + (CGSize)textShadowOffsetForState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    !IOS6_OR_LATER ? ZUX_CGSizeFromUIOffset([TitleTextAttributeForKeyAndStateInClass(UITextAttributeTextShadowOffset, state, containerClass) UIOffsetValue]) :
+    !IOS6_OR_LATER ? ZUX_CGSizeFromUIOffset
+    ([titleTextAttributeForStateAndKey
+      (APPEARANCE_IN_CLASS(containerClass), state, UITextAttributeTextShadowOffset) UIOffsetValue]) :
 #endif
-    TitleShadowAttributeForStateInClass(state, containerClass).shadowOffset;
+    titleShadowAttributeForState(APPEARANCE_IN_CLASS(containerClass), state).shadowOffset;
 }
 
 + (void)setTextShadowOffset:(CGSize)textShadowOffset forState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
     if (!IOS6_OR_LATER) {
-        NSValue *offsetValue = [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)];
-        SetTitleTextAttributeForKeyAndStateInClass(offsetValue, UITextAttributeTextShadowOffset, state, containerClass);
+        setTitleTextAttributeForStateAndKey
+        (APPEARANCE_IN_CLASS(containerClass), state, UITextAttributeTextShadowOffset,
+         [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)]);
         return;
     }
 #endif
-    NSShadow *shadow = DefaultTitleShadowAttributeForStateInClass(state, containerClass);
+    NSShadow *shadow = defaultTitleShadowAttributeForState(APPEARANCE_IN_CLASS(containerClass), state);
     [shadow setShadowOffset:textShadowOffset];
-    SetTitleShadowAttributeForStateInClass(shadow, state, containerClass);
+    setTitleShadowAttributeForState(APPEARANCE_IN_CLASS(containerClass), state, shadow);
 }
 
 + (CGFloat)textShadowSizeForState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
@@ -349,16 +561,16 @@ ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
     !IOS6_OR_LATER ? 0 :
 #endif
-    TitleShadowAttributeForStateInClass(state, containerClass).shadowBlurRadius;
+    titleShadowAttributeForState(APPEARANCE_IN_CLASS(containerClass), state).shadowBlurRadius;
 }
 
 + (void)setTextShadowSize:(CGFloat)textShadowSize forState:(UIControlState)state whenContainedIn:(Class<UIAppearanceContainer>)containerClass {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
     if (!IOS6_OR_LATER) return;
 #endif
-    NSShadow *shadow = DefaultTitleShadowAttributeForStateInClass(state, containerClass);
+    NSShadow *shadow = defaultTitleShadowAttributeForState(APPEARANCE_IN_CLASS(containerClass), state);
     [shadow setShadowBlurRadius:textShadowSize];
-    SetTitleShadowAttributeForStateInClass(shadow, state, containerClass);
+    setTitleShadowAttributeForState(APPEARANCE_IN_CLASS(containerClass), state, shadow);
 }
 
 @end

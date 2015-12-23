@@ -175,28 +175,4 @@ ZUX_CATEGORY_M(ZUX_UIBarItem)
     setTitleShadowAttributeForState(APPEARANCE, state, shadow);
 }
 
-#pragma mark - inline implementation -
-
-ZUX_STATIC_INLINE id titleTextAttributeForStateAndKey(id instance, UIControlState state, NSString *key) {
-    return [[instance titleTextAttributesForState:state] objectForKey:key];
-}
-
-ZUX_STATIC_INLINE void setTitleTextAttributeForStateAndKey(id instance, UIControlState state, NSString *key, id value) {
-    NSMutableDictionary *attributes = ZUX_AUTORELEASE([[instance titleTextAttributesForState:state] mutableCopy]);
-    [attributes setObject:value forKey:key];
-    [instance setTitleTextAttributes:attributes forState:state];
-}
-
-ZUX_STATIC_INLINE NSShadow *titleShadowAttributeForState(id instance, UIControlState state) {
-    return titleTextAttributeForStateAndKey(instance, state, NSShadowAttributeName);
-}
-
-ZUX_STATIC_INLINE NSShadow *defaultTitleShadowAttributeForState(id instance, UIControlState state) {
-    return titleShadowAttributeForState(instance, state) ?: ZUX_AUTORELEASE([[NSShadow alloc] init]);
-}
-
-ZUX_STATIC_INLINE void setTitleShadowAttributeForState(id instance, UIControlState state, NSShadow *shadow) {
-    setTitleTextAttributeForStateAndKey(instance, state, NSShadowAttributeName, shadow);
-}
-
 @end

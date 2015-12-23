@@ -7,7 +7,6 @@
 //
 
 #import "UINavigationBar+ZUX.h"
-#import "UIImage+ZUX.h"
 #import "ZUXGeometry.h"
 #import "zadapt.h"
 #import "zappearance.h"
@@ -36,32 +35,6 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
     [APPEARANCE setTintColor:tintColor];
 }
 
-#pragma mark - backgroundColor -
-
-- (UIColor *)defaultBackgroundColor {
-    return backgroundColorForBarMetrics(self, UIBarMetricsDefault);
-}
-
-- (void)setDefaultBackgroundColor:(UIColor *)backgroundColor {
-    setBackgroundColorForBarMetrics(self, backgroundColor, UIBarMetricsDefault);
-}
-
-+ (UIColor *)defaultBackgroundColor {
-    return [self backgroundColorForBarMetrics:UIBarMetricsDefault];
-}
-
-+ (void)setDefaultBackgroundColor:(UIColor *)backgroundColor {
-    [self setBackgroundColor:backgroundColor forBarMetrics:UIBarMetricsDefault];
-}
-
-+ (UIColor *)backgroundColorForBarMetrics:(UIBarMetrics)barMetrics {
-    return backgroundColorForBarMetrics(APPEARANCE, barMetrics);
-}
-
-+ (void)setBackgroundColor:(UIColor *)backgroundColor forBarMetrics:(UIBarMetrics)barMetrics {
-    setBackgroundColorForBarMetrics(APPEARANCE, backgroundColor, barMetrics);
-}
-
 #pragma mark - backgroundImage -
 
 - (UIImage *)defaultBackgroundImage {
@@ -86,6 +59,40 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
 
 + (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics {
     setBackgroundImageForBarMetrics(APPEARANCE, backgroundImage, barMetrics);
+}
+
+#pragma mark - backgroundColor -
+
+- (UIColor *)defaultBackgroundColor {
+    return [self backgroundColorForBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)setDefaultBackgroundColor:(UIColor *)backgroundColor {
+    [self setBackgroundColor:backgroundColor forBarMetrics:UIBarMetricsDefault];
+}
+
+- (UIColor *)backgroundColorForBarMetrics:(UIBarMetrics)barMetrics {
+    return backgroundColorForBarMetrics(self, barMetrics);
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor forBarMetrics:(UIBarMetrics)barMetrics {
+    setBackgroundColorForBarMetrics(self, backgroundColor, barMetrics);
+}
+
++ (UIColor *)defaultBackgroundColor {
+    return [self backgroundColorForBarMetrics:UIBarMetricsDefault];
+}
+
++ (void)setDefaultBackgroundColor:(UIColor *)backgroundColor {
+    [self setBackgroundColor:backgroundColor forBarMetrics:UIBarMetricsDefault];
+}
+
++ (UIColor *)backgroundColorForBarMetrics:(UIBarMetrics)barMetrics {
+    return backgroundColorForBarMetrics(APPEARANCE, barMetrics);
+}
+
++ (void)setBackgroundColor:(UIColor *)backgroundColor forBarMetrics:(UIBarMetrics)barMetrics {
+    setBackgroundColorForBarMetrics(APPEARANCE, backgroundColor, barMetrics);
 }
 
 #pragma mark - textFont -
@@ -250,53 +257,6 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
     NSShadow *shadow = defaultTitleShadowAttribute(APPEARANCE);
     [shadow setShadowBlurRadius:textShadowSize];
     setTitleShadowAttribute(APPEARANCE, shadow);
-}
-
-#pragma mark - inline implementation -
-
-ZUX_STATIC_INLINE id titleTextAttributeForKey(id instance, NSString *key) {
-    return [[instance titleTextAttributes] objectForKey:key];
-}
-
-ZUX_STATIC_INLINE void setTitleTextAttributeForKey(id instance, NSString *key, id value) {
-    NSMutableDictionary *attributes = ZUX_AUTORELEASE([[instance titleTextAttributes] mutableCopy]);
-    [attributes setObject:value forKey:key];
-    [instance setTitleTextAttributes:attributes];
-}
-
-ZUX_STATIC_INLINE NSShadow *titleShadowAttribute(id instance) {
-    return titleTextAttributeForKey(instance, NSShadowAttributeName);
-}
-
-ZUX_STATIC_INLINE NSShadow *defaultTitleShadowAttribute(id instance) {
-    return titleShadowAttribute(instance) ?: ZUX_AUTORELEASE([[NSShadow alloc] init]);
-}
-
-ZUX_STATIC_INLINE void setTitleShadowAttribute(id instance, NSShadow *shadow) {
-    setTitleTextAttributeForKey(instance, NSShadowAttributeName, shadow);
-}
-
-ZUX_STATIC_INLINE UIColor *backgroundColorForBarMetrics
-(ZUX_KINDOF(UINavigationBar *) instance, UIBarMetrics barMetrics) {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
-    return [[instance backgroundImageForBarMetrics:barMetrics] dominantColor];
-}
-
-ZUX_STATIC_INLINE void setBackgroundColorForBarMetrics
-(ZUX_KINDOF(UINavigationBar *) instance, UIColor *backgroundColor, UIBarMetrics barMetrics) {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
-    [instance setBackgroundImage:[UIImage imagePointWithColor:backgroundColor]
-                   forBarMetrics:barMetrics];
-}
-
-ZUX_STATIC_INLINE UIImage *backgroundImageForBarMetrics
-(ZUX_KINDOF(UINavigationBar *) instance, UIBarMetrics barMetrics) {
-    return [instance backgroundImageForBarMetrics:barMetrics];
-}
-
-ZUX_STATIC_INLINE void setBackgroundImageForBarMetrics
-(ZUX_KINDOF(UINavigationBar *) instance, UIImage *backgroundImage, UIBarMetrics barMetrics) {
-    [instance setBackgroundImage:backgroundImage forBarMetrics:barMetrics];
 }
 
 @end
