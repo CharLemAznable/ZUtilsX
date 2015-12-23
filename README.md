@@ -2,9 +2,9 @@
 
 收集日常开发中积累的工具代码.
 
-        pod "ZUtilsX", "~> 0.0.10"
+        pod "ZUtilsX", "~> 0.0.11"
 
-[ZIP压缩包下载](https://raw.githubusercontent.com/CharLemAznable/ZUtilsX/master/ZUtilsX.zip)
+[压缩包下载](https://raw.githubusercontent.com/CharLemAznable/ZUtilsX/master/ZUtilsX.tar.gz)
 
 #####Constant
 
@@ -459,22 +459,27 @@
         // 添加自定义样式方法, 可自定义透明模式, tint颜色, 背景颜色/图片, 字体, 字色, 文字阴影.
         +isTranslucent
         +setTranslucent:
+
         +tintColor
         +setTintColor:
 
-        -defaultBackgroundColor
-        -setDefaultBackgroundColor:
-        +defaultBackgroundColor
-        +setDefaultBackgroundColor:
-        +backgroundColorForBarMetrics:
-        +setBackgroundColor:forBarMetrics:
-
         -defaultBackgroundImage
         -setDefaultBackgroundImage:
+
         +defaultBackgroundImage
         +setDefaultBackgroundImage:
         +backgroundImageForBarMetrics:
         +setBackgroundImage:forBarMetrics:
+
+        -defaultBackgroundColor
+        -setDefaultBackgroundColor:
+        -backgroundColorForBarMetrics:
+        -setBackgroundColor:forBarMetrics:
+
+        +defaultBackgroundColor
+        +setDefaultBackgroundColor:
+        +backgroundColorForBarMetrics:
+        +setBackgroundColor:forBarMetrics:
 
         -textFont
         -setTextFont:
@@ -506,12 +511,16 @@
         // 添加自定义样式方法, 可自定义透明模式, 背景图片, 选中项背景图片, 选中项tint颜色.
         +isTranslucent
         +setTranslucent:
+
         +backgroundImage
         +setBackgroundImage:
+
         +selectionIndicatorImage
         +setSelectionIndicatorImage:
+
         +tintColor
         +setTintColor:
+
         +selectedImageTintColor
         +setSelectedImageTintColor:
 
@@ -561,84 +570,161 @@
         +tintColorWhenContainedIn:
         +setTintColor:whenContainedIn:
 
-        // 背景图片
+        // 背景图片/颜色
+        -defaultBackgroundImage
+        -setDefaultBackgroundImage:
+
         +defaultBackgroundImage
         +setDefaultBackgroundImage:
-        +defaultBackgroundImageWhenContainedIn:
-        +setDefaultBackgroundImage:whenContainedIn:
         +backgroundImageForState:barMetrics:
         +setBackgroundImage:forState:barMetrics:
+
+        +defaultBackgroundImageWhenContainedIn:
+        +setDefaultBackgroundImage:whenContainedIn:
         +backgroundImageForState:barMetrics:whenContainedIn:
         +setBackgroundImage:forState:barMetrics:whenContainedIn:
 
+        -defaultBackgroundColor
+        -setDefaultBackgroundColor:
+        -backgroundColorForState:barMetrics:
+        -setBackgroundColor:forState:barMetrics:
+
+        +defaultBackgroundColor
+        +setDefaultBackgroundColor:
+        +backgroundColorForState:barMetrics:
+        +setBackgroundColor:forState:barMetrics:
+
+        +defaultBackgroundColorWhenContainedIn:
+        +setDefaultBackgroundColor:whenContainedIn:
+        +backgroundColorForState:barMetrics:whenContainedIn:
+        +setBackgroundColor:forState:barMetrics:whenContainedIn:
+
+        -defaultBackgroundImageForStyle:
+        -setDefaultBackgroundImage:forStyle:
+
         +defaultBackgroundImageForStyle:
         +setDefaultBackgroundImage:forStyle:
-        +defaultBackgroundImageForStyle:whenContainedIn:
-        +setDefaultBackgroundImage:forStyle:whenContainedIn:
         +backgroundImageForState:style:barMetrics:
         +setBackgroundImage:forState:style:barMetrics:
+
+        +defaultBackgroundImageForStyle:whenContainedIn:
+        +setDefaultBackgroundImage:forStyle:whenContainedIn:
         +backgroundImageForState:style:barMetrics:whenContainedIn:
         +setBackgroundImage:forState:style:barMetrics:whenContainedIn:
 
+        -defaultBackgroundColorForStyle:
+        -setDefaultBackgroundColor:forStyle:
+        -backgroundColorForState:style:barMetrics:
+        -setBackgroundColor:forState:style:barMetrics:
+
+        +defaultBackgroundColorForStyle:
+        +setDefaultBackgroundColor:forStyle:
+        +backgroundColorForState:style:barMetrics:
+        +setBackgroundColor:forState:style:barMetrics:
+
+        +defaultBackgroundColorForStyle:whenContainedIn:
+        +setDefaultBackgroundColor:forStyle:whenContainedIn:
+        +backgroundColorForState:style:barMetrics:whenContainedIn:
+        +setBackgroundColor:forState:style:barMetrics:whenContainedIn:
+
         // 背景位置偏移
+        -defaultBackgroundVerticalPositionAdjustment
+        -setDefaultBackgroundVerticalPositionAdjustment:
+
         +defaultBackgroundVerticalPositionAdjustment
         +setDefaultBackgroundVerticalPositionAdjustment:
-        +defaultBackgroundVerticalPositionAdjustmentWhenContainedIn:
-        +setDefaultBackgroundVerticalPositionAdjustment:whenContainedIn:
         +backgroundVerticalPositionAdjustmentForBarMetrics:
         +setBackgroundVerticalPositionAdjustment:forBarMetrics:
+
+        +defaultBackgroundVerticalPositionAdjustmentWhenContainedIn:
+        +setDefaultBackgroundVerticalPositionAdjustment:whenContainedIn:
         +backgroundVerticalPositionAdjustmentForBarMetrics:whenContainedIn:
         +setBackgroundVerticalPositionAdjustment:forBarMetrics:whenContainedIn:
 
         // 文字位置偏移
+        -defaultTitlePositionAdjustment
+        -setDefaultTitlePositionAdjustment:
+
         +defaultTitlePositionAdjustment
         +setDefaultTitlePositionAdjustment:
-        +defaultTitlePositionAdjustmentWhenContainedIn:
-        +setDefaultTitlePositionAdjustment:whenContainedIn:
         +titlePositionAdjustmentForBarMetrics:
         +setTitlePositionAdjustment:forBarMetrics:
+
+        +defaultTitlePositionAdjustmentWhenContainedIn:
+        +setDefaultTitlePositionAdjustment:whenContainedIn:
         +titlePositionAdjustmentForBarMetrics:whenContainedIn:
         +setTitlePositionAdjustment:forBarMetrics:whenContainedIn:
 
-        // 返回按钮背景图片
+        // 返回按钮背景图片/颜色
+        -defaultBackButtonBackgroundImage
+        -setDefaultBackButtonBackgroundImage:
+
         +defaultBackButtonBackgroundImage
         +setDefaultBackButtonBackgroundImage:
-        +defaultBackButtonBackgroundImageWhenContainedIn:
-        +setDefaultBackButtonBackgroundImage:whenContainedIn:
         +backButtonBackgroundImageForState:barMetrics:
         +setBackButtonBackgroundImage:forState:barMetrics:
+
+        +defaultBackButtonBackgroundImageWhenContainedIn:
+        +setDefaultBackButtonBackgroundImage:whenContainedIn:
         +backButtonBackgroundImageForState:barMetrics:whenContainedIn:
         +setBackButtonBackgroundImage:forState:barMetrics:whenContainedIn:
 
+        -defaultBackButtonBackgroundColor
+        -setDefaultBackButtonBackgroundColor:
+        -backButtonBackgroundColorForState:barMetrics:
+        -setBackButtonBackgroundColor:forState:barMetrics:
+
+        +defaultBackButtonBackgroundColor
+        +setDefaultBackButtonBackgroundColor:
+        +backButtonBackgroundColorForState:barMetrics:
+        +setBackButtonBackgroundColor:forState:barMetrics:
+
+        +defaultBackButtonBackgroundColorWhenContainedIn:
+        +setDefaultBackButtonBackgroundColor:whenContainedIn:
+        +backButtonBackgroundColorForState:barMetrics:whenContainedIn:
+        +setBackButtonBackgroundColor:forState:barMetrics:whenContainedIn:
+
         // 返回按钮背景位置偏移
+        -defaultBackButtonBackgroundVerticalPositionAdjustment
+        -setDefaultBackButtonBackgroundVerticalPositionAdjustment:
+
         +defaultBackButtonBackgroundVerticalPositionAdjustment
         +setDefaultBackButtonBackgroundVerticalPositionAdjustment:
-        +defaultBackButtonBackgroundVerticalPositionAdjustmentWhenContainedIn:
-        +setDefaultBackButtonBackgroundVerticalPositionAdjustment:whenContainedIn:
         +backButtonBackgroundVerticalPositionAdjustmentForBarMetrics:
         +setBackButtonBackgroundVerticalPositionAdjustment:forBarMetrics:
+
+        +defaultBackButtonBackgroundVerticalPositionAdjustmentWhenContainedIn:
+        +setDefaultBackButtonBackgroundVerticalPositionAdjustment:whenContainedIn:
         +backButtonBackgroundVerticalPositionAdjustmentForBarMetrics:whenContainedIn:
         +setBackButtonBackgroundVerticalPositionAdjustment:forBarMetrics:whenContainedIn:
 
         // 返回按钮文字位置偏移
+        -defaultBackButtonTitlePositionAdjustment
+        -setDefaultBackButtonTitlePositionAdjustment:
+
         +defaultBackButtonTitlePositionAdjustment
         +setDefaultBackButtonTitlePositionAdjustment:
-        +defaultBackButtonTitlePositionAdjustmentWhenContainedIn:
-        +setDefaultBackButtonTitlePositionAdjustment:whenContainedIn:
         +backButtonTitlePositionAdjustmentForBarMetrics:
         +setBackButtonTitlePositionAdjustment:forBarMetrics:
+
+        +defaultBackButtonTitlePositionAdjustmentWhenContainedIn:
+        +setDefaultBackButtonTitlePositionAdjustment:whenContainedIn:
         +backButtonTitlePositionAdjustmentForBarMetrics:whenContainedIn:
         +setBackButtonTitlePositionAdjustment:forBarMetrics:whenContainedIn:
 
         // 字体, 字色, 文字阴影
         +textFontForState:whenContainedIn:
         +setTextFont:forState:whenContainedIn:
+
         +textColorForState:whenContainedIn:
         +setTextColor:forState:whenContainedIn:
+
         +textShadowColorForState:whenContainedIn:
         +setTextShadowColor:forState:whenContainedIn:
+
         +textShadowOffsetForState:whenContainedIn:
         +setTextShadowOffset:forState:whenContainedIn:
+
         +textShadowSizeForState:whenContainedIn:
         +setTextShadowSize:forState:whenContainedIn:
 
