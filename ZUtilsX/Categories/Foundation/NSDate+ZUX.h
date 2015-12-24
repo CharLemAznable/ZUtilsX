@@ -6,7 +6,7 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 
 #ifndef ZUtilsX_NSDate_ZUX_h

@@ -157,12 +157,10 @@
 #pragma mark - inline functions -
 
 ZUX_STATIC_INLINE CTTextAlignment CTTextAlignmentFromZUXLinesSpacingLabel(ZUXLabel *label) {
-    switch (label.textAlignment) {
-        case ZUXTextAlignmentLeft: return zkCTTextAlignmentLeft;
-        case ZUXTextAlignmentCenter: return zkCTTextAlignmentCenter;
-        case ZUXTextAlignmentRight: return zkCTTextAlignmentRight;
-        default: return zkCTTextAlignmentNatural;
-    }
+    if (label.textAlignment == ZUXTextAlignmentLeft) return zkCTTextAlignmentLeft;
+    else if (label.textAlignment == ZUXTextAlignmentCenter) return zkCTTextAlignmentCenter;
+    else if (label.textAlignment == ZUXTextAlignmentRight) return zkCTTextAlignmentRight;
+    else return zkCTTextAlignmentNatural;
 }
 
 ZUX_STATIC_INLINE NSDictionary *NSAttributedStringAttributesFromZUXLinesSpacingLabel(ZUXLabel *label) {

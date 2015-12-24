@@ -42,24 +42,25 @@
 
 # define ZUXFontAttributeName               NSFontAttributeName
 # define ZUXForegroundColorAttributeName    NSForegroundColorAttributeName
-#else // __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
-# define ZUXTextAlignmentLeft               UITextAlignmentLeft
-# define ZUXTextAlignmentCenter             UITextAlignmentCenter
-# define ZUXTextAlignmentRight              UITextAlignmentRight
-# define ZUXLineBreakByWordWrapping         UILineBreakModeWordWrap
-# define ZUXLineBreakByCharWrapping         UILineBreakModeCharacterWrap
-# define ZUXLineBreakByClipping             UILineBreakModeClip
-# define ZUXLineBreakByTruncatingHead       UILineBreakModeHeadTruncation
-# define ZUXLineBreakByTruncatingTail       UILineBreakModeTailTruncation
-# define ZUXLineBreakByTruncatingMiddle     UILineBreakModeMiddleTruncation
-# define zkCTTextAlignmentLeft              kCTLeftTextAlignment
-# define zkCTTextAlignmentRight             kCTRightTextAlignment
-# define zkCTTextAlignmentCenter            kCTCenterTextAlignment
-# define zkCTTextAlignmentJustified         kCTJustifiedTextAlignment
-# define zkCTTextAlignmentNatural           kCTNaturalTextAlignment
 
-# define ZUXFontAttributeName               UITextAttributeFont
-# define ZUXForegroundColorAttributeName    UITextAttributeTextColor
+#else // __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
+# define ZUXTextAlignmentLeft               (IOS6_OR_LATER? NSTextAlignmentLeft : UITextAlignmentLeft)
+# define ZUXTextAlignmentCenter             (IOS6_OR_LATER? NSTextAlignmentCenter : UITextAlignmentCenter)
+# define ZUXTextAlignmentRight              (IOS6_OR_LATER? NSTextAlignmentRight : UITextAlignmentRight)
+# define ZUXLineBreakByWordWrapping         (IOS6_OR_LATER? NSLineBreakByWordWrapping : UILineBreakModeWordWrap)
+# define ZUXLineBreakByCharWrapping         (IOS6_OR_LATER? NSLineBreakByCharWrapping : UILineBreakModeCharacterWrap)
+# define ZUXLineBreakByClipping             (IOS6_OR_LATER? NSLineBreakByClipping : UILineBreakModeClip)
+# define ZUXLineBreakByTruncatingHead       (IOS6_OR_LATER? NSLineBreakByTruncatingHead : UILineBreakModeHeadTruncation)
+# define ZUXLineBreakByTruncatingTail       (IOS6_OR_LATER? NSLineBreakByTruncatingTail : UILineBreakModeTailTruncation)
+# define ZUXLineBreakByTruncatingMiddle     (IOS6_OR_LATER? NSLineBreakByTruncatingMiddle : UILineBreakModeMiddleTruncation)
+# define zkCTTextAlignmentLeft              (IOS6_OR_LATER? kCTTextAlignmentLeft : kCTLeftTextAlignment)
+# define zkCTTextAlignmentRight             (IOS6_OR_LATER? kCTTextAlignmentRight : kCTRightTextAlignment)
+# define zkCTTextAlignmentCenter            (IOS6_OR_LATER? kCTTextAlignmentCenter : kCTCenterTextAlignment)
+# define zkCTTextAlignmentJustified         (IOS6_OR_LATER? kCTTextAlignmentJustified : kCTJustifiedTextAlignment)
+# define zkCTTextAlignmentNatural           (IOS6_OR_LATER? kCTTextAlignmentNatural : kCTNaturalTextAlignment)
+
+# define ZUXFontAttributeName               (IOS6_OR_LATER? NSFontAttributeName : UITextAttributeFont)
+# define ZUXForegroundColorAttributeName    (IOS6_OR_LATER? NSForegroundColorAttributeName : UITextAttributeTextColor)
 #endif // __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
@@ -79,15 +80,15 @@
 # define ZUXUserNotificationTypeSound       UIUserNotificationTypeSound
 # define ZUXUserNotificationTypeAlert       UIUserNotificationTypeAlert
 #else // __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
-# define ZUXCalendarUnitEra                 NSEraCalendarUnit
-# define ZUXCalendarUnitYear                NSYearCalendarUnit
-# define ZUXCalendarUnitMonth               NSMonthCalendarUnit
-# define ZUXCalendarUnitDay                 NSDayCalendarUnit
-# define ZUXCalendarUnitHour                NSHourCalendarUnit
-# define ZUXCalendarUnitMinute              NSMinuteCalendarUnit
-# define ZUXCalendarUnitSecond              NSSecondCalendarUnit
-# define ZUXCalendarUnitWeekday             NSWeekdayCalendarUnit
-# define ZUXCalendarUnitWeekdayOrdinal      NSWeekdayOrdinalCalendarUnit
+# define ZUXCalendarUnitEra                 (IOS8_OR_LATER? NSCalendarUnitEra : NSEraCalendarUnit)
+# define ZUXCalendarUnitYear                (IOS8_OR_LATER? NSCalendarUnitYear : NSYearCalendarUnit)
+# define ZUXCalendarUnitMonth               (IOS8_OR_LATER? NSCalendarUnitMonth : NSMonthCalendarUnit)
+# define ZUXCalendarUnitDay                 (IOS8_OR_LATER? NSCalendarUnitDay : NSDayCalendarUnit)
+# define ZUXCalendarUnitHour                (IOS8_OR_LATER? NSCalendarUnitHour : NSHourCalendarUnit)
+# define ZUXCalendarUnitMinute              (IOS8_OR_LATER? NSCalendarUnitMinute : NSMinuteCalendarUnit)
+# define ZUXCalendarUnitSecond              (IOS8_OR_LATER? NSCalendarUnitSecond : NSSecondCalendarUnit)
+# define ZUXCalendarUnitWeekday             (IOS8_OR_LATER? NSCalendarUnitWeekday : NSWeekdayCalendarUnit)
+# define ZUXCalendarUnitWeekdayOrdinal      (IOS8_OR_LATER? NSCalendarUnitWeekdayOrdinal : NSWeekdayOrdinalCalendarUnit)
 
 # define ZUXUserNotificationType            UIRemoteNotificationType
 # define ZUXUserNotificationTypeNone        UIRemoteNotificationTypeNone

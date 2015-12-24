@@ -21,7 +21,7 @@
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 90000
 # define APPEARANCE_IN_CLASS(clz)   [self appearanceWhenContainedInInstancesOfClasses:@[(clz)]]
 #else
-# define APPEARANCE_IN_CLASS(clz)   [self appearanceWhenContainedIn:(clz), nil]
+# define APPEARANCE_IN_CLASS(clz)   (IOS9_OR_LATER?[self appearanceWhenContainedInInstancesOfClasses:@[(clz)]]:[self appearanceWhenContainedIn:(clz), nil])
 #endif
 
 #pragma mark - titleTextAttribute -
@@ -31,7 +31,8 @@ ZUX_STATIC_INLINE id titleTextAttributeForKey(id instance, NSString *key) {
 }
 
 ZUX_STATIC_INLINE void setTitleTextAttributeForKey(id instance, NSString *key, id value) {
-    NSMutableDictionary *attributes = ZUX_AUTORELEASE([[instance titleTextAttributes] mutableCopy]);
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary:
+                                       [instance titleTextAttributes]];
     [attributes setObject:value forKey:key];
     [instance setTitleTextAttributes:attributes];
 }
@@ -55,7 +56,8 @@ ZUX_STATIC_INLINE id titleTextAttributeForStateAndKey(id instance, UIControlStat
 }
 
 ZUX_STATIC_INLINE void setTitleTextAttributeForStateAndKey(id instance, UIControlState state, NSString *key, id value) {
-    NSMutableDictionary *attributes = ZUX_AUTORELEASE([[instance titleTextAttributesForState:state] mutableCopy]);
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary:
+                                       [instance titleTextAttributesForState:state]];
     [attributes setObject:value forKey:key];
     [instance setTitleTextAttributes:attributes forState:state];
 }
