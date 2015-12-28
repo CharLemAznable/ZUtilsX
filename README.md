@@ -105,15 +105,25 @@
         // (NSMutableArray)
         -setObject:atIndexedSubscript:
 
-        // 读写应用程序沙盒中的文件.
-        -writeToUserFile:
-        +arrayWithContentsOfUserFile:
-        -writeToUserFile:inDirectory:
-        +arrayWithContentsOfUserFile:inDirectory:
+        // 读取应用程序沙盒/Bundle中的文件.
+        -initWithContentsOfUserFile:
+        -initWithContentsOfUserFile:subpath:
+        -initWithContentsOfUserFile:inDirectory:
+        -initWithContentsOfUserFile:inDirectory:subpath:
+        -initWithContentsOfUserFile:bundle:
+        -initWithContentsOfUserFile:bundle:subpath:
 
-        // 读取应用程序Bundle中的文件.
+        +arrayWithContentsOfUserFile:
+        +arrayWithContentsOfUserFile:subpath:
+        +arrayWithContentsOfUserFile:inDirectory:
+        +arrayWithContentsOfUserFile:inDirectory:subpath:
         +arrayWithContentsOfUserFile:bundle:
         +arrayWithContentsOfUserFile:bundle:subpath:
+
+        // 写入应用程序沙盒中的文件.
+        -writeToUserFile:
+        -writeToUserFile:inDirectory:
+        -writeToUserFile:inDirectory:subpath:
 
 * NSDictionary+ZUX
 
@@ -135,15 +145,25 @@
         // (NSMutableDictionary)
         -setObject:forKeyedSubscript:
 
-        // 读写应用程序沙盒中的文件.
-        -writeToUserFile:
-        +dictionaryWithContentsOfUserFile:
-        -writeToUserFile:inDirectory:
-        +dictionaryWithContentsOfUserFile:inDirectory:
+        // 读取应用程序沙盒/Bundle中的文件.
+        -initWithContentsOfUserFile:
+        -initWithContentsOfUserFile:subpath:
+        -initWithContentsOfUserFile:inDirectory:
+        -initWithContentsOfUserFile:inDirectory:subpath:
+        -initWithContentsOfUserFile:bundle:
+        -initWithContentsOfUserFile:bundle:subpath:
 
-        // 读取应用程序Bundle中的文件.
+        +dictionaryWithContentsOfUserFile:
+        +dictionaryWithContentsOfUserFile:subpath:
+        +dictionaryWithContentsOfUserFile:inDirectory:
+        +dictionaryWithContentsOfUserFile:inDirectory:subpath:
         +dictionaryWithContentsOfUserFile:bundle:
         +dictionaryWithContentsOfUserFile:bundle:subpath:
+
+        // 写入应用程序沙盒中的文件.
+        -writeToUserFile:
+        -writeToUserFile:inDirectory:
+        -writeToUserFile:inDirectory:subpath:
 
 - NSData+ZUX
 
@@ -397,15 +417,18 @@
         // 获取图片主色调.
         -dominantColor
 
-        // 读写应用程序沙盒中的文件.
-        -writeToUserFile:
+        // 读取应用程序沙盒/Bundle中的文件.
         +imageWithContentsOfUserFile:
-        -writeToUserFile:inDirectory:
+        +imageWithContentsOfUserFile:subpath:
         +imageWithContentsOfUserFile:inDirectory:
-
-        // 读取应用程序Bundle中的文件.
+        +imageWithContentsOfUserFile:inDirectory:subpath:
         +imageWithContentsOfUserFile:bundle:
         +imageWithContentsOfUserFile:bundle:subpath:
+
+        // 写入应用程序沙盒中的文件.
+        -writeToUserFile:
+        -writeToUserFile:inDirectory:
+        -writeToUserFile:inDirectory:subpath:
 
 - UITextField+ZUX
 
@@ -933,15 +956,24 @@
         // 默认使用Documents目录.
         +fullFilePath:
         +fileExists:
-        +createDirectory:
         +deleteAllFiles
+        +directoryExists:
+        +createDirectory:
 
         // 指定使用其他目录, 如Library/Caches或tmp目录.
         // 使用枚举ZUXDirectoryType指定目录类型.
         +fullFilePath:inDirectory:
         +fileExists:inDirectory:
-        +createDirectory:inDirectory:
         +deleteAllFilesInDirectory:
+        +directoryExists:inDirectory:
+        +createDirectory:inDirectory:
+
+        // 指定子目录.
+        +fullFilePath:inDirectory:subpath:
+        +fileExists:inDirectory:subpath:
+        +deleteAllFilesInDirectory:subpath:
+        +directoryExists:inDirectory:subpath:
+        +createDirectory:inDirectory:subpath:
 
         // 应用根目录.
         // 使用枚举ZUXDirectoryType指定目录类型.
@@ -953,21 +985,25 @@
 - ZUXBundle
 
     资源bundle工具.
-    当bundle参数为nil时, 在当前App Bundle中寻找资源文件; 否则在对应bundle中的子目录中寻找.
+    当不指定bundle参数或bundle参数为nil时, 在当前App Bundle中寻找资源文件; 否则在对应bundle中的子目录中寻找.
     当subpath参数为nil时, 在bundle根目录中寻找.
 
         // 读入bundle中的图片对象.
+        +imageWithName:
         +imageWithName:bundle:
         +imageWithName:bundle:subpath:
+        +imageForCurrentDeviceWithName:
         +imageForCurrentDeviceWithName:bundle:
         +imageForCurrentDeviceWithName:bundle:subpath:
 
         // 获取bundle中plist文件的完整路径.
+        +plistPathWithName:
         +plistPathWithName:bundle:
         +plistPathWithName:bundle:subpath:
 
         // 获取bundle中音频文件URL.
         // 用于AudioServicesCreateSystemSoundID(CFURLRef, SystemSoundID*)
+        +audioURLWithName:type:
         +audioURLWithName:type:bundle:
         +audioURLWithName:type:bundle:subpath:
 

@@ -16,10 +16,10 @@
 @implementation ZUXColorDictionaryTest
 
 - (void)testZUXColorDictionary {
-    ZUXColorDictionary *dict = [[ZUXColorDictionary alloc] initWithContentsOfUserFile:@"ZUXColorDictionaryTest" bundle:nil];
+    ZUXColorDictionary *dict = [[ZUXColorDictionary alloc] initWithContentsOfUserFile:@"ZUXColorDictionaryTest"];
     XCTAssertEqualObjects(dict[@"blackColor"], [UIColor colorWithRed:0 green:0 blue:0 alpha:1]);
     XCTAssertEqualObjects(dict[@"whiteColor"], [UIColor colorWithRed:1 green:1 blue:1 alpha:1]);
-    [dict reloadWithContentsOfUserFile:@"ZUXColorDictionaryTest2" bundle:nil];
+    [dict reloadWithContentsOfUserFile:@"ZUXColorDictionaryTest2"];
     XCTAssertEqualObjects(dict[@"blackColor"], [UIColor colorWithRed:1 green:1 blue:1 alpha:1]);
     XCTAssertEqualObjects(dict[@"whiteColor"], [UIColor colorWithRed:0 green:0 blue:0 alpha:1]);
 }

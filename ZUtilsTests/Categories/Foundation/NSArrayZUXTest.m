@@ -32,6 +32,27 @@
     XCTAssertTrue([arrayMutableCopy isKindOfClass:[NSMutableArray class]]);
 }
 
+- (void)testNSArraySafe {
+    NSArray *array = @[@"AAA"];
+    
+    XCTAssertNil([array objectAtIndex:1]);
+    XCTAssertNil(array[1]);
+    XCTAssertEqualObjects([array objectAtIndex:1 defaultValue:@"BBB"], @"BBB");
+    
+    NSMutableArray *arrayMutable = [array mutableCopy];
+    XCTAssertNil([arrayMutable objectAtIndex:1]);
+    XCTAssertNil(arrayMutable[1]);
+    XCTAssertEqualObjects([arrayMutable objectAtIndex:1 defaultValue:@"BBB"], @"BBB");
+    NSObject *nilObject = nil;
+    arrayMutable[1] = nilObject;
+    XCTAssertNil([arrayMutable objectAtIndex:1]);
+    XCTAssertNil(arrayMutable[1]);
+    arrayMutable[0] = nilObject;
+    XCTAssertNotNil([arrayMutable objectAtIndex:0]);
+    XCTAssertNotNil(arrayMutable[0]);
+    XCTAssertEqualObjects([arrayMutable objectAtIndex:0 defaultValue:@"BBB"], @"AAA");
+}
+
 - (void)testNSArrayDirectory {
     NSArray *array = @[@"AAA"];
     XCTAssertFalse([ZUXDirectory fileExists:@"arrayfile.plist"]);

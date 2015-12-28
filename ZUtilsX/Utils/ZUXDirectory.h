@@ -19,15 +19,23 @@ typedef NS_ENUM(NSUInteger, ZUXDirectoryType) {
 
 @interface ZUXDirectory : NSObject
 
-+ (NSString *)fullFilePath:(NSString *)filePath;
-+ (BOOL)fileExists:(NSString *)filePath;
-+ (BOOL)createDirectory:(NSString *)directoryPath;
++ (NSString *)fullFilePath:(NSString *)fileName;
++ (BOOL)fileExists:(NSString *)fileName;
 + (BOOL)deleteAllFiles;
++ (BOOL)directoryExists:(NSString *)directoryName;
++ (BOOL)createDirectory:(NSString *)directoryName;
 
-+ (NSString *)fullFilePath:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
-+ (BOOL)fileExists:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
-+ (BOOL)createDirectory:(NSString *)directoryPath inDirectory:(ZUXDirectoryType)directory;
++ (NSString *)fullFilePath:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
++ (BOOL)fileExists:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
 + (BOOL)deleteAllFilesInDirectory:(ZUXDirectoryType)directory;
++ (BOOL)directoryExists:(NSString *)directoryName inDirectory:(ZUXDirectoryType)directory;
++ (BOOL)createDirectory:(NSString *)directoryName inDirectory:(ZUXDirectoryType)directory;
+
++ (NSString *)fullFilePath:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
++ (BOOL)fileExists:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
++ (BOOL)deleteAllFilesInDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
++ (BOOL)directoryExists:(NSString *)directoryName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
++ (BOOL)createDirectory:(NSString *)directoryName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
 
 + (NSString *)documentDirectoryRoot;
 + (NSString *)cachesDirectoryRoot;

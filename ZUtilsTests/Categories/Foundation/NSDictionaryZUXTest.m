@@ -30,6 +30,46 @@
     XCTAssertNotEqual([dict objectForKey:@"AAA"], [dictCopy objectForKey:@"AAA"]);
     XCTAssertNotEqual([dict objectForKey:@"AAA"], [dictMutableCopy objectForKey:@"AAA"]);
     XCTAssertTrue([dictMutableCopy isKindOfClass:[NSMutableDictionary class]]);
+    
+    NSObject *nilObject = nil;
+    XCTAssertNil(dict[nilObject]);
+    XCTAssertEqualObjects([dict objectForKey:nilObject defaultValue:@"bbb"], @"bbb");
+    ((NSMutableDictionary *)dictMutableCopy)[[nilObject description]] = @"bbb";
+    XCTAssertNil(dict[nilObject]);
+//    [((NSMutableDictionary *)dictMutableCopy) setObject:nilObject forKey:@"AAA"];
+    ((NSMutableDictionary *)dictMutableCopy)[@"AAA"] = nilObject;
+    XCTAssertNotNil(dictMutableCopy[@"AAA"]);
+    XCTAssertEqualObjects([dictMutableCopy objectForKey:@"AAA" defaultValue:@"bbb"], @"aaa");
+}
+
+- (void)testNSDictionarySafe {
+    NSString *nilStr = nil;
+    
+    NSDictionary *dict = @{@"AAA":@"aaa"};
+    XCTAssertNil([dict objectForKey:nilStr]);
+    XCTAssertNil(dict[nilStr]);
+    XCTAssertEqualObjects([dict objectForKey:nilStr defaultValue:@"bbb"], @"bbb");
+    
+    NSMutableDictionary *dictMutable = [dict mutableCopy];
+    XCTAssertNil([dictMutable objectForKey:nilStr]);
+    XCTAssertNil(dictMutable[nilStr]);
+    XCTAssertEqualObjects([dictMutable objectForKey:nilStr defaultValue:@"bbb"], @"bbb");
+    [dictMutable setObject:@"ccc" forKey:nilStr];
+    XCTAssertNil([dictMutable objectForKey:nilStr]);
+    XCTAssertNil(dictMutable[nilStr]);
+    XCTAssertEqualObjects([dictMutable objectForKey:nilStr defaultValue:@"bbb"], @"bbb");
+    dictMutable[nilStr] = @"ccc";
+    XCTAssertNil([dictMutable objectForKey:nilStr]);
+    XCTAssertNil(dictMutable[nilStr]);
+    XCTAssertEqualObjects([dictMutable objectForKey:nilStr defaultValue:@"bbb"], @"bbb");
+    [dictMutable setObject:nilStr forKey:@"AAA"];
+    XCTAssertNotNil([dictMutable objectForKey:@"AAA"]);
+    XCTAssertNotNil(dictMutable[@"AAA"]);
+    XCTAssertEqualObjects([dictMutable objectForKey:@"AAA" defaultValue:@"bbb"], @"aaa");
+    dictMutable[@"AAA"] = nilStr;
+    XCTAssertNotNil([dictMutable objectForKey:@"AAA"]);
+    XCTAssertNotNil(dictMutable[@"AAA"]);
+    XCTAssertEqualObjects([dictMutable objectForKey:@"AAA" defaultValue:@"bbb"], @"aaa");
 }
 
 - (void)testNSDictionaryDirectory {

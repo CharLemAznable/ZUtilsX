@@ -173,32 +173,27 @@ ZUX_STATIC_INLINE CGGradientRef CreateGradientWithColorsAndLocations(NSArray *co
 
 @end
 
-@implementation UIImage (ZUXDirectory)
+@implementation UIImage (ZUXCreation)
 
-- (BOOL)writeToUserFile:(NSString *)filePath {
-    return [self writeToUserFile:filePath inDirectory:ZUXDocument];
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName {
+    return [self imageWithContentsOfUserFile:fileName subpath:nil];
 }
 
-+ (UIImage *)imageWithContentsOfUserFile:(NSString *)filePath {
-    return [self imageWithContentsOfUserFile:filePath inDirectory:ZUXDocument];
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath {
+    if ([ZUXDirectory fileExists:fileName inDirectory:ZUXDocument subpath:subpath])
+        return [self imageWithContentsOfUserFile:fileName inDirectory:ZUXDocument subpath:subpath];
+    return [self imageWithContentsOfUserFile:fileName bundle:nil subpath:subpath];
 }
 
-- (BOOL)writeToUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
-    if (ZUX_EXPECT_F(![ZUXDirectory createDirectory:[filePath stringByDeletingLastPathComponent]
-                                        inDirectory:directory])) return NO;
-    return [UIImagePNGRepresentation(self) writeToFile:
-            [ZUXDirectory fullFilePath:filePath inDirectory:directory]
-                                            atomically:YES];
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory {
+    return [self imageWithContentsOfUserFile:fileName inDirectory:directory subpath:nil];
 }
 
-+ (UIImage *)imageWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
-    if (ZUX_EXPECT_F(![ZUXDirectory fileExists:filePath inDirectory:directory])) return nil;
-    return [UIImage imageWithContentsOfFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]];
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
+    NSString *fname = [NSString stringWithFormat:@"%@.png", fileName];
+    if (ZUX_EXPECT_F(![ZUXDirectory fileExists:fname inDirectory:directory subpath:subpath])) return nil;
+    return [self imageWithContentsOfFile:[ZUXDirectory fullFilePath:fname inDirectory:directory subpath:subpath]];
 }
-
-@end
-
-@implementation UIImage (ZUXBundle)
 
 + (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName {
     return [self imageWithContentsOfUserFile:fileName bundle:bundleName subpath:nil];
@@ -206,6 +201,25 @@ ZUX_STATIC_INLINE CGGradientRef CreateGradientWithColorsAndLocations(NSArray *co
 
 + (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath {
     return [ZUXBundle imageWithName:fileName bundle:bundleName subpath:subpath];
+}
+
+@end
+
+@implementation UIImage (ZUXSerialization)
+
+- (BOOL)writeToUserFile:(NSString *)fileName {
+    return [self writeToUserFile:fileName inDirectory:ZUXDocument];
+}
+
+- (BOOL)writeToUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory {
+    return [self writeToUserFile:fileName inDirectory:directory subpath:nil];
+}
+
+- (BOOL)writeToUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
+    if (ZUX_EXPECT_F(![ZUXDirectory createDirectory:[fileName stringByDeletingLastPathComponent]
+                                        inDirectory:directory subpath:subpath])) return NO;
+    return [UIImagePNGRepresentation(self) writeToFile:
+            [ZUXDirectory fullFilePath:fileName inDirectory:directory subpath:subpath] atomically:YES];
 }
 
 @end

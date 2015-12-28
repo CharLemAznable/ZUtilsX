@@ -7,11 +7,91 @@
 //
 
 #import "NSDictionary+ZUX.h"
+#import "NSObject+ZUX.h"
 #import "NSNull+ZUX.h"
 #import "ZUXBundle.h"
 #import "zarc.h"
 
 ZUX_CATEGORY_M(ZUX_NSDictionary)
+
+@interface NSDictionary (ZUXSafe)
+@end
+@implementation NSDictionary (ZUXSafe)
+
+- (id)zux_objectForKey:(id)key {
+    if (!key) return nil;
+    return [self zux_objectForKey:key];
+}
+
+- (id)zux_objectForKeyedSubscript:(id)key {
+    if (!key) return nil;
+    return [self zux_objectForKeyedSubscript:key];
+}
+
++ (void)load {
+    [super load];
+    
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+        [NSClassFromString(@"__NSDictionaryI")
+         swizzleInstanceOriSelector:@selector(objectForKey:)
+         withNewSelector:@selector(zux_objectForKey:)];
+        [NSClassFromString(@"__NSDictionaryI")
+         swizzleInstanceOriSelector:@selector(objectForKeyedSubscript:)
+         withNewSelector:@selector(zux_objectForKeyedSubscript:)];
+    });
+}
+
+@end // NSDictionary (ZUXSafe)
+
+@interface NSMutableDictionary (ZUXSafe)
+@end
+@implementation NSMutableDictionary (ZUXSafe)
+
+- (id)zux_objectForKey:(id)key {
+    if (!key) return nil;
+    return [self zux_objectForKey:key];
+}
+
+- (id)zux_objectForKeyedSubscript:(id)key {
+    if (!key) return nil;
+    return [self zux_objectForKeyedSubscript:key];
+}
+
+- (void)zux_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
+    if (!anObject || !aKey) return;
+    [self zux_setObject:anObject forKey:aKey];
+}
+
+- (void)zux_setObject:(id)anObject forKeyedSubscript:(id<NSCopying>)aKey {
+    if (!anObject || !aKey) return;
+    [self zux_setObject:anObject forKey:aKey];
+}
+
++ (void)load {
+    [super load];
+    
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+        [NSClassFromString(@"__NSDictionaryM")
+         swizzleInstanceOriSelector:@selector(objectForKey:)
+         withNewSelector:@selector(zux_objectForKey:)];
+        [NSClassFromString(@"__NSDictionaryI")
+         swizzleInstanceOriSelector:@selector(objectForKeyedSubscript:)
+         withNewSelector:@selector(zux_objectForKeyedSubscript:)];
+        
+        [NSClassFromString(@"__NSDictionaryM")
+         swizzleInstanceOriSelector:@selector(setObject:forKey:)
+         withNewSelector:@selector(zux_setObject:forKey:)];
+        [NSClassFromString(@"__NSDictionaryM")
+         swizzleInstanceOriSelector:@selector(setObject:forKeyedSubscript:)
+         withNewSelector:@selector(zux_setObject:forKeyedSubscript:)];
+    });
+}
+
+@end // NSMutableDictionary (ZUXSafe)
 
 @implementation NSDictionary (ZUX)
 
@@ -38,7 +118,7 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
     return ZUX_AUTORELEASE([dict copy]);
 }
 
-@end
+@end // NSDictionary (ZUX)
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
 @implementation NSDictionary (ZUXSubscript)
@@ -47,7 +127,7 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
     return [self objectForKey:key];
 }
 
-@end
+@end // NSDictionary (ZUXSubscript)
 
 @implementation NSMutableDictionary (ZUXSubscript)
 
@@ -55,34 +135,56 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
     [self setObject:obj forKey:key];
 }
 
-@end
+@end // NSMutableDictionary (ZUXSubscript)
 #endif // __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
 
-@implementation NSDictionary (ZUXDirectory)
+@implementation NSDictionary (ZUXCreation)
 
-- (BOOL)writeToUserFile:(NSString *)filePath {
-    return [self writeToUserFile:filePath inDirectory:ZUXDocument];
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName {
+    return [self initWithContentsOfUserFile:fileName subpath:nil];
 }
 
-+ (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)filePath {
-    return [self dictionaryWithContentsOfUserFile:filePath inDirectory:ZUXDocument];
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath {
+    if ([ZUXDirectory fileExists:fileName inDirectory:ZUXDocument subpath:subpath])
+        return [self initWithContentsOfUserFile:fileName inDirectory:ZUXDocument subpath:subpath];
+    return [self initWithContentsOfUserFile:fileName bundle:nil subpath:subpath];
 }
 
-- (BOOL)writeToUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
-    if (ZUX_EXPECT_F(![ZUXDirectory createDirectory:[filePath stringByDeletingLastPathComponent]
-                                        inDirectory:directory])) return NO;
-    return [self writeToFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]
-                  atomically:YES];
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory {
+    return [self initWithContentsOfUserFile:fileName inDirectory:directory subpath:nil];
 }
 
-+ (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
-    if (ZUX_EXPECT_F(![ZUXDirectory fileExists:filePath inDirectory:directory])) return nil;
-    return [NSDictionary dictionaryWithContentsOfFile:[ZUXDirectory fullFilePath:filePath inDirectory:directory]];
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
+    if (ZUX_EXPECT_F(![ZUXDirectory fileExists:fileName inDirectory:directory subpath:subpath])) return nil;
+    return [self initWithContentsOfFile:[ZUXDirectory fullFilePath:fileName inDirectory:directory subpath:subpath]];
 }
 
-@end
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName {
+    return [self initWithContentsOfUserFile:fileName bundle:bundleName subpath:nil];
+}
 
-@implementation NSDictionary (ZUXBundle)
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath {
+    return [self initWithContentsOfFile:[ZUXBundle plistPathWithName:fileName bundle:bundleName subpath:subpath]];
+}
+
++ (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)fileName {
+    return [self dictionaryWithContentsOfUserFile:fileName subpath:nil];
+}
+
++ (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath {
+    if ([ZUXDirectory fileExists:fileName inDirectory:ZUXDocument subpath:subpath])
+        return [self dictionaryWithContentsOfUserFile:fileName inDirectory:ZUXDocument subpath:subpath];
+    return [self dictionaryWithContentsOfUserFile:fileName bundle:nil subpath:subpath];
+}
+
++ (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory {
+    return [self dictionaryWithContentsOfUserFile:fileName inDirectory:directory subpath:nil];
+}
+
++ (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
+    if (ZUX_EXPECT_F(![ZUXDirectory fileExists:fileName inDirectory:directory subpath:subpath])) return nil;
+    return [self dictionaryWithContentsOfFile:[ZUXDirectory fullFilePath:fileName inDirectory:directory subpath:subpath]];
+}
 
 + (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName {
     return [self dictionaryWithContentsOfUserFile:fileName bundle:bundleName subpath:nil];
@@ -92,4 +194,22 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
     return [self dictionaryWithContentsOfFile:[ZUXBundle plistPathWithName:fileName bundle:bundleName subpath:subpath]];
 }
 
-@end
+@end // NSDictionary (ZUXCreation)
+
+@implementation NSDictionary (ZUXSerialization)
+
+- (BOOL)writeToUserFile:(NSString *)fileName {
+    return [self writeToUserFile:fileName inDirectory:ZUXDocument];
+}
+
+- (BOOL)writeToUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory {
+    return [self writeToUserFile:fileName inDirectory:directory subpath:nil];
+}
+
+- (BOOL)writeToUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
+    if (ZUX_EXPECT_F(![ZUXDirectory createDirectory:[fileName stringByDeletingLastPathComponent]
+                                        inDirectory:directory subpath:subpath])) return NO;
+    return [self writeToFile:[ZUXDirectory fullFilePath:fileName inDirectory:directory subpath:subpath] atomically:YES];
+}
+
+@end // NSDictionary (ZUXSerialization)

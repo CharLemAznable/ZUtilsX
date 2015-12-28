@@ -17,15 +17,15 @@ ZUX_CATEGORY_M(ZUX_NSObject)
 
 + (void)swizzleInstanceOriSelector:(SEL)oriSelector
                    withNewSelector:(SEL)newSelector {
-    swizzleClassMethod([self class], oriSelector, newSelector);
+    swizzleInstanceMethod([self class], oriSelector, newSelector);
 }
 
 + (void)swizzleClassOriSelector:(SEL)oriSelector
                 withNewSelector:(SEL)newSelector {
-    swizzleClassMethod(object_getClass([self class]), oriSelector, newSelector);
+    swizzleInstanceMethod(object_getClass([self class]), oriSelector, newSelector);
 }
 
-ZUX_STATIC_INLINE void swizzleClassMethod(Class clazz, SEL oriSelector, SEL newSelector) {
+ZUX_STATIC_INLINE void swizzleInstanceMethod(Class clazz, SEL oriSelector, SEL newSelector) {
     Method oriMethod = class_getInstanceMethod(clazz, oriSelector);
     Method newMethod = class_getInstanceMethod(clazz, newSelector);
     if(class_addMethod(clazz, oriSelector,

@@ -11,6 +11,22 @@
 
 @implementation ZUXBundle
 
++ (UIImage *)imageWithName:(NSString *)imageName {
+    return [self imageWithName:imageName bundle:nil];
+}
+
++ (UIImage *)imageForCurrentDeviceWithName:(NSString *)imageName {
+    return [self imageForCurrentDeviceWithName:imageName bundle:nil];
+}
+
++ (NSString *)plistPathWithName:(NSString *)fileName {
+    return [self plistPathWithName:fileName bundle:nil];
+}
+
++ (NSURL *)audioURLWithName:(NSString *)fileName type:(NSString *)fileType {
+    return [self audioURLWithName:fileName type:fileType bundle:nil];
+}
+
 + (UIImage *)imageWithName:(NSString *)imageName bundle:(NSString *)bundleName {
     return [self imageWithName:imageName bundle:bundleName subpath:nil];
 }
@@ -48,7 +64,7 @@
 
 NSString *bundleFilePath(NSString *fileName, NSString *fileType, NSString *bundleName, NSString *subpath) {
     NSBundle *bundle = [NSBundle bundleForClass:[ZUXBundle class]];
-    // if bundleName is nil, search file in mainBundle, ignore the sub directory(dirName).
+    // if bundleName is nil, search file in mainBundle, subpath defines sub folder reference.
     if (!bundleName) return [bundle pathForResource:fileName ofType:fileType inDirectory:subpath];
     
     return [[[[bundle resourcePath] stringByAppendingPathComponent:

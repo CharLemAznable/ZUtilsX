@@ -10,40 +10,73 @@
 
 @implementation ZUXDirectory
 
-+ (NSString *)fullFilePath:(NSString *)filePath {
-    return [self fullFilePath:filePath inDirectory:ZUXDocument];
++ (NSString *)fullFilePath:(NSString *)fileName {
+    return [self fullFilePath:fileName inDirectory:ZUXDocument];
 }
 
-+ (BOOL)fileExists:(NSString *)filePath {
-    return [self fileExists:filePath inDirectory:ZUXDocument];
-}
-
-+ (BOOL)createDirectory:(NSString *)directoryPath {
-    return [self createDirectory:directoryPath inDirectory:ZUXDocument];
++ (BOOL)fileExists:(NSString *)fileName {
+    return [self fileExists:fileName inDirectory:ZUXDocument];
 }
 
 + (BOOL)deleteAllFiles {
     return [self deleteAllFilesInDirectory:ZUXDocument];
 }
 
-+ (NSString *)fullFilePath:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
-    return [[self directoryRoot:directory] stringByAppendingPathComponent:filePath];
++ (BOOL)directoryExists:(NSString *)directoryName {
+    return [self directoryExists:directoryName inDirectory:ZUXDocument];
 }
 
-+ (BOOL)fileExists:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory {
-    NSString *fullFilePath = [self fullFilePath:filePath inDirectory:directory];
-    return [[NSFileManager defaultManager] fileExistsAtPath:fullFilePath];
++ (BOOL)createDirectory:(NSString *)directoryName {
+    return [self createDirectory:directoryName inDirectory:ZUXDocument];
 }
 
-+ (BOOL)createDirectory:(NSString *)directoryPath inDirectory:(ZUXDirectoryType)directory {
-    return [self fileExists:directoryPath inDirectory:directory]
-        || [[NSFileManager defaultManager] createDirectoryAtPath:[self fullFilePath:directoryPath
-                                                                        inDirectory:directory]
-                                     withIntermediateDirectories:YES attributes:nil error:nil];
++ (NSString *)fullFilePath:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory {
+    return [self fullFilePath:fileName inDirectory:directory subpath:nil];
+}
+
++ (BOOL)fileExists:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory {
+    return [self fileExists:fileName inDirectory:directory subpath:nil];
 }
 
 + (BOOL)deleteAllFilesInDirectory:(ZUXDirectoryType)directory {
-    return [[NSFileManager defaultManager] removeItemAtPath:[self directoryRoot:directory] error:nil];
+    return [self deleteAllFilesInDirectory:directory subpath:nil];
+}
+
++ (BOOL)directoryExists:(NSString *)directoryName inDirectory:(ZUXDirectoryType)directory {
+    return [self directoryExists:directoryName inDirectory:directory subpath:nil];
+}
+
++ (BOOL)createDirectory:(NSString *)directoryName inDirectory:(ZUXDirectoryType)directory {
+    return [self createDirectory:directoryName inDirectory:directory subpath:nil];
+}
+
++ (NSString *)fullFilePath:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
+    return [[[self directoryRoot:directory] stringByAppendingPathComponent:
+             subpath] stringByAppendingPathComponent:fileName];
+}
+
++ (BOOL)fileExists:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
+    return [[NSFileManager defaultManager] fileExistsAtPath:
+            [self fullFilePath:fileName inDirectory:directory subpath:subpath]];
+}
+
++ (BOOL)deleteAllFilesInDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
+    return [[NSFileManager defaultManager] removeItemAtPath:
+            [[self directoryRoot:directory] stringByAppendingPathComponent:subpath] error:nil];
+}
+
++ (BOOL)directoryExists:(NSString *)directoryName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
+    BOOL isDirectory;
+    BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:
+                   [self fullFilePath:directoryName inDirectory:directory subpath:subpath] isDirectory:&isDirectory];
+    return exists && isDirectory;
+}
+
++ (BOOL)createDirectory:(NSString *)directoryName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
+    return [self directoryExists:directoryName inDirectory:directory subpath:subpath]
+    || [[NSFileManager defaultManager] createDirectoryAtPath:[self fullFilePath:directoryName
+                                                                    inDirectory:directory subpath:subpath]
+                                 withIntermediateDirectories:YES attributes:nil error:nil];
 }
 
 + (NSString *)documentDirectoryRoot {

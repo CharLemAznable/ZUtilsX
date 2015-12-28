@@ -28,21 +28,23 @@ ZUX_CATEGORY_H(ZUX_UIImage)
 
 @end // UIImage (ZUX)
 
-@interface UIImage (ZUXDirectory)
+@interface UIImage (ZUXCreation)
 
-- (BOOL)writeToUserFile:(NSString *)filePath;
-+ (UIImage *)imageWithContentsOfUserFile:(NSString *)filePath;
-
-- (BOOL)writeToUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
-+ (UIImage *)imageWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
-
-@end // UIImage (ZUXDirectory)
-
-@interface UIImage (ZUXBundle)
-
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName;
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath;
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
++ (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
 + (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
 + (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
 
-@end // UIImage (ZUXBundle)
+@end // UIImage (ZUXCreation)
+
+@interface UIImage (ZUXSerialization)
+
+- (BOOL)writeToUserFile:(NSString *)fileName;
+- (BOOL)writeToUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
+- (BOOL)writeToUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
+
+@end // UIImage (ZUXSerialization)
 
 #endif /* ZUtilsX_UIImage_ZUX_h */

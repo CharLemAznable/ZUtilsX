@@ -16,14 +16,26 @@
 @interface ZUXColorDictionary : NSObject
 
 - (ZUX_INSTANCETYPE)initWithDictionary:(NSDictionary *)dictionary;
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)filePath;
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
 - (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
 - (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
 
++ (ZUXColorDictionary *)colorDictionaryWithDictionary:(NSDictionary *)dictionary;
++ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName;
++ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath;
++ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
++ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
++ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
++ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
+
 - (void)reloadWithDictionary:(NSDictionary *)dictionary;
-- (void)reloadWithContentsOfUserFile:(NSString *)filePath;
-- (void)reloadWithContentsOfUserFile:(NSString *)filePath inDirectory:(ZUXDirectoryType)directory;
+- (void)reloadWithContentsOfUserFile:(NSString *)fileName;
+- (void)reloadWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath;
+- (void)reloadWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
+- (void)reloadWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
 - (void)reloadWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
 - (void)reloadWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
 
