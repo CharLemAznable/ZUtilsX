@@ -13,7 +13,7 @@
 
 ZUX_CATEGORY_M(ZUX_UINavigationBar)
 
-@implementation UINavigationBar (ZUX)
+@implementation UINavigationBar (ZUXAppearance)
 
 #pragma mark - translucent -
 

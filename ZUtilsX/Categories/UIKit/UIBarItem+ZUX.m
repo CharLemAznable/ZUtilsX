@@ -13,7 +13,7 @@
 
 ZUX_CATEGORY_M(ZUX_UIBarItem)
 
-@implementation UIBarItem (ZUX)
+@implementation UIBarItem (ZUXAppearance)
 
 #pragma mark - textFont -
 

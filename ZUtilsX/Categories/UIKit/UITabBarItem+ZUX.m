@@ -13,7 +13,7 @@
 
 ZUX_CATEGORY_M(ZUX_UITabBarItem)
 
-@implementation UITabBarItem (ZUX)
+@implementation UITabBarItem (ZUXAppearance)
 
 + (id)tabBarItemWithTitle:(NSString *)title image:(UIImage *)image selectedImage:(UIImage *)selectedImage {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000

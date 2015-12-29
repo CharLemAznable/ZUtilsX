@@ -13,7 +13,7 @@
 
 ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
 
-@implementation UIBarButtonItem (ZUX)
+@implementation UIBarButtonItem (ZUXAppearance)
 
 #pragma mark - tintColor -
 

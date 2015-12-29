@@ -14,7 +14,7 @@
 
 ZUX_CATEGORY_H(ZUX_UITabBarItem)
 
-@interface UITabBarItem (ZUX)
+@interface UITabBarItem (ZUXAppearance)
 
 + (id)tabBarItemWithTitle:(NSString *)title image:(UIImage *)image selectedImage:(UIImage *)selectedImage;
 

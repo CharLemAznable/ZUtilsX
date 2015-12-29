@@ -15,7 +15,7 @@
 
 ZUX_CATEGORY_H(ZUX_UINavigationBar)
 
-@interface UINavigationBar (ZUX)
+@interface UINavigationBar (ZUXAppearance)
 
 + (BOOL)isTranslucent;
 + (void)setTranslucent:(BOOL)translucent;

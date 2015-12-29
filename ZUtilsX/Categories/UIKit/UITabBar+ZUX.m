@@ -14,6 +14,29 @@ ZUX_CATEGORY_M(ZUX_UITabBar)
 
 @implementation UITabBar (ZUX)
 
+- (NSArray ZUX_GENERIC(UIView *) *)barButtons {
+    NSMutableArray *barButtons = [NSMutableArray array];
+    [self.subviews enumerateObjectsUsingBlock:
+     ^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+         if ([NSStringFromClass([obj class]) isEqualToString:@"UITabBarButton"])
+             [barButtons addObject:obj];
+     }];
+    return barButtons;
+}
+
+@end
+
+@implementation UITabBar (ZUXAppearance)
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
+- (BOOL)isTranslucent {
+    return NO;
+}
+
+- (void)setTranslucent:(BOOL)translucent {
+}
+#endif
+
 + (BOOL)isTranslucent {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
@@ -87,16 +110,3 @@ ZUX_CATEGORY_M(ZUX_UITabBar)
 }
 
 @end
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
-@implementation UITabBar (ZUXTranslucent)
-
-- (BOOL)isTranslucent {
-    return NO;
-}
-
-- (void)setTranslucent:(BOOL)translucent {
-}
-
-@end
-#endif

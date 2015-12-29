@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
+#import "zobjc.h"
 #import "zarc.h"
 
 #ifndef ZUtilsX_UITabBar_ZUX_h
@@ -17,6 +18,15 @@ ZUX_CATEGORY_H(ZUX_UITabBar)
 
 @interface UITabBar (ZUX)
 
+@property (nonatomic, readonly) NSArray ZUX_GENERIC(UIView *) *barButtons;
+
+@end
+
+@interface UITabBar (ZUXAppearance)
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
+@property (nonatomic, getter=isTranslucent) BOOL translucent;
+#endif
 + (BOOL)isTranslucent;
 + (void)setTranslucent:(BOOL)translucent;
 
@@ -39,13 +49,5 @@ ZUX_CATEGORY_H(ZUX_UITabBar)
 + (void)setSelectedImageTintColor:(UIColor *)selectedImageTintColor;
 
 @end
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
-@interface UITabBar (ZUXTranslucent)
-
-@property (nonatomic, getter=isTranslucent) BOOL translucent;
-
-@end
-#endif
 
 #endif /* ZUtilsX_UITabBar_ZUX_h */
