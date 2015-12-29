@@ -479,12 +479,15 @@
 
 - UINavigationBar+ZUX
 
-        // 添加自定义样式方法, 可自定义透明模式, tint颜色, 背景颜色/图片, 字体, 字色, 文字阴影.
+        // 添加自定义样式方法, 可自定义透明模式, tint颜色, barTint颜色, 背景颜色/图片, 字体, 字色, 文字阴影.
         +isTranslucent
         +setTranslucent:
 
         +tintColor
         +setTintColor:
+
+        +barTintColor
+        +setBarTintColor:
 
         -defaultBackgroundImage
         -setDefaultBackgroundImage:
@@ -531,7 +534,7 @@
 
 - UITabBar+ZUX
 
-        // 添加自定义样式方法, 可自定义透明模式, 背景图片, 选中项背景图片, 选中项tint颜色.
+        // 添加自定义样式方法, 可自定义透明模式, 背景图片, 选中项背景图片, 选中项tint颜色, barTint颜色.
         +isTranslucent
         +setTranslucent:
 
@@ -543,6 +546,9 @@
 
         +tintColor
         +setTintColor:
+
+        +barTintColor
+        +setBarTintColor:
 
         +selectedImageTintColor
         +setSelectedImageTintColor:

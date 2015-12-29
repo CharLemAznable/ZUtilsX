@@ -23,6 +23,9 @@ ZUX_CATEGORY_H(ZUX_UINavigationBar)
 + (UIColor *)tintColor;
 + (void)setTintColor:(UIColor *)tintColor;
 
++ (UIColor *)barTintColor;
++ (void)setBarTintColor:(UIColor *)barTintColor;
+
 @property (nonatomic, ZUX_STRONG) UIImage *defaultBackgroundImage;
 
 + (UIImage *)defaultBackgroundImage;

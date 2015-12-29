@@ -21,6 +21,9 @@
     NSDictionary *dict = @{@"last name":@"Doe", @"first name":@"John"};
     NSString *parametric = @"He's name is ${first name}·${last name}.";
     XCTAssertEqualObjects([parametric parametricStringWithObject:dict], @"He's name is John·Doe.");
+    
+    NSArray *array = @[@1, @"is", @"name"];
+    XCTAssertTrue([@"He's name is John·Doe. 1" containsAllOfStringInArray:array]);
 }
 
 @end

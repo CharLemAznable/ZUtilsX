@@ -106,22 +106,22 @@ ZUX_CATEGORY_M(ZUX_NSString)
 }
 
 - (BOOL)containsAnyOfStringInArray:(NSArray *)array {
-    for (NSString *item in array) if ([self containsString:item]) return YES;
+    for (id item in array) if ([self containsString:[item description]]) return YES;
     return NO;
 }
 
 - (BOOL)containsAnyOfCaseInsensitiveStringInArray:(NSArray *)array {
-    for (NSString *item in array) if ([self containsCaseInsensitiveString:item]) return YES;
+    for (id item in array) if ([self containsCaseInsensitiveString:[item description]]) return YES;
     return NO;
 }
 
 - (BOOL)containsAllOfStringInArray:(NSArray *)array {
-    for (NSString *item in array) if (![self containsString:item]) return NO;
+    for (id item in array) if (![self containsString:[item description]]) return NO;
     return YES;
 }
 
 - (BOOL)containsAllOfCaseInsensitiveStringInArray:(NSArray *)array {
-    for (NSString *item in array) if (![self containsCaseInsensitiveString:item]) return NO;
+    for (id item in array) if (![self containsCaseInsensitiveString:[item description]]) return NO;
     return YES;
 }
 

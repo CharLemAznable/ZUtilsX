@@ -35,6 +35,21 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
     [APPEARANCE setTintColor:tintColor];
 }
 
++ (UIColor *)barTintColor {
+    return
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    !IOS7_OR_LATER ? nil :
+#endif
+    [APPEARANCE barTintColor];
+}
+
++ (void)setBarTintColor:(UIColor *)barTintColor {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
+    if (!IOS7_OR_LATER) return;
+#endif
+    [APPEARANCE setBarTintColor:barTintColor];
+}
+
 #pragma mark - backgroundImage -
 
 - (UIImage *)defaultBackgroundImage {

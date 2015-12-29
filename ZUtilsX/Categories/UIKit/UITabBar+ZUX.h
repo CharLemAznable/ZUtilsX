@@ -29,6 +29,9 @@ ZUX_CATEGORY_H(ZUX_UITabBar)
 + (UIColor *)tintColor;
 + (void)setTintColor:(UIColor *)tintColor;
 
++ (UIColor *)barTintColor;
++ (void)setBarTintColor:(UIColor *)barTintColor;
+
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 @property (nonatomic, ZUX_STRONG) UIColor *selectedImageTintColor;
 #endif
