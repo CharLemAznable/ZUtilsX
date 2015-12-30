@@ -19,9 +19,11 @@
 @implementation ZUXColorDictionary
 
 + (void)load {
-    [super load];
-    ZUX_ENABLE_CATEGORY(ZUX_NSDictionary);
-    ZUX_ENABLE_CATEGORY(ZUX_UIColor);
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+        ZUX_ENABLE_CATEGORY(ZUX_NSDictionary);
+        ZUX_ENABLE_CATEGORY(ZUX_UIColor);
+    });
 }
 
 - (ZUX_INSTANCETYPE)init {

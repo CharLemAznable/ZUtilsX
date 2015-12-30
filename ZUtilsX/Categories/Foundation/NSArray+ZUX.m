@@ -29,8 +29,6 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 }
 
 + (void)load {
-    [super load];
-    
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
         ZUX_ENABLE_CATEGORY(ZUX_NSObject);
@@ -80,8 +78,6 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 }
 
 + (void)load {
-    [super load];
-    
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
         ZUX_ENABLE_CATEGORY(ZUX_NSObject);

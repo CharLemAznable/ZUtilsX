@@ -119,28 +119,28 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 #pragma mark - Swizzle Methods -
    
 + (void)load {
-    [super load];
-    
-    ZUX_ENABLE_CATEGORY(ZUX_NSObject);
-    // init
-    [self swizzleInstanceOriSelector:@selector(init)
-                     withNewSelector:@selector(zuxInit)];
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+        // init
+        [self swizzleInstanceOriSelector:@selector(init)
+                         withNewSelector:@selector(zuxInit)];
 #if !IS_ARC
-    // dealloc
-    [self swizzleInstanceOriSelector:@selector(dealloc)
-                     withNewSelector:@selector(zuxDealloc)];
+        // dealloc
+        [self swizzleInstanceOriSelector:@selector(dealloc)
+                         withNewSelector:@selector(zuxDealloc)];
 #endif
-    // state
-    [self swizzleInstanceOriSelector:@selector(setHighlighted:)
-                     withNewSelector:@selector(zuxSetHighlighted:)];
-    [self swizzleInstanceOriSelector:@selector(setSelected:)
-                     withNewSelector:@selector(zuxSetSelected:)];
-    [self swizzleInstanceOriSelector:@selector(setEnabled:)
-                     withNewSelector:@selector(zuxSetEnabled:)];
+        // state
+        [self swizzleInstanceOriSelector:@selector(setHighlighted:)
+                         withNewSelector:@selector(zuxSetHighlighted:)];
+        [self swizzleInstanceOriSelector:@selector(setSelected:)
+                         withNewSelector:@selector(zuxSetSelected:)];
+        [self swizzleInstanceOriSelector:@selector(setEnabled:)
+                         withNewSelector:@selector(zuxSetEnabled:)];
+    });
 }
 
 - (ZUX_INSTANCETYPE)zuxInit {
-    ZUX_ENABLE_CATEGORY(ZUX_NSObject);
     [self setProperty:[NSMutableDictionary dictionary] forAssociateKey:zBorderWidthsKey];
     [self setProperty:[NSMutableDictionary dictionary] forAssociateKey:zBorderColorsKey];
     
@@ -153,7 +153,6 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 }
 
 - (void)zuxDealloc {
-    ZUX_ENABLE_CATEGORY(ZUX_NSObject);
     [self setProperty:nil forAssociateKey:zBorderWidthsKey];
     [self setProperty:nil forAssociateKey:zBorderColorsKey];
     

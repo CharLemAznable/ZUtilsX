@@ -32,12 +32,13 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 #pragma mark - Swizzle & Override Methods -
 
 + (void)load {
-    [super load];
-    
-    ZUX_ENABLE_CATEGORY(ZUX_NSObject);
-    // swizzle loadView
-    [self swizzleInstanceOriSelector:@selector(loadView)
-                     withNewSelector:@selector(zuxLoadView)];
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+        // swizzle loadView
+        [self swizzleInstanceOriSelector:@selector(loadView)
+                         withNewSelector:@selector(zuxLoadView)];
+    });
 }
 
 - (void)zuxLoadView {
@@ -85,27 +86,28 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 @implementation UIViewController (ZUX_Private)
 
 + (void)load {
-    [super load];
-    
-    ZUX_ENABLE_CATEGORY(ZUX_NSObject);
-    // preferredStatusBarStyle
-    [self swizzleInstanceOriSelector:@selector(preferredStatusBarStyle)
-                     withNewSelector:@selector(zuxPreferredStatusBarStyle)];
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+        // preferredStatusBarStyle
+        [self swizzleInstanceOriSelector:@selector(preferredStatusBarStyle)
+                         withNewSelector:@selector(zuxPreferredStatusBarStyle)];
 #if !IS_ARC
-    // dealloc
-    [self swizzleInstanceOriSelector:@selector(dealloc)
-                     withNewSelector:@selector(zuxDealloc)];
+        // dealloc
+        [self swizzleInstanceOriSelector:@selector(dealloc)
+                         withNewSelector:@selector(zuxPrivateDealloc)];
 #endif
+    });
 }
 
 - (UIStatusBarStyle)zuxPreferredStatusBarStyle {
     return [self p_StatusBarStyle];
 }
 
-- (void)zuxDealloc {
+- (void)zuxPrivateDealloc {
     ZUX_ENABLE_CATEGORY(ZUX_NSObject);
     [self setProperty:nil forAssociateKey:p_StatusBarStyleKey];
-    [self zuxDealloc];
+    [self zuxPrivateDealloc];
 }
 
 NSString *const p_StatusBarStyleKey = @"p_StatusBarStyle";
