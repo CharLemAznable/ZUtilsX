@@ -19,7 +19,7 @@ ZUX_CATEGORY_H(ZUX_UIView)
 @interface UIView (ZUX)
 
 // Clip to Bounds.
-@property BOOL      maskToBounds;
+@property BOOL      masksToBounds;
 
 // Corner.
 @property CGFloat   cornerRadius;
@@ -107,5 +107,24 @@ ZUX_EXTERN ZUXAnimation ZUXImmediateAnimationMake(ZUXAnimateType type,
 - (void)zuxAnimate:(ZUXAnimation)animation completion:(void (^)())completion;
 
 @end // UIView (ZUXAnimate)
+
+@interface UIView (ZUXBadge)
+
+- (void)showBadge;
+- (void)showBadgeWithValue:(NSString *)badgeValue;
+- (void)hideBadge;
+
+// default text font <font-family: ".SFUIText-Regular"; font-weight: normal; font-style: normal; font-size: 13.00pt>
+@property (nonatomic, ZUX_STRONG) UIFont   *badgeTextFont;
+// default text color [UIColor whiteColor]
+@property (nonatomic, ZUX_STRONG) UIColor  *badgeTextColor;
+// default color [UIColor redColor]
+@property (nonatomic, ZUX_STRONG) UIColor  *badgeColor;
+// default offset (0, 0), center position (bounds.size.width, badgeSize/4).
+@property (nonatomic)             CGSize    badgeOffset;
+// default size 8, badge is a circle of radius 4. Effect badge size when badgeValue is nil or empty.
+@property (nonatomic)             CGFloat   badgeSize;
+
+@end // UIView (ZUXBadge)
 
 #endif /* ZUtilsX_UIView_ZUX_h */

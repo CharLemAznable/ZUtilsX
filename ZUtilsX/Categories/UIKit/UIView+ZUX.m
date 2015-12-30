@@ -8,7 +8,12 @@
 
 #import "UIView+ZUX.h"
 #import "NSObject+ZUX.h"
+#import "NSNull+ZUX.h"
+#import "NSNumber+ZUX.h"
+#import "NSString+ZUX.h"
+#import "UILabel+ZUX.h"
 #import "ZUXTransform.h"
+#import "zadapt.h"
 #import <objc/runtime.h>
 
 ZUX_CATEGORY_M(ZUX_UIView)
@@ -17,12 +22,12 @@ ZUX_CATEGORY_M(ZUX_UIView)
 
 #pragma mark - Properties Methods -
 
-- (BOOL)maskToBounds {
+- (BOOL)masksToBounds {
     return self.layer.masksToBounds;
 }
 
-- (void)setMaskToBounds:(BOOL)maskToBounds {
-    self.layer.masksToBounds = maskToBounds;
+- (void)setMasksToBounds:(BOOL)masksToBounds {
+    self.layer.masksToBounds = masksToBounds;
 }
 
 - (CGFloat)cornerRadius {
@@ -123,17 +128,18 @@ NSString *const zTransformViewBoundsKVOKey  = @"bounds";
 #pragma mark - Swizzle & Override Methods -
 
 + (void)load {
-    [super load];
-    
-    ZUX_ENABLE_CATEGORY(ZUX_NSObject);
-    // observe superview change
-    [self swizzleInstanceOriSelector:@selector(willMoveToSuperview:)
-                     withNewSelector:@selector(zuxWillMoveToSuperview:)];
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+        // observe superview change
+        [self swizzleInstanceOriSelector:@selector(willMoveToSuperview:)
+                         withNewSelector:@selector(zuxWillMoveToSuperview:)];
 #if !IS_ARC
-    // dealloc with removeObserver
-    [self swizzleInstanceOriSelector:@selector(dealloc)
-                     withNewSelector:@selector(zuxDealloc)];
+        // dealloc with removeObserver
+        [self swizzleInstanceOriSelector:@selector(dealloc)
+                         withNewSelector:@selector(zuxAutoLayoutDealloc)];
 #endif
+    });
 }
 
 - (void)zuxWillMoveToSuperview:(UIView *)newSuperview {
@@ -144,12 +150,12 @@ NSString *const zTransformViewBoundsKVOKey  = @"bounds";
     }
 }
 
-- (void)zuxDealloc {
+- (void)zuxAutoLayoutDealloc {
     [self p_RemoveFrameAndBoundsObserversFromView:self.zTransform.view];
     [self p_RemoveObserversFromTransform:self.zTransform];
     objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(zTransformKVOKey),
                              nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    [self zuxDealloc];
+    [self zuxAutoLayoutDealloc];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
@@ -423,6 +429,146 @@ ZUX_STATIC_INLINE CGVector ZUXAnimateTranslateVector(UIView *view, ZUXAnimation 
     if (hasZUXAnimateDirection(animation, ZUXAnimateRight)) vector.dx -= direction * relativeSize.width;
     
     return vector;
+}
+
+@end
+
+#pragma mark - General badge -
+
+static NSInteger const ZUX_BADGE_TAG = 2147520;
+
+NSString *const zBadgeTextFontKVOKey    = @"zbadgeTextFont";
+NSString *const zBadgeTextColorKVOKey   = @"zbadgeTextColor";
+NSString *const zBadgeColorKVOKey       = @"zbadgeColor";
+NSString *const zBadgeOffsetKVOKey      = @"zbadgeOffset";
+NSString *const zBadgeSizeKVOKey        = @"zbadgeSize";
+
+@implementation UIView (ZUXBadge)
+
+- (void)showBadge {
+    [self showBadgeWithValue:nil];
+}
+
+- (void)showBadgeWithValue:(NSString *)badgeValue {
+    [self hideBadge];
+    self.masksToBounds = NO;
+    
+    UILabel *badgeLabel = ZUX_AUTORELEASE([[UILabel alloc] init]);
+    badgeLabel.tag = ZUX_BADGE_TAG;
+    badgeLabel.backgroundColor = self.badgeColor;
+    badgeLabel.masksToBounds = YES;
+    [self addSubview:badgeLabel];
+    
+    CGSize offset = self.badgeOffset;
+    ZUX_ENABLE_CATEGORY(ZUX_NSNull);
+    ZUX_ENABLE_CATEGORY(ZUX_NSString);
+    if ([NSNull isNotNull:badgeValue] && [badgeValue isNotEmpty]) {
+        badgeLabel.text = badgeValue;
+        badgeLabel.font = self.badgeTextFont;
+        badgeLabel.textColor = self.badgeTextColor;
+        badgeLabel.textAlignment = ZUXTextAlignmentCenter;
+        
+        ZUX_ENABLE_CATEGORY(ZUX_UILabel);
+        CGSize size = [badgeLabel sizeThatConstraintToSize:
+                       CGSizeMake(self.bounds.size.width, self.bounds.size.height)];
+        badgeLabel.center = CGPointMake(self.bounds.size.width + offset.width, size.height / 4 + offset.height);
+        badgeLabel.bounds = CGRectMake(0, 0, MAX(size.width + badgeLabel.font.pointSize / 2, size.height), size.height);
+        badgeLabel.cornerRadius = size.height / 2;
+        
+    } else {
+        CGFloat badgeSize = self.badgeSize;
+        badgeLabel.center = CGPointMake(self.bounds.size.width + offset.width, badgeSize / 4 + offset.height);
+        badgeLabel.bounds = CGRectMake(0, 0, badgeSize, badgeSize);
+        badgeLabel.cornerRadius = badgeSize / 2;
+    }
+}
+
+- (void)hideBadge {
+    [[self viewWithTag:ZUX_BADGE_TAG] removeFromSuperview];
+}
+
+- (UIFont *)badgeTextFont {
+    return [self propertyForAssociateKey:zBadgeTextFontKVOKey] ?: [UIFont fontWithName:@".SFUIText-Regular" size:13];
+}
+
+- (void)setBadgeTextFont:(UIFont *)badgeTextFont {
+    [self setProperty:badgeTextFont forAssociateKey:zBadgeTextFontKVOKey];
+    
+    ((UILabel *)[self viewWithTag:ZUX_BADGE_TAG]).font = self.badgeTextFont;
+}
+
+- (UIColor *)badgeTextColor {
+    return [self propertyForAssociateKey:zBadgeTextColorKVOKey] ?: [UIColor whiteColor];
+}
+
+- (void)setBadgeTextColor:(UIColor *)badgeTextColor {
+    [self setProperty:badgeTextColor forAssociateKey:zBadgeTextColorKVOKey];
+    
+    ((UILabel *)[self viewWithTag:ZUX_BADGE_TAG]).textColor = self.badgeTextColor;
+}
+
+- (UIColor *)badgeColor {
+    return [self propertyForAssociateKey:zBadgeColorKVOKey] ?: [UIColor redColor];
+}
+
+- (void)setBadgeColor:(UIColor *)badgeColor {
+    [self setProperty:badgeColor forAssociateKey:zBadgeColorKVOKey];
+    
+    [self viewWithTag:ZUX_BADGE_TAG].backgroundColor = self.badgeColor;
+}
+
+- (CGSize)badgeOffset {
+    NSValue *badgeOffset = [self propertyForAssociateKey:zBadgeOffsetKVOKey];
+    return badgeOffset ? [badgeOffset CGSizeValue] : CGSizeZero;
+}
+
+- (void)setBadgeOffset:(CGSize)badgeOffset {
+    CGSize oriOffset = self.badgeOffset;
+    CGPoint center = [self viewWithTag:ZUX_BADGE_TAG].center;
+    
+    [self setProperty:[NSValue valueWithCGSize:badgeOffset] forAssociateKey:zBadgeOffsetKVOKey];
+    
+    [self viewWithTag:ZUX_BADGE_TAG].center = CGPointMake(center.x - oriOffset.width + badgeOffset.width,
+                                                          center.y - oriOffset.height + badgeOffset.height);
+}
+
+- (CGFloat)badgeSize {
+    NSNumber *badgeSize = [self propertyForAssociateKey:zBadgeSizeKVOKey];
+    ZUX_ENABLE_CATEGORY(ZUX_NSNumber);
+    return badgeSize ? [badgeSize cgfloatValue] : 8;
+}
+
+- (void)setBadgeSize:(CGFloat)badgeSize {
+    ZUX_ENABLE_CATEGORY(ZUX_NSNumber);
+    [self setProperty:[NSNumber numberWithCGFloat:badgeSize] forAssociateKey:zBadgeSizeKVOKey];
+    
+    if (!((UILabel *)[self viewWithTag:ZUX_BADGE_TAG]).text) {
+        [self viewWithTag:ZUX_BADGE_TAG].bounds = CGRectMake(0, 0, badgeSize, badgeSize);
+        [self viewWithTag:ZUX_BADGE_TAG].cornerRadius = badgeSize / 2;
+    }
+}
+
+#pragma mark - Swizzle & Override Methods -
+
++ (void)load {
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+#if !IS_ARC
+        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+        // dealloc badge's associate objects
+        [self swizzleInstanceOriSelector:@selector(dealloc)
+                         withNewSelector:@selector(zuxBadgeDealloc)];
+#endif
+    });
+}
+
+- (void)zuxBadgeDealloc {
+    [self setProperty:nil forAssociateKey:zBadgeTextFontKVOKey];
+    [self setProperty:nil forAssociateKey:zBadgeTextColorKVOKey];
+    [self setProperty:nil forAssociateKey:zBadgeColorKVOKey];
+    [self setProperty:nil forAssociateKey:zBadgeOffsetKVOKey];
+    [self setProperty:nil forAssociateKey:zBadgeSizeKVOKey];
+    [self zuxBadgeDealloc];
 }
 
 @end

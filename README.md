@@ -305,7 +305,7 @@
 - UIView+ZUX
 
         // 添加属性: (Layer)
-        maskToBounds
+        masksToBounds
         cornerRadius
         borderWidth
         borderColor
@@ -366,6 +366,18 @@
         (NS_OPTIONS)    ZUXAnimateDirection // NS_OPTIONS, 指定平移/翻页动画方向
 
         (struct)        ZUXAnimation // 定义动画类型/方向/持续时间/延迟时间
+
+        // 通用badge
+        -showBadge
+        -showBadgeWithValue:
+        -hideBadge
+
+        // 通用badge相关属性
+        badgeTextFont
+        badgeTextColor
+        badgeColor
+        badgeOffset
+        badgeSize
 
 - UIControl+ZUX
 
