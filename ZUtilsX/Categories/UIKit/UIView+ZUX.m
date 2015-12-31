@@ -14,6 +14,7 @@
 #import "UILabel+ZUX.h"
 #import "ZUXTransform.h"
 #import "zadapt.h"
+#import "zappearance.h"
 #import <objc/runtime.h>
 
 ZUX_CATEGORY_M(ZUX_UIView)
@@ -569,6 +570,98 @@ NSString *const zBadgeSizeKVOKey        = @"zbadgeSize";
     [self setProperty:nil forAssociateKey:zBadgeOffsetKVOKey];
     [self setProperty:nil forAssociateKey:zBadgeSizeKVOKey];
     [self zuxBadgeDealloc];
+}
+
+@end
+
+@implementation UIView (ZUXAppearance)
+
++ (CGFloat)borderWidth {
+    return [(UIView *)APPEARANCE borderWidth];
+}
+
++ (void)setBorderWidth:(CGFloat)borderWidth {
+    [(UIView *)APPEARANCE setBorderWidth:borderWidth];
+}
+
++ (UIColor *)borderColor {
+    return [(UIView *)APPEARANCE borderColor];
+}
+
++ (void)setBorderColor:(UIColor *)borderColor {
+    [(UIView *)APPEARANCE setBorderColor:borderColor];
+}
+
++ (UIColor *)shadowColor {
+    return [(UIView *)APPEARANCE shadowColor];
+}
+
++ (void)setShadowColor:(UIColor *)shadowColor {
+    [(UIView *)APPEARANCE setShadowColor:shadowColor];
+}
+
++ (float)shadowOpacity {
+    return [(UIView *)APPEARANCE shadowOpacity];
+}
+
++ (void)setShadowOpacity:(float)shadowOpacity {
+    [(UIView *)APPEARANCE setShadowOpacity:shadowOpacity];
+}
+
++ (CGSize)shadowOffset {
+    return [(UIView *)APPEARANCE shadowOffset];
+}
+
++ (void)setShadowOffset:(CGSize)shadowOffset {
+    [(UIView *)APPEARANCE setShadowOffset:shadowOffset];
+}
+
++ (CGFloat)shadowSize {
+    return [(UIView *)APPEARANCE shadowSize];
+}
+
++ (void)setShadowSize:(CGFloat)shadowSize {
+    [(UIView *)APPEARANCE setShadowSize:shadowSize];
+}
+
++ (UIFont *)badgeTextFont {
+    return [APPEARANCE badgeTextFont];
+}
+
++ (void)setBadgeTextFont:(UIFont *)badgeTextFont {
+    [APPEARANCE setBadgeTextFont:badgeTextFont];
+}
+
++ (UIColor *)badgeTextColor {
+    return [APPEARANCE badgeTextColor];
+}
+
++ (void)setBadgeTextColor:(UIColor *)badgeTextColor {
+    [APPEARANCE setBadgeTextColor:badgeTextColor];
+}
+
++ (UIColor *)badgeColor {
+    return [APPEARANCE badgeColor];
+}
+
++ (void)setBadgeColor:(UIColor *)badgeColor {
+    [APPEARANCE setBadgeColor:badgeColor];
+}
+
++ (CGSize)badgeOffset {
+    return [APPEARANCE badgeOffset];
+}
+
++ (void)setBadgeOffset:(CGSize)badgeOffset {
+    [APPEARANCE setBadgeOffset:badgeOffset];
+}
+
++ (CGFloat)badgeSize {
+    return [APPEARANCE badgeSize];
+}
+
++ (void)setBadgeSize:(CGFloat)badgeSize {
+    [APPEARANCE setBadgeSize:badgeSize];
 }
 
 @end

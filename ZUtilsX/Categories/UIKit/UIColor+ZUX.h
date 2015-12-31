@@ -18,13 +18,10 @@ ZUX_CATEGORY_H(ZUX_UIColor)
 
 // Convenience methods for creating autoreleased colors with integer between 0 and 255
 + (UIColor *)colorWithIntegerRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue;
-
 // Convenience methods for creating autoreleased colors with integer between 0 and 255
 + (UIColor *)colorWithIntegerRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(NSUInteger)alpha;
-
 // Convenience methods for creating autoreleased colors with HEX String like "ff3344"
 + (UIColor *)colorWithRGBHexString:(NSString *)hexString;
-
 // Convenience methods for creating autoreleased colors with HEX String like "ff3344ff"
 + (UIColor *)colorWithRGBAHexString:(NSString *)hexString;
 

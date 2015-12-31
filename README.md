@@ -379,7 +379,40 @@
         badgeOffset
         badgeSize
 
+        // 自定义样式方法
+        +borderWidth
+        +setBorderWidth:
+        +borderColor
+        +setBorderColor:
+        +shadowColor
+        +setShadowColor:
+        +shadowOpacity
+        +setShadowOpacity:
+        +shadowOffset
+        +setShadowOffset:
+        +shadowSize
+        +setShadowSize:
+
+        +badgeTextFont
+        +setBadgeTextFont:
+        +badgeTextColor
+        +setBadgeTextColor:
+        +badgeColor
+        +setBadgeColor:
+        +badgeOffset
+        +setBadgeOffset:
+        +badgeSize
+        +setBadgeSize:
+
 - UIControl+ZUX
+
+        // 添加-(someAttribute)ForState:方法
+        -borderWidthForState:
+        -borderColorForState:
+        -shadowColorForState:
+        -shadowOpacityForState:
+        -shadowOffsetForState:
+        -shadowSizeForState:
 
         // 添加-set(SomeAttribute):forState:方法
         -setBorderWidth:forState:
@@ -389,13 +422,19 @@
         -setShadowOffset:forState:
         -setShadowSize:forState:
 
-        // 添加-(someAttribute)ForState:方法
-        -borderWidthForState:
-        -borderColorForState:
-        -shadowColorForState:
-        -shadowOpacityForState:
-        -shadowOffsetForState:
-        -shadowSizeForState:
+        // 自定义样式方法
+        +borderWidthForState:
+        +setBorderWidth:forState:
+        +borderColorForState:
+        +setBorderColor:forState:
+        +shadowColorForState:
+        +setShadowColor:forState:
+        +shadowOpacityForState:
+        +setShadowOpacity:forState:
+        +shadowOffsetForState:
+        +setShadowOffset:forState:
+        +shadowSizeForState:
+        +setShadowSize:forState:
 
 - UILabel+ZUX
 

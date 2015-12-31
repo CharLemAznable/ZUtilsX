@@ -25,14 +25,14 @@ ZUX_CATEGORY_H(ZUX_UIView)
 @property CGFloat   cornerRadius;
 
 // Border.
-@property CGFloat   borderWidth;
-@property UIColor  *borderColor;
+@property CGFloat   borderWidth     UI_APPEARANCE_SELECTOR;
+@property UIColor  *borderColor     UI_APPEARANCE_SELECTOR;
 
 // Shadow.
-@property UIColor  *shadowColor;
-@property float     shadowOpacity;
-@property CGSize    shadowOffset;
-@property CGFloat   shadowSize;
+@property UIColor  *shadowColor     UI_APPEARANCE_SELECTOR;
+@property float     shadowOpacity   UI_APPEARANCE_SELECTOR;
+@property CGSize    shadowOffset    UI_APPEARANCE_SELECTOR;
+@property CGFloat   shadowSize      UI_APPEARANCE_SELECTOR;
 
 // Screenshots.
 - (UIImage *)imageRepresentation;
@@ -115,16 +115,53 @@ ZUX_EXTERN ZUXAnimation ZUXImmediateAnimationMake(ZUXAnimateType type,
 - (void)hideBadge;
 
 // default text font <font-family: ".SFUIText-Regular"; font-weight: normal; font-style: normal; font-size: 13.00pt>
-@property (nonatomic, ZUX_STRONG) UIFont   *badgeTextFont;
+@property (nonatomic, ZUX_STRONG) UIFont   *badgeTextFont   UI_APPEARANCE_SELECTOR;
 // default text color [UIColor whiteColor]
-@property (nonatomic, ZUX_STRONG) UIColor  *badgeTextColor;
+@property (nonatomic, ZUX_STRONG) UIColor  *badgeTextColor  UI_APPEARANCE_SELECTOR;
 // default color [UIColor redColor]
-@property (nonatomic, ZUX_STRONG) UIColor  *badgeColor;
+@property (nonatomic, ZUX_STRONG) UIColor  *badgeColor      UI_APPEARANCE_SELECTOR;
 // default offset (0, 0), center position (bounds.size.width, badgeSize/4).
-@property (nonatomic)             CGSize    badgeOffset;
+@property (nonatomic)             CGSize    badgeOffset     UI_APPEARANCE_SELECTOR;
 // default size 8, badge is a circle of radius 4. Effect badge size when badgeValue is nil or empty.
-@property (nonatomic)             CGFloat   badgeSize;
+@property (nonatomic)             CGFloat   badgeSize       UI_APPEARANCE_SELECTOR;
 
 @end // UIView (ZUXBadge)
+
+@interface UIView (ZUXAppearance)
+
++ (CGFloat)borderWidth;
++ (void)setBorderWidth:(CGFloat)borderWidth;
+
++ (UIColor *)borderColor;
++ (void)setBorderColor:(UIColor *)borderColor;
+
++ (UIColor *)shadowColor;
++ (void)setShadowColor:(UIColor *)shadowColor;
+
++ (float)shadowOpacity;
++ (void)setShadowOpacity:(float)shadowOpacity;
+
++ (CGSize)shadowOffset;
++ (void)setShadowOffset:(CGSize)shadowOffset;
+
++ (CGFloat)shadowSize;
++ (void)setShadowSize:(CGFloat)shadowSize;
+
++ (UIFont *)badgeTextFont;
++ (void)setBadgeTextFont:(UIFont *)badgeTextFont;
+
++ (UIColor *)badgeTextColor;
++ (void)setBadgeTextColor:(UIColor *)badgeTextColor;
+
++ (UIColor *)badgeColor;
++ (void)setBadgeColor:(UIColor *)badgeColor;
+
++ (CGSize)badgeOffset;
++ (void)setBadgeOffset:(CGSize)badgeOffset;
+
++ (CGFloat)badgeSize;
++ (void)setBadgeSize:(CGFloat)badgeSize;
+
+@end
 
 #endif /* ZUtilsX_UIView_ZUX_h */

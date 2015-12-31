@@ -16,23 +16,45 @@ ZUX_CATEGORY_H(ZUX_UIControl)
 
 @interface UIControl (ZUX)
 
-- (void)setBorderWidth:(CGFloat)width forState:(UIControlState)state;
-- (CGFloat)borderWidthForState:(UIControlState)state;
+- (CGFloat)borderWidthForState:(UIControlState)state UI_APPEARANCE_SELECTOR;
+- (void)setBorderWidth:(CGFloat)width forState:(UIControlState)state UI_APPEARANCE_SELECTOR;
 
-- (void)setBorderColor:(UIColor *)color forState:(UIControlState)state;
-- (UIColor *)borderColorForState:(UIControlState)state;
+- (UIColor *)borderColorForState:(UIControlState)state UI_APPEARANCE_SELECTOR;
+- (void)setBorderColor:(UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR;
 
-- (void)setShadowColor:(UIColor *)color forState:(UIControlState)state;
-- (UIColor *)shadowColorForState:(UIControlState)state;
+- (UIColor *)shadowColorForState:(UIControlState)state UI_APPEARANCE_SELECTOR;
+- (void)setShadowColor:(UIColor *)color forState:(UIControlState)state UI_APPEARANCE_SELECTOR;
 
-- (void)setShadowOpacity:(float)opacity forState:(UIControlState)state;
-- (float)shadowOpacityForState:(UIControlState)state;
+- (float)shadowOpacityForState:(UIControlState)state UI_APPEARANCE_SELECTOR;
+- (void)setShadowOpacity:(float)opacity forState:(UIControlState)state UI_APPEARANCE_SELECTOR;
 
-- (void)setShadowOffset:(CGSize)offset forState:(UIControlState)state;
-- (CGSize)shadowOffsetForState:(UIControlState)state;
+- (CGSize)shadowOffsetForState:(UIControlState)state UI_APPEARANCE_SELECTOR;
+- (void)setShadowOffset:(CGSize)offset forState:(UIControlState)state UI_APPEARANCE_SELECTOR;
 
-- (void)setShadowSize:(CGFloat)size forState:(UIControlState)state;
-- (CGFloat)shadowSizeForState:(UIControlState)state;
+- (CGFloat)shadowSizeForState:(UIControlState)state UI_APPEARANCE_SELECTOR;
+- (void)setShadowSize:(CGFloat)size forState:(UIControlState)state UI_APPEARANCE_SELECTOR;
+
+@end
+
+@interface UIControl (ZUXAppearance)
+
++ (CGFloat)borderWidthForState:(UIControlState)state;
++ (void)setBorderWidth:(CGFloat)width forState:(UIControlState)state;
+
++ (UIColor *)borderColorForState:(UIControlState)state;
++ (void)setBorderColor:(UIColor *)color forState:(UIControlState)state;
+
++ (UIColor *)shadowColorForState:(UIControlState)state;
++ (void)setShadowColor:(UIColor *)color forState:(UIControlState)state;
+
++ (float)shadowOpacityForState:(UIControlState)state;
++ (void)setShadowOpacity:(float)opacity forState:(UIControlState)state;
+
++ (CGSize)shadowOffsetForState:(UIControlState)state;
++ (void)setShadowOffset:(CGSize)offset forState:(UIControlState)state;
+
++ (CGFloat)shadowSizeForState:(UIControlState)state;
++ (void)setShadowSize:(CGFloat)size forState:(UIControlState)state;
 
 @end
 
