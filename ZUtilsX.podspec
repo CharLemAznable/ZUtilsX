@@ -12,6 +12,5 @@ Pod::Spec.new do |s|
   s.requires_arc  = false
   s.source        = { :git => "https://github.com/CharLemAznable/ZUtilsX.git", :tag => s.version.to_s }
   s.source_files  = "ZUtilsX/**/*.{h,m}"
-  s.exclude_files = "ZUtilsX/Privates/**/*.{h,m}"
   s.frameworks    = 'Foundation', 'CoreGraphics', 'UIKit', 'Security'
 end

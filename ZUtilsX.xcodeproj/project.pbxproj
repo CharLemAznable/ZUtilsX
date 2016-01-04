@@ -50,10 +50,10 @@
 		6A1794711C05D8A300FF5870 /* UITextField+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A1794651C05BB4300FF5870 /* UITextField+ZUX.h */; };
 		6A1794721C05D8A300FF5870 /* UITextView+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A1794621C05BB1300FF5870 /* UITextView+ZUX.h */; };
 		6A1794731C05D8A300FF5870 /* UITabBarItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */; };
+		6A29B3E81C3A14AE003DF51A /* ZUXJSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A29B3E71C3A14AE003DF51A /* ZUXJSONKit.m */; };
 		6A5024B21C1A70F6002A7E99 /* ZUXColorDictionaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5024B11C1A70F6002A7E99 /* ZUXColorDictionaryTest.m */; };
 		6A5024B41C1A72BE002A7E99 /* ZUXColorDictionaryTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A5024B31C1A72BE002A7E99 /* ZUXColorDictionaryTest.plist */; };
 		6A5024B61C1AB703002A7E99 /* ZUXColorDictionaryTest2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A5024B51C1AB703002A7E99 /* ZUXColorDictionaryTest2.plist */; };
-		6A5332551C108F910088F2B0 /* ZUXJSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5332541C108F910088F2B0 /* ZUXJSONKit.m */; };
 		6A5332571C108FF90088F2B0 /* ZUXJSONKitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5332561C108FF90088F2B0 /* ZUXJSONKitTest.m */; };
 		6A5B155B1C0C350F006B8673 /* ZUXBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B155A1C0C350F006B8673 /* ZUXBundle.m */; };
 		6A5B155C1C0C3C2F006B8673 /* ZUXBundle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A5B15591C0C350F006B8673 /* ZUXBundle.h */; };
@@ -256,11 +256,12 @@
 		6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+ZUX.h"; sourceTree = "<group>"; };
 		6A17946C1C05D45800FF5870 /* UITabBarItem+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarItem+ZUX.m"; sourceTree = "<group>"; };
 		6A17946E1C05D58600FF5870 /* NSDateZUXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDateZUXTest.m; path = Categories/Foundation/NSDateZUXTest.m; sourceTree = "<group>"; };
+		6A29B3E51C3A14AE003DF51A /* zappearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zappearance.h; path = Privates/zappearance.h; sourceTree = "<group>"; };
+		6A29B3E61C3A14AE003DF51A /* ZUXJSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXJSONKit.h; path = Privates/ZUXJSONKit.h; sourceTree = "<group>"; };
+		6A29B3E71C3A14AE003DF51A /* ZUXJSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXJSONKit.m; path = Privates/ZUXJSONKit.m; sourceTree = "<group>"; };
 		6A5024B11C1A70F6002A7E99 /* ZUXColorDictionaryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXColorDictionaryTest.m; path = Entities/ZUXColorDictionaryTest.m; sourceTree = "<group>"; };
 		6A5024B31C1A72BE002A7E99 /* ZUXColorDictionaryTest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ZUXColorDictionaryTest.plist; path = Entities/ZUXColorDictionaryTest.plist; sourceTree = "<group>"; };
 		6A5024B51C1AB703002A7E99 /* ZUXColorDictionaryTest2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ZUXColorDictionaryTest2.plist; path = Entities/ZUXColorDictionaryTest2.plist; sourceTree = "<group>"; };
-		6A5332531C108F910088F2B0 /* ZUXJSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXJSONKit.h; sourceTree = "<group>"; };
-		6A5332541C108F910088F2B0 /* ZUXJSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXJSONKit.m; sourceTree = "<group>"; };
 		6A5332561C108FF90088F2B0 /* ZUXJSONKitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXJSONKitTest.m; path = Utils/ZUXJSONKitTest.m; sourceTree = "<group>"; };
 		6A5B15591C0C350F006B8673 /* ZUXBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXBundle.h; sourceTree = "<group>"; };
 		6A5B155A1C0C350F006B8673 /* ZUXBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXBundle.m; sourceTree = "<group>"; };
@@ -336,7 +337,6 @@
 		6A63FA1C1C02E0E000AB3891 /* ZUXView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXView.m; sourceTree = "<group>"; };
 		6A648B511C1E5C7A0077F276 /* UITabBar+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+ZUX.h"; sourceTree = "<group>"; };
 		6A648B521C1E5C7A0077F276 /* UITabBar+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+ZUX.m"; sourceTree = "<group>"; };
-		6A648B541C1E5F5F0077F276 /* zappearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zappearance.h; sourceTree = "<group>"; };
 		6A648B571C1E86CE0077F276 /* UIBarItem+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarItem+ZUX.h"; sourceTree = "<group>"; };
 		6A648B581C1E86CE0077F276 /* UIBarItem+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarItem+ZUX.m"; sourceTree = "<group>"; };
 		6A648B5B1C1E94AD0077F276 /* ZUXKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXKeychain.h; sourceTree = "<group>"; };
@@ -441,6 +441,16 @@
 			name = Entities;
 			sourceTree = "<group>";
 		};
+		6A29B3DF1C3A11FF003DF51A /* Privates */ = {
+			isa = PBXGroup;
+			children = (
+				6A29B3E51C3A14AE003DF51A /* zappearance.h */,
+				6A29B3E61C3A14AE003DF51A /* ZUXJSONKit.h */,
+				6A29B3E71C3A14AE003DF51A /* ZUXJSONKit.m */,
+			);
+			name = Privates;
+			sourceTree = "<group>";
+		};
 		6A63F9A91C02E00D00AB3891 = {
 			isa = PBXGroup;
 			children = (
@@ -468,6 +478,7 @@
 				6A63F9CD1C02E0E000AB3891 /* Categories */,
 				6A63F9F71C02E0E000AB3891 /* Entities */,
 				6A63F9FC1C02E0E000AB3891 /* MBProgressHUD */,
+				6A29B3DF1C3A11FF003DF51A /* Privates */,
 				6A63F9B51C02E00D00AB3891 /* ZUtilsX.h */,
 			);
 			path = ZUtilsX;
@@ -531,7 +542,6 @@
 				6A0F89781C0359C80003948C /* UIDevice+ZUX.m */,
 				6A648B651C1EC5E40077F276 /* UIApplication+ZUX.h */,
 				6A648B661C1EC5E40077F276 /* UIApplication+ZUX.m */,
-				6A648B541C1E5F5F0077F276 /* zappearance.h */,
 				6A63F9EE1C02E0E000AB3891 /* UIView+ZUX.h */,
 				6A63F9EF1C02E0E000AB3891 /* UIView+ZUX.m */,
 				6A63F9E81C02E0E000AB3891 /* UIControl+ZUX.h */,
@@ -597,8 +607,6 @@
 				6A63FA0C1C02E0E000AB3891 /* ZUXRuntime.m */,
 				6A63FA091C02E0E000AB3891 /* ZUXJson.h */,
 				6A63FA0A1C02E0E000AB3891 /* ZUXJson.m */,
-				6A5332531C108F910088F2B0 /* ZUXJSONKit.h */,
-				6A5332541C108F910088F2B0 /* ZUXJSONKit.m */,
 				6A63FA051C02E0E000AB3891 /* ZUXDirectory.h */,
 				6A63FA061C02E0E000AB3891 /* ZUXDirectory.m */,
 				6A5B15591C0C350F006B8673 /* ZUXBundle.h */,
@@ -757,10 +765,10 @@
 				6A1794641C05BB1300FF5870 /* UITextView+ZUX.m in Sources */,
 				6A63FA371C02E0E000AB3891 /* ZUXImageView.m in Sources */,
 				6A63FA391C02E0E000AB3891 /* ZUXPageControl.m in Sources */,
+				6A29B3E81C3A14AE003DF51A /* ZUXJSONKit.m in Sources */,
 				6A63FA2F1C02E0E000AB3891 /* ZUXTransform.m in Sources */,
 				6A63FA291C02E0E000AB3891 /* UIControl+ZUX.m in Sources */,
 				6A63FA311C02E0E000AB3891 /* UIView+MBProgressHUD.m in Sources */,
-				6A5332551C108F910088F2B0 /* ZUXJSONKit.m in Sources */,
 				6A63FA321C02E0E000AB3891 /* ZUXDirectory.m in Sources */,
 				6A17946A1C05CF0B00FF5870 /* NSDate+ZUX.m in Sources */,
 				6A63FA221C02E0E000AB3891 /* NSNull+ZUX.m in Sources */,
