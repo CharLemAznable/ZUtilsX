@@ -20,7 +20,6 @@ ZUX_CATEGORY_H(ZUXJson_NSObject)
 @protocol ZUXJsonable <NSObject>
 
 @optional
-+ (NSArray *)zuxJsonPropertyNames;
 - (id)zuxJsonObject;
 - (NSData *)zuxJsonData;
 - (NSString *)zuxJsonString;
@@ -33,6 +32,12 @@ ZUX_CATEGORY_H(ZUXJson_NSObject)
 
 @interface NSNull (ZUXJson)
 @end // NSNull (ZUXJson)
+
+@interface NSValue (ZUXJson)
+
++ (NSValue *)valueWithJsonObject:(id)jsonObject;
+
+@end // NSValue (ZUXJson)
 
 @interface NSNumber (ZUXJson)
 @end // NSNumber (ZUXJson)

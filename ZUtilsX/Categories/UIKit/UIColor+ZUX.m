@@ -8,6 +8,7 @@
 
 #import "UIColor+ZUX.h"
 #import "NSString+ZUX.h"
+#import "zarc.h"
 
 ZUX_CATEGORY_M(ZUX_UIColor)
 
@@ -40,6 +41,27 @@ ZUX_CATEGORY_M(ZUX_UIColor)
     [[NSScanner scannerWithString:[str substringWithRange:NSMakeRange(4, 2)]] scanHexInt:&blue];
     [[NSScanner scannerWithString:[str substringWithRange:NSMakeRange(6, 2)]] scanHexInt:&alpha];
     return [self colorWithIntegerRed:red green:green blue:blue alpha:alpha];
+}
+
+- (CGColorRef)rgbaCGColorRef {
+    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
+    CGFloat components[4] = {0, 0, 0, 0};
+    [self getRed:&components[0] green:&components[1]
+            blue:&components[2] alpha:&components[3]];
+    CGColorRef colorRef = CGColorCreate(rgb, components);
+    CGColorSpaceRelease(rgb);
+    return (ZUX_BRIDGE CGColorRef)ZUX_AUTORELEASE((ZUX_BRIDGE_TRANSFER id)colorRef);
+}
+
+- (BOOL)isEqual:(id)object {
+    if (object == self) return YES;
+    if (!object || ![object isKindOfClass:[self class]]) return NO;
+    return [self isEqualToColor:object];
+}
+
+- (BOOL)isEqualToColor:(UIColor *)color {
+    if (color == self) return YES;
+    return CGColorEqualToColor(self.rgbaCGColorRef, color.rgbaCGColorRef);
 }
 
 @end

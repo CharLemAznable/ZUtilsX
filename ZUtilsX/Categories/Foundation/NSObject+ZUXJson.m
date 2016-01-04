@@ -8,10 +8,13 @@
 
 #import "NSObject+ZUXJson.h"
 #import "NSString+ZUX.h"
+#import "NSNumber+ZUX.h"
+#import "ZUXGeometry.h"
 #import "ZUXRuntime.h"
 #import "ZUXJson.h"
 #import "zobjc.h"
 #import "zarc.h"
+#import "zconstant.h"
 #import <objc/runtime.h>
 
 ZUX_CATEGORY_M(ZUXJson_NSObject)
@@ -20,17 +23,32 @@ ZUX_CATEGORY_M(ZUXJson_NSObject)
 
 @implementation NSObject (ZUXJson)
 
+static NSArray *NSObjectProperties = nil;
+
++ (void)load {
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+        NSMutableArray *properties = [NSMutableArray array];
+        enumerateClassProperties([NSObject class], ^(objc_property_t property) {
+            [properties addObject:ZUX_GetPropertyAttribute(property).name];
+        });
+        NSObjectProperties = [properties copy];
+    });
+}
+
 - (id)zuxJsonObject {
     NSMutableDictionary *properties = [NSMutableDictionary dictionary];
-    enumerateObjectPropertiesWithVerifierAndProcessor(self, ^BOOL(NSString *propertyAttrs) {
-        return !isWeakReferenceProperty(propertyAttrs)
-            && !isStructureTypeProperty(propertyAttrs);
+    enumerateObjectPropertiesWithProcessor(self, ^(id object, ZUXPropertyAttribute *property) {
+        if ([property isWeak] || [NSObjectProperties containsObject:property.name]) return;
         
-    }, ^(id object, id propertyKey) {
-        id jsonObj = [[object valueForKey:propertyKey] zuxJsonObject];
-        if (!jsonObj) return;
-        [properties setObject:jsonObj forKey:propertyKey];
-        
+        @try {
+            id jsonObj = [[object valueForKey:property.name] zuxJsonObject];
+            if (!jsonObj) return;
+            [properties setObject:jsonObj forKey:property.name];
+        }
+        @catch (NSException *exception) {
+            ZLog(@"%@", exception);
+        }
     });
     return ZUX_AUTORELEASE([properties copy]);
 }
@@ -45,69 +63,32 @@ ZUX_CATEGORY_M(ZUXJson_NSObject)
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
     if (ZUX_EXPECT_T(self = [self init])) {
-        enumerateObjectPropertiesWithVerifierAndProcessor(self, ^BOOL(NSString *propertyAttrs) {
-            return !isWeakReferenceProperty(propertyAttrs)
-            && !isReadOnlyProperty(propertyAttrs)
-            && !isStructureTypeProperty(propertyAttrs);
+        enumerateObjectPropertiesWithProcessor(self, ^(id object, ZUXPropertyAttribute *property) {
+            if ([property isReadonly] || [property isWeak] || [NSObjectProperties containsObject:property.name]) return;
             
-        }, ^(id object, id propertyKey) {
-            id value = ZUX_RETAIN([jsonObject valueForKey:propertyKey]);
+            id value = [jsonObject objectForKey:property.name];
             if (!value) return;
             
-            NSString *propertyClassName = ZUX_GetPropertyClassName([object class], propertyKey);
-            Class propertyClass = NSClassFromString(propertyClassName);
-            if (propertyClass) {
-                id newValue = [[propertyClass alloc] initWithJsonObject:value];
-                ZUX_RELEASE(value);
-                value = newValue;
-            }
+            Class propertyClass = property.objectClass;
+            if (propertyClass == [NSValue class]) value = [NSValue valueWithJsonObject:value];
+            else if (propertyClass) value = ZUX_AUTORELEASE([[propertyClass alloc] initWithJsonObject:value]);
             
-            [object setValue:value forKey:propertyKey];
-            ZUX_RELEASE(value);
+            @try {
+                [object setValue:value forKey:property.name];
+            }
+            @catch (NSException *exception) {
+                ZLog(@"%@", exception);
+            }
         });
     }
     return self;
 }
 
-typedef BOOL (^ZUXJsonPropertyVerifier)(NSString *propertyAttrs);
-
-typedef void (^ZUXJsonPropertyProcessor)(id object, id propertyKey);
-
-ZUX_STATIC_INLINE void enumerateObjectPropertiesWithVerifierAndProcessor
-(id object, ZUXJsonPropertyVerifier verifier, ZUXJsonPropertyProcessor processor) {
-    Class class = [object class];
-    while (class != [NSObject class]) {
-        if (![class respondsToSelector:@selector(zuxJsonPropertyNames)]) {
-            class = [class superclass]; continue;
-        }
-        
-        [[class zuxJsonPropertyNames] enumerateObjectsUsingBlock:
-         ^(id _Nonnull propertyName, NSUInteger idx, BOOL *_Nonnull stop) {
-             objc_property_t property = class_getProperty([object class], [propertyName UTF8String]);
-             NSString* propertyAttrs = @(property_getAttributes(property));
-             
-             if (verifier && !verifier(propertyAttrs)) return;
-             processor(object, propertyName);
-         }];
-        class = [class superclass];
-    }
-}
-
-ZUX_STATIC_INLINE bool isWeakReferenceProperty(NSString *propertyAttrs) {
-    ZUX_ENABLE_CATEGORY(ZUX_NSString);
-    return [propertyAttrs containsString:@",W,"];
-}
-
-ZUX_STATIC_INLINE bool isReadOnlyProperty(NSString *propertyAttrs) {
-    ZUX_ENABLE_CATEGORY(ZUX_NSString);
-    return [propertyAttrs containsString:@",R,"];
-}
-
-ZUX_STATIC_INLINE bool isStructureTypeProperty(NSString *propertyAttrs) {
-    NSScanner *scanner = [NSScanner scannerWithString:propertyAttrs];
-    [scanner scanUpToString:@"T" intoString: nil];
-    [scanner scanString:@"T" intoString:nil];
-    return [scanner scanString:@"{" intoString:nil];
+typedef void (^ZUXJsonPropertyProcessor)(id object, ZUXPropertyAttribute *property);
+ZUX_STATIC_INLINE void enumerateObjectPropertiesWithProcessor(id object, ZUXJsonPropertyProcessor processor) {
+    enumerateObjectProperties(object, ^(id object, objc_property_t property) {
+        processor(object, ZUX_GetPropertyAttribute(property));
+    });
 }
 
 @end
@@ -120,6 +101,109 @@ ZUX_STATIC_INLINE bool isStructureTypeProperty(NSString *propertyAttrs) {
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
     return [NSNull null];
+}
+
+@end
+
+@implementation NSValue (ZUXJson)
+
+- (id)zuxJsonObject {
+    const char *objCType = [self objCType];
+    NSMutableDictionary *properties = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       @(objCType), @"type", nil];
+    if (strcmp(objCType, @encode(CGPoint)) == 0) {
+        CGPoint p = [self CGPointValue];
+        properties[@"x"] = @(p.x);
+        properties[@"y"] = @(p.y);
+        
+    } else if (strcmp(objCType, @encode(CGVector)) == 0) {
+        CGVector v = [self CGVectorValue];
+        properties[@"dx"] = @(v.dx);
+        properties[@"dy"] = @(v.dy);
+        
+    } else if (strcmp(objCType, @encode(CGSize)) == 0) {
+        CGSize s = [self CGSizeValue];
+        properties[@"width"] = @(s.width);
+        properties[@"height"] = @(s.height);
+        
+    } else if (strcmp(objCType, @encode(CGRect)) == 0) {
+        CGRect r = [self CGRectValue];
+        properties[@"origin"] = [[NSValue valueWithCGPoint:r.origin] zuxJsonObject];
+        properties[@"size"] = [[NSValue valueWithCGSize:r.size] zuxJsonObject];
+        
+    } else if (strcmp(objCType, @encode(CGAffineTransform)) == 0) {
+        CGAffineTransform t = [self CGAffineTransformValue];
+        properties[@"a"] = @(t.a);
+        properties[@"b"] = @(t.b);
+        properties[@"c"] = @(t.c);
+        properties[@"d"] = @(t.d);
+        properties[@"tx"] = @(t.tx);
+        properties[@"ty"] = @(t.ty);
+        
+    } else if (strcmp(objCType, @encode(UIEdgeInsets)) == 0) {
+        UIEdgeInsets e = [self UIEdgeInsetsValue];
+        properties[@"top"] = @(e.top);
+        properties[@"left"] = @(e.left);
+        properties[@"bottom"] = @(e.bottom);
+        properties[@"right"] = @(e.right);
+        
+    } else if (strcmp(objCType, @encode(UIOffset)) == 0) {
+        UIOffset o = [self UIOffsetValue];
+        properties[@"horizontal"] = @(o.horizontal);
+        properties[@"vertical"] = @(o.vertical);
+        
+    } else return [super zuxJsonObject];
+    return ZUX_AUTORELEASE([properties copy]);
+}
+
++ (NSValue *)valueWithJsonObject:(id)jsonObject {
+    if (![jsonObject isKindOfClass:[NSDictionary class]]) return nil;
+    
+    ZUX_ENABLE_CATEGORY(ZUX_NSNumber);
+    const char *objCType = [jsonObject[@"type"] UTF8String];
+    if (strcmp(objCType, @encode(CGPoint)) == 0) {
+        CGFloat x = [[jsonObject objectForKey:@"x"] cgfloatValue];
+        CGFloat y = [[jsonObject objectForKey:@"y"] cgfloatValue];
+        return [NSValue valueWithCGPoint:CGPointMake(x, y)];
+        
+    } else if (strcmp(objCType, @encode(CGVector)) == 0) {
+        CGFloat dx = [[jsonObject objectForKey:@"dx"] cgfloatValue];
+        CGFloat dy = [[jsonObject objectForKey:@"dy"] cgfloatValue];
+        return [NSValue valueWithCGVector:CGVectorMake(dx, dy)];
+        
+    } else if (strcmp(objCType, @encode(CGSize)) == 0) {
+        CGFloat width = [[jsonObject objectForKey:@"width"] cgfloatValue];
+        CGFloat height = [[jsonObject objectForKey:@"height"] cgfloatValue];
+        return [NSValue valueWithCGSize:CGSizeMake(width, height)];
+        
+    } else if (strcmp(objCType, @encode(CGRect)) == 0) {
+        NSValue *origin = [NSValue valueWithJsonObject:[jsonObject objectForKey:@"origin"]];
+        NSValue *size = [NSValue valueWithJsonObject:[jsonObject objectForKey:@"size"]];
+        return [NSValue valueWithCGRect:ZUX_CGRectMake([origin CGPointValue], [size CGSizeValue])];
+        
+    } else if (strcmp(objCType, @encode(CGAffineTransform)) == 0) {
+        CGFloat a = [[jsonObject objectForKey:@"a"] cgfloatValue];
+        CGFloat b = [[jsonObject objectForKey:@"b"] cgfloatValue];
+        CGFloat c = [[jsonObject objectForKey:@"c"] cgfloatValue];
+        CGFloat d = [[jsonObject objectForKey:@"d"] cgfloatValue];
+        CGFloat tx = [[jsonObject objectForKey:@"tx"] cgfloatValue];
+        CGFloat ty = [[jsonObject objectForKey:@"ty"] cgfloatValue];
+        return [NSValue valueWithCGAffineTransform:CGAffineTransformMake(a, b, c, d, tx, ty)];
+        
+    } else if (strcmp(objCType, @encode(UIEdgeInsets)) == 0) {
+        CGFloat top = [[jsonObject objectForKey:@"top"] cgfloatValue];
+        CGFloat left = [[jsonObject objectForKey:@"left"] cgfloatValue];
+        CGFloat bottom = [[jsonObject objectForKey:@"bottom"] cgfloatValue];
+        CGFloat right = [[jsonObject objectForKey:@"right"] cgfloatValue];
+        return [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(top, left, bottom, right)];
+        
+    } else if (strcmp(objCType, @encode(UIOffset)) == 0) {
+        CGFloat horizontal = [[jsonObject objectForKey:@"horizontal"] cgfloatValue];
+        CGFloat vertical = [[jsonObject objectForKey:@"vertical"] cgfloatValue];
+        return [NSValue valueWithUIOffset:UIOffsetMake(horizontal, vertical)];
+        
+    }
+    return nil;
 }
 
 @end

@@ -15,9 +15,6 @@
 @property (nonatomic, assign) int field3;
 @end
 @implementation JsonBean
-+ (NSArray *)zuxJsonPropertyNames {
-    return @[@"field1", @"field2", @"field3"];
-}
 - (BOOL)isEqual:(id)object {
     if (object == self) return YES;
     if (!object || ![object isKindOfClass:[self class]]) return NO;

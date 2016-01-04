@@ -7,6 +7,7 @@
 //
 
 #import "NSObject+ZUX.h"
+#import "UIColor+ZUX.h"
 #import "zobjc.h"
 #import "zarc.h"
 #import <objc/runtime.h>
@@ -62,6 +63,13 @@ ZUX_STATIC_INLINE void swizzleInstanceMethod(Class clazz, SEL oriSelector, SEL n
 - (void)removeObserver:(NSObject *)observer
            forKeyPaths:(NSArray *)keyPaths {
     [self removeObserver:observer forKeyPaths:keyPaths context:NULL];
+}
+
++ (void)load {
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+        ZUX_ENABLE_CATEGORY(ZUX_UIColor);
+    });
 }
 
 - (id)propertyForAssociateKey:(NSString *)key {

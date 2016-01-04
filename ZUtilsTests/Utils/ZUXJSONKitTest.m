@@ -48,9 +48,11 @@
     JSONDemoBean *demo = [[JSONDemoBean alloc] init];
     demo.desc = @"JSON";
     NSDictionary *dict3 = @{@"1":@"AAA", @"2":demo};
-    NSLog(@"%@", [dict3 JSONString]);
-    NSLog(@"%@", [dict3 JSONStringWithOptions:0 serializeUnsupportedClassesUsingBlock:
-                  ^id(id object) { return [object isKindOfClass:[JSONDemoBean class]]?[object desc]:[NSString stringWithFormat:@"\"%@\"", object]; } error:NULL]);
+    XCTAssertNil([dict3 JSONStringWithOptions:0 error:&error]);
+    XCTAssertEqualObjects(error.userInfo[NSLocalizedDescriptionKey], @"Unable to serialize object class JSONDemoBean.");
+    XCTAssertEqualObjects([dict3 JSONStringWithOptions:0 serializeUnsupportedClassesUsingBlock:^id(id object) {
+        return([object isKindOfClass:[JSONDemoBean class]]?[object desc]:[NSString stringWithFormat:@"%@", object]);
+    } error:NULL], @"{\"1\":\"AAA\",\"2\":\"JSON\"}");
 }
 
 @end

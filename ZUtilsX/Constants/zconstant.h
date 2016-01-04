@@ -9,6 +9,12 @@
 #ifndef ZUtilsX_zconstant_h
 #define ZUtilsX_zconstant_h
 
+#ifdef DEBUG
+# define ZLog(fmt, ...)     NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+# define ZLog(...)
+#endif
+
 #define appIdentifier                   [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]
 #define appVersion                      [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 

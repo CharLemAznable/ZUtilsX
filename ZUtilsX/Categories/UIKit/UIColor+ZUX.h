@@ -25,6 +25,9 @@ ZUX_CATEGORY_H(ZUX_UIColor)
 // Convenience methods for creating autoreleased colors with HEX String like "ff3344ff"
 + (UIColor *)colorWithRGBAHexString:(NSString *)hexString;
 
+- (CGColorRef)rgbaCGColorRef;
+- (BOOL)isEqualToColor:(UIColor *)color;
+
 @end
 
 #endif /* ZUtilsX_UIColor_ZUX_h */

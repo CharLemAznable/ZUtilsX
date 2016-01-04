@@ -37,6 +37,10 @@
 
         ZUX_ENABLE_ALL_CATEGORIES
 
+* 调试输出宏
+
+        ZLog(fmt, ...)
+
 #####Category (Foundation)
 
 * NSObject+ZUX
@@ -57,17 +61,18 @@
 * NSObject+ZUXJson
 
         // 添加json化工具方法.
-        +zuxJsonPropertyNames
         -zuxJsonObject
         -zuxJsonData
         -zuxJsonString
 
         // 添加反json化工具方法
         -initWithJsonObject:
+        +valueWithJsonObject: // 仅NSValue类
 
-        // +zuxJsonPropertyNames方法指定当前类需要加入json转化的属性名称, 默认为空数组.
-        // 如果指定的属性为弱引用/结构体, 则json化时默认忽略.
-        // 如果指定的属性为弱引用/只读/结构体, 则反json化时默认忽略.
+        // 遍历对象属性列表, 生成JSON字符串.
+        // 如果属性由NSObject定义, 则忽略.
+        // 如果指定的属性为弱引用, 则json化时默认忽略.
+        // 如果指定的属性为弱引用/只读, 则反json化时默认忽略.
 
 * NSNull+ZUX
 
@@ -500,6 +505,12 @@
         // 根据十六进制字符串格式颜色生成UIColor.
         +colorWithRGBHexString:
         +colorWithRGBAHexString:
+
+        // 获取RGBA ColorSpace的CGColorRef.
+        -rgbaCGColorRef
+
+        // 判断颜色是否相同, 使用rgbaCGColorRef实现比较.
+        -isEqualToColor:
 
 - UIViewController+ZUX
 
@@ -984,8 +995,21 @@
 
     添加运行时工具方法.
 
-        // 运行时获取类属性的声明类型名称(类名/结构体名/基本类型名), 没有该名称属性/属性声明为id类型时, 返回nil.
-        NSString * ZUX_GetPropertyClassName(Class, NSString*);
+        // 运行时获取属性的特性.
+        ZUXPropertyAttribute * ZUX_GetPropertyAttributeByName(Class, NSString*);
+        ZUXPropertyAttribute * ZUX_GetPropertyAttribute(objc_property_t);
+
+        // 遍历属性列表.
+        void enumerateObjectProperties(id, (^)(id, objc_property_t));
+        void enumerateClassProperties(Class, (^)(objc_property_t));
+
+    属性特性.
+
+        ZUXPropertyAttribute
+
+    属性内存策略枚举.
+
+        ZUXPropertyMemoryManagementPolicy
 
 - ZUXJson
 

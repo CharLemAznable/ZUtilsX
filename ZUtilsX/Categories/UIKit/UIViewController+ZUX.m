@@ -44,12 +44,8 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 - (void)zuxLoadView {
     [self zuxLoadView];
     
-    NSString *viewClassName = ZUX_GetPropertyClassName([self class], @"view");
-    if (!viewClassName || [@"UIView" isEqualToString:viewClassName]) return;
-    
-    Class viewClass = NSClassFromString(viewClassName);
-    if (ZUX_EXPECT_F(![viewClass isSubclassOfClass:[UIView class]])) return;
-    
+    Class viewClass = ZUX_GetPropertyAttributeByName([self class], @"view").objectClass;
+    if (![viewClass isSubclassOfClass:[UIView class]]) return;
     self.view = ZUX_AUTORELEASE([[viewClass alloc] initWithFrame:self.view.frame]);
 }
 

@@ -14,9 +14,6 @@
 @property (nonatomic, assign) int age;
 @end
 @implementation People
-+ (NSArray *)zuxJsonPropertyNames {
-    return @[@"name", @"age"];
-}
 - (BOOL)isEqual:(id)object {
     if (object == self) return YES;
     if (!object || ![object isKindOfClass:[self class]]) return NO;
