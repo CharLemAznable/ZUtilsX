@@ -8,10 +8,9 @@
 
 #import "UIViewController+ZUX.h"
 #import "NSObject+ZUX.h"
-#import "ZUXRuntime.h"
+#import "ZUXProperty.h"
 #import "zarc.h"
 #import "zadapt.h"
-#import <objc/runtime.h>
 
 ZUX_CATEGORY_M(ZUX_UIViewController)
 
@@ -44,7 +43,7 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 - (void)zuxLoadView {
     [self zuxLoadView];
     
-    Class viewClass = ZUX_GetPropertyAttributeByName([self class], @"view").objectClass;
+    Class viewClass = [[[self class] zuxPropertyForName:@"view"] objectClass];
     if (![viewClass isSubclassOfClass:[UIView class]]) return;
     self.view = ZUX_AUTORELEASE([[viewClass alloc] initWithFrame:self.view.frame]);
 }

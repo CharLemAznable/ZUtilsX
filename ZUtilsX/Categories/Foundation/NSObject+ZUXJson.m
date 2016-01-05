@@ -7,10 +7,11 @@
 //
 
 #import "NSObject+ZUXJson.h"
+#import "NSObject+ZUX.h"
 #import "NSString+ZUX.h"
 #import "NSNumber+ZUX.h"
+#import "ZUXProperty.h"
 #import "ZUXGeometry.h"
-#import "ZUXRuntime.h"
 #import "ZUXJson.h"
 #import "zobjc.h"
 #import "zarc.h"
@@ -28,28 +29,29 @@ static NSArray *NSObjectProperties = nil;
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
+        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
         NSMutableArray *properties = [NSMutableArray array];
-        enumerateClassProperties([NSObject class], ^(objc_property_t property) {
-            [properties addObject:ZUX_GetPropertyAttribute(property).name];
-        });
+        [self enumerateZUXPropertiesWithBlock:^(ZUXProperty *property) {
+            [properties addObject:[property name]];
+        }];
         NSObjectProperties = [properties copy];
     });
 }
 
 - (id)zuxJsonObject {
     NSMutableDictionary *properties = [NSMutableDictionary dictionary];
-    enumerateObjectPropertiesWithProcessor(self, ^(id object, ZUXPropertyAttribute *property) {
-        if ([property isWeak] || [NSObjectProperties containsObject:property.name]) return;
+    [self enumerateZUXPropertiesWithBlock:^(id object, ZUXProperty *property) {
+        if ([property isWeakReference] || [NSObjectProperties containsObject:[property name]]) return;
         
         @try {
-            id jsonObj = [[object valueForKey:property.name] zuxJsonObject];
+            id jsonObj = [[object valueForKey:[property name]] zuxJsonObject];
             if (!jsonObj) return;
-            [properties setObject:jsonObj forKey:property.name];
+            [properties setObject:jsonObj forKey:[property name]];
         }
         @catch (NSException *exception) {
             ZLog(@"%@", exception);
         }
-    });
+    }];
     return ZUX_AUTORELEASE([properties copy]);
 }
 
@@ -63,32 +65,26 @@ static NSArray *NSObjectProperties = nil;
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
     if (ZUX_EXPECT_T(self = [self init])) {
-        enumerateObjectPropertiesWithProcessor(self, ^(id object, ZUXPropertyAttribute *property) {
-            if ([property isReadonly] || [property isWeak] || [NSObjectProperties containsObject:property.name]) return;
+        [self enumerateZUXPropertiesWithBlock:^(id object, ZUXProperty *property) {
+            if ([property isReadOnly] || [property isWeakReference]
+                || [NSObjectProperties containsObject:[property name]]) return;
             
-            id value = [jsonObject objectForKey:property.name];
+            id value = [jsonObject objectForKey:[property name]];
             if (!value) return;
             
-            Class propertyClass = property.objectClass;
+            Class propertyClass = [property objectClass];
             if (propertyClass == [NSValue class]) value = [NSValue valueWithJsonObject:value];
             else if (propertyClass) value = ZUX_AUTORELEASE([[propertyClass alloc] initWithJsonObject:value]);
             
             @try {
-                [object setValue:value forKey:property.name];
+                [object setValue:value forKey:[property name]];
             }
             @catch (NSException *exception) {
                 ZLog(@"%@", exception);
             }
-        });
+        }];
     }
     return self;
-}
-
-typedef void (^ZUXJsonPropertyProcessor)(id object, ZUXPropertyAttribute *property);
-ZUX_STATIC_INLINE void enumerateObjectPropertiesWithProcessor(id object, ZUXJsonPropertyProcessor processor) {
-    enumerateObjectProperties(object, ^(id object, objc_property_t property) {
-        processor(object, ZUX_GetPropertyAttribute(property));
-    });
 }
 
 @end

@@ -58,6 +58,27 @@
         -propertyForAssociateKey:
         -setProperty:forAssociateKey:
 
+        // 运行时工具方法.
+        +zuxProtocols
+        +enumerateZUXProtocolsWithBlock:
+        -enumerateZUXProtocolsWithBlock:
+
+        +zuxIvars
+        +zuxIvarForName:
+        +enumerateZUXIvarsWithBlock:
+        -enumerateZUXIvarsWithBlock:
+
+        +zuxProperties
+        +zuxPropertyForName:
+        +enumerateZUXPropertiesWithBlock:
+        -enumerateZUXPropertiesWithBlock:
+
+        +zuxMethods
+        +zuxInstanceMethodForName:
+        +zuxClassMethodForName:
+        +enumerateZUXMethodsWithBlock:
+        -enumerateZUXMethodsWithBlock:
+
 * NSObject+ZUXJson
 
         // 添加json化工具方法.
@@ -991,25 +1012,95 @@
         CGSize ZUX_CGSizeFromUIOffset(UIOffset offset);
         UIOffset ZUX_UIOffsetFromCGSize(CGSize size);
 
-- ZUXRuntime
+- ZUXProtocol
 
-    添加运行时工具方法.
+    运行时 - 协议对象.
 
-        // 运行时获取属性的特性.
-        ZUXPropertyAttribute * ZUX_GetPropertyAttributeByName(Class, NSString*);
-        ZUXPropertyAttribute * ZUX_GetPropertyAttribute(objc_property_t);
+        +allProtocols
 
-        // 遍历属性列表.
-        void enumerateObjectProperties(id, (^)(id, objc_property_t));
-        void enumerateClassProperties(Class, (^)(objc_property_t));
+        +protocolWithObjCProtocol:
+        +protocolWithName:
 
-    属性特性.
+        -initWithObjCProtocol:
+        -initWithName:
 
-        ZUXPropertyAttribute
+        -objCProtocol
+        -name
+        -incorporatedProtocols
+        -methodsRequired:instance:
 
-    属性内存策略枚举.
+- ZUXIvar
 
+    运行时 - 实例变量对象.
+
+        +ivarWithObjCIvar:
+        +instanceIvarWithName:inClass:
+        +classIvarWithName:inClass:
+        +ivarWithName:typeEncoding:
+        +ivarWithName:encode:
+
+        -initWithObjCIvar:
+        -initInstanceIvarWithName:inClass:
+        -initClassIvarWithName:inClass:
+        -initWithName:typeEncoding:
+
+        -name
+        -typeName
+        -typeEncoding
+        -offset
+
+- ZUXProperty
+
+    运行时 - 属性对象.
+
+        +propertyWithObjCProperty:
+        +propertyWithName:inClass:
+        +propertyWithName:attributes:
+
+        -initWithObjCProperty:
+        -initWithName:inClass:
+        -initWithName:attributes:
+
+        -attributes
+        -addToClass:
+
+        -attributeEncodings
+        -isReadOnly
+        -isNonAtomic
+        -isWeakReference
+        -isEligibleForGarbageCollection
+        -isDynamic
+        -memoryManagementPolicy
+        -getter
+        -setter
+        -name
+        -ivarName
+        -typeName
+        -typeEncoding
+        -objectClass
+
+        // 属性内存策略枚举
         ZUXPropertyMemoryManagementPolicy
+
+- ZUXMethod
+
+    运行时 - 方法对象.
+
+        +methodWithObjCMethod:
+        +instanceMethodWithName:inClass:
+        +classMethodWithName:inClass:
+        +methodWithSelector:implementation:signature:
+
+        -initWithObjCMethod:
+        -initInstanceMethodWithName:inClass:
+        -initClassMethodWithName:inClass:
+        -initWithSelector:implementation:signature:
+
+        -selector
+        -selectorName
+        -implementation
+        -setImplementation:
+        -signature
 
 - ZUXJson
 
