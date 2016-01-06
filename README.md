@@ -2,7 +2,7 @@
 
 收集日常开发中积累的工具代码.
 
-        pod "ZUtilsX", "~> 0.0.12"
+        pod "ZUtilsX", "~> 0.0.13"
 
 [压缩包下载](https://raw.githubusercontent.com/CharLemAznable/ZUtilsX/master/ZUtilsX.tar.gz)
 
@@ -545,14 +545,12 @@
         // 激活此Category后, UIViewController的子类将自动按照其覆盖声明的主view属性类型, 创建UIView子类的对象, 并自动注入控制器的主view属性.
         @interface XView : UIView
         @end
-
         @implementation XView
         @end
 
         @interface XViewController : UIViewController
         @property (nonatomic, strong) XView* view;
         @end
-
         @implementation XViewController
         - (void)viewDidLoad {
             [super viewDidLoad];
