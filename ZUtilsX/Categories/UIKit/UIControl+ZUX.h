@@ -34,7 +34,7 @@ ZUX_CATEGORY_H(ZUX_UIControl)
 - (CGFloat)shadowSizeForState:(UIControlState)state UI_APPEARANCE_SELECTOR;
 - (void)setShadowSize:(CGFloat)size forState:(UIControlState)state UI_APPEARANCE_SELECTOR;
 
-@end
+@end // UIControl (ZUX)
 
 @interface UIControl (ZUXAppearance)
 
@@ -56,6 +56,6 @@ ZUX_CATEGORY_H(ZUX_UIControl)
 + (CGFloat)shadowSizeForState:(UIControlState)state;
 + (void)setShadowSize:(CGFloat)size forState:(UIControlState)state;
 
-@end
+@end // UIControl (ZUXAppearance)
 
 #endif /* ZUtilsX_UIControl_ZUX_h */

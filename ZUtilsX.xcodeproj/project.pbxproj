@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6A0E1AD21C3E5F0500995C70 /* UINavigationController+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0E1AD11C3E5F0500995C70 /* UINavigationController+ZUX.m */; };
+		6A0E1AD31C3E68C600995C70 /* UINavigationController+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A0E1AD01C3E5F0500995C70 /* UINavigationController+ZUX.h */; };
 		6A0F89651C0347620003948C /* zobjc.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A0F89621C0346900003948C /* zobjc.h */; };
 		6A0F89661C0347620003948C /* zarc.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A0F89601C0346900003948C /* zarc.h */; };
 		6A0F89671C0347620003948C /* zadapt.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A0F895F1C0346900003948C /* zadapt.h */; };
@@ -169,6 +171,7 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				6A0E1AD31C3E68C600995C70 /* UINavigationController+ZUX.h in CopyFiles */,
 				6A68BF471C3BC12D00C690E1 /* ZUXProtocol.h in CopyFiles */,
 				6A68BF481C3BC12D00C690E1 /* ZUXIvar.h in CopyFiles */,
 				6A68BF491C3BC12D00C690E1 /* ZUXProperty.h in CopyFiles */,
@@ -239,6 +242,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6A0E1AD01C3E5F0500995C70 /* UINavigationController+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+ZUX.h"; sourceTree = "<group>"; };
+		6A0E1AD11C3E5F0500995C70 /* UINavigationController+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+ZUX.m"; sourceTree = "<group>"; };
 		6A0F895F1C0346900003948C /* zadapt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zadapt.h; sourceTree = "<group>"; };
 		6A0F89601C0346900003948C /* zarc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zarc.h; sourceTree = "<group>"; };
 		6A0F89611C0346900003948C /* zconstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zconstant.h; sourceTree = "<group>"; };
@@ -579,6 +584,8 @@
 				6A63F9E71C02E0E000AB3891 /* UIColor+ZUX.m */,
 				6A63F9F01C02E0E000AB3891 /* UIViewController+ZUX.h */,
 				6A63F9F11C02E0E000AB3891 /* UIViewController+ZUX.m */,
+				6A0E1AD01C3E5F0500995C70 /* UINavigationController+ZUX.h */,
+				6A0E1AD11C3E5F0500995C70 /* UINavigationController+ZUX.m */,
 				6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */,
 				6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */,
 				6A648B511C1E5C7A0077F276 /* UITabBar+ZUX.h */,
@@ -828,6 +835,7 @@
 				6A63FA251C02E0E000AB3891 /* NSObject+ZUXJson.m in Sources */,
 				6A63FA241C02E0E000AB3891 /* NSObject+ZUX.m in Sources */,
 				6A63FA201C02E0E000AB3891 /* NSDictionary+ZUX.m in Sources */,
+				6A0E1AD21C3E5F0500995C70 /* UINavigationController+ZUX.m in Sources */,
 				6A5B155B1C0C350F006B8673 /* ZUXBundle.m in Sources */,
 				6A648B5D1C1E94AD0077F276 /* ZUXKeychain.m in Sources */,
 				6A6A3D941C1983C700847DEF /* ZUXColorDictionary.m in Sources */,

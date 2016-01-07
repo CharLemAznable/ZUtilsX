@@ -26,7 +26,7 @@ ZUX_CATEGORY_H(ZUX_NSObject)
 - (id)propertyForAssociateKey:(NSString *)key;
 - (void)setProperty:(id)property forAssociateKey:(NSString *)key;
 
-@end
+@end // NSObject (ZUX)
 
 @class ZUXProtocol;
 @class ZUXIvar;
@@ -55,6 +55,6 @@ ZUX_CATEGORY_H(ZUX_NSObject)
 + (void)enumerateZUXMethodsWithBlock:(void (^)(ZUXMethod *method))block;
 - (void)enumerateZUXMethodsWithBlock:(void (^)(id object, ZUXMethod *method))block;
 
-@end
+@end // NSObject (ZUXRuntime)
 
 #endif /* ZUtilsX_NSObject_ZUX_h */

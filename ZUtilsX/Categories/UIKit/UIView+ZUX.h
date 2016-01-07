@@ -162,6 +162,6 @@ ZUX_EXTERN ZUXAnimation ZUXImmediateAnimationMake(ZUXAnimateType type,
 + (CGFloat)badgeSize;
 + (void)setBadgeSize:(CGFloat)badgeSize;
 
-@end
+@end // UIView (ZUXAppearance)
 
 #endif /* ZUtilsX_UIView_ZUX_h */

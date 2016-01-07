@@ -57,6 +57,7 @@
 #import "UITextView+ZUX.h"
 #import "UIColor+ZUX.h"
 #import "UIViewController+ZUX.h"
+#import "UINavigationController+ZUX.h"
 #import "UINavigationBar+ZUX.h"
 #import "UITabBar+ZUX.h"
 #import "UIBarItem+ZUX.h"

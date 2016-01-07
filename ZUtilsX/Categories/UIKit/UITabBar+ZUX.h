@@ -20,7 +20,7 @@ ZUX_CATEGORY_H(ZUX_UITabBar)
 
 @property (nonatomic, readonly) NSArray ZUX_GENERIC(UIView *) *barButtons;
 
-@end
+@end // UITabBar (ZUX)
 
 @interface UITabBar (ZUXAppearance)
 
@@ -48,6 +48,6 @@ ZUX_CATEGORY_H(ZUX_UITabBar)
 + (UIColor *)selectedImageTintColor;
 + (void)setSelectedImageTintColor:(UIColor *)selectedImageTintColor;
 
-@end
+@end // UITabBar (ZUXAppearance)
 
 #endif /* ZUtilsX_UITabBar_ZUX_h */

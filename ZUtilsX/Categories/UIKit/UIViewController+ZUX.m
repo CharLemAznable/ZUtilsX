@@ -19,7 +19,7 @@ ZUX_CATEGORY_M(ZUX_UIViewController)
 - (UIStatusBarStyle)p_StatusBarStyle;
 - (void)setP_StatusBarStyle:(UIStatusBarStyle)p_StatusBarStyle;
 
-@end
+@end // UIViewController (ZUX_Private)
 
 ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
     UIViewController *root = [UIApplication sharedApplication].keyWindow.rootViewController;
@@ -46,10 +46,6 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
     Class viewClass = [[[self class] zuxPropertyForName:@"view"] objectClass];
     if (![viewClass isSubclassOfClass:[UIView class]]) return;
     self.view = ZUX_AUTORELEASE([[viewClass alloc] initWithFrame:self.view.frame]);
-}
-
-- (UINavigationBar *)navigationBar {
-    return self.navigationController.navigationBar;
 }
 
 - (UIStatusBarStyle)statusBarStyle {

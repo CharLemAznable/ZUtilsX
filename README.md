@@ -536,7 +536,6 @@
 - UIViewController+ZUX
 
         // 添加属性.
-        navigationBar
         statusBarStyle
 
         // 添加方法.
@@ -557,6 +556,19 @@
             NSLog(@"%@", self.view.class); // OUTPUT: XView
         }
         @end
+
+- UINavigationController+ZUX
+
+    添加分类: UIViewController (ZUXNavigation)
+
+        // 添加属性.
+        navigationBar
+
+        // 添加导航控制中回调方法.
+        -willNavigatePush:
+        -didNavigatePush:
+        -willNavigatePop:
+        -didNavigatePop:
 
 - UINavigationBar+ZUX
 

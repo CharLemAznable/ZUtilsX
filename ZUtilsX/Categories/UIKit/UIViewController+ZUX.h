@@ -17,8 +17,6 @@ ZUX_CATEGORY_H(ZUX_UIViewController)
 
 @interface UIViewController (ZUX)
 
-@property (nonatomic, readonly) UINavigationBar *navigationBar;
-
 @property (nonatomic) UIStatusBarStyle statusBarStyle;
 - (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle animated:(BOOL)animated;
 
