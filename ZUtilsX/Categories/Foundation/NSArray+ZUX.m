@@ -20,18 +20,21 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 
 - (id)zux_objectAtIndex:(NSUInteger)index {
     if (index >= [self count]) return nil;
-    return [self zux_objectAtIndex:index];
+    id value = [self zux_objectAtIndex:index];
+    return [NSNull isNull:value] ? nil : value;
 }
 
 - (id)zux_objectAtIndexedSubscript:(NSUInteger)index {
     if (index >= [self count]) return nil;
-    return [self zux_objectAtIndexedSubscript:index];
+    id value = [self zux_objectAtIndexedSubscript:index];
+    return [NSNull isNull:value] ? nil : value;
 }
 
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
         ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+        ZUX_ENABLE_CATEGORY(ZUX_NSNull);
         [NSClassFromString(@"__NSArrayI")
          swizzleInstanceOriSelector:@selector(objectAtIndex:)
          withNewSelector:@selector(zux_objectAtIndex:)];
@@ -49,31 +52,33 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 
 - (id)zux_objectAtIndex:(NSUInteger)index {
     if (index >= [self count]) return nil;
-    return [self zux_objectAtIndex:index];
+    id value = [self zux_objectAtIndex:index];
+    return [NSNull isNull:value] ? nil : value;
 }
 
 - (id)zux_objectAtIndexedSubscript:(NSUInteger)index {
     if (index >= [self count]) return nil;
-    return [self zux_objectAtIndexedSubscript:index];
+    id value = [self zux_objectAtIndexedSubscript:index];
+    return [NSNull isNull:value] ? nil : value;
 }
 
 - (void)zux_setObject:(id)anObject atIndexedSubscript:(NSUInteger)index {
-    if (!anObject) return;
+    if ([NSNull isNull:anObject]) return;
     [self zux_setObject:anObject atIndexedSubscript:index];
 }
 
 - (void)zux_addObject:(id)anObject {
-    if (!anObject) return;
+    if ([NSNull isNull:anObject]) return;
     [self zux_addObject:anObject];
 }
 
 - (void)zux_insertObject:(id)anObject atIndex:(NSUInteger)index {
-    if (!anObject) return;
+    if ([NSNull isNull:anObject]) return;
     [self zux_insertObject:anObject atIndex:index];
 }
 
 - (void)zux_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject {
-    if (!anObject) return;
+    if ([NSNull isNull:anObject]) return;
     [self zux_replaceObjectAtIndex:index withObject:anObject];
 }
 
@@ -81,6 +86,7 @@ ZUX_CATEGORY_M(ZUX_NSArray)
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
         ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+        ZUX_ENABLE_CATEGORY(ZUX_NSNull);
         [NSClassFromString(@"__NSArrayM")
          swizzleInstanceOriSelector:@selector(objectAtIndex:)
          withNewSelector:@selector(zux_objectAtIndex:)];
@@ -118,8 +124,8 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 }
 
 - (id)objectAtIndex:(NSUInteger)index defaultValue:(id)defaultValue {
-    ZUX_ENABLE_CATEGORY(ZUX_NSNull);
-    return [NSNull isNull:[self objectAtIndex:index]] ? defaultValue : [self objectAtIndex:index];
+    id value = [self objectAtIndex:index];
+    return [NSNull isNull:value] ? defaultValue : value;
 }
 
 @end // NSArray (ZUX)

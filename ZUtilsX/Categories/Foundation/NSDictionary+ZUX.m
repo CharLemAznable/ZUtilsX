@@ -19,19 +19,22 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 @implementation NSDictionary (ZUXSafe)
 
 - (id)zux_objectForKey:(id)key {
-    if (!key) return nil;
-    return [self zux_objectForKey:key];
+    if ([NSNull isNull:key]) return nil;
+    id value = [self zux_objectForKey:key];
+    return [NSNull isNull:value] ? nil : value;
 }
 
 - (id)zux_objectForKeyedSubscript:(id)key {
-    if (!key) return nil;
-    return [self zux_objectForKeyedSubscript:key];
+    if ([NSNull isNull:key]) return nil;
+    id value = [self zux_objectForKeyedSubscript:key];
+    return [NSNull isNull:value] ? nil : value;
 }
 
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
         ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+        ZUX_ENABLE_CATEGORY(ZUX_NSNull);
         [NSClassFromString(@"__NSDictionaryI")
          swizzleInstanceOriSelector:@selector(objectForKey:)
          withNewSelector:@selector(zux_objectForKey:)];
@@ -48,29 +51,32 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 @implementation NSMutableDictionary (ZUXSafe)
 
 - (id)zux_objectForKey:(id)key {
-    if (!key) return nil;
-    return [self zux_objectForKey:key];
+    if ([NSNull isNull:key]) return nil;
+    id value = [self zux_objectForKey:key];
+    return [NSNull isNull:value] ? nil : value;
 }
 
 - (id)zux_objectForKeyedSubscript:(id)key {
-    if (!key) return nil;
-    return [self zux_objectForKeyedSubscript:key];
+    if ([NSNull isNull:key]) return nil;
+    id value = [self zux_objectForKeyedSubscript:key];
+    return [NSNull isNull:value] ? nil : value;
 }
 
 - (void)zux_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
-    if (!anObject || !aKey) return;
+    if ([NSNull isNull:anObject] || [NSNull isNull:aKey]) return;
     [self zux_setObject:anObject forKey:aKey];
 }
 
 - (void)zux_setObject:(id)anObject forKeyedSubscript:(id<NSCopying>)aKey {
-    if (!anObject || !aKey) return;
-    [self zux_setObject:anObject forKey:aKey];
+    if ([NSNull isNull:anObject] || [NSNull isNull:aKey]) return;
+    [self zux_setObject:anObject forKeyedSubscript:aKey];
 }
 
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
         ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+        ZUX_ENABLE_CATEGORY(ZUX_NSNull);
         [NSClassFromString(@"__NSDictionaryM")
          swizzleInstanceOriSelector:@selector(objectForKey:)
          withNewSelector:@selector(zux_objectForKey:)];
@@ -102,8 +108,8 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 }
 
 - (id)objectForKey:(id)key defaultValue:(id)defaultValue {
-    ZUX_ENABLE_CATEGORY(ZUX_NSNull);
-    return [NSNull isNull:[self objectForKey:key]] ? defaultValue : [self objectForKey:key];
+    id value = [self objectForKey:key];
+    return [NSNull isNull:value] ? defaultValue : value;
 }
 
 - (NSDictionary *)subDictionaryForKeys:(NSArray *)keys {
