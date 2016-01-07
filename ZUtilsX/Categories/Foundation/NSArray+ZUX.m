@@ -20,14 +20,12 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 
 - (id)zux_objectAtIndex:(NSUInteger)index {
     if (index >= [self count]) return nil;
-    id value = [self zux_objectAtIndex:index];
-    return [NSNull isNull:value] ? nil : value;
+    return [self zux_objectAtIndex:index];
 }
 
 - (id)zux_objectAtIndexedSubscript:(NSUInteger)index {
     if (index >= [self count]) return nil;
-    id value = [self zux_objectAtIndexedSubscript:index];
-    return [NSNull isNull:value] ? nil : value;
+    return [self zux_objectAtIndexedSubscript:index];
 }
 
 + (void)load {
@@ -52,33 +50,31 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 
 - (id)zux_objectAtIndex:(NSUInteger)index {
     if (index >= [self count]) return nil;
-    id value = [self zux_objectAtIndex:index];
-    return [NSNull isNull:value] ? nil : value;
+    return [self zux_objectAtIndex:index];
 }
 
 - (id)zux_objectAtIndexedSubscript:(NSUInteger)index {
     if (index >= [self count]) return nil;
-    id value = [self zux_objectAtIndexedSubscript:index];
-    return [NSNull isNull:value] ? nil : value;
+    return [self zux_objectAtIndexedSubscript:index];
 }
 
 - (void)zux_setObject:(id)anObject atIndexedSubscript:(NSUInteger)index {
-    if ([NSNull isNull:anObject]) return;
+    if (!anObject) return;
     [self zux_setObject:anObject atIndexedSubscript:index];
 }
 
 - (void)zux_addObject:(id)anObject {
-    if ([NSNull isNull:anObject]) return;
+    if (!anObject) return;
     [self zux_addObject:anObject];
 }
 
 - (void)zux_insertObject:(id)anObject atIndex:(NSUInteger)index {
-    if ([NSNull isNull:anObject]) return;
+    if (!anObject) return;
     [self zux_insertObject:anObject atIndex:index];
 }
 
 - (void)zux_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject {
-    if ([NSNull isNull:anObject]) return;
+    if (!anObject) return;
     [self zux_replaceObjectAtIndex:index withObject:anObject];
 }
 

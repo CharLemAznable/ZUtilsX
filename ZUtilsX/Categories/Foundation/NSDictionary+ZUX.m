@@ -19,15 +19,13 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 @implementation NSDictionary (ZUXSafe)
 
 - (id)zux_objectForKey:(id)key {
-    if ([NSNull isNull:key]) return nil;
-    id value = [self zux_objectForKey:key];
-    return [NSNull isNull:value] ? nil : value;
+    if (!key) return nil;
+    return [self zux_objectForKey:key];
 }
 
 - (id)zux_objectForKeyedSubscript:(id)key {
-    if ([NSNull isNull:key]) return nil;
-    id value = [self zux_objectForKeyedSubscript:key];
-    return [NSNull isNull:value] ? nil : value;
+    if (!key) return nil;
+    return [self zux_objectForKeyedSubscript:key];
 }
 
 + (void)load {
@@ -51,24 +49,22 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 @implementation NSMutableDictionary (ZUXSafe)
 
 - (id)zux_objectForKey:(id)key {
-    if ([NSNull isNull:key]) return nil;
-    id value = [self zux_objectForKey:key];
-    return [NSNull isNull:value] ? nil : value;
+    if (!key) return nil;
+    return [self zux_objectForKey:key];
 }
 
 - (id)zux_objectForKeyedSubscript:(id)key {
-    if ([NSNull isNull:key]) return nil;
-    id value = [self zux_objectForKeyedSubscript:key];
-    return [NSNull isNull:value] ? nil : value;
+    if (!key) return nil;
+    return [self zux_objectForKeyedSubscript:key];
 }
 
 - (void)zux_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
-    if ([NSNull isNull:anObject] || [NSNull isNull:aKey]) return;
+    if (!anObject || !aKey) return;
     [self zux_setObject:anObject forKey:aKey];
 }
 
 - (void)zux_setObject:(id)anObject forKeyedSubscript:(id<NSCopying>)aKey {
-    if ([NSNull isNull:anObject] || [NSNull isNull:aKey]) return;
+    if (!anObject || !aKey) return;
     [self zux_setObject:anObject forKeyedSubscript:aKey];
 }
 
