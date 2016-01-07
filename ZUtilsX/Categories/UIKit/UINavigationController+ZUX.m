@@ -25,33 +25,33 @@ ZUX_CATEGORY_M(ZUX_UINavigationController)
 #pragma mark - Navigate callback implementation -
 
 - (void)zuxViewWillAppear:(BOOL)animated {
+    [[self class] swizzleZuxViewDidAppear:NO];
     [self willNavigatePush:animated];
     [self zuxViewWillAppear:animated];
-    [[self class] swizzleZuxViewWillAppear:YES];
-    [[self class] swizzleZuxViewDidAppear:NO];
 }
 
 - (void)zuxViewDidAppear:(BOOL)animated {
     [self zuxViewDidAppear:animated];
     [self didNavigatePush:animated];
+    [[self class] swizzleZuxViewWillAppear:YES];
     [[self class] swizzleZuxViewDidAppear:YES];
 }
 
 - (void)zuxViewWillDisappear:(BOOL)animated {
+    [[self class] swizzleZuxViewDidDisappear:NO];
     [self willNavigatePop:animated];
     [self zuxViewWillDisappear:animated];
-    [[self class] swizzleZuxViewWillDisappear:YES];
-    [[self class] swizzleZuxViewDidDisappear:NO];
 }
 
 - (void)zuxViewDidDisappear:(BOOL)animated {
     [self zuxViewDidDisappear:animated];
     [self didNavigatePop:animated];
+    [[self class] swizzleZuxViewWillDisappear:YES];
     [[self class] swizzleZuxViewDidDisappear:YES];
 }
 
 #define ZUXSwizzledKey_implement(SwizzleKey) \
-static NSString *const ZUXView ## SwizzleKey ## SwizzledKey = @"zuxView ## SwizzleKey ## SwizzledKey"; \
+static NSString *const ZUXView ## SwizzleKey ## SwizzledKey = @"zuxView" @#SwizzleKey @"SwizzledKey"; \
 + (BOOL)zuxView ## SwizzleKey ## Swizzled { \
     return [[self propertyForAssociateKey:ZUXView ## SwizzleKey ## SwizzledKey] boolValue]; \
 } \
@@ -72,26 +72,6 @@ ZUXSwizzledKey_implement(WillAppear);
 ZUXSwizzledKey_implement(DidAppear);
 ZUXSwizzledKey_implement(WillDisappear);
 ZUXSwizzledKey_implement(DidDisappear);
-
-+ (void)load {
-    static dispatch_once_t once_t;
-    dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
-#if !IS_ARC
-        // dealloc
-        [self swizzleInstanceOriSelector:@selector(dealloc)
-                         withNewSelector:@selector(zuxNavigationDealloc)];
-#endif
-    });
-}
-
-- (void)zuxNavigationDealloc {
-    [self setProperty:nil forAssociateKey:ZUXViewWillAppearSwizzledKey];
-    [self setProperty:nil forAssociateKey:ZUXViewDidAppearSwizzledKey];
-    [self setProperty:nil forAssociateKey:ZUXViewWillDisappearSwizzledKey];
-    [self setProperty:nil forAssociateKey:ZUXViewDidDisappearSwizzledKey];
-    [self zuxNavigationDealloc];
-}
 
 @end
 
