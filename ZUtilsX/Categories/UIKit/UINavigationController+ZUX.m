@@ -8,6 +8,8 @@
 
 #import "UINavigationController+ZUX.h"
 #import "NSObject+ZUX.h"
+#import "zarc.h"
+#import <objc/runtime.h>
 
 ZUX_CATEGORY_M(ZUX_UINavigationController)
 
@@ -15,6 +17,32 @@ ZUX_CATEGORY_M(ZUX_UINavigationController)
 
 - (UINavigationBar *)navigationBar {
     return self.navigationController.navigationBar;
+}
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    [self.navigationController pushViewController:viewController animated:animated];
+}
+
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated {
+    return [self.navigationController popViewControllerAnimated:animated];
+}
+
+- (NSArray *)popToViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    return [self.navigationController popToViewController:viewController animated:animated];
+}
+
+- (NSArray *)popToRootViewControllerAnimated:(BOOL)animated {
+    return [self.navigationController popToRootViewControllerAnimated:animated];
+}
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated initialWithBlock:(ZUXNavigationCallbackBlock)initial completionWithBlock:(ZUXNavigationCallbackBlock)completion {
+    [self.navigationController pushViewController:viewController animated:animated
+                                 initialWithBlock:initial completionWithBlock:completion];
+}
+
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated cleanupWithBlock:(ZUXNavigationCallbackBlock)cleanup completionWithBlock:(ZUXNavigationCallbackBlock)completion {
+    return [self.navigationController popViewControllerAnimated:animated
+                                               cleanupWithBlock:cleanup completionWithBlock:completion];
 }
 
 - (void)willNavigatePush:(BOOL)animated {}
@@ -26,6 +54,8 @@ ZUX_CATEGORY_M(ZUX_UINavigationController)
 
 - (void)zuxViewWillAppear:(BOOL)animated {
     [[self class] swizzleZuxViewDidAppear:NO];
+    
+    [self zuxViewWillAppearCallback];
     [self willNavigatePush:animated];
     [self zuxViewWillAppear:animated];
 }
@@ -33,12 +63,18 @@ ZUX_CATEGORY_M(ZUX_UINavigationController)
 - (void)zuxViewDidAppear:(BOOL)animated {
     [self zuxViewDidAppear:animated];
     [self didNavigatePush:animated];
+    [self zuxViewDidAppearCallback];
+    
+    [self setZuxViewWillAppearCallbackBlock:NULL];
+    [self setZuxViewDidAppearCallbackBlock:NULL];
     [[self class] swizzleZuxViewWillAppear:YES];
     [[self class] swizzleZuxViewDidAppear:YES];
 }
 
 - (void)zuxViewWillDisappear:(BOOL)animated {
     [[self class] swizzleZuxViewDidDisappear:NO];
+    
+    [self zuxViewWillDisappearCallback];
     [self willNavigatePop:animated];
     [self zuxViewWillDisappear:animated];
 }
@@ -46,11 +82,53 @@ ZUX_CATEGORY_M(ZUX_UINavigationController)
 - (void)zuxViewDidDisappear:(BOOL)animated {
     [self zuxViewDidDisappear:animated];
     [self didNavigatePop:animated];
+    [self zuxViewDidDisappearCallback];
+    
+    [self setZuxViewWillDisappearCallbackBlock:NULL];
+    [self setZuxViewDidDisappearCallbackBlock:NULL];
     [[self class] swizzleZuxViewWillDisappear:YES];
     [[self class] swizzleZuxViewDidDisappear:YES];
 }
 
-#define ZUXSwizzledKey_implement(SwizzleKey) \
+#define ZUXCallbackBlockImplementation(BlockKey) \
+static NSString *const ZUXView ## BlockKey ## CallbackBlockKey = @"zuxView" @#BlockKey @"CallbackBlockKey"; \
+- (ZUXNavigationCallbackBlock)zuxView ## BlockKey ## CallbackBlock { \
+    return (ZUXNavigationCallbackBlock)[self propertyForAssociateKey:ZUXView ## BlockKey ## CallbackBlockKey]; \
+} \
+- (void)setZuxView ## BlockKey ## CallbackBlock:(ZUXNavigationCallbackBlock)block { \
+    [self setProperty:(id)block forAssociateKey:ZUXView ## BlockKey ## CallbackBlockKey]; \
+} \
+- (void)zuxView ## BlockKey ## Callback { \
+    ZUXNavigationCallbackBlock block = [self zuxView ## BlockKey ## CallbackBlock]; \
+    if (!block) return; block(self); \
+}
+
+ZUXCallbackBlockImplementation(WillAppear);
+ZUXCallbackBlockImplementation(DidAppear);
+ZUXCallbackBlockImplementation(WillDisappear);
+ZUXCallbackBlockImplementation(DidDisappear);
+
++ (void)load {
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+#if !IS_ARC
+        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+        [self swizzleInstanceOriSelector:@selector(dealloc)
+                         withNewSelector:@selector(zuxNavigationDealloc)];
+#endif
+    });
+}
+
+- (void)zuxNavigationDealloc {
+    ZUX_ENABLE_CATEGORY(ZUX_NSObject);
+    [self setProperty:NULL forAssociateKey:ZUXViewWillAppearCallbackBlockKey];
+    [self setProperty:NULL forAssociateKey:ZUXViewDidAppearCallbackBlockKey];
+    [self setProperty:NULL forAssociateKey:ZUXViewWillDisappearCallbackBlockKey];
+    [self setProperty:NULL forAssociateKey:ZUXViewDidDisappearCallbackBlockKey];
+    [self zuxNavigationDealloc];
+}
+
+#define ZUXCallbackSwizzleImplementation(SwizzleKey) \
 static NSString *const ZUXView ## SwizzleKey ## SwizzledKey = @"zuxView" @#SwizzleKey @"SwizzledKey"; \
 + (BOOL)zuxView ## SwizzleKey ## Swizzled { \
     return [[self propertyForAssociateKey:ZUXView ## SwizzleKey ## SwizzledKey] boolValue]; \
@@ -68,14 +146,30 @@ static NSString *const ZUXView ## SwizzleKey ## SwizzledKey = @"zuxView" @#Swizz
     } \
 }
 
-ZUXSwizzledKey_implement(WillAppear);
-ZUXSwizzledKey_implement(DidAppear);
-ZUXSwizzledKey_implement(WillDisappear);
-ZUXSwizzledKey_implement(DidDisappear);
+ZUXCallbackSwizzleImplementation(WillAppear);
+ZUXCallbackSwizzleImplementation(DidAppear);
+ZUXCallbackSwizzleImplementation(WillDisappear);
+ZUXCallbackSwizzleImplementation(DidDisappear);
 
 @end
 
 @implementation UINavigationController (ZUX)
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+          initialWithBlock:(ZUXNavigationCallbackBlock)initial
+       completionWithBlock:(ZUXNavigationCallbackBlock)completion {
+    [viewController setZuxViewWillAppearCallbackBlock:initial];
+    [viewController setZuxViewDidAppearCallbackBlock:completion];
+    [self pushViewController:viewController animated:animated];
+}
+
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated
+                               cleanupWithBlock:(ZUXNavigationCallbackBlock)cleanup
+                            completionWithBlock:(ZUXNavigationCallbackBlock)completion {
+    [self.topViewController setZuxViewWillDisappearCallbackBlock:cleanup];
+    [self.topViewController setZuxViewDidDisappearCallbackBlock:completion];
+    return [self popViewControllerAnimated:animated];
+}
 
 + (void)load {
     static dispatch_once_t once_t;

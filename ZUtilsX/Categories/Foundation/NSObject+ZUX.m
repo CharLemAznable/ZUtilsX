@@ -72,7 +72,7 @@ ZUX_STATIC_INLINE void swizzleInstanceMethod(Class clazz, SEL oriSelector, SEL n
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_UIColor);
+        ZUX_ENABLE_CATEGORY(ZUX_UIColor); // for [UIColor -isEqual:]
     });
 }
 

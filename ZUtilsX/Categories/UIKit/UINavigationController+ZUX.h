@@ -8,19 +8,41 @@
 
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
+#import "zobjc.h"
 
 #ifndef ZUtilsX_UINavigationController_ZUX_h
 #define ZUtilsX_UINavigationController_ZUX_h
 
 ZUX_CATEGORY_H(ZUX_UINavigationController)
 
+typedef void (^ZUXNavigationCallbackBlock)(UIViewController *viewController);
+
 @interface UINavigationController (ZUX)
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+          initialWithBlock:(ZUXNavigationCallbackBlock)initial
+       completionWithBlock:(ZUXNavigationCallbackBlock)completion;
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated
+                               cleanupWithBlock:(ZUXNavigationCallbackBlock)cleanup
+                            completionWithBlock:(ZUXNavigationCallbackBlock)completion;
 
 @end // UINavigationController (ZUX)
 
 @interface UIViewController (ZUXNavigation)
 
 @property (nonatomic, readonly) UINavigationBar *navigationBar;
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated;
+- (NSArray ZUX_GENERIC(ZUX_KINDOF(UIViewController *)) *)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (NSArray ZUX_GENERIC(ZUX_KINDOF(UIViewController *)) *)popToRootViewControllerAnimated:(BOOL)animated;
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+          initialWithBlock:(ZUXNavigationCallbackBlock)initial
+       completionWithBlock:(ZUXNavigationCallbackBlock)completion;
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated
+                               cleanupWithBlock:(ZUXNavigationCallbackBlock)cleanup
+                            completionWithBlock:(ZUXNavigationCallbackBlock)completion;
 
 - (void)willNavigatePush:(BOOL)animated; // Called when NavigationController push. Default does nothing
 - (void)didNavigatePush:(BOOL)animated; // Called when NavigationController push. Default does nothing

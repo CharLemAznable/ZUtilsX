@@ -2,7 +2,7 @@
 
 收集日常开发中积累的工具代码.
 
-        pod "ZUtilsX", "~> 0.0.13"
+        pod "ZUtilsX", "~> 0.0.14"
 
 [压缩包下载](https://raw.githubusercontent.com/CharLemAznable/ZUtilsX/master/ZUtilsX.tar.gz)
 
@@ -559,10 +559,22 @@
 
 - UINavigationController+ZUX
 
+        // 添加导航控制方法, 支持导航起始/结束时回调代码块.
+        -pushViewController:animated:initialWithBlock:completionWithBlock:
+        -popViewControllerAnimated:cleanupWithBlock:completionWithBlock:
+
     添加分类: UIViewController (ZUXNavigation)
 
         // 添加属性.
         navigationBar
+
+        // 添加导航控制方法.
+        -pushViewController:animated:
+        -popViewControllerAnimated:
+        -popToViewController:animated:
+        -popToRootViewControllerAnimated:
+        -pushViewController:animated:initialWithBlock:completionWithBlock:
+        -popViewControllerAnimated:cleanupWithBlock:completionWithBlock:
 
         // 添加导航控制中回调方法.
         -willNavigatePush:

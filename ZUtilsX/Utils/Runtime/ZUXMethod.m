@@ -97,7 +97,7 @@
 
 - (NSString *)signature {
     [self doesNotRecognizeSelector:_cmd];
-    return NULL;
+    return nil;
 }
 
 @end
