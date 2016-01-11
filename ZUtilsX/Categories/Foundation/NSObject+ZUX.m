@@ -20,28 +20,36 @@ ZUX_CATEGORY_M(ZUX_NSObject)
 
 @implementation NSObject (ZUX)
 
-+ (void)swizzleInstanceOriSelector:(SEL)oriSelector
-                   withNewSelector:(SEL)newSelector {
-    swizzleInstanceMethod([self class], oriSelector, newSelector);
+#pragma mark - swizzle -
+
++ (void)swizzleInstanceOriSelector:(SEL)oriSelector withNewSelector:(SEL)newSelector {
+    [self swizzleInstanceOriSelector:oriSelector withNewSelector:newSelector fromClass:self];
 }
 
-+ (void)swizzleClassOriSelector:(SEL)oriSelector
-                withNewSelector:(SEL)newSelector {
-    swizzleInstanceMethod(object_getClass([self class]), oriSelector, newSelector);
++ (void)swizzleInstanceOriSelector:(SEL)oriSelector withNewSelector:(SEL)newSelector fromClass:(Class)clazz {
+    swizzleInstanceMethod(self, oriSelector, newSelector, clazz);
 }
 
-ZUX_STATIC_INLINE void swizzleInstanceMethod(Class clazz, SEL oriSelector, SEL newSelector) {
-    Method oriMethod = class_getInstanceMethod(clazz, oriSelector);
-    Method newMethod = class_getInstanceMethod(clazz, newSelector);
-    if(class_addMethod(clazz, oriSelector,
-                       method_getImplementation(newMethod),
-                       method_getTypeEncoding(newMethod))) {
-        class_replaceMethod(clazz, newSelector,
-                            method_getImplementation(oriMethod),
-                            method_getTypeEncoding(oriMethod));
-    } else method_exchangeImplementations(oriMethod, newMethod);
++ (void)swizzleClassOriSelector:(SEL)oriSelector withNewSelector:(SEL)newSelector {
+    [self swizzleClassOriSelector:oriSelector withNewSelector:newSelector fromClass:object_getClass(self)];
 }
 
++ (void)swizzleClassOriSelector:(SEL)oriSelector withNewSelector:(SEL)newSelector fromClass:(Class)clazz {
+    swizzleInstanceMethod(object_getClass(self), oriSelector, newSelector, clazz);
+}
+
+ZUX_STATIC_INLINE void swizzleInstanceMethod(Class swiClass, SEL oriSelector, SEL newSelector, Class impClass) {
+    Method oriMethod = class_getInstanceMethod(impClass, oriSelector);
+    Method newMethod = class_getInstanceMethod(impClass, newSelector);
+    class_addMethod(swiClass, oriSelector, method_getImplementation(oriMethod),
+                    method_getTypeEncoding(oriMethod));
+    class_addMethod(swiClass, newSelector, method_getImplementation(newMethod),
+                    method_getTypeEncoding(newMethod));
+    method_exchangeImplementations(class_getInstanceMethod(swiClass, oriSelector),
+                                   class_getInstanceMethod(swiClass, newSelector));
+}
+
+#pragma mark - observe -
 
 - (void)addObserver:(NSObject *)observer
         forKeyPaths:(NSArray *)keyPaths
@@ -69,12 +77,7 @@ ZUX_STATIC_INLINE void swizzleInstanceMethod(Class clazz, SEL oriSelector, SEL n
     [self removeObserver:observer forKeyPaths:keyPaths context:NULL];
 }
 
-+ (void)load {
-    static dispatch_once_t once_t;
-    dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_UIColor); // for [UIColor -isEqual:]
-    });
-}
+#pragma mark - associate -
 
 - (id)propertyForAssociateKey:(NSString *)key {
     return objc_getAssociatedObject(self, (ZUX_BRIDGE const void *)(key));
@@ -88,6 +91,13 @@ ZUX_STATIC_INLINE void swizzleInstanceMethod(Class clazz, SEL oriSelector, SEL n
     objc_setAssociatedObject(self, (ZUX_BRIDGE const void *)(key),
                              property, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [self didChangeValueForKey:key];
+}
+
++ (void)load {
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+        ZUX_ENABLE_CATEGORY(ZUX_UIColor); // for [UIColor -isEqual:]
+    });
 }
 
 @end

@@ -47,7 +47,9 @@
 
         // 封装Selector替换方法.
         +swizzleInstanceOriSelector:withNewSelector:
+        +swizzleInstanceOriSelector:withNewSelector:fromClass:
         +swizzleClassOriSelector:withNewSelector:
+        +swizzleClassOriSelector:withNewSelector:fromClass:
 
         // 多键添加/移除KVO方法.
         -addObserver:forKeyPaths:options:context:
@@ -1021,10 +1023,12 @@
     添加单例工具宏.
 
         // 添加于.h文件, @interface中
-        ZUX_SINGLETON_H
+        ZUX_SINGLETON_H(SHARE_INSTANCE)
 
         // 添加于.m文件, @implementation中
-        ZUX_SINGLETOM_M
+        ZUX_SINGLETOM_M(SHARE_INSTANCE)
+
+        // 用于添加单例类方法: +(id)SHARE_INSTANCE, 并屏蔽alloc/copy实现.
 
 - ZUXGeometry
 

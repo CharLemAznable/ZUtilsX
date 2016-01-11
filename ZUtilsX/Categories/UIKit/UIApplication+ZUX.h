@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
+#import "zobjc.h"
 #import "zadapt.h"
 
 #ifndef ZUtilsX_UIApplication_ZUX_h
@@ -20,9 +21,9 @@ ZUX_CATEGORY_H(ZUX_UIApplication)
 + (void)registerUserNotificationTypes:(ZUXUserNotificationType)types;
 - (void)registerUserNotificationTypes:(ZUXUserNotificationType)types;
 + (void)registerUserNotificationTypes:(ZUXUserNotificationType)types
-                           categories:(NSSet<UIUserNotificationCategory *> *)categories;
+                           categories:(NSSet ZUX_GENERIC(UIUserNotificationCategory *) *)categories;
 - (void)registerUserNotificationTypes:(ZUXUserNotificationType)types
-                           categories:(NSSet<UIUserNotificationCategory *> *)categories;
+                           categories:(NSSet ZUX_GENERIC(UIUserNotificationCategory *) *)categories;
 
 + (BOOL)notificationTypeRegisted:(ZUXUserNotificationType)type;
 - (BOOL)notificationTypeRegisted:(ZUXUserNotificationType)type;

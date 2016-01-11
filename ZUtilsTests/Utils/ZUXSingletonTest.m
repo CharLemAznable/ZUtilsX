@@ -10,11 +10,11 @@
 #import "ZUtilsX.h"
 
 @interface MySingleton : NSObject
-ZUX_SINGLETON_H
+ZUX_SINGLETON_H(sharedInstance)
 @end
 
 @implementation MySingleton
-ZUX_SINGLETOM_M
+ZUX_SINGLETOM_M(sharedInstance)
 @end
 
 @interface ZUXSingletonTest : XCTestCase
