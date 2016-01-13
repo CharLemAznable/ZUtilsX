@@ -74,7 +74,21 @@ ZUX_STATIC_INLINE void setTitleShadowAttributeForState(id instance, UIControlSta
     setTitleTextAttributeForStateAndKey(instance, state, NSShadowAttributeName, shadow);
 }
 
-#pragma mark - backgroundImage -
+#pragma mark - selectionIndicatorColor -
+
+ZUX_STATIC_INLINE UIColor *selectionIndicatorColor
+(ZUX_KINDOF(UITabBar *) instance) {
+    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
+    return [[instance selectionIndicatorImage] dominantColor];
+}
+
+ZUX_STATIC_INLINE void setSelectionIndicatorColor
+(ZUX_KINDOF(UITabBar *) instance, UIColor *selectionIndicatorColor) {
+    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
+    [instance setSelectionIndicatorImage:[UIImage imagePointWithColor:selectionIndicatorColor]];
+}
+
+#pragma mark - backgroundImageForBarMetrics -
 
 ZUX_STATIC_INLINE UIImage *backgroundImageForBarMetrics
 (ZUX_KINDOF(UINavigationBar *) instance, UIBarMetrics barMetrics) {
@@ -86,7 +100,7 @@ ZUX_STATIC_INLINE void setBackgroundImageForBarMetrics
     [instance setBackgroundImage:backgroundImage forBarMetrics:barMetrics];
 }
 
-#pragma mark - backgroundColor -
+#pragma mark - backgroundColorForBarMetrics -
 
 ZUX_STATIC_INLINE UIColor *backgroundColorForBarMetrics
 (ZUX_KINDOF(UINavigationBar *) instance, UIBarMetrics barMetrics) {

@@ -28,6 +28,8 @@ ZUX_CATEGORY_M(ZUX_UITabBar)
 
 @implementation UITabBar (ZUXAppearance)
 
+#pragma mark - translucent -
+
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
 - (BOOL)isTranslucent {
     return NO;
@@ -52,21 +54,7 @@ ZUX_CATEGORY_M(ZUX_UITabBar)
     [APPEARANCE setTranslucent:translucent];
 }
 
-+ (UIImage *)backgroundImage {
-    return [APPEARANCE backgroundImage];
-}
-
-+ (void)setBackgroundImage:(UIImage *)backgroundImage {
-    [APPEARANCE setBackgroundImage:backgroundImage];
-}
-
-+ (UIImage *)selectionIndicatorImage {
-    return [APPEARANCE selectionIndicatorImage];
-}
-
-+ (void)setSelectionIndicatorImage:(UIImage *)selectionIndicatorImage {
-    [APPEARANCE setSelectionIndicatorImage:selectionIndicatorImage];
-}
+#pragma mark - tintColor -
 
 + (UIColor *)tintColor {
     return [APPEARANCE tintColor];
@@ -75,6 +63,15 @@ ZUX_CATEGORY_M(ZUX_UITabBar)
 + (void)setTintColor:(UIColor *)tintColor {
     [APPEARANCE setTintColor:tintColor];
 }
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
+- (UIColor *)barTintColor {
+    return nil;
+}
+
+- (void)setBarTintColor:(UIColor *)barTintColor {
+}
+#endif
 
 + (UIColor *)barTintColor {
     return
@@ -90,6 +87,56 @@ ZUX_CATEGORY_M(ZUX_UITabBar)
 #endif
     [APPEARANCE setBarTintColor:barTintColor];
 }
+
+#pragma mark - backgroundImage -
+
++ (UIImage *)backgroundImage {
+    return [APPEARANCE backgroundImage];
+}
+
++ (void)setBackgroundImage:(UIImage *)backgroundImage {
+    [APPEARANCE setBackgroundImage:backgroundImage];
+}
+
+#pragma mark - backgroundColor -
+
++ (UIColor *)backgroundColor {
+    return [APPEARANCE backgroundColor];
+}
+
++ (void)setBackgroundColor:(UIColor *)backgroundColor {
+    [APPEARANCE setBackgroundColor:backgroundColor];
+}
+
+#pragma mark - indicatorImage -
+
++ (UIImage *)selectionIndicatorImage {
+    return [APPEARANCE selectionIndicatorImage];
+}
+
++ (void)setSelectionIndicatorImage:(UIImage *)selectionIndicatorImage {
+    [APPEARANCE setSelectionIndicatorImage:selectionIndicatorImage];
+}
+
+#pragma mark - indicatorColor -
+
+- (UIColor *)selectionIndicatorColor {
+    return selectionIndicatorColor(self);
+}
+
+- (void)setSelectionIndicatorColor:(UIColor *)selectionIndicatorColor {
+    setSelectionIndicatorColor(self, selectionIndicatorColor);
+}
+
++ (UIColor *)selectionIndicatorColor {
+    return selectionIndicatorColor(APPEARANCE);
+}
+
++ (void)setSelectionIndicatorColor:(UIColor *)selectionIndicatorColor {
+    setSelectionIndicatorColor(APPEARANCE, selectionIndicatorColor);
+}
+
+#pragma mark - selectedTintColor -
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 - (UIColor *)selectedImageTintColor {

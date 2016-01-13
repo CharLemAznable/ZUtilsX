@@ -23,22 +23,25 @@ ZUX_CATEGORY_H(ZUX_UINavigationBar)
 + (UIColor *)tintColor;
 + (void)setTintColor:(UIColor *)tintColor;
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
+@property (nonatomic, ZUX_STRONG) UIColor *barTintColor UI_APPEARANCE_SELECTOR;
+#endif
 + (UIColor *)barTintColor;
 + (void)setBarTintColor:(UIColor *)barTintColor;
 
 @property (nonatomic, ZUX_STRONG) UIImage *defaultBackgroundImage;
-
 + (UIImage *)defaultBackgroundImage;
 + (void)setDefaultBackgroundImage:(UIImage *)backgroundImage;
+
 + (UIImage *)backgroundImageForBarMetrics:(UIBarMetrics)barMetrics;
 + (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics;
 
 @property (nonatomic, ZUX_STRONG) UIColor *defaultBackgroundColor;
-- (UIColor *)backgroundColorForBarMetrics:(UIBarMetrics)barMetrics;
-- (void)setBackgroundColor:(UIColor *)backgroundColor forBarMetrics:(UIBarMetrics)barMetrics;
-
 + (UIColor *)defaultBackgroundColor;
 + (void)setDefaultBackgroundColor:(UIColor *)backgroundColor;
+
+- (UIColor *)backgroundColorForBarMetrics:(UIBarMetrics)barMetrics;
+- (void)setBackgroundColor:(UIColor *)backgroundColor forBarMetrics:(UIBarMetrics)barMetrics;
 + (UIColor *)backgroundColorForBarMetrics:(UIBarMetrics)barMetrics;
 + (void)setBackgroundColor:(UIColor *)backgroundColor forBarMetrics:(UIBarMetrics)barMetrics;
 

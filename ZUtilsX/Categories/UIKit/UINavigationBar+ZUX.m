@@ -35,6 +35,15 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
     [APPEARANCE setTintColor:tintColor];
 }
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
+- (UIColor *)barTintColor {
+    return nil;
+}
+
+- (void)setBarTintColor:(UIColor *)barTintColor {
+}
+#endif
+
 + (UIColor *)barTintColor {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
@@ -86,20 +95,20 @@ ZUX_CATEGORY_M(ZUX_UINavigationBar)
     [self setBackgroundColor:backgroundColor forBarMetrics:UIBarMetricsDefault];
 }
 
-- (UIColor *)backgroundColorForBarMetrics:(UIBarMetrics)barMetrics {
-    return backgroundColorForBarMetrics(self, barMetrics);
-}
-
-- (void)setBackgroundColor:(UIColor *)backgroundColor forBarMetrics:(UIBarMetrics)barMetrics {
-    setBackgroundColorForBarMetrics(self, backgroundColor, barMetrics);
-}
-
 + (UIColor *)defaultBackgroundColor {
     return [self backgroundColorForBarMetrics:UIBarMetricsDefault];
 }
 
 + (void)setDefaultBackgroundColor:(UIColor *)backgroundColor {
     [self setBackgroundColor:backgroundColor forBarMetrics:UIBarMetricsDefault];
+}
+
+- (UIColor *)backgroundColorForBarMetrics:(UIBarMetrics)barMetrics {
+    return backgroundColorForBarMetrics(self, barMetrics);
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor forBarMetrics:(UIBarMetrics)barMetrics {
+    setBackgroundColorForBarMetrics(self, backgroundColor, barMetrics);
 }
 
 + (UIColor *)backgroundColorForBarMetrics:(UIBarMetrics)barMetrics {

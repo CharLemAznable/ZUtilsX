@@ -598,19 +598,19 @@
 
         -defaultBackgroundImage
         -setDefaultBackgroundImage:
-
         +defaultBackgroundImage
         +setDefaultBackgroundImage:
+
         +backgroundImageForBarMetrics:
         +setBackgroundImage:forBarMetrics:
 
         -defaultBackgroundColor
         -setDefaultBackgroundColor:
-        -backgroundColorForBarMetrics:
-        -setBackgroundColor:forBarMetrics:
-
         +defaultBackgroundColor
         +setDefaultBackgroundColor:
+
+        -backgroundColorForBarMetrics:
+        -setBackgroundColor:forBarMetrics:
         +backgroundColorForBarMetrics:
         +setBackgroundColor:forBarMetrics:
 
@@ -648,17 +648,25 @@
         +isTranslucent
         +setTranslucent:
 
-        +backgroundImage
-        +setBackgroundImage:
-
-        +selectionIndicatorImage
-        +setSelectionIndicatorImage:
-
         +tintColor
         +setTintColor:
 
         +barTintColor
         +setBarTintColor:
+
+        +backgroundImage
+        +setBackgroundImage:
+
+        +backgroundColor
+        +setBackgroundColor:
+
+        +selectionIndicatorImage
+        +setSelectionIndicatorImage:
+
+        -selectionIndicatorColor
+        -setSelectionIndicatorColor:
+        +selectionIndicatorColor
+        +setSelectionIndicatorColor:
 
         +selectedImageTintColor
         +setSelectedImageTintColor:

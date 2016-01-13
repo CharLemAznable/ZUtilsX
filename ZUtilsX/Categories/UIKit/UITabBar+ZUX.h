@@ -30,17 +30,27 @@ ZUX_CATEGORY_H(ZUX_UITabBar)
 + (BOOL)isTranslucent;
 + (void)setTranslucent:(BOOL)translucent;
 
++ (UIColor *)tintColor;
++ (void)setTintColor:(UIColor *)tintColor;
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
+@property (nonatomic, ZUX_STRONG) UIColor *barTintColor UI_APPEARANCE_SELECTOR;
+#endif
++ (UIColor *)barTintColor;
++ (void)setBarTintColor:(UIColor *)barTintColor;
+
 + (UIImage *)backgroundImage;
 + (void)setBackgroundImage:(UIImage *)backgroundImage;
+
++ (UIColor *)backgroundColor;
++ (void)setBackgroundColor:(UIColor *)backgroundColor;
 
 + (UIImage *)selectionIndicatorImage;
 + (void)setSelectionIndicatorImage:(UIImage *)selectionIndicatorImage;
 
-+ (UIColor *)tintColor;
-+ (void)setTintColor:(UIColor *)tintColor;
-
-+ (UIColor *)barTintColor;
-+ (void)setBarTintColor:(UIColor *)barTintColor;
+@property (nonatomic, ZUX_STRONG) UIColor *selectionIndicatorColor;
++ (UIColor *)selectionIndicatorColor;
++ (void)setSelectionIndicatorColor:(UIColor *)selectionIndicatorColor;
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
 @property (nonatomic, ZUX_STRONG) UIColor *selectedImageTintColor;
