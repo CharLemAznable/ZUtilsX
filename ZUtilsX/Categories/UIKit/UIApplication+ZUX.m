@@ -12,12 +12,14 @@
 
 ZUX_CATEGORY_M(ZUX_UIApplication)
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
 @interface ZUXApplicationDelegateDummy : NSObject
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings;
 - (void)zuxApplication:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings;
 
 @end
+#endif
 
 @implementation UIApplication (ZUX)
 
@@ -41,6 +43,7 @@ ZUX_CATEGORY_M(ZUX_UIApplication)
      [UIUserNotificationSettings settingsForTypes:userNotificationType(types)
                                        categories:categories]];
     
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
     // registerForRemoteNotifications in IOS8.0+
     if (!IOS8_OR_LATER) return;
     static dispatch_once_t once_t;
@@ -51,6 +54,7 @@ ZUX_CATEGORY_M(ZUX_UIApplication)
          withNewSelector:@selector(zuxApplication:didRegisterUserNotificationSettings:)
          fromClass:[ZUXApplicationDelegateDummy class]];
     });
+#endif
 }
 
 + (BOOL)notificationTypeRegisted:(ZUXUserNotificationType)type {
@@ -92,6 +96,7 @@ ZUX_STATIC_INLINE UIUserNotificationType userNotificationType(ZUXUserNotificatio
 
 @end
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
 @implementation ZUXApplicationDelegateDummy
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {}
@@ -102,3 +107,4 @@ ZUX_STATIC_INLINE UIUserNotificationType userNotificationType(ZUXUserNotificatio
 }
 
 @end
+#endif
