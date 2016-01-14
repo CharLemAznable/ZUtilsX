@@ -59,12 +59,14 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 }
 
 - (void)zux_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
-    if (!anObject || !aKey) return;
+    if (!aKey) return;
+    if (!anObject) { [self removeObjectForKey:aKey]; return; }
     [self zux_setObject:anObject forKey:aKey];
 }
 
 - (void)zux_setObject:(id)anObject forKeyedSubscript:(id<NSCopying>)aKey {
-    if (!anObject || !aKey) return;
+    if (!aKey) return;
+    if (!anObject) { [self removeObjectForKey:aKey]; return; }
     [self zux_setObject:anObject forKeyedSubscript:aKey];
 }
 

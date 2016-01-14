@@ -59,7 +59,7 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 }
 
 - (void)zux_setObject:(id)anObject atIndexedSubscript:(NSUInteger)index {
-    if (!anObject) return;
+    if (!anObject) { [self removeObjectAtIndex:index]; return; }
     [self zux_setObject:anObject atIndexedSubscript:index];
 }
 
@@ -74,8 +74,13 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 }
 
 - (void)zux_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject {
-    if (!anObject) return;
+    if (!anObject) { [self removeObjectAtIndex:index]; return; }
     [self zux_replaceObjectAtIndex:index withObject:anObject];
+}
+
+- (void)zux_removeObjectAtIndex:(NSUInteger)index {
+    if (index >= [self count]) return;
+    [self zux_removeObjectAtIndex:index];
 }
 
 + (void)load {
@@ -102,6 +107,9 @@ ZUX_CATEGORY_M(ZUX_NSArray)
         [NSClassFromString(@"__NSArrayM")
          swizzleInstanceOriSelector:@selector(replaceObjectAtIndex:withObject:)
          withNewSelector:@selector(zux_replaceObjectAtIndex:withObject:)];
+        [NSClassFromString(@"__NSArrayM")
+         swizzleInstanceOriSelector:@selector(removeObjectAtIndex:)
+         withNewSelector:@selector(zux_removeObjectAtIndex:)];
     });
 }
 

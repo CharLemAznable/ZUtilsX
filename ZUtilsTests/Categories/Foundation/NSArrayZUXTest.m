@@ -51,26 +51,26 @@
     XCTAssertEqualObjects([arrayMutable objectAtIndex:2 defaultValue:@"BBB"], @"BBB");
     NSObject *nilObject = nil;
     arrayMutable[1] = nilObject;
-    XCTAssertNotNil([arrayMutable objectAtIndex:1]);
-    XCTAssertNotNil(arrayMutable[1]);
+    XCTAssertNil([arrayMutable objectAtIndex:1]);
+    XCTAssertNil(arrayMutable[1]);
     arrayMutable[2] = nilObject;
     XCTAssertNil([arrayMutable objectAtIndex:2]);
     XCTAssertNil(arrayMutable[2]);
     arrayMutable[0] = nilObject;
-    XCTAssertNotNil([arrayMutable objectAtIndex:0]);
-    XCTAssertNotNil(arrayMutable[0]);
-    XCTAssertEqualObjects([arrayMutable objectAtIndex:0 defaultValue:@"BBB"], @"AAA");
+    XCTAssertNil([arrayMutable objectAtIndex:0]);
+    XCTAssertNil(arrayMutable[0]);
+    XCTAssertEqualObjects([arrayMutable objectAtIndex:0 defaultValue:@"BBB"], @"BBB");
     
     nilObject = [NSNull null];
+    arrayMutable[0] = nilObject;
+    XCTAssertNotNil([arrayMutable objectAtIndex:0]);
+    XCTAssertNotNil(arrayMutable[0]);
     arrayMutable[1] = nilObject;
     XCTAssertNotNil([arrayMutable objectAtIndex:1]);
     XCTAssertNotNil(arrayMutable[1]);
     arrayMutable[2] = nilObject;
     XCTAssertNotNil([arrayMutable objectAtIndex:2]);
     XCTAssertNotNil(arrayMutable[2]);
-    arrayMutable[0] = nilObject;
-    XCTAssertNotNil([arrayMutable objectAtIndex:0]);
-    XCTAssertNotNil(arrayMutable[0]);
     XCTAssertEqualObjects([arrayMutable objectAtIndex:0 defaultValue:@"BBB"], @"BBB");
 }
 
