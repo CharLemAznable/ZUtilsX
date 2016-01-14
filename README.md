@@ -1028,15 +1028,22 @@
 
 - ZUXSingleton
 
-    添加单例工具宏.
+    添加单例宏.
 
-        // 添加于.h文件, @interface中
-        ZUX_SINGLETON_H(SHARE_INSTANCE)
+        // 定义单例类
+        @singletonface(CLASS_NAME, SUPER_CLASS_NAME)
 
-        // 添加于.m文件, @implementation中
-        ZUX_SINGLETOM_M(SHARE_INSTANCE)
+        // 实现单例类
+        @singletonation(CLASS_NAME)
 
-        // 用于添加单例类方法: +(id)SHARE_INSTANCE, 并屏蔽alloc/copy实现.
+        // 单例类定义示例
+        @singletonface(MySingleton, NSObject)
+        @end
+        @singletonation(MySingleton)
+        @end
+
+        // 单例使用示例
+        [MySingleton shareMySingleton]
 
 - ZUXGeometry
 
