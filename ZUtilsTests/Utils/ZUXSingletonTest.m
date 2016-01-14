@@ -8,14 +8,8 @@
 
 #import <XCTest/XCTest.h>
 #import "ZUtilsX.h"
-
-@interface MySingleton : NSObject
-ZUX_SINGLETON_H(sharedInstance)
-@end
-
-@implementation MySingleton
-ZUX_SINGLETOM_M(sharedInstance)
-@end
+#import "MySingleton.h"
+#import "MySubSingleton.h"
 
 @interface ZUXSingletonTest : XCTestCase
 
@@ -27,6 +21,10 @@ ZUX_SINGLETOM_M(sharedInstance)
     XCTAssertEqual([MySingleton new], [MySingleton sharedInstance]);
     XCTAssertEqual([MySingleton sharedInstance], [[MySingleton sharedInstance] copy]);
     XCTAssertNil([MySingleton new]);
+    XCTAssertEqual([MySubSingleton new], [MySubSingleton sharedInstance]);
+    XCTAssertEqual([MySubSingleton sharedInstance], [[MySubSingleton sharedInstance] copy]);
+    XCTAssertNil([MySubSingleton new]);
+    XCTAssertNotEqual([MySingleton sharedInstance], [MySubSingleton sharedInstance]);
 }
 
 @end

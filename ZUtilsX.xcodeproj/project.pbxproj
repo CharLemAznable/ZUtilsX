@@ -150,6 +150,8 @@
 		6A6A3D941C1983C700847DEF /* ZUXColorDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */; };
 		6A6A3D951C19840D00847DEF /* ZUXColorDictionary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */; };
 		6A7B861D1C29496E00FF864E /* UIImageZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B861C1C29496E00FF864E /* UIImageZUXTest.m */; };
+		6AE1BDBC1C477AA700848FD5 /* MySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE1BDBB1C477AA700848FD5 /* MySingleton.m */; };
+		6AE1BDBF1C477AB900848FD5 /* MySubSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE1BDBE1C477AB900848FD5 /* MySubSingleton.m */; };
 		6AE7ABEA1C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7ABE91C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m */; };
 		6AE7ABEB1C20006B0061A235 /* UIBarButtonItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6AE7ABE81C1FD8BE0061A235 /* UIBarButtonItem+ZUX.h */; };
 /* End PBXBuildFile section */
@@ -375,6 +377,10 @@
 		6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXColorDictionary.h; sourceTree = "<group>"; };
 		6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXColorDictionary.m; sourceTree = "<group>"; };
 		6A7B861C1C29496E00FF864E /* UIImageZUXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageZUXTest.m; path = Categories/UIKit/UIImageZUXTest.m; sourceTree = "<group>"; };
+		6AE1BDBA1C477AA700848FD5 /* MySingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MySingleton.h; path = Utils/MySingleton.h; sourceTree = "<group>"; };
+		6AE1BDBB1C477AA700848FD5 /* MySingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MySingleton.m; path = Utils/MySingleton.m; sourceTree = "<group>"; };
+		6AE1BDBD1C477AB900848FD5 /* MySubSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MySubSingleton.h; path = Utils/MySubSingleton.h; sourceTree = "<group>"; };
+		6AE1BDBE1C477AB900848FD5 /* MySubSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MySubSingleton.m; path = Utils/MySubSingleton.m; sourceTree = "<group>"; };
 		6AE7ABE81C1FD8BE0061A235 /* UIBarButtonItem+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+ZUX.h"; sourceTree = "<group>"; };
 		6AE7ABE91C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+ZUX.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -414,6 +420,10 @@
 			children = (
 				6A68BF441C3BB68A00C690E1 /* Runtime */,
 				6A0F896A1C0348C70003948C /* ZUXSingletonTest.m */,
+				6AE1BDBA1C477AA700848FD5 /* MySingleton.h */,
+				6AE1BDBB1C477AA700848FD5 /* MySingleton.m */,
+				6AE1BDBD1C477AB900848FD5 /* MySubSingleton.h */,
+				6AE1BDBE1C477AB900848FD5 /* MySubSingleton.m */,
 				6A0F896C1C034DA10003948C /* ZUXGeometryTest.m */,
 				6A0F89701C03528D0003948C /* ZUXJsonTest.m */,
 				6A5332561C108FF90088F2B0 /* ZUXJSONKitTest.m */,
@@ -873,6 +883,7 @@
 				6A0F89711C03528D0003948C /* ZUXJsonTest.m in Sources */,
 				6A68BF4C1C3BC15800C690E1 /* ZUXMethodTest.m in Sources */,
 				6A1087E91C048D8B0062160C /* NSDictionaryZUXTest.m in Sources */,
+				6AE1BDBF1C477AB900848FD5 /* MySubSingleton.m in Sources */,
 				6A0F89731C0356B90003948C /* ZUXDirectoryTest.m in Sources */,
 				6A17637B1C06B83800EC52FE /* UIColorZUXTest.m in Sources */,
 				6A1763801C06DAB600EC52FE /* ZUXConstraintTest.m in Sources */,
@@ -880,6 +891,7 @@
 				6A7B861D1C29496E00FF864E /* UIImageZUXTest.m in Sources */,
 				6A17946F1C05D58600FF5870 /* NSDateZUXTest.m in Sources */,
 				6A1087E51C04871E0062160C /* NSObjectZUXJsonTest.m in Sources */,
+				6AE1BDBC1C477AA700848FD5 /* MySingleton.m in Sources */,
 				6A0F896D1C034DA10003948C /* ZUXGeometryTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
