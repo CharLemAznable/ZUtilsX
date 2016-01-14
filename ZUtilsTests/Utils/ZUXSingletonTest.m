@@ -8,8 +8,16 @@
 
 #import <XCTest/XCTest.h>
 #import "ZUtilsX.h"
-#import "MySingleton.h"
-#import "MySubSingleton.h"
+
+@singletonface(MySingleton, NSObject)
+@end
+@singletonation(MySingleton)
+@end
+
+@singletonface(MySubSingleton, MySingleton)
+@end
+@singletonation(MySubSingleton)
+@end
 
 @interface ZUXSingletonTest : XCTestCase
 
@@ -18,13 +26,13 @@
 @implementation ZUXSingletonTest
 
 - (void)testMySingleton {
-    XCTAssertEqual([MySingleton new], [MySingleton sharedInstance]);
-    XCTAssertEqual([MySingleton sharedInstance], [[MySingleton sharedInstance] copy]);
+    XCTAssertEqual([MySingleton new], [MySingleton shareMySingleton]);
+    XCTAssertEqual([MySingleton shareMySingleton], [[MySingleton shareMySingleton] copy]);
     XCTAssertNil([MySingleton new]);
-    XCTAssertEqual([MySubSingleton new], [MySubSingleton sharedInstance]);
-    XCTAssertEqual([MySubSingleton sharedInstance], [[MySubSingleton sharedInstance] copy]);
+    XCTAssertEqual([MySubSingleton new], [MySubSingleton shareMySubSingleton]);
+    XCTAssertEqual([MySubSingleton shareMySubSingleton], [[MySubSingleton shareMySubSingleton] copy]);
     XCTAssertNil([MySubSingleton new]);
-    XCTAssertNotEqual([MySingleton sharedInstance], [MySubSingleton sharedInstance]);
+    XCTAssertNotEqual([MySingleton shareMySingleton], [MySubSingleton shareMySubSingleton]);
 }
 
 @end

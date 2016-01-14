@@ -12,25 +12,28 @@
 #import "zobjc.h"
 #import "zarc.h"
 
-#define ZUX_SINGLETON_H(SHARE_INSTANCE) \
-+ (ZUX_INSTANCETYPE)SHARE_INSTANCE;
+#define singletonface(CLASS_NAME, SUPER_CLASS_NAME) \
+interface CLASS_NAME : SUPER_CLASS_NAME \
++ (ZUX_INSTANCETYPE)share##CLASS_NAME;
 
-#define ZUX_SINGLETOM_M(SHARE_INSTANCE) \
-static id _##SHARE_INSTANCE; \
-+ (ZUX_INSTANCETYPE)SHARE_INSTANCE { \
+#define singletonation(CLASS_NAME) \
+implementation CLASS_NAME \
+static id _share##CLASS_NAME; \
++ (ZUX_INSTANCETYPE)share##CLASS_NAME { \
     static dispatch_once_t once_t; \
     dispatch_once(&once_t, ^{ \
-        if (ZUX_EXPECT_F(_##SHARE_INSTANCE)) return; \
-        _##SHARE_INSTANCE = [[self alloc] init]; \
+        if (ZUX_EXPECT_F(_share##CLASS_NAME)) return; \
+        _share##CLASS_NAME = [[self alloc] init]; \
     }); \
-    return _##SHARE_INSTANCE; \
+    return _share##CLASS_NAME; \
 } \
 + (ZUX_INSTANCETYPE)allocWithZone:(struct _NSZone *)zone { \
     static dispatch_once_t once_t; \
     __block id alloc = nil; \
     dispatch_once(&once_t, ^{ \
-        if (ZUX_EXPECT_T(!_##SHARE_INSTANCE)) _##SHARE_INSTANCE = [super allocWithZone:zone]; \
-        alloc = _##SHARE_INSTANCE; \
+        if (ZUX_EXPECT_T(!_share##CLASS_NAME)) \
+            _share##CLASS_NAME = [super allocWithZone:zone]; \
+        alloc = _share##CLASS_NAME; \
     }); \
     return alloc; \
 } \
