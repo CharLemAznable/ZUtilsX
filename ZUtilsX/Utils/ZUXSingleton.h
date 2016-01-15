@@ -12,30 +12,30 @@
 #import "zobjc.h"
 #import "zarc.h"
 
-#define singleton_interface(CLASS_NAME, SUPER_CLASS_NAME)       \
-interface CLASS_NAME : SUPER_CLASS_NAME                         \
-+ (ZUX_INSTANCETYPE)share##CLASS_NAME;                          \
+#define singleton_interface(className, superClassName)          \
+interface className : superClassName                            \
++ (ZUX_INSTANCETYPE)share##className;                           \
 @end                                                            \
-@interface CLASS_NAME ()
+@interface className ()
 
-#define singleton_implementation(CLASS_NAME)                    \
-implementation CLASS_NAME                                       \
-static id _share##CLASS_NAME;                                   \
-+ (ZUX_INSTANCETYPE)share##CLASS_NAME {                         \
+#define singleton_implementation(className)                     \
+implementation className                                        \
+static id _share##className;                                    \
++ (ZUX_INSTANCETYPE)share##className {                          \
     static dispatch_once_t once_t;                              \
     dispatch_once(&once_t, ^{                                   \
-        if (ZUX_EXPECT_F(_share##CLASS_NAME)) return;           \
-        _share##CLASS_NAME = [[self alloc] init];               \
+        if (ZUX_EXPECT_F(_share##className)) return;            \
+        _share##className = [[self alloc] init];                \
     });                                                         \
-    return _share##CLASS_NAME;                                  \
+    return _share##className;                                   \
 }                                                               \
 + (ZUX_INSTANCETYPE)allocWithZone:(struct _NSZone *)zone {      \
     static dispatch_once_t once_t;                              \
     __block id alloc = nil;                                     \
     dispatch_once(&once_t, ^{                                   \
-        if (ZUX_EXPECT_T(!_share##CLASS_NAME))                  \
-            _share##CLASS_NAME = [super allocWithZone:zone];    \
-        alloc = _share##CLASS_NAME;                             \
+        if (ZUX_EXPECT_T(!_share##className))                   \
+            _share##className = [super allocWithZone:zone];     \
+        alloc = _share##className;                              \
     });                                                         \
     return alloc;                                               \
 }                                                               \

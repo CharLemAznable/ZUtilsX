@@ -11,29 +11,29 @@
 
 #import "zobjc.h"
 
-#define enable_category_constructor(CLASS_NAME, CATEGORY_NAME)                  \
+#define enable_category_constructor(className, categoryName)                    \
 __attribute__((constructor))                                                    \
-ZUX_STATIC void enable_ZUX_CATEGORY_##CLASS_NAME##_##CATEGORY_NAME()            \
-{ [ZUX_CATEGORY_##CLASS_NAME##_##CATEGORY_NAME declare]; }
+ZUX_STATIC void enable_ZUX_CATEGORY_##className##_##categoryName()              \
+{ [ZUX_CATEGORY_##className##_##categoryName declare]; }
 
-#define category_interface(CLASS_NAME, CATEGORY_NAME)                           \
-interface ZUX_CATEGORY_##CLASS_NAME##_##CATEGORY_NAME : NSObject                \
+#define category_interface(className, categoryName)                             \
+interface ZUX_CATEGORY_##className##_##categoryName : NSObject                  \
 + (void)declare;                                                                \
 @end                                                                            \
-enable_category_constructor(CLASS_NAME, CATEGORY_NAME)                          \
-@interface CLASS_NAME (CATEGORY_NAME)
+enable_category_constructor(className, categoryName)                            \
+@interface className (categoryName)
 
-#define category_interface_generic(CLASS_NAME, GENERIC_PARAM, CATEGORY_NAME)    \
-interface ZUX_CATEGORY_##CLASS_NAME##_##CATEGORY_NAME : NSObject                \
+#define category_interface_generic(className, genericParam, categoryName)       \
+interface ZUX_CATEGORY_##className##_##categoryName : NSObject                  \
 + (void)declare;                                                                \
 @end                                                                            \
-enable_category_constructor(CLASS_NAME, CATEGORY_NAME)                          \
-@interface CLASS_NAME GENERIC_PARAM (CATEGORY_NAME)
+enable_category_constructor(className, categoryName)                            \
+@interface className genericParam (categoryName)
 
-#define category_implementation(CLASS_NAME, CATEGORY_NAME)                      \
-implementation ZUX_CATEGORY_##CLASS_NAME##_##CATEGORY_NAME                      \
+#define category_implementation(className, categoryName)                        \
+implementation ZUX_CATEGORY_##className##_##categoryName                        \
 + (void)declare { ; }                                                           \
 @end                                                                            \
-@implementation CLASS_NAME (CATEGORY_NAME)
+@implementation className (categoryName)
 
 #endif /* ZUtilsX_ZUXCategory_h */

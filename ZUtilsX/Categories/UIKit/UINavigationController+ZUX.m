@@ -88,16 +88,16 @@
     [[self class] swizzleZuxViewDidDisappear:YES];
 }
 
-#define ZUXCallbackBlockImplementation(BlockKey)                                                            \
-static NSString *const ZUXView##BlockKey##CallbackBlockKey = @"zuxView" @#BlockKey @"CallbackBlockKey";     \
-- (ZUXNavigationCallbackBlock)zuxView##BlockKey##CallbackBlock {                                            \
-    return (ZUXNavigationCallbackBlock)[self propertyForAssociateKey:ZUXView##BlockKey##CallbackBlockKey];  \
+#define ZUXCallbackBlockImplementation(blockKey)                                                            \
+static NSString *const ZUXView##blockKey##CallbackBlockKey = @"zuxView" @#blockKey @"CallbackBlockKey";     \
+- (ZUXNavigationCallbackBlock)zuxView##blockKey##CallbackBlock {                                            \
+    return (ZUXNavigationCallbackBlock)[self propertyForAssociateKey:ZUXView##blockKey##CallbackBlockKey];  \
 }                                                                                                           \
-- (void)setZuxView##BlockKey##CallbackBlock:(ZUXNavigationCallbackBlock)block {                             \
-    [self setProperty:(id)block forAssociateKey:ZUXView##BlockKey##CallbackBlockKey];                       \
+- (void)setZuxView##blockKey##CallbackBlock:(ZUXNavigationCallbackBlock)block {                             \
+    [self setProperty:(id)block forAssociateKey:ZUXView##blockKey##CallbackBlockKey];                       \
 }                                                                                                           \
-- (void)zuxView##BlockKey##Callback {                                                                       \
-    ZUXNavigationCallbackBlock block = [self zuxView##BlockKey##CallbackBlock];                             \
+- (void)zuxView##blockKey##Callback {                                                                       \
+    ZUXNavigationCallbackBlock block = [self zuxView##blockKey##CallbackBlock];                             \
     if (block) block(self);                                                                                 \
 }
 
@@ -124,20 +124,20 @@ ZUXCallbackBlockImplementation(DidDisappear);
     [self zuxNavigationDealloc];
 }
 
-#define ZUXCallbackSwizzleImplementation(SwizzleKey)                                                \
-static NSString *const ZUXView##SwizzleKey##SwizzledKey = @"zuxView" @#SwizzleKey @"SwizzledKey";   \
-+ (BOOL)zuxView##SwizzleKey##Swizzled {                                                             \
-    return [[self propertyForAssociateKey:ZUXView##SwizzleKey##SwizzledKey] boolValue];             \
+#define ZUXCallbackSwizzleImplementation(swizzleKey)                                                \
+static NSString *const ZUXView##swizzleKey##SwizzledKey = @"zuxView" @#swizzleKey @"SwizzledKey";   \
++ (BOOL)zuxView##swizzleKey##Swizzled {                                                             \
+    return [[self propertyForAssociateKey:ZUXView##swizzleKey##SwizzledKey] boolValue];             \
 }                                                                                                   \
-+ (void)setZuxView##SwizzleKey##Swizzled:(BOOL)swizzled {                                           \
-    [self setProperty:@(swizzled) forAssociateKey:ZUXView##SwizzleKey##SwizzledKey];                \
++ (void)setZuxView##swizzleKey##Swizzled:(BOOL)swizzled {                                           \
+    [self setProperty:@(swizzled) forAssociateKey:ZUXView##swizzleKey##SwizzledKey];                \
 }                                                                                                   \
-+ (void)swizzleZuxView##SwizzleKey:(BOOL)swizzled {                                                 \
++ (void)swizzleZuxView##swizzleKey:(BOOL)swizzled {                                                 \
     @synchronized(self) {                                                                           \
-        if ([self zuxView##SwizzleKey##Swizzled] == swizzled) {                                     \
-            [self swizzleInstanceOriSelector:@selector(view##SwizzleKey:)                           \
-                             withNewSelector:@selector(zuxView##SwizzleKey:)];                      \
-            [self setZuxView##SwizzleKey##Swizzled:!swizzled];                                      \
+        if ([self zuxView##swizzleKey##Swizzled] == swizzled) {                                     \
+            [self swizzleInstanceOriSelector:@selector(view##swizzleKey:)                           \
+                             withNewSelector:@selector(zuxView##swizzleKey:)];                      \
+            [self setZuxView##swizzleKey##Swizzled:!swizzled];                                      \
         }                                                                                           \
     }                                                                                               \
 }
