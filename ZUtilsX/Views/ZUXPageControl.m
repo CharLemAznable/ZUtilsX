@@ -60,7 +60,6 @@
     _pageIndicatorColor = ZUX_RETAIN(pageIndicatorColor);
     
     ZUX_RELEASE(_pageIndicatorImage);
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     _pageIndicatorImage = ZUX_RETAIN([UIImage imageEllipseWithColor:_pageIndicatorColor
                                                                size:CGSizeMake(20, 20)]);
 }
@@ -72,7 +71,6 @@
     _currentPageIndicatorColor = ZUX_RETAIN(currentPageIndicatorColor);
     
     ZUX_RELEASE(_currentPageIndicatorImage);
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     _currentPageIndicatorImage = ZUX_RETAIN([UIImage imageEllipseWithColor:_currentPageIndicatorColor
                                                                       size:CGSizeMake(20, 20)]);
 }

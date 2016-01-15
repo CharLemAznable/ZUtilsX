@@ -14,9 +14,7 @@
 #ifndef ZUtilsX_NSNumber_ZUX_h
 #define ZUtilsX_NSNumber_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_NSNumber)
-
-@interface NSNumber (ZUX)
+@category_interface(NSNumber, ZUX)
 
 + (ZUX_INSTANCETYPE)numberWithCGFloat:(CGFloat)value;
 - (ZUX_INSTANCETYPE)initWithCGFloat:(CGFloat)value;

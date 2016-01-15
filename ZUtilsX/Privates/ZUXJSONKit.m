@@ -160,8 +160,6 @@
 #error JSONKit requires NSInteger and NSUInteger to be the same size as the C 'size_t' type.
 #endif
 
-ZUX_CATEGORY_M(ZUX_JSONKit)
-
 // For DJB hash.
 #define JK_HASH_INIT           (1402737925UL)
 
@@ -2261,7 +2259,7 @@ static id _JKParseUTF8String(JKParseState *parseState, BOOL mutableCollections, 
  autorelease limbo, but we've done our best to minimize that impact, so it all balances out.
  */
 
-@implementation NSString (JSONKitDeserializing)
+@category_implementation(NSString, JSONKitDeserializing)
 
 static id _NSStringObjectFromJSONString(NSString *jsonString, JKParseOptionFlags parseOptionFlags, NSError **error, BOOL mutableCollection) {
     id                returnObject = NULL;
@@ -2315,7 +2313,7 @@ exitNow:
 
 @end
 
-@implementation NSData (JSONKitDeserializing)
+@category_implementation(NSData, JSONKitDeserializing)
 
 - (id)objectFromJSONData {
     return([self objectFromJSONDataWithParseOptions:JKParseOptionStrict error:NULL]);
@@ -2914,7 +2912,7 @@ errorExit:
 
 @end
 
-@implementation NSString (JSONKitSerializing)
+@category_implementation(NSString, JSONKitSerializing)
 
 ////////////
 #pragma mark Methods for serializing a single NSString.
@@ -2944,7 +2942,7 @@ errorExit:
 
 @end
 
-@implementation NSArray (JSONKitSerializing)
+@category_implementation(NSArray, JSONKitSerializing)
 
 // NSData returning methods...
 
@@ -2976,7 +2974,7 @@ errorExit:
 
 @end
 
-@implementation NSDictionary (JSONKitSerializing)
+@category_implementation(NSDictionary, JSONKitSerializing)
 
 // NSData returning methods...
 
@@ -3010,7 +3008,7 @@ errorExit:
 
 #ifdef __BLOCKS__
 
-@implementation NSArray (JSONKitSerializingBlockAdditions)
+@category_implementation(NSArray, JSONKitSerializingBlockAdditions)
 
 - (NSData *)JSONDataWithOptions:(JKSerializeOptionFlags)serializeOptions serializeUnsupportedClassesUsingBlock:(id(^)(id object))block error:(NSError **)error {
     return([JKSerializer serializeObject:self options:serializeOptions encodeOption:(JKEncodeOptionAsData | JKEncodeOptionCollectionObj) block:block delegate:NULL selector:NULL error:error]);
@@ -3022,7 +3020,7 @@ errorExit:
 
 @end
 
-@implementation NSDictionary (JSONKitSerializingBlockAdditions)
+@category_implementation(NSDictionary, JSONKitSerializingBlockAdditions)
 
 - (NSData *)JSONDataWithOptions:(JKSerializeOptionFlags)serializeOptions serializeUnsupportedClassesUsingBlock:(id(^)(id object))block error:(NSError **)error {
     return([JKSerializer serializeObject:self options:serializeOptions encodeOption:(JKEncodeOptionAsData | JKEncodeOptionCollectionObj) block:block delegate:NULL selector:NULL error:error]);

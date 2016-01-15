@@ -14,15 +14,13 @@
 #ifndef ZUtilsX_UITabBar_ZUX_h
 #define ZUtilsX_UITabBar_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UITabBar)
-
-@interface UITabBar (ZUX)
+@category_interface(UITabBar, ZUX)
 
 @property (nonatomic, readonly) NSArray ZUX_GENERIC(UIView *) *barButtons;
 
 @end // UITabBar (ZUX)
 
-@interface UITabBar (ZUXAppearance)
+@category_interface(UITabBar, ZUXAppearance)
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000
 @property (nonatomic, getter=isTranslucent) BOOL translucent;

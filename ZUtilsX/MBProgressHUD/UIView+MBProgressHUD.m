@@ -9,9 +9,7 @@
 #import "UIView+MBProgressHUD.h"
 #import "zarc.h"
 
-ZUX_CATEGORY_M(ZUX_MBProgressHUD)
-
-@implementation UIView (MBProgressHUD)
+@category_implementation(UIView, MBProgressHUD)
 
 - (MBProgressHUD *)mbProgressHUD {
     MBProgressHUD *hud = [MBProgressHUD HUDForView:self];
@@ -73,7 +71,7 @@ ZUX_CATEGORY_M(ZUX_MBProgressHUD)
 
 @end
 
-@implementation UIView (RecursiveMBProgressHUD)
+@category_implementation(UIView, RecursiveMBProgressHUD)
 
 - (MBProgressHUD *)recursiveMBProgressHUD {
     NSEnumerator *subviewsEnum = [self.subviews reverseObjectEnumerator];

@@ -9,9 +9,7 @@
 #import "NSExpression+ZUX.h"
 #import "NSString+ZUX.h"
 
-ZUX_CATEGORY_M(ZUX_NSExpression)
-
-@implementation NSExpression (ZUX)
+@category_implementation(NSExpression, ZUX)
 
 + (NSArray *)keywordsArrayInExpressionFormat {
     return @[@"AND", @"OR", @"IN", @"NOT", @"ALL", @"ANY", @"SOME", @"NONE", @"LIKE", @"CASEINSENSITIVE", @"CI", @"MATCHES", @"CONTAINS", @"BEGINSWITH", @"ENDSWITH", @"BETWEEN", @"NULL", @"NIL", @"SELF", @"TRUE", @"YES", @"FALSE", @"NO", @"FIRST", @"LAST", @"SIZE", @"ANYKEY", @"SUBQUERY", @"CAST", @"TRUEPREDICATE", @"FALSEPREDICATE"];
@@ -22,7 +20,6 @@ NSString *const zParametricSuffix   = @"}";
 NSString *const zKeyPathPlaceholder = @"%K";
 
 + (NSExpression *)expressionWithParametricFormat:(NSString *)parametricFormat {
-    ZUX_ENABLE_CATEGORY(ZUX_NSString);
     NSMutableString *expressionFormat = [NSMutableString string];
     NSMutableArray *arguments = [NSMutableArray array];
     NSUInteger start = 0, end = [parametricFormat indexOfString:zParametricPrefix fromIndex:start];

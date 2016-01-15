@@ -8,9 +8,7 @@
 
 #import "UITextField+ZUX.h"
 
-ZUX_CATEGORY_M(ZUX_UITextField)
-
-@implementation UITextField (ZUX)
+@category_implementation(UITextField, ZUX)
 
 - (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string limitWithLength:(NSUInteger)length {
     NSString *toBeString = [self.text stringByReplacingCharactersInRange:range withString:string];

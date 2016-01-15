@@ -128,18 +128,14 @@ ZUX_STATIC_INLINE void constraintOriginAndSize(UIView *view, CGFloat viewSize,
 
 ZUX_STATIC_INLINE CGFloat constraintValue(UIView *view, id constraint) {
     if ([constraint isKindOfClass:[NSNumber class]]) {
-        ZUX_ENABLE_CATEGORY(ZUX_NSNumber);
         return [(NSNumber *)constraint cgfloatValue];
     } else if ([constraint isKindOfClass:[ZUXConstraint class]]) {
         ZUXConstraintBlock block = [(ZUXConstraint *)constraint block];
         return (block && view) ? block(view) : 0;
     } else if ([constraint isKindOfClass:[NSExpression class]]) {
-        ZUX_ENABLE_CATEGORY(ZUX_NSValue);
         id result = [(NSExpression *)constraint expressionValueWithObject:view context:nil];
-        ZUX_ENABLE_CATEGORY(ZUX_NSNumber);
         return [result respondsToSelector:@selector(cgfloatValue)] ? [result cgfloatValue] : 0;
     } else if ([constraint isKindOfClass:[NSString class]]) {
-        ZUX_ENABLE_CATEGORY(ZUX_NSExpression);
         return constraintValue(view, [NSExpression expressionWithParametricFormat:constraint]);
     }
     return 0;

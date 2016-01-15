@@ -12,12 +12,10 @@
 #ifndef ZUtilsX_UIView_MBProgressHUD_h
 #define ZUtilsX_UIView_MBProgressHUD_h
 
-ZUX_CATEGORY_H(ZUX_MBProgressHUD)
-
 /**
  * MBProgressHUD for CURRENT view.
  */
-@interface UIView (MBProgressHUD)
+@category_interface(UIView, MBProgressHUD)
 
 @property (MB_STRONG) UIFont *hudLabelFont;
 @property (MB_STRONG) UIFont *hudDetailsLabelFont;
@@ -42,7 +40,7 @@ ZUX_CATEGORY_H(ZUX_MBProgressHUD)
 /**
  * MBProgressHUD RECURSIVE in current view and its subviews.
  */
-@interface UIView (RecursiveMBProgressHUD)
+@category_interface(UIView, RecursiveMBProgressHUD)
 
 @property (MB_STRONG) UIFont *recursiveHudLabelFont;
 @property (MB_STRONG) UIFont *recursiveHudDetailsLabelFont;

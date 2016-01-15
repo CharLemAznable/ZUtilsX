@@ -16,9 +16,7 @@
 #import "zarc.h"
 #import <objc/runtime.h>
 
-ZUX_CATEGORY_M(ZUX_NSObject)
-
-@implementation NSObject (ZUX)
+@category_implementation(NSObject, ZUX)
 
 #pragma mark - swizzle -
 
@@ -93,16 +91,9 @@ ZUX_STATIC_INLINE void swizzleInstanceMethod(Class swiClass, SEL oriSelector, SE
     [self didChangeValueForKey:key];
 }
 
-+ (void)load {
-    static dispatch_once_t once_t;
-    dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_UIColor); // for [UIColor -isEqual:]
-    });
-}
-
 @end
 
-@implementation NSObject (ZUXRuntime)
+@category_implementation(NSObject, ZUXRuntime)
 
 + (NSArray *)zuxProtocols {
     unsigned int count;

@@ -12,9 +12,7 @@
 #ifndef ZUtilsX_UITabBarItem_ZUX_h
 #define ZUtilsX_UITabBarItem_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UITabBarItem)
-
-@interface UITabBarItem (ZUXAppearance)
+@category_interface(UITabBarItem, ZUXAppearance)
 
 + (id)tabBarItemWithTitle:(NSString *)title image:(UIImage *)image selectedImage:(UIImage *)selectedImage;
 

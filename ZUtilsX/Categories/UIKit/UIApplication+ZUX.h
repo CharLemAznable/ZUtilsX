@@ -14,9 +14,7 @@
 #ifndef ZUtilsX_UIApplication_ZUX_h
 #define ZUtilsX_UIApplication_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UIApplication)
-
-@interface UIApplication (ZUX)
+@category_interface(UIApplication, ZUX)
 
 + (void)registerUserNotificationTypes:(ZUXUserNotificationType)types;
 - (void)registerUserNotificationTypes:(ZUXUserNotificationType)types;

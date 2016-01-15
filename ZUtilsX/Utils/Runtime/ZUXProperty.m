@@ -173,13 +173,6 @@ NSString *const ZUXPropertyTypeEncodingAttribute                    = @"T";
 
 @implementation ZUXPropertyInternal
 
-+ (void)load {
-    static dispatch_once_t once_t;
-    dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSString);
-    });
-}
-
 - (ZUX_INSTANCETYPE)initWithObjCProperty:(objc_property_t)property {
     if (ZUX_EXPECT_T(self = [self init])) {
         _property = property;

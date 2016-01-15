@@ -15,11 +15,6 @@
 
 @implementation NSDictionaryZUXTest
 
-- (void)setUp {
-    [super setUp];
-    ZUX_ENABLE_CATEGORY(ZUX_NSDictionary);
-}
-
 - (void)testNSDictionaryZUX {
     NSDictionary *dict = @{@"AAA":@"aaa", @"BBB":@"bbb", @"CCC":@"ccc"};
     NSDictionary *dictCopy = [dict deepCopy];

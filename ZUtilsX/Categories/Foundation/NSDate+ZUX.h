@@ -12,11 +12,9 @@
 #ifndef ZUtilsX_NSDate_ZUX_h
 #define ZUtilsX_NSDate_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_NSDate)
-
 typedef long long ZUXTimeIntervalMills;
 
-@interface NSDate (ZUX)
+@category_interface(NSDate, ZUX)
 
 - (ZUXTimeIntervalMills)timeIntervalMillsSinceDate:(NSDate *)anotherDate;
 @property (readonly) ZUXTimeIntervalMills timeIntervalMillsSinceNow;
@@ -33,13 +31,13 @@ typedef long long ZUXTimeIntervalMills;
 
 @end // NSDate (ZUX)
 
-@interface NSDate (ZUXStringDate)
+@category_interface(NSDate, ZUXStringDate)
 
 - (NSString *)stringWithDateFormat:(NSString *)dateFormat;
 
 @end // NSDate (ZUXStringDate)
 
-@interface NSString (ZUXStringDate)
+@category_interface(NSString, ZUXStringDate)
 
 - (NSDate *)dateWithDateFormat:(NSString *)dateFormat;
 

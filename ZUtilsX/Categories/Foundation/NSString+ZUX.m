@@ -12,9 +12,7 @@
 #import "zadapt.h"
 #include <CommonCrypto/CommonDigest.h>
 
-ZUX_CATEGORY_M(ZUX_NSString)
-
-@implementation NSString (ZUX)
+@category_implementation(NSString, ZUX)
 
 #pragma mark - Empty Methods -
 
@@ -248,13 +246,10 @@ ZUX_CATEGORY_M(ZUX_NSString)
 
 - (NSString *)base64EncodedString  {
     if (ZUX_EXPECT_F([self length] == 0)) return nil;
-    
-    ZUX_ENABLE_CATEGORY(ZUX_NSData);
     return [[self dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString];
 }
 
 + (NSString *)stringWithBase64String:(NSString *)base64String {
-    ZUX_ENABLE_CATEGORY(ZUX_NSData);
     return ZUX_AUTORELEASE([[NSString alloc] initWithData:[NSData dataWithBase64String:base64String]
                                                  encoding:NSUTF8StringEncoding]);
 }

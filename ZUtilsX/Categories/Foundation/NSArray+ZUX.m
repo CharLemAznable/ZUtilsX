@@ -12,11 +12,9 @@
 #import "ZUXBundle.h"
 #import "zarc.h"
 
-ZUX_CATEGORY_M(ZUX_NSArray)
-
-@interface NSArray (ZUXSafe)
+@category_interface_generic(NSArray, ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE), ZUXSafe)
 @end
-@implementation NSArray (ZUXSafe)
+@category_implementation(NSArray, ZUXSafe)
 
 - (id)zux_objectAtIndex:(NSUInteger)index {
     if (index >= [self count]) return nil;
@@ -31,8 +29,6 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
-        ZUX_ENABLE_CATEGORY(ZUX_NSNull);
         [NSClassFromString(@"__NSArrayI")
          swizzleInstanceOriSelector:@selector(objectAtIndex:)
          withNewSelector:@selector(zux_objectAtIndex:)];
@@ -44,9 +40,9 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 
 @end // NSArray (ZUXSafe)
 
-@interface NSMutableArray (ZUXSafe)
+@category_interface_generic(NSMutableArray, ZUX_GENERIC(ZUX_OBJECT_TYPE), ZUXSafe)
 @end
-@implementation NSMutableArray (ZUXSafe)
+@category_implementation(NSMutableArray, ZUXSafe)
 
 - (id)zux_objectAtIndex:(NSUInteger)index {
     if (index >= [self count]) return nil;
@@ -86,8 +82,6 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
-        ZUX_ENABLE_CATEGORY(ZUX_NSNull);
         [NSClassFromString(@"__NSArrayM")
          swizzleInstanceOriSelector:@selector(objectAtIndex:)
          withNewSelector:@selector(zux_objectAtIndex:)];
@@ -115,7 +109,7 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 
 @end // NSMutableArray (ZUXSafe)
 
-@implementation NSArray (ZUX)
+@category_implementation(NSArray, ZUX)
 
 - (NSArray *)deepCopy {
     return [[NSArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:
@@ -135,7 +129,7 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 @end // NSArray (ZUX)
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
-@implementation NSArray (ZUXSubscript)
+@category_implementation(NSArray, ZUXSubscript)
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index {
     return [self objectAtIndex:index];
@@ -143,7 +137,7 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 
 @end // NSArray (ZUXSubscript)
 
-@implementation NSMutableArray (ZUXSubscript)
+@category_implementation(NSMutableArray, ZUXSubscript)
 
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)index {
     [self replaceObjectAtIndex:index withObject:obj];
@@ -152,7 +146,7 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 @end // NSMutableArray (ZUXSubscript)
 #endif // __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
 
-@implementation NSArray (ZUXCreation)
+@category_implementation(NSArray, ZUXCreation)
 
 - (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName {
     return [self initWithContentsOfUserFile:fileName subpath:nil];
@@ -210,7 +204,7 @@ ZUX_CATEGORY_M(ZUX_NSArray)
 
 @end // NSArray (ZUXCreation)
 
-@implementation NSArray (ZUXSerialization)
+@category_implementation(NSArray, ZUXSerialization)
 
 - (BOOL)writeToUserFile:(NSString *)fileName {
     return [self writeToUserFile:fileName inDirectory:ZUXDocument];

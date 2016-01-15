@@ -12,9 +12,7 @@
 #ifndef ZUtilsX_NSObject_ZUX_h
 #define ZUtilsX_NSObject_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_NSObject)
-
-@interface NSObject (ZUX)
+@category_interface(NSObject, ZUX)
 
 + (void)swizzleInstanceOriSelector:(SEL)oriSelector withNewSelector:(SEL)newSelector;
 + (void)swizzleInstanceOriSelector:(SEL)oriSelector withNewSelector:(SEL)newSelector fromClass:(Class)clazz;
@@ -35,7 +33,7 @@ ZUX_CATEGORY_H(ZUX_NSObject)
 @class ZUXProperty;
 @class ZUXMethod;
 
-@interface NSObject (ZUXRuntime)
+@category_interface(NSObject, ZUXRuntime)
 
 + (NSArray *)zuxProtocols;
 + (void)enumerateZUXProtocolsWithBlock:(void (^)(ZUXProtocol *protocol))block;

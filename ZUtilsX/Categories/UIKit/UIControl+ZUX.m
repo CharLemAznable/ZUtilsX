@@ -15,15 +15,11 @@
 #import "zappearance.h"
 #import <objc/runtime.h>
 
-ZUX_CATEGORY_M(ZUX_UIControl)
-
-@implementation UIControl (ZUX)
+@category_implementation(UIControl, ZUX)
 
 #pragma mark - Border Width With UIControlState Methods -
 
 - (CGFloat)borderWidthForState:(UIControlState)state {
-    ZUX_ENABLE_CATEGORY(ZUX_NSNumber);
-    ZUX_ENABLE_CATEGORY(ZUX_NSDictionary);
     return [[[self zBorderWidths] objectForKey:[self keyForState:state]
                                   defaultValue:[[self zBorderWidths] valueForKey:
                                                 [self keyForState:UIControlStateNormal]]]
@@ -31,23 +27,19 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 }
 
 - (void)setBorderWidth:(CGFloat)width forState:(UIControlState)state {
-    ZUX_ENABLE_CATEGORY(ZUX_UIView);
     if(state == UIControlStateNormal) self.borderWidth = width;
-    ZUX_ENABLE_CATEGORY(ZUX_NSNumber);
     [self zBorderWidths][[self keyForState:state]] = [NSNumber numberWithCGFloat:width];
 }
 
 #pragma mark - Border Color With UIControlState Methods -
 
 - (UIColor *)borderColorForState:(UIControlState)state {
-    ZUX_ENABLE_CATEGORY(ZUX_NSDictionary);
     return [[self zBorderColors] objectForKey:[self keyForState:state]
                                  defaultValue:[[self zBorderColors] valueForKey:
                                                [self keyForState:UIControlStateNormal]]];
 }
 
 - (void)setBorderColor:(UIColor *)color forState:(UIControlState)state {
-    ZUX_ENABLE_CATEGORY(ZUX_UIView);
     if(state == UIControlStateNormal) self.borderColor = color;
     [self zBorderColors][[self keyForState:state]] = color;
 }
@@ -55,14 +47,12 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 #pragma mark - Shadow Color With UIControlState Methods -
 
 - (UIColor *)shadowColorForState:(UIControlState)state {
-    ZUX_ENABLE_CATEGORY(ZUX_NSDictionary);
     return [[self zShadowColors] objectForKey:[self keyForState:state]
                                  defaultValue:[[self zShadowColors] valueForKey:
                                                [self keyForState:UIControlStateNormal]]];
 }
 
 - (void)setShadowColor:(UIColor *)color forState:(UIControlState)state {
-    ZUX_ENABLE_CATEGORY(ZUX_UIView);
     if(state == UIControlStateNormal) self.shadowColor = color;
     [self zShadowColors][[self keyForState:state]] = color;
 }
@@ -70,7 +60,6 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 #pragma mark - Shadow Opacity With UIControlState Methods -
 
 - (float)shadowOpacityForState:(UIControlState)state {
-    ZUX_ENABLE_CATEGORY(ZUX_NSDictionary);
     return [[[self zShadowOpacities] objectForKey:[self keyForState:state]
                                      defaultValue:[[self zShadowOpacities] valueForKey:
                                                    [self keyForState:UIControlStateNormal]]]
@@ -78,7 +67,6 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 }
 
 - (void)setShadowOpacity:(float)opacity forState:(UIControlState)state {
-    ZUX_ENABLE_CATEGORY(ZUX_UIView);
     if(state == UIControlStateNormal) self.shadowOpacity = opacity;
     [self zShadowOpacities][[self keyForState:state]] = [NSNumber numberWithFloat:opacity];
 }
@@ -86,7 +74,6 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 #pragma mark - Shadow Offset With UIControlState Methods -
 
 - (CGSize)shadowOffsetForState:(UIControlState)state {
-    ZUX_ENABLE_CATEGORY(ZUX_NSDictionary);
     return [[[self zShadowOffsets] objectForKey:[self keyForState:state]
                                    defaultValue:[[self zShadowOffsets] valueForKey:
                                                  [self keyForState:UIControlStateNormal]]]
@@ -94,7 +81,6 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 }
 
 - (void)setShadowOffset:(CGSize)offset forState:(UIControlState)state {
-    ZUX_ENABLE_CATEGORY(ZUX_UIView);
     if(state == UIControlStateNormal) self.shadowOffset = offset;
     [self zShadowOffsets][[self keyForState:state]] = [NSValue valueWithCGSize:offset];
 }
@@ -102,8 +88,6 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 #pragma mark - Shadow Size With UIControlState Methods -
 
 - (CGFloat)shadowSizeForState:(UIControlState)state {
-    ZUX_ENABLE_CATEGORY(ZUX_NSNumber);
-    ZUX_ENABLE_CATEGORY(ZUX_NSDictionary);
     return [[[self zShadowSizes] objectForKey:[self keyForState:state]
                                 defaultValue:[[self zShadowSizes] valueForKey:
                                               [self keyForState:UIControlStateNormal]]]
@@ -111,9 +95,7 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 }
 
 - (void)setShadowSize:(CGFloat)size forState:(UIControlState)state {
-    ZUX_ENABLE_CATEGORY(ZUX_UIView);
     if(state == UIControlStateNormal) self.shadowSize = size;
-    ZUX_ENABLE_CATEGORY(ZUX_NSNumber);
     [self zShadowSizes][[self keyForState:state]] = [NSNumber numberWithCGFloat:size];
 }
 
@@ -122,7 +104,6 @@ ZUX_CATEGORY_M(ZUX_UIControl)
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
         // init
         [self swizzleInstanceOriSelector:@selector(init)
                          withNewSelector:@selector(zuxInit)];
@@ -214,10 +195,9 @@ NSString *const zShadowOpacitiesKey = @"zShadowOpacities";
 NSString *const zShadowOffsetsKey   = @"zShadowOffsets";
 NSString *const zShadowSizesKey     = @"zShadowSizes";
 
-#define ZUXAttribute_implement(attribute) \
-- (NSMutableDictionary *)attribute { \
-    ZUX_ENABLE_CATEGORY(ZUX_NSObject); \
-    return [self propertyForAssociateKey:attribute##Key]; \
+#define ZUXAttribute_implement(attribute)                   \
+- (NSMutableDictionary *)attribute {                        \
+    return [self propertyForAssociateKey:attribute##Key];   \
 }
 
 ZUXAttribute_implement(zBorderWidths)
@@ -235,7 +215,7 @@ ZUXAttribute_implement(zShadowSizes)
 
 @end
 
-@implementation UIControl (ZUXAppearance)
+@category_implementation(UIControl, ZUXAppearance)
 
 + (CGFloat)borderWidthForState:(UIControlState)state {
     return [APPEARANCE borderWidthForState:state];

@@ -8,9 +8,7 @@
 
 #import "NSCoder+ZUX.h"
 
-ZUX_CATEGORY_M(ZUX_NSCoder)
-
-@implementation NSCoder (ZUX)
+@category_implementation(NSCoder, ZUX)
 
 #if defined(__LP64__) && __LP64__
 

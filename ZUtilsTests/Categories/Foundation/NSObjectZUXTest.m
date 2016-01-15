@@ -37,7 +37,6 @@
 @implementation NSObjectZUXTest
 
 - (void)testNSObjectZUX {
-    ZUX_ENABLE_CATEGORY(ZUX_NSObject);
     [MyObject swizzleClassOriSelector:@selector(classMethod) withNewSelector:@selector(swizzleClassMethod)];
     [MyObject swizzleInstanceOriSelector:@selector(instanceMethod) withNewSelector:@selector(swizzleInstanceMethod)];
     

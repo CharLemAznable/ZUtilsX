@@ -15,13 +15,9 @@
 
 @implementation NSArrayZUXTest
 
-- (void)setUp {
-    [super setUp];
-    ZUX_ENABLE_CATEGORY(ZUX_NSArray);
-}
-
 - (void)testNSArrayZUX {
     NSArray *array = @[@"AAA"];
+    [ZUX_CATEGORY_NSArray_ZUX declare];
     NSArray *arrayCopy = [array deepCopy];
     NSArray *arrayMutableCopy = [array deepMutableCopy];
     

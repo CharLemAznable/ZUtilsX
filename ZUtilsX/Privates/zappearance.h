@@ -78,13 +78,11 @@ ZUX_STATIC_INLINE void setTitleShadowAttributeForState(id instance, UIControlSta
 
 ZUX_STATIC_INLINE UIColor *selectionIndicatorColor
 (ZUX_KINDOF(UITabBar *) instance) {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     return [[instance selectionIndicatorImage] dominantColor];
 }
 
 ZUX_STATIC_INLINE void setSelectionIndicatorColor
 (ZUX_KINDOF(UITabBar *) instance, UIColor *selectionIndicatorColor) {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     [instance setSelectionIndicatorImage:[UIImage imagePointWithColor:selectionIndicatorColor]];
 }
 
@@ -104,13 +102,11 @@ ZUX_STATIC_INLINE void setBackgroundImageForBarMetrics
 
 ZUX_STATIC_INLINE UIColor *backgroundColorForBarMetrics
 (ZUX_KINDOF(UINavigationBar *) instance, UIBarMetrics barMetrics) {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     return [backgroundImageForBarMetrics(instance, barMetrics) dominantColor];
 }
 
 ZUX_STATIC_INLINE void setBackgroundColorForBarMetrics
 (ZUX_KINDOF(UINavigationBar *) instance, UIColor *backgroundColor, UIBarMetrics barMetrics) {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     setBackgroundImageForBarMetrics(instance, [UIImage imagePointWithColor:backgroundColor], barMetrics);
 }
 
@@ -130,13 +126,11 @@ ZUX_STATIC_INLINE void setBackgroundImageForStateAndBarMetrics
 
 ZUX_STATIC_INLINE UIColor *backgroundColorForStateAndBarMetrics
 (ZUX_KINDOF(UIBarButtonItem *) instance, UIControlState state, UIBarMetrics barMetrics) {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     return [backgroundImageForStateAndBarMetrics(instance, state, barMetrics) dominantColor];
 }
 
 ZUX_STATIC_INLINE void setBackgroundColorForStateAndBarMetrics
 (ZUX_KINDOF(UIBarButtonItem *) instance, UIColor *backgroundColor, UIControlState state, UIBarMetrics barMetrics) {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     setBackgroundImageForStateAndBarMetrics(instance, [UIImage imagePointWithColor:backgroundColor], state, barMetrics);
 }
 
@@ -163,13 +157,11 @@ ZUX_STATIC_INLINE void setBackgroundImageForStateAndStyleAndBarMetrics
 
 ZUX_STATIC_INLINE UIColor *backgroundColorForStateAndStyleAndBarMetrics
 (ZUX_KINDOF(UIBarButtonItem *) instance, UIControlState state, UIBarButtonItemStyle style, UIBarMetrics barMetrics) {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     return [backgroundImageForStateAndStyleAndBarMetrics(instance, state, style, barMetrics) dominantColor];
 }
 
 ZUX_STATIC_INLINE void setBackgroundColorForStateAndStyleAndBarMetrics
 (ZUX_KINDOF(UIBarButtonItem *) instance, UIColor *backgroundColor, UIControlState state, UIBarButtonItemStyle style, UIBarMetrics barMetrics) {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     setBackgroundImageForStateAndStyleAndBarMetrics
     (instance, [UIImage imagePointWithColor:backgroundColor], state, style, barMetrics);
 }
@@ -214,13 +206,11 @@ ZUX_STATIC_INLINE void setBackButtonBackgroundImageForStateAndBarMetrics
 
 ZUX_STATIC_INLINE UIColor *backButtonBackgroundColorForStateAndBarMetrics
 (ZUX_KINDOF(UIBarButtonItem *) instance, UIControlState state, UIBarMetrics barMetrics) {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     return [backButtonBackgroundImageForStateAndBarMetrics(instance, state, barMetrics) dominantColor];
 }
 
 ZUX_STATIC_INLINE void setBackButtonBackgroundColorForStateAndBarMetrics
 (ZUX_KINDOF(UIBarButtonItem *) instance, UIColor *backgroundColor, UIControlState state, UIBarMetrics barMetrics) {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     setBackButtonBackgroundImageForStateAndBarMetrics
     (instance, [UIImage imagePointWithColor:backgroundColor], state, barMetrics);
 }

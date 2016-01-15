@@ -16,7 +16,6 @@
 @implementation NSDateZUXTest
 
 - (void)testNSDateZUX {
-    ZUX_ENABLE_CATEGORY(ZUX_NSDate);
     NSString *string = @"2015-11-25 11:48";
     NSDate *stringDate = [string dateWithDateFormat:@"yyyy-MM-dd HH:mm"];
     NSString *dateString = [stringDate stringWithDateFormat:@"yyyy-MM-dd HH:mm"];

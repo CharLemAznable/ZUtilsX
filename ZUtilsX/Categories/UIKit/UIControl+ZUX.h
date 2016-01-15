@@ -12,9 +12,7 @@
 #ifndef ZUtilsX_UIControl_ZUX_h
 #define ZUtilsX_UIControl_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UIControl)
-
-@interface UIControl (ZUX)
+@category_interface(UIControl, ZUX)
 
 - (CGFloat)borderWidthForState:(UIControlState)state UI_APPEARANCE_SELECTOR;
 - (void)setBorderWidth:(CGFloat)width forState:(UIControlState)state UI_APPEARANCE_SELECTOR;
@@ -36,7 +34,7 @@ ZUX_CATEGORY_H(ZUX_UIControl)
 
 @end // UIControl (ZUX)
 
-@interface UIControl (ZUXAppearance)
+@category_interface(UIControl, ZUXAppearance)
 
 + (CGFloat)borderWidthForState:(UIControlState)state;
 + (void)setBorderWidth:(CGFloat)width forState:(UIControlState)state;

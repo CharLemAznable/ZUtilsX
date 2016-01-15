@@ -10,9 +10,7 @@
 #import "NSString+ZUX.h"
 #import "zarc.h"
 
-ZUX_CATEGORY_M(ZUX_UIColor)
-
-@implementation UIColor (ZUX)
+@category_implementation(UIColor, ZUX)
 
 + (UIColor *)colorWithIntegerRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue {
     return [self colorWithIntegerRed:red green:green blue:blue alpha:255];
@@ -25,7 +23,6 @@ ZUX_CATEGORY_M(ZUX_UIColor)
 + (UIColor *)colorWithRGBHexString:(NSString *)hexString {
     NSString *str = [[hexString trim] uppercaseString];
     if (ZUX_EXPECT_F([str length] < 6)) return nil;
-    ZUX_ENABLE_CATEGORY(ZUX_NSString);
     return [self colorWithRGBAHexString:[[str substringWithRange:NSMakeRange(0, 6)] appendWithObjects:@"FF", nil]];
 }
 

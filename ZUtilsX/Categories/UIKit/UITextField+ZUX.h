@@ -12,9 +12,7 @@
 #ifndef ZUtilsX_UITextField_ZUX_h
 #define ZUtilsX_UITextField_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UITextField)
-
-@interface UITextField (ZUX)
+@category_interface(UITextField, ZUX)
 
 - (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string limitWithLength:(NSUInteger)length;
 

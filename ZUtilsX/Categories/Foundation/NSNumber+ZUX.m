@@ -9,9 +9,7 @@
 #import "NSNumber+ZUX.h"
 #import "zarc.h"
 
-ZUX_CATEGORY_M(ZUX_NSNumber)
-
-@implementation NSNumber (ZUX)
+@category_implementation(NSNumber, ZUX)
 
 + (ZUX_INSTANCETYPE)numberWithCGFloat:(CGFloat)value {
     return ZUX_AUTORELEASE([[self alloc] initWithCGFloat:value]);

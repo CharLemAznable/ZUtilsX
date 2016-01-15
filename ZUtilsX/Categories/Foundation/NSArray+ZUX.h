@@ -14,9 +14,7 @@
 #ifndef ZUtilsX_NSArray_ZUX_h
 #define ZUtilsX_NSArray_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_NSArray)
-
-@interface NSArray ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE) (ZUX)
+@category_interface_generic(NSArray, ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE), ZUX)
 
 - (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)deepCopy NS_RETURNS_RETAINED;
 - (NSMutableArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)deepMutableCopy NS_RETURNS_RETAINED;
@@ -25,20 +23,20 @@ ZUX_CATEGORY_H(ZUX_NSArray)
 @end // NSArray (ZUX)
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
-@interface NSArray ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE) (ZUXSubscript)
+@category_interface_generic(NSArray, ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE), ZUXSubscript)
 
 - (ZUX_OBJECT_TYPE)objectAtIndexedSubscript:(NSUInteger)idx;
 
 @end // NSArray (ZUXSubscript)
 
-@interface NSMutableArray ZUX_GENERIC(ZUX_OBJECT_TYPE) (ZUXSubscript)
+@category_interface_generic(NSMutableArray, ZUX_GENERIC(ZUX_OBJECT_TYPE), ZUXSubscript)
 
 - (void)setObject:(ZUX_OBJECT_TYPE)obj atIndexedSubscript:(NSUInteger)idx;
 
 @end // NSMutableArray (ZUXSubscript)
 #endif // __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
 
-@interface NSArray ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE) (ZUXCreation)
+@category_interface_generic(NSArray, ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE), ZUXCreation)
 
 - (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName;
 - (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath;
@@ -56,7 +54,7 @@ ZUX_CATEGORY_H(ZUX_NSArray)
 
 @end // NSArray (ZUXCreation)
 
-@interface NSArray ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE) (ZUXSerialization)
+@category_interface_generic(NSArray, ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE), ZUXSerialization)
 
 - (BOOL)writeToUserFile:(NSString *)fileName;
 - (BOOL)writeToUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;

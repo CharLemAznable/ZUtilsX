@@ -10,9 +10,7 @@
 #import "zadapt.h"
 #import "zappearance.h"
 
-ZUX_CATEGORY_M(ZUX_UITabBar)
-
-@implementation UITabBar (ZUX)
+@category_implementation(UITabBar, ZUX)
 
 - (NSArray ZUX_GENERIC(UIView *) *)barButtons {
     NSMutableArray *barButtons = [NSMutableArray array];
@@ -26,7 +24,7 @@ ZUX_CATEGORY_M(ZUX_UITabBar)
 
 @end
 
-@implementation UITabBar (ZUXAppearance)
+@category_implementation(UITabBar, ZUXAppearance)
 
 #pragma mark - translucent -
 

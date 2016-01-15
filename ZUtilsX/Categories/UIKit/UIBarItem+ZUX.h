@@ -12,9 +12,7 @@
 #ifndef ZUtilsX_UIBarItem_ZUX_h
 #define ZUtilsX_UIBarItem_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UIBarItem)
-
-@interface UIBarItem (ZUXAppearance)
+@category_interface(UIBarItem, ZUXAppearance)
 
 - (UIFont *)textFontForState:(UIControlState)state;
 - (void)setTextFont:(UIFont *)textFont forState:(UIControlState)state;

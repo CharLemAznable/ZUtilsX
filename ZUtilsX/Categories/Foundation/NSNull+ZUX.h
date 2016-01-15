@@ -12,9 +12,7 @@
 #ifndef ZUtilsX_NSNull_ZUX_h
 #define ZUtilsX_NSNull_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_NSNull)
-
-@interface NSNull (ZUX)
+@category_interface(NSNull, ZUX)
 
 + (BOOL)isNull:(id)obj;
 + (BOOL)isNotNull:(id)obj;

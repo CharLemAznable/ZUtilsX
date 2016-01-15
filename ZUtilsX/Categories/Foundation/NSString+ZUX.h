@@ -13,9 +13,7 @@
 #ifndef ZUtilsX_NSString_ZUX_h
 #define ZUtilsX_NSString_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_NSString)
-
-@interface NSString (ZUX)
+@category_interface(NSString, ZUX)
 
 - (BOOL)isEmpty;
 - (BOOL)isNotEmpty;

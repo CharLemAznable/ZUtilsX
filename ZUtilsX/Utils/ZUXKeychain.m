@@ -11,14 +11,14 @@
 #import "zobjc.h"
 #import "zarc.h"
 
-#define ZUXKeychainErrorExpect(condition, errorCondition, error, errorCode, errorReturn) \
-if (ZUX_EXPECT_F(condition)) { \
-    if (errorCondition) \
-        *(error) = [NSError errorWithDomain:@"ZUXKeychainErrorDomain" code:(errorCode) userInfo:nil]; \
-    return (errorReturn); \
+#define ZUXKeychainErrorExpect(condition, errorCondition, error, errorCode, errorReturn)                \
+if (ZUX_EXPECT_F(condition)) {                                                                          \
+    if (errorCondition)                                                                                 \
+        *(error) = [NSError errorWithDomain:@"ZUXKeychainErrorDomain" code:(errorCode) userInfo:nil];   \
+    return (errorReturn);                                                                               \
 }
 
-#define ZUXKeychainErrorExpectDefault(condition, error, errorCode, errorReturn) \
+#define ZUXKeychainErrorExpectDefault(condition, error, errorCode, errorReturn)                         \
 ZUXKeychainErrorExpect(condition, (error) != nil, error, errorCode, errorReturn)
 
 @implementation ZUXKeychain

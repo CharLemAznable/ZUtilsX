@@ -8,9 +8,7 @@
 
 #import "NSNull+ZUX.h"
 
-ZUX_CATEGORY_M(ZUX_NSNull)
-
-@implementation NSNull (ZUX)
+@category_implementation(NSNull, ZUX)
 
 + (BOOL)isNull:(id)obj {
     return obj == nil || [obj isEqual:[self null]];

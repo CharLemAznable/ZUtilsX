@@ -11,9 +11,7 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
-ZUX_CATEGORY_M(ZUX_UIDevice)
-
-@implementation UIDevice (ZUX)
+@category_implementation(UIDevice, ZUX)
 
 - (NSString *)fullModel {
     static NSString *_fullModel = nil;

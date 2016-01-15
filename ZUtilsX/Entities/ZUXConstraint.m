@@ -51,13 +51,13 @@
 
 #pragma mark - Some Convenience Constraints -
 
-#define ZUXConstraint_implement(constraint, block) \
-+ (ZUXConstraint *)constraint { \
-    static dispatch_once_t once_t; \
-    dispatch_once(&once_t, ^{ \
-        constraint = [[self alloc] initWithBlock:block]; \
-    }); \
-    return constraint; \
+#define ZUXConstraint_implement(constraint, block)          \
++ (ZUXConstraint *)constraint {                             \
+    static dispatch_once_t once_t;                          \
+    dispatch_once(&once_t, ^{                               \
+        constraint = [[self alloc] initWithBlock:block];    \
+    });                                                     \
+    return constraint;                                      \
 }
 
 ZUXConstraint_implement(nilConstraint, nil)

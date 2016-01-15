@@ -16,8 +16,6 @@
 @implementation UIColorZUXTest
 
 - (void)testUIColorZUX {
-    ZUX_ENABLE_CATEGORY(ZUX_UIColor);
-    
     UIColor *integerDarkGrayColor = [UIColor colorWithIntegerRed:85 green:85 blue:85];
     UIColor *darkGrayColor = [UIColor darkGrayColor];
     XCTAssertTrue([integerDarkGrayColor isEqualToColor:darkGrayColor]);

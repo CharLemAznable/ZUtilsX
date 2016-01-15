@@ -11,9 +11,7 @@
 #import "zadapt.h"
 #import "zappearance.h"
 
-ZUX_CATEGORY_M(ZUX_UIBarButtonItem)
-
-@implementation UIBarButtonItem (ZUXAppearance)
+@category_implementation(UIBarButtonItem, ZUXAppearance)
 
 #pragma mark - tintColor -
 

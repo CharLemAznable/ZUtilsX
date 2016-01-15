@@ -12,9 +12,7 @@
 #ifndef ZUtilsX_NSData_ZUX_h
 #define ZUtilsX_NSData_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_NSData)
-
-@interface NSData (ZUX)
+@category_interface(NSData, ZUX)
 
 - (NSString *)base64EncodedString;
 + (NSData *)dataWithBase64String:(NSString *)base64String;

@@ -11,9 +11,7 @@
 #import "zadapt.h"
 #import "zappearance.h"
 
-ZUX_CATEGORY_M(ZUX_UITabBarItem)
-
-@implementation UITabBarItem (ZUXAppearance)
+@category_implementation(UITabBarItem, ZUXAppearance)
 
 + (id)tabBarItemWithTitle:(NSString *)title image:(UIImage *)image selectedImage:(UIImage *)selectedImage {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000

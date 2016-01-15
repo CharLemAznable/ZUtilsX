@@ -94,8 +94,6 @@ typedef unsigned int   NSUInteger;
     
 #ifndef _JSONKIT_H_
 #define _JSONKIT_H_
-
-ZUX_CATEGORY_H(ZUX_JSONKit)
     
 #define JSONKIT_VERSION_MAJOR 1
 #define JSONKIT_VERSION_MINOR 4
@@ -162,7 +160,7 @@ typedef struct JKParseState JKParseState; // Opaque internal, private type.
 #pragma mark - Deserializing methods -
 ////////////
     
-@interface NSString (JSONKitDeserializing)
+@category_interface(NSString, JSONKitDeserializing)
 - (id)objectFromJSONString;
 - (id)objectFromJSONStringWithParseOptions:(JKParseOptionFlags)parseOptionFlags;
 - (id)objectFromJSONStringWithParseOptions:(JKParseOptionFlags)parseOptionFlags error:(NSError **)error;
@@ -171,7 +169,7 @@ typedef struct JKParseState JKParseState; // Opaque internal, private type.
 - (id)mutableObjectFromJSONStringWithParseOptions:(JKParseOptionFlags)parseOptionFlags error:(NSError **)error;
 @end
     
-@interface NSData (JSONKitDeserializing)
+@category_interface(NSData, JSONKitDeserializing)
 // The NSData MUST be UTF8 encoded JSON.
 - (id)objectFromJSONData;
 - (id)objectFromJSONDataWithParseOptions:(JKParseOptionFlags)parseOptionFlags;
@@ -185,7 +183,7 @@ typedef struct JKParseState JKParseState; // Opaque internal, private type.
 #pragma mark - Serializing methods -
 ////////////
     
-@interface NSString (JSONKitSerializing)
+@category_interface(NSString, JSONKitSerializing)
 // Convenience methods for those that need to serialize the receiving NSString (i.e., instead of having to serialize a NSArray with a single NSString, you can "serialize to JSON" just the NSString).
 // Normally, a string that is serialized to JSON has quotation marks surrounding it, which you may or may not want when serializing a single string, and can be controlled with includeQuotes:
 // includeQuotes:YES `a "test"...` -> `"a \"test\"..."`
@@ -196,7 +194,7 @@ typedef struct JKParseState JKParseState; // Opaque internal, private type.
 - (NSString *)JSONStringWithOptions:(JKSerializeOptionFlags)serializeOptions includeQuotes:(BOOL)includeQuotes error:(NSError **)error;
 @end
     
-@interface NSArray (JSONKitSerializing)
+@category_interface(NSArray, JSONKitSerializing)
 - (NSData *)JSONData;
 - (NSData *)JSONDataWithOptions:(JKSerializeOptionFlags)serializeOptions error:(NSError **)error;
 - (NSData *)JSONDataWithOptions:(JKSerializeOptionFlags)serializeOptions serializeUnsupportedClassesUsingDelegate:(id)delegate selector:(SEL)selector error:(NSError **)error;
@@ -205,7 +203,7 @@ typedef struct JKParseState JKParseState; // Opaque internal, private type.
 - (NSString *)JSONStringWithOptions:(JKSerializeOptionFlags)serializeOptions serializeUnsupportedClassesUsingDelegate:(id)delegate selector:(SEL)selector error:(NSError **)error;
 @end
     
-@interface NSDictionary (JSONKitSerializing)
+@category_interface(NSDictionary, JSONKitSerializing)
 - (NSData *)JSONData;
 - (NSData *)JSONDataWithOptions:(JKSerializeOptionFlags)serializeOptions error:(NSError **)error;
 - (NSData *)JSONDataWithOptions:(JKSerializeOptionFlags)serializeOptions serializeUnsupportedClassesUsingDelegate:(id)delegate selector:(SEL)selector error:(NSError **)error;
@@ -216,12 +214,12 @@ typedef struct JKParseState JKParseState; // Opaque internal, private type.
     
 #ifdef __BLOCKS__
     
-@interface NSArray (JSONKitSerializingBlockAdditions)
+@category_interface(NSArray, JSONKitSerializingBlockAdditions)
 - (NSData *)JSONDataWithOptions:(JKSerializeOptionFlags)serializeOptions serializeUnsupportedClassesUsingBlock:(id(^)(id object))block error:(NSError **)error;
 - (NSString *)JSONStringWithOptions:(JKSerializeOptionFlags)serializeOptions serializeUnsupportedClassesUsingBlock:(id(^)(id object))block error:(NSError **)error;
 @end
     
-@interface NSDictionary (JSONKitSerializingBlockAdditions)
+@category_interface(NSDictionary, JSONKitSerializingBlockAdditions)
 - (NSData *)JSONDataWithOptions:(JKSerializeOptionFlags)serializeOptions serializeUnsupportedClassesUsingBlock:(id(^)(id object))block error:(NSError **)error;
 - (NSString *)JSONStringWithOptions:(JKSerializeOptionFlags)serializeOptions serializeUnsupportedClassesUsingBlock:(id(^)(id object))block error:(NSError **)error;
 @end

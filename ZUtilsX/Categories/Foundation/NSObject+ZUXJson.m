@@ -18,18 +18,15 @@
 #import "zconstant.h"
 #import <objc/runtime.h>
 
-ZUX_CATEGORY_M(ZUXJson_NSObject)
-
 #if NS_BLOCKS_AVAILABLE
 
-@implementation NSObject (ZUXJson)
+@category_implementation(NSObject, ZUXJson)
 
 static NSArray *NSObjectProperties = nil;
 
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
         NSMutableArray *properties = [NSMutableArray array];
         [self enumerateZUXPropertiesWithBlock:^(ZUXProperty *property) {
             [properties addObject:[property name]];
@@ -89,7 +86,7 @@ static NSArray *NSObjectProperties = nil;
 
 @end
 
-@implementation NSNull (ZUXJson)
+@category_implementation(NSNull, ZUXJson)
 
 - (id)zuxJsonObject {
     return nil;
@@ -101,7 +98,7 @@ static NSArray *NSObjectProperties = nil;
 
 @end
 
-@implementation NSValue (ZUXJson)
+@category_implementation(NSValue, ZUXJson)
 
 - (id)zuxJsonObject {
     const char *objCType = [self objCType];
@@ -155,7 +152,6 @@ static NSArray *NSObjectProperties = nil;
 + (NSValue *)valueWithJsonObject:(id)jsonObject {
     if (![jsonObject isKindOfClass:[NSDictionary class]]) return nil;
     
-    ZUX_ENABLE_CATEGORY(ZUX_NSNumber);
     const char *objCType = [jsonObject[@"type"] UTF8String];
     if (strcmp(objCType, @encode(CGPoint)) == 0) {
         CGFloat x = [[jsonObject objectForKey:@"x"] cgfloatValue];
@@ -204,7 +200,7 @@ static NSArray *NSObjectProperties = nil;
 
 @end
 
-@implementation NSNumber (ZUXJson)
+@category_implementation(NSNumber, ZUXJson)
 
 - (id)zuxJsonObject {
     if (isnan([self doubleValue]) || isinf([self doubleValue])) return nil;
@@ -220,7 +216,7 @@ static NSArray *NSObjectProperties = nil;
 
 @end
 
-@implementation NSString (ZUXJson)
+@category_implementation(NSString, ZUXJson)
 
 - (id)zuxJsonObject {
     return self;
@@ -235,7 +231,7 @@ static NSArray *NSObjectProperties = nil;
 
 @end
 
-@implementation NSArray (ZUXJson)
+@category_implementation(NSArray, ZUXJson)
 
 - (id)zuxJsonObject {
     if ([NSJSONSerialization isValidJSONObject:self]) return self;
@@ -259,7 +255,7 @@ static NSArray *NSObjectProperties = nil;
 
 @end
 
-@implementation NSDictionary (ZUXJson)
+@category_implementation(NSDictionary, ZUXJson)
 
 - (id)zuxJsonObject {
     if ([NSJSONSerialization isValidJSONObject:self]) return self;

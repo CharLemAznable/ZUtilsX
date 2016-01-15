@@ -10,9 +10,7 @@
 #import "zarc.h"
 #import "zadapt.h"
 
-ZUX_CATEGORY_M(ZUX_NSDate)
-
-@implementation NSDate (ZUX)
+@category_implementation(NSDate, ZUX)
 
 - (ZUXTimeIntervalMills)timeIntervalMillsSinceDate:(NSDate *)anotherDate {
     return [self timeIntervalSinceDate:anotherDate] * 1000;
@@ -26,9 +24,9 @@ ZUX_CATEGORY_M(ZUX_NSDate)
     return [self timeIntervalSince1970] * 1000;
 }
 
-#define ZUXNSDateComponent_implement(calendarUnit, componentName) \
-- (NSInteger)componentName { \
-    return [[NSCalendar currentCalendar] components:calendarUnit fromDate:self].componentName; \
+#define ZUXNSDateComponent_implement(calendarUnit, componentName)                               \
+- (NSInteger)componentName {                                                                    \
+    return [[NSCalendar currentCalendar] components:calendarUnit fromDate:self].componentName;  \
 }
 
 ZUXNSDateComponent_implement(ZUXCalendarUnitEra, era);
@@ -42,7 +40,7 @@ ZUXNSDateComponent_implement(ZUXCalendarUnitWeekday, weekday);
 
 @end
 
-@implementation NSDate (ZUXStringDate)
+@category_implementation(NSDate, ZUXStringDate)
 
 - (NSString *)stringWithDateFormat:(NSString *)dateFormat {
     NSDateFormatter *formatter = ZUX_AUTORELEASE([[NSDateFormatter alloc] init]);
@@ -52,7 +50,7 @@ ZUXNSDateComponent_implement(ZUXCalendarUnitWeekday, weekday);
 
 @end
 
-@implementation NSString (ZUXStringDate)
+@category_implementation(NSString, ZUXStringDate)
 
 - (NSDate *)dateWithDateFormat:(NSString *)dateFormat {
     NSDateFormatter *formatter = ZUX_AUTORELEASE([[NSDateFormatter alloc] init]);

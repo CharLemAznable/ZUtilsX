@@ -12,11 +12,9 @@
 #import "ZUXBundle.h"
 #import "zarc.h"
 
-ZUX_CATEGORY_M(ZUX_NSDictionary)
-
-@interface NSDictionary (ZUXSafe)
+@category_interface_generic(NSDictionary, ZUX_COVARIANT_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE), ZUXSafe)
 @end
-@implementation NSDictionary (ZUXSafe)
+@category_implementation(NSDictionary, ZUXSafe)
 
 - (id)zux_objectForKey:(id)key {
     if (!key) return nil;
@@ -31,8 +29,6 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
-        ZUX_ENABLE_CATEGORY(ZUX_NSNull);
         [NSClassFromString(@"__NSDictionaryI")
          swizzleInstanceOriSelector:@selector(objectForKey:)
          withNewSelector:@selector(zux_objectForKey:)];
@@ -44,9 +40,9 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 
 @end // NSDictionary (ZUXSafe)
 
-@interface NSMutableDictionary (ZUXSafe)
+@category_interface_generic(NSMutableDictionary, ZUX_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE), ZUXSafe)
 @end
-@implementation NSMutableDictionary (ZUXSafe)
+@category_implementation(NSMutableDictionary, ZUXSafe)
 
 - (id)zux_objectForKey:(id)key {
     if (!key) return nil;
@@ -73,8 +69,6 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
-        ZUX_ENABLE_CATEGORY(ZUX_NSNull);
         [NSClassFromString(@"__NSDictionaryM")
          swizzleInstanceOriSelector:@selector(objectForKey:)
          withNewSelector:@selector(zux_objectForKey:)];
@@ -93,7 +87,7 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 
 @end // NSMutableDictionary (ZUXSafe)
 
-@implementation NSDictionary (ZUX)
+@category_implementation(NSDictionary, ZUX)
 
 - (NSDictionary *)deepCopy {
     return [[NSDictionary alloc] initWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithData:
@@ -121,7 +115,7 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 @end // NSDictionary (ZUX)
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
-@implementation NSDictionary (ZUXSubscript)
+@category_implementation(NSDictionary, ZUXSubscript)
 
 - (id)objectForKeyedSubscript:(id)key {
     return [self objectForKey:key];
@@ -129,7 +123,7 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 
 @end // NSDictionary (ZUXSubscript)
 
-@implementation NSMutableDictionary (ZUXSubscript)
+@category_implementation(NSMutableDictionary, ZUXSubscript)
 
 - (void)setObject:(id)obj forKeyedSubscript:(id<NSCopying>)key {
     [self setObject:obj forKey:key];
@@ -138,7 +132,7 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 @end // NSMutableDictionary (ZUXSubscript)
 #endif // __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
 
-@implementation NSDictionary (ZUXCreation)
+@category_implementation(NSDictionary, ZUXCreation)
 
 - (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName {
     return [self initWithContentsOfUserFile:fileName subpath:nil];
@@ -196,7 +190,7 @@ ZUX_CATEGORY_M(ZUX_NSDictionary)
 
 @end // NSDictionary (ZUXCreation)
 
-@implementation NSDictionary (ZUXSerialization)
+@category_implementation(NSDictionary, ZUXSerialization)
 
 - (BOOL)writeToUserFile:(NSString *)fileName {
     return [self writeToUserFile:fileName inDirectory:ZUXDocument];

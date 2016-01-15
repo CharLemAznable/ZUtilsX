@@ -12,9 +12,7 @@
 #ifndef ZUtilsX_UILabel_ZUX_h
 #define ZUtilsX_UILabel_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UILabel)
-
-@interface UILabel (ZUX)
+@category_interface(UILabel, ZUX)
 
 - (CGSize)sizeThatConstraintToSize:(CGSize)size;
 

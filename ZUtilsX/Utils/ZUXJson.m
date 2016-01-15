@@ -19,7 +19,6 @@ BOOL ZUX_USE_JSONKIT = NO;
 
 + (id)objectFromJsonData:(NSData *)jsonData {
     if (ZUX_USE_JSONKIT) {
-        ZUX_ENABLE_CATEGORY(ZUX_JSONKit);
         return [jsonData objectFromJSONData];
     } else {
         return [NSJSONSerialization
@@ -30,7 +29,6 @@ BOOL ZUX_USE_JSONKIT = NO;
 
 + (id)objectFromJsonString:(NSString *)jsonString {
     if (ZUX_USE_JSONKIT) {
-        ZUX_ENABLE_CATEGORY(ZUX_JSONKit);
         return [jsonString objectFromJSONString];
     } else {
         return [self objectFromJsonData:
@@ -41,30 +39,25 @@ BOOL ZUX_USE_JSONKIT = NO;
 + (id)objectFromJsonData:(NSData *)jsonData asClass:(Class)clazz {
     id jsonObject;
     if (ZUX_USE_JSONKIT) {
-        ZUX_ENABLE_CATEGORY(ZUX_JSONKit);
         jsonObject = [jsonData objectFromJSONData];
     } else {
         jsonObject = [self objectFromJsonData:jsonData];
     }
-    ZUX_ENABLE_CATEGORY(ZUXJson_NSObject);
     return ZUX_AUTORELEASE([[clazz alloc] initWithJsonObject:jsonObject]);
 }
 
 + (id)objectFromJsonString:(NSString *)jsonString asClass:(Class)clazz {
     id jsonObject;
     if (ZUX_USE_JSONKIT) {
-        ZUX_ENABLE_CATEGORY(ZUX_JSONKit);
         jsonObject = [jsonString objectFromJSONString];
     } else {
         jsonObject = [self objectFromJsonString:jsonString];
     }
-    ZUX_ENABLE_CATEGORY(ZUXJson_NSObject);
     return ZUX_AUTORELEASE([[clazz alloc] initWithJsonObject:jsonObject]);
 }
 
 + (NSData *)jsonDataFromObject:(id)object {
     if (![self isValidJSONObject:object]) {
-        ZUX_ENABLE_CATEGORY(ZUXJson_NSObject);
         id jsonObject = [object zuxJsonObject];
         if (ZUX_EXPECT_F(![self isValidJSONObject:jsonObject])) {
             return [[jsonObject description] dataUsingEncoding:NSUTF8StringEncoding];

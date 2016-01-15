@@ -13,9 +13,7 @@
 #ifndef ZUtilsX_UIImage_ZUX_h
 #define ZUtilsX_UIImage_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UIImage)
-
-@interface UIImage (ZUX)
+@category_interface(UIImage, ZUX)
 
 + (UIImage *)imagePointWithColor:(UIColor *)color;
 + (UIImage *)imageRectWithColor:(UIColor *)color size:(CGSize)size;
@@ -28,7 +26,7 @@ ZUX_CATEGORY_H(ZUX_UIImage)
 
 @end // UIImage (ZUX)
 
-@interface UIImage (ZUXCreation)
+@category_interface(UIImage, ZUXCreation)
 
 + (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName;
 + (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath;
@@ -39,7 +37,7 @@ ZUX_CATEGORY_H(ZUX_UIImage)
 
 @end // UIImage (ZUXCreation)
 
-@interface UIImage (ZUXSerialization)
+@category_interface(UIImage, ZUXSerialization)
 
 - (BOOL)writeToUserFile:(NSString *)fileName;
 - (BOOL)writeToUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;

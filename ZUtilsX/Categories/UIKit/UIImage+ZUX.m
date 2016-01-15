@@ -12,9 +12,7 @@
 #import "zarc.h"
 #import "zadapt.h"
 
-ZUX_CATEGORY_M(ZUX_UIImage)
-
-@implementation UIImage (ZUX)
+@category_implementation(UIImage, ZUX)
 
 + (UIImage *)imagePointWithColor:(UIColor *)color {
     return [self imageRectWithColor:color size:CGSizeMake(1, 1)];
@@ -173,7 +171,7 @@ ZUX_STATIC_INLINE CGGradientRef CreateGradientWithColorsAndLocations(NSArray *co
 
 @end
 
-@implementation UIImage (ZUXCreation)
+@category_implementation(UIImage, ZUXCreation)
 
 + (UIImage *)imageWithContentsOfUserFile:(NSString *)fileName {
     return [self imageWithContentsOfUserFile:fileName subpath:nil];
@@ -205,7 +203,7 @@ ZUX_STATIC_INLINE CGGradientRef CreateGradientWithColorsAndLocations(NSArray *co
 
 @end
 
-@implementation UIImage (ZUXSerialization)
+@category_implementation(UIImage, ZUXSerialization)
 
 - (BOOL)writeToUserFile:(NSString *)fileName {
     return [self writeToUserFile:fileName inDirectory:ZUXDocument];

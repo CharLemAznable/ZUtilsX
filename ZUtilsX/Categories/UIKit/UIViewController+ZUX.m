@@ -12,9 +12,7 @@
 #import "zarc.h"
 #import "zadapt.h"
 
-ZUX_CATEGORY_M(ZUX_UIViewController)
-
-@interface UIViewController (ZUX_Private)
+@category_interface(UIViewController, ZUX_Private)
 
 - (UIStatusBarStyle)p_StatusBarStyle;
 - (void)setP_StatusBarStyle:(UIStatusBarStyle)p_StatusBarStyle;
@@ -26,14 +24,13 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
     return root.childViewControllerForStatusBarStyle ?: root;
 }
 
-@implementation UIViewController (ZUX)
+@category_implementation(UIViewController, ZUX)
 
 #pragma mark - Swizzle & Override Methods -
 
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
         // swizzle loadView
         [self swizzleInstanceOriSelector:@selector(loadView)
                          withNewSelector:@selector(zuxLoadView)];
@@ -74,12 +71,11 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 
 @end
 
-@implementation UIViewController (ZUX_Private)
+@category_implementation(UIViewController, ZUX_Private)
 
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
         // preferredStatusBarStyle
         [self swizzleInstanceOriSelector:@selector(preferredStatusBarStyle)
                          withNewSelector:@selector(zuxPreferredStatusBarStyle)];
@@ -96,7 +92,6 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 }
 
 - (void)zuxPrivateDealloc {
-    ZUX_ENABLE_CATEGORY(ZUX_NSObject);
     [self setProperty:nil forAssociateKey:p_StatusBarStyleKey];
     [self zuxPrivateDealloc];
 }

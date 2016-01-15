@@ -11,9 +11,7 @@
 #import "zarc.h"
 #import <objc/runtime.h>
 
-ZUX_CATEGORY_M(ZUX_UINavigationController)
-
-@implementation UIViewController (ZUXNavigation)
+@category_implementation(UIViewController, ZUXNavigation)
 
 - (UINavigationBar *)navigationBar {
     return self.navigationController.navigationBar;
@@ -90,17 +88,17 @@ ZUX_CATEGORY_M(ZUX_UINavigationController)
     [[self class] swizzleZuxViewDidDisappear:YES];
 }
 
-#define ZUXCallbackBlockImplementation(BlockKey) \
-static NSString *const ZUXView##BlockKey##CallbackBlockKey = @"zuxView" @#BlockKey @"CallbackBlockKey"; \
-- (ZUXNavigationCallbackBlock)zuxView##BlockKey##CallbackBlock { \
-    return (ZUXNavigationCallbackBlock)[self propertyForAssociateKey:ZUXView##BlockKey##CallbackBlockKey]; \
-} \
-- (void)setZuxView##BlockKey##CallbackBlock:(ZUXNavigationCallbackBlock)block { \
-    [self setProperty:(id)block forAssociateKey:ZUXView##BlockKey##CallbackBlockKey]; \
-} \
-- (void)zuxView##BlockKey##Callback { \
-    ZUXNavigationCallbackBlock block = [self zuxView##BlockKey##CallbackBlock]; \
-    if (block) block(self); \
+#define ZUXCallbackBlockImplementation(BlockKey)                                                            \
+static NSString *const ZUXView##BlockKey##CallbackBlockKey = @"zuxView" @#BlockKey @"CallbackBlockKey";     \
+- (ZUXNavigationCallbackBlock)zuxView##BlockKey##CallbackBlock {                                            \
+    return (ZUXNavigationCallbackBlock)[self propertyForAssociateKey:ZUXView##BlockKey##CallbackBlockKey];  \
+}                                                                                                           \
+- (void)setZuxView##BlockKey##CallbackBlock:(ZUXNavigationCallbackBlock)block {                             \
+    [self setProperty:(id)block forAssociateKey:ZUXView##BlockKey##CallbackBlockKey];                       \
+}                                                                                                           \
+- (void)zuxView##BlockKey##Callback {                                                                       \
+    ZUXNavigationCallbackBlock block = [self zuxView##BlockKey##CallbackBlock];                             \
+    if (block) block(self);                                                                                 \
 }
 
 ZUXCallbackBlockImplementation(WillAppear);
@@ -112,7 +110,6 @@ ZUXCallbackBlockImplementation(DidDisappear);
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
 #if !IS_ARC
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
         [self swizzleInstanceOriSelector:@selector(dealloc)
                          withNewSelector:@selector(zuxNavigationDealloc)];
 #endif
@@ -120,7 +117,6 @@ ZUXCallbackBlockImplementation(DidDisappear);
 }
 
 - (void)zuxNavigationDealloc {
-    ZUX_ENABLE_CATEGORY(ZUX_NSObject);
     [self setProperty:NULL forAssociateKey:ZUXViewWillAppearCallbackBlockKey];
     [self setProperty:NULL forAssociateKey:ZUXViewDidAppearCallbackBlockKey];
     [self setProperty:NULL forAssociateKey:ZUXViewWillDisappearCallbackBlockKey];
@@ -128,22 +124,22 @@ ZUXCallbackBlockImplementation(DidDisappear);
     [self zuxNavigationDealloc];
 }
 
-#define ZUXCallbackSwizzleImplementation(SwizzleKey) \
-static NSString *const ZUXView##SwizzleKey##SwizzledKey = @"zuxView" @#SwizzleKey @"SwizzledKey"; \
-+ (BOOL)zuxView##SwizzleKey##Swizzled { \
-    return [[self propertyForAssociateKey:ZUXView##SwizzleKey##SwizzledKey] boolValue]; \
-} \
-+ (void)setZuxView##SwizzleKey##Swizzled:(BOOL)swizzled { \
-    [self setProperty:@(swizzled) forAssociateKey:ZUXView##SwizzleKey##SwizzledKey]; \
-} \
-+ (void)swizzleZuxView##SwizzleKey:(BOOL)swizzled { \
-    @synchronized(self) { \
-        if ([self zuxView##SwizzleKey##Swizzled] == swizzled) { \
-            [self swizzleInstanceOriSelector:@selector(view##SwizzleKey:) \
-                             withNewSelector:@selector(zuxView##SwizzleKey:)]; \
-            [self setZuxView##SwizzleKey##Swizzled:!swizzled]; \
-        } \
-    } \
+#define ZUXCallbackSwizzleImplementation(SwizzleKey)                                                \
+static NSString *const ZUXView##SwizzleKey##SwizzledKey = @"zuxView" @#SwizzleKey @"SwizzledKey";   \
++ (BOOL)zuxView##SwizzleKey##Swizzled {                                                             \
+    return [[self propertyForAssociateKey:ZUXView##SwizzleKey##SwizzledKey] boolValue];             \
+}                                                                                                   \
++ (void)setZuxView##SwizzleKey##Swizzled:(BOOL)swizzled {                                           \
+    [self setProperty:@(swizzled) forAssociateKey:ZUXView##SwizzleKey##SwizzledKey];                \
+}                                                                                                   \
++ (void)swizzleZuxView##SwizzleKey:(BOOL)swizzled {                                                 \
+    @synchronized(self) {                                                                           \
+        if ([self zuxView##SwizzleKey##Swizzled] == swizzled) {                                     \
+            [self swizzleInstanceOriSelector:@selector(view##SwizzleKey:)                           \
+                             withNewSelector:@selector(zuxView##SwizzleKey:)];                      \
+            [self setZuxView##SwizzleKey##Swizzled:!swizzled];                                      \
+        }                                                                                           \
+    }                                                                                               \
 }
 
 ZUXCallbackSwizzleImplementation(WillAppear);
@@ -153,7 +149,7 @@ ZUXCallbackSwizzleImplementation(DidDisappear);
 
 @end
 
-@implementation UINavigationController (ZUX)
+@category_implementation(UINavigationController, ZUX)
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
           initialWithBlock:(ZUXNavigationCallbackBlock)initial
@@ -174,7 +170,6 @@ ZUXCallbackSwizzleImplementation(DidDisappear);
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
         [self swizzleInstanceOriSelector:@selector(pushViewController:animated:)
                          withNewSelector:@selector(zuxPushViewController:animated:)];
         [self swizzleInstanceOriSelector:@selector(popViewControllerAnimated:)

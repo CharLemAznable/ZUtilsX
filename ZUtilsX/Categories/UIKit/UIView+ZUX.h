@@ -14,9 +14,7 @@
 #ifndef ZUtilsX_UIView_ZUX_h
 #define ZUtilsX_UIView_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UIView)
-
-@interface UIView (ZUX)
+@category_interface(UIView, ZUX)
 
 // Clip to Bounds.
 @property BOOL      masksToBounds;
@@ -41,7 +39,7 @@ ZUX_CATEGORY_H(ZUX_UIView)
 
 @class ZUXTransform;
 
-@interface UIView (ZUXAutoLayout)
+@category_interface(UIView, ZUXAutoLayout)
 
 @property (nonatomic, ZUX_STRONG) ZUXTransform *zTransform; // animatable.
 
@@ -101,14 +99,14 @@ ZUX_EXTERN ZUXAnimation ZUXImmediateAnimationMake(ZUXAnimateType type,
                                                   ZUXAnimateDirection direction,
                                                   NSTimeInterval duration);
 
-@interface UIView (ZUXAnimate)
+@category_interface(UIView, ZUXAnimate)
 
 - (void)zuxAnimate:(ZUXAnimation)animation;
 - (void)zuxAnimate:(ZUXAnimation)animation completion:(void (^)())completion;
 
 @end // UIView (ZUXAnimate)
 
-@interface UIView (ZUXBadge)
+@category_interface(UIView, ZUXBadge)
 
 - (void)showBadge;
 - (void)showBadgeWithValue:(NSString *)badgeValue;
@@ -127,7 +125,7 @@ ZUX_EXTERN ZUXAnimation ZUXImmediateAnimationMake(ZUXAnimateType type,
 
 @end // UIView (ZUXBadge)
 
-@interface UIView (ZUXAppearance)
+@category_interface(UIView, ZUXAppearance)
 
 + (CGFloat)borderWidth;
 + (void)setBorderWidth:(CGFloat)borderWidth;

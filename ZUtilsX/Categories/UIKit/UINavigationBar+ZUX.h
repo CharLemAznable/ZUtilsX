@@ -13,9 +13,7 @@
 #ifndef ZUtilsX_UINavigationBar_ZUX_h
 #define ZUtilsX_UINavigationBar_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UINavigationBar)
-
-@interface UINavigationBar (ZUXAppearance)
+@category_interface(UINavigationBar, ZUXAppearance)
 
 + (BOOL)isTranslucent;
 + (void)setTranslucent:(BOOL)translucent;

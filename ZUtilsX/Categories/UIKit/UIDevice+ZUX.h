@@ -12,9 +12,7 @@
 #ifndef ZUtilsX_UIDevice_ZUX_h
 #define ZUtilsX_UIDevice_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UIDevice)
-
-@interface UIDevice (ZUX)
+@category_interface(UIDevice, ZUX)
 
 - (NSString *)fullModel;
 - (NSString *)purifiedFullModel;

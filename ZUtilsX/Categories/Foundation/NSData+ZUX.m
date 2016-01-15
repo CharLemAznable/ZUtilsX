@@ -9,8 +9,6 @@
 #import "NSData+ZUX.h"
 #import "zarc.h"
 
-ZUX_CATEGORY_M(ZUX_NSData)
-
 static const char _base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 static const short _base64DecodingTable[256] = {
     -2, -2, -2, -2, -2, -2, -2, -2, -2, -1, -1, -2, -1, -1, -2, -2,
@@ -31,7 +29,7 @@ static const short _base64DecodingTable[256] = {
     -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2
 };
 
-@implementation NSData (ZUX)
+@category_implementation(NSData, ZUX)
 
 // Adapted from http://www.cocoadev.com/index.pl?BaseSixtyFour
 - (NSString *)base64EncodedString {

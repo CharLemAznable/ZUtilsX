@@ -11,9 +11,7 @@
 #import "zadapt.h"
 #import "zappearance.h"
 
-ZUX_CATEGORY_M(ZUX_UINavigationBar)
-
-@implementation UINavigationBar (ZUXAppearance)
+@category_implementation(UINavigationBar, ZUXAppearance)
 
 #pragma mark - translucent -
 

@@ -16,8 +16,6 @@
 @implementation NSStringZUXTest
 
 - (void)testNSStringZUX {
-    ZUX_ENABLE_CATEGORY(ZUX_NSString);
-    
     NSDictionary *dict = @{@"last name":@"Doe", @"first name":@"John"};
     NSString *parametric = @"He's name is ${first name}·${last name}.";
     XCTAssertEqualObjects([parametric parametricStringWithObject:dict], @"He's name is John·Doe.");

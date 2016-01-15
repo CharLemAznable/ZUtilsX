@@ -38,7 +38,6 @@
 @implementation NSObjectZUXJsonTest
 
 - (void)testNSObjectZUXJson {
-    ZUX_ENABLE_CATEGORY(ZUXJson_NSObject);
     ZUX_USE_JSONKIT = YES;
     XCTAssertEqualObjects([@"JSON" zuxJsonString], @"\"JSON\"");
     ZUX_USE_JSONKIT = NO;

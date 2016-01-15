@@ -28,8 +28,6 @@
 @implementation UIViewControllerZUXTest
 
 - (void)testUIViewControllerZUX {
-    ZUX_ENABLE_CATEGORY(ZUX_UIViewController);
-    
     UIViewController *controller = [[UIViewController alloc] init];
     XCTAssertTrue(controller.view.class == [UIView class]);
     

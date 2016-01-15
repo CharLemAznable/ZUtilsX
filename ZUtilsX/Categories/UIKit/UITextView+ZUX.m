@@ -8,9 +8,7 @@
 
 #import "UITextView+ZUX.h"
 
-ZUX_CATEGORY_M(ZUX_UITextView)
-
-@implementation UITextView (ZUX)
+@category_implementation(UITextView, ZUX)
 
 - (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string limitWithLength:(NSUInteger)length {
     NSString *toBeString = [self.text stringByReplacingCharactersInRange:range withString:string];

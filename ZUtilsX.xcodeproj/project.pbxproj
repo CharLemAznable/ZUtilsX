@@ -150,6 +150,8 @@
 		6A6A3D941C1983C700847DEF /* ZUXColorDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */; };
 		6A6A3D951C19840D00847DEF /* ZUXColorDictionary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */; };
 		6A7B861D1C29496E00FF864E /* UIImageZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B861C1C29496E00FF864E /* UIImageZUXTest.m */; };
+		6A869D071C489106001A9661 /* ZUXDataBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A869D061C489106001A9661 /* ZUXDataBox.m */; };
+		6A869D081C48DD74001A9661 /* ZUXDataBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A869D051C489106001A9661 /* ZUXDataBox.h */; };
 		6AE7ABEA1C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7ABE91C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m */; };
 		6AE7ABEB1C20006B0061A235 /* UIBarButtonItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6AE7ABE81C1FD8BE0061A235 /* UIBarButtonItem+ZUX.h */; };
 /* End PBXBuildFile section */
@@ -171,6 +173,7 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				6A869D081C48DD74001A9661 /* ZUXDataBox.h in CopyFiles */,
 				6A0E1AD31C3E68C600995C70 /* UINavigationController+ZUX.h in CopyFiles */,
 				6A68BF471C3BC12D00C690E1 /* ZUXProtocol.h in CopyFiles */,
 				6A68BF481C3BC12D00C690E1 /* ZUXIvar.h in CopyFiles */,
@@ -375,6 +378,8 @@
 		6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXColorDictionary.h; sourceTree = "<group>"; };
 		6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXColorDictionary.m; sourceTree = "<group>"; };
 		6A7B861C1C29496E00FF864E /* UIImageZUXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageZUXTest.m; path = Categories/UIKit/UIImageZUXTest.m; sourceTree = "<group>"; };
+		6A869D051C489106001A9661 /* ZUXDataBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXDataBox.h; sourceTree = "<group>"; };
+		6A869D061C489106001A9661 /* ZUXDataBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXDataBox.m; sourceTree = "<group>"; };
 		6AE7ABE81C1FD8BE0061A235 /* UIBarButtonItem+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+ZUX.h"; sourceTree = "<group>"; };
 		6AE7ABE91C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+ZUX.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -640,6 +645,8 @@
 				6A5B155A1C0C350F006B8673 /* ZUXBundle.m */,
 				6A648B5B1C1E94AD0077F276 /* ZUXKeychain.h */,
 				6A648B5C1C1E94AD0077F276 /* ZUXKeychain.m */,
+				6A869D051C489106001A9661 /* ZUXDataBox.h */,
+				6A869D061C489106001A9661 /* ZUXDataBox.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -838,6 +845,7 @@
 				6A0E1AD21C3E5F0500995C70 /* UINavigationController+ZUX.m in Sources */,
 				6A5B155B1C0C350F006B8673 /* ZUXBundle.m in Sources */,
 				6A648B5D1C1E94AD0077F276 /* ZUXKeychain.m in Sources */,
+				6A869D071C489106001A9661 /* ZUXDataBox.m in Sources */,
 				6A6A3D941C1983C700847DEF /* ZUXColorDictionary.m in Sources */,
 				6A648B671C1EC5E40077F276 /* UIApplication+ZUX.m in Sources */,
 				6A63FA3B1C02E0E000AB3891 /* ZUXSearchBar.m in Sources */,

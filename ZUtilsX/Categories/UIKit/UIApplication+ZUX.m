@@ -10,8 +10,6 @@
 #import "NSObject+ZUX.h"
 #import "zobjc.h"
 
-ZUX_CATEGORY_M(ZUX_UIApplication)
-
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
 @interface ZUXApplicationDelegateDummy : NSObject
 
@@ -21,7 +19,7 @@ ZUX_CATEGORY_M(ZUX_UIApplication)
 @end
 #endif
 
-@implementation UIApplication (ZUX)
+@category_implementation(UIApplication, ZUX)
 
 + (void)registerUserNotificationTypes:(ZUXUserNotificationType)types {
     [[self sharedApplication] registerUserNotificationTypes:types];
@@ -48,7 +46,6 @@ ZUX_CATEGORY_M(ZUX_UIApplication)
     if (!IOS8_OR_LATER) return;
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
         [[self.delegate class]
          swizzleInstanceOriSelector:@selector(application:didRegisterUserNotificationSettings:)
          withNewSelector:@selector(zuxApplication:didRegisterUserNotificationSettings:)

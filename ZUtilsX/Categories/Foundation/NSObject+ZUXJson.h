@@ -13,8 +13,6 @@
 #ifndef ZUtilsX_NSObject_ZUXJson_h
 #define ZUtilsX_NSObject_ZUXJson_h
 
-ZUX_CATEGORY_H(ZUXJson_NSObject)
-
 #if NS_BLOCKS_AVAILABLE
 
 @protocol ZUXJsonable <NSObject>
@@ -27,28 +25,26 @@ ZUX_CATEGORY_H(ZUXJson_NSObject)
 
 @end // ZUXJsonable
 
-@interface NSObject (ZUXJson) <ZUXJsonable>
+@category_interface(NSObject, ZUXJson) <ZUXJsonable>
 @end // NSObject (ZUXJson)
 
-@interface NSNull (ZUXJson)
+@category_interface(NSNull, ZUXJson)
 @end // NSNull (ZUXJson)
 
-@interface NSValue (ZUXJson)
-
+@category_interface(NSValue, ZUXJson)
 + (NSValue *)valueWithJsonObject:(id)jsonObject;
-
 @end // NSValue (ZUXJson)
 
-@interface NSNumber (ZUXJson)
+@category_interface(NSNumber, ZUXJson)
 @end // NSNumber (ZUXJson)
 
-@interface NSString (ZUXJson)
+@category_interface(NSString, ZUXJson)
 @end // NSString (ZUXJson)
 
-@interface NSArray (ZUXJson)
+@category_interface(NSArray, ZUXJson)
 @end // NSArray (ZUXJson)
 
-@interface NSDictionary (ZUXJson)
+@category_interface(NSDictionary, ZUXJson)
 @end // NSDictionary (ZUXJson)
 
 #endif // NS_BLOCKS_AVAILABLE

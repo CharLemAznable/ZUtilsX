@@ -17,9 +17,7 @@
 #import "zappearance.h"
 #import <objc/runtime.h>
 
-ZUX_CATEGORY_M(ZUX_UIView)
-
-@implementation UIView (ZUX)
+@category_implementation(UIView, ZUX)
 
 #pragma mark - Properties Methods -
 
@@ -113,7 +111,7 @@ NSString *const zTransformViewKVOKey        = @"view";
 NSString *const zTransformViewFrameKVOKey   = @"frame";
 NSString *const zTransformViewBoundsKVOKey  = @"bounds";
 
-@implementation UIView (ZUXAutoLayout)
+@category_implementation(UIView, ZUXAutoLayout)
 
 - (ZUX_INSTANCETYPE)initWithTransform:(ZUXTransform *)transform {
     if (ZUX_EXPECT_T(self = [self init])) {
@@ -131,7 +129,6 @@ NSString *const zTransformViewBoundsKVOKey  = @"bounds";
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
         // observe superview change
         [self swizzleInstanceOriSelector:@selector(willMoveToSuperview:)
                          withNewSelector:@selector(zuxWillMoveToSuperview:)];
@@ -344,7 +341,7 @@ ZUX_INLINE ZUXAnimation ZUXImmediateAnimationMake(ZUXAnimateType type,
     return ZUXAnimationMake(type, direction, duration, 0);
 }
 
-@implementation UIView (ZUXAnimate)
+@category_implementation(UIView, ZUXAnimate)
 
 - (void)zuxAnimate:(ZUXAnimation)animation {
     [self zuxAnimate:animation completion:^{}];
@@ -444,7 +441,7 @@ NSString *const zBadgeColorKVOKey       = @"zbadgeColor";
 NSString *const zBadgeOffsetKVOKey      = @"zbadgeOffset";
 NSString *const zBadgeSizeKVOKey        = @"zbadgeSize";
 
-@implementation UIView (ZUXBadge)
+@category_implementation(UIView, ZUXBadge)
 
 - (void)showBadge {
     [self showBadgeWithValue:nil];
@@ -461,15 +458,12 @@ NSString *const zBadgeSizeKVOKey        = @"zbadgeSize";
     [self addSubview:badgeLabel];
     
     CGSize offset = self.badgeOffset;
-    ZUX_ENABLE_CATEGORY(ZUX_NSNull);
-    ZUX_ENABLE_CATEGORY(ZUX_NSString);
     if ([NSNull isNotNull:badgeValue] && [badgeValue isNotEmpty]) {
         badgeLabel.text = badgeValue;
         badgeLabel.font = self.badgeTextFont;
         badgeLabel.textColor = self.badgeTextColor;
         badgeLabel.textAlignment = ZUXTextAlignmentCenter;
         
-        ZUX_ENABLE_CATEGORY(ZUX_UILabel);
         CGSize size = [badgeLabel sizeThatConstraintToSize:
                        CGSizeMake(self.bounds.size.width, self.bounds.size.height)];
         badgeLabel.center = CGPointMake(self.bounds.size.width + offset.width, size.height / 4 + offset.height);
@@ -535,12 +529,10 @@ NSString *const zBadgeSizeKVOKey        = @"zbadgeSize";
 
 - (CGFloat)badgeSize {
     NSNumber *badgeSize = [self propertyForAssociateKey:zBadgeSizeKVOKey];
-    ZUX_ENABLE_CATEGORY(ZUX_NSNumber);
     return badgeSize ? [badgeSize cgfloatValue] : 8;
 }
 
 - (void)setBadgeSize:(CGFloat)badgeSize {
-    ZUX_ENABLE_CATEGORY(ZUX_NSNumber);
     [self setProperty:[NSNumber numberWithCGFloat:badgeSize] forAssociateKey:zBadgeSizeKVOKey];
     
     if (!((UILabel *)[self viewWithTag:ZUX_BADGE_TAG]).text) {
@@ -555,7 +547,6 @@ NSString *const zBadgeSizeKVOKey        = @"zbadgeSize";
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
 #if !IS_ARC
-        ZUX_ENABLE_CATEGORY(ZUX_NSObject);
         // dealloc badge's associate objects
         [self swizzleInstanceOriSelector:@selector(dealloc)
                          withNewSelector:@selector(zuxBadgeDealloc)];
@@ -574,7 +565,7 @@ NSString *const zBadgeSizeKVOKey        = @"zbadgeSize";
 
 @end
 
-@implementation UIView (ZUXAppearance)
+@category_implementation(UIView, ZUXAppearance)
 
 + (CGFloat)borderWidth {
     return [(UIView *)APPEARANCE borderWidth];

@@ -25,8 +25,6 @@
 @implementation ZUXJSONKitTest
 
 - (void)testZUXJSONKit {
-    ZUX_ENABLE_CATEGORY(ZUX_JSONKit);
-    
     XCTAssertEqualObjects([@"Hello, World!" JSONString], @"\"Hello, World!\"");
     XCTAssertNil([@"\"Hello, World!\"" objectFromJSONString]);
     

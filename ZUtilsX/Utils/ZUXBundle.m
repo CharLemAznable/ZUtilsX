@@ -48,7 +48,6 @@
 }
 
 + (UIImage *)imageForCurrentDeviceWithName:(NSString *)imageName bundle:(NSString *)bundleName subpath:(NSString *)subpath {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
     return [self imageWithName:[UIImage imageNameForCurrentDeviceNamed:imageName] bundle:bundleName subpath:subpath];
 }
 

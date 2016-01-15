@@ -9,9 +9,7 @@
 #import "UILabel+ZUX.h"
 #import "zadapt.h"
 
-ZUX_CATEGORY_M(ZUX_UILabel)
-
-@implementation UILabel (ZUX)
+@category_implementation(UILabel, ZUX)
 
 - (CGSize)sizeThatConstraintToSize:(CGSize)size {
     return

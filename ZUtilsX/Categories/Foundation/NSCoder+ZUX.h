@@ -13,9 +13,7 @@
 #ifndef ZUtilsX_NSCoder_ZUX_h
 #define ZUtilsX_NSCoder_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_NSCoder)
-
-@interface NSCoder (ZUX)
+@category_interface(NSCoder, ZUX)
 
 - (void)encodeCGFloat:(CGFloat)realv forKey:(NSString *)key;
 - (CGFloat)decodeCGFloatForKey:(NSString *)key;

@@ -25,7 +25,6 @@
     if (ZUX_EXPECT_T(self = [super initWithCoder:aDecoder])) {
         _canCopy = [aDecoder decodeBoolForKey:@"canCopy"];
         _backgroundImage = ZUX_RETAIN([aDecoder decodeObjectOfClass:[UIImage class] forKey:@"backgroundImage"]);
-        ZUX_ENABLE_CATEGORY(ZUX_NSCoder);
         _linesSpacing = [aDecoder decodeCGFloatForKey:@"linesSpacing"];
     }
     return self;
@@ -55,7 +54,6 @@
     [super encodeWithCoder:aCoder];
     [aCoder encodeBool:_canCopy forKey:@"canCopy"];
     [aCoder encodeObject:_backgroundImage forKey:@"backgroundImage"];
-    ZUX_ENABLE_CATEGORY(ZUX_NSCoder);
     [aCoder encodeCGFloat:_linesSpacing forKey:@"linesSpacing"];
 }
 
@@ -148,7 +146,6 @@
     
     NSUInteger lineCount = [(NSArray *)CTFrameGetLines(frame) count];
     CFRelease(frame);
-    ZUX_ENABLE_CATEGORY(ZUX_UILabel);
     CGSize originalSize = [super sizeThatConstraintToSize:size];
     originalSize.height += (MAX(1, lineCount) - 1) * _linesSpacing;
     return originalSize;

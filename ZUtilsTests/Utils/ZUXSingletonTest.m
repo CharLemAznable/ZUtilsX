@@ -9,14 +9,14 @@
 #import <XCTest/XCTest.h>
 #import "ZUtilsX.h"
 
-@singletonface(MySingleton, NSObject)
+@singleton_interface(MySingleton, NSObject)
 @end
-@singletonation(MySingleton)
+@singleton_implementation(MySingleton)
 @end
 
-@singletonface(MySubSingleton, MySingleton)
+@singleton_interface(MySubSingleton, MySingleton)
 @end
-@singletonation(MySubSingleton)
+@singleton_implementation(MySubSingleton)
 @end
 
 @interface ZUXSingletonTest : XCTestCase

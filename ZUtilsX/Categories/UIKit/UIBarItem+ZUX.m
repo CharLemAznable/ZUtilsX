@@ -11,9 +11,7 @@
 #import "zadapt.h"
 #import "zappearance.h"
 
-ZUX_CATEGORY_M(ZUX_UIBarItem)
-
-@implementation UIBarItem (ZUXAppearance)
+@category_implementation(UIBarItem, ZUXAppearance)
 
 #pragma mark - textFont -
 

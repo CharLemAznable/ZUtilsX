@@ -33,10 +33,6 @@
         appIdentifier
         appVersion
 
-* 激活zutilsX内的所有Category, 省略添加Other Linker Flags: "-all_load -ObjC".
-
-        ZUX_ENABLE_ALL_CATEGORIES
-
 * 调试输出宏
 
         ZLog(fmt, ...)
@@ -1022,9 +1018,18 @@
 
 - ZUXCategory
 
-    添加Category工具宏, 用于在需要使用Category方法时, 动态加载Category文件.
+    添加Category工具宏, 用于定义Category并自动加载.
 
-        ZUX_ENABLE_CATEGORY(ZUX_XXX)
+        // 定义Category
+        @category_interface(CLASS_NAME, CATEGORY_NAME)
+        // 定义包含泛型的Category
+        @category_interface_generic(CLASS_NAME, GENERIC_PARAM, CATEGORY_NAME)
+
+        // 实现Category
+        @category_implementation(CLASS_NAME, CATEGORY_NAME)
+
+        // 添加的分类将于__attribute__((constructor))时自动加载,
+        // 所以可以省略Other Linker Flags: "-all_load -ObjC"
 
 - ZUXSingleton
 

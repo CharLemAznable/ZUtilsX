@@ -9,12 +9,9 @@
 #import "NSValue+ZUX.h"
 #import "NSString+ZUX.h"
 
-ZUX_CATEGORY_M(ZUX_NSValue)
-
-@implementation NSValue (ZUX)
+@category_implementation(NSValue, ZUX)
 
 - (id)valueForKey:(NSString *)key {
-    ZUX_ENABLE_CATEGORY(ZUX_NSString);
     const char *objCType = [self objCType];
     if (strcmp(objCType, @encode(CGPoint)) == 0) {
         CGPoint p = [self CGPointValue];
@@ -63,7 +60,6 @@ ZUX_CATEGORY_M(ZUX_NSValue)
 
 - (id)valueForKeyPath:(NSString *)keyPath {
     if (strcmp([self objCType], @encode(CGRect)) == 0) {
-        ZUX_ENABLE_CATEGORY(ZUX_NSString);
         CGRect r = [self CGRectValue];
         if ([keyPath isCaseInsensitiveEqualToString:@"origin.x"]) return @(r.origin.x);
         else if ([keyPath isCaseInsensitiveEqualToString:@"origin.y"]) return @(r.origin.y);

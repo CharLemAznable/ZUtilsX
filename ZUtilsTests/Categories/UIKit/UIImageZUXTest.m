@@ -16,8 +16,6 @@
 @implementation UIImageZUXTest
 
 - (void)testUIImageZUX {
-    ZUX_ENABLE_CATEGORY(ZUX_UIImage);
-    
     UIImage *bluePoint = [UIImage imageRectWithColor:[UIColor blueColor] size:CGSizeMake(1, 1)];
     UIColor *blueDominantColor = [bluePoint dominantColor];
     XCTAssertEqualObjects(blueDominantColor, [UIColor blueColor]);

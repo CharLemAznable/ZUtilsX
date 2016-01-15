@@ -13,9 +13,7 @@
 #ifndef ZUtilsX_UIBarButtonItem_ZUX_h
 #define ZUtilsX_UIBarButtonItem_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UIBarButtonItem)
-
-@interface UIBarButtonItem (ZUXAppearance)
+@category_interface(UIBarButtonItem, ZUXAppearance)
 
 #pragma mark - tintColor -
 

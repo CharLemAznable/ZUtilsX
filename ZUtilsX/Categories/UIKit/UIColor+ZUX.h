@@ -12,9 +12,7 @@
 #ifndef ZUtilsX_UIColor_ZUX_h
 #define ZUtilsX_UIColor_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UIColor)
-
-@interface UIColor (ZUX)
+@category_interface(UIColor, ZUX)
 
 // Convenience methods for creating autoreleased colors with integer between 0 and 255
 + (UIColor *)colorWithIntegerRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue;

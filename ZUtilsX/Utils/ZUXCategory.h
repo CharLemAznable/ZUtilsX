@@ -9,16 +9,31 @@
 #ifndef ZUtilsX_ZUXCategory_h
 #define ZUtilsX_ZUXCategory_h
 
-#define ZUX_CATEGORY_H(name) \
-@interface ZUX_CATEGORY_##name : NSObject \
-+ (void)declare; \
-@end
+#import "zobjc.h"
 
-#define ZUX_CATEGORY_M(name) \
-@implementation ZUX_CATEGORY_##name \
-+ (void)declare { ; } \
-@end
+#define enable_category_constructor(CLASS_NAME, CATEGORY_NAME)                  \
+__attribute__((constructor))                                                    \
+ZUX_STATIC void enable_ZUX_CATEGORY_##CLASS_NAME##_##CATEGORY_NAME()            \
+{ [ZUX_CATEGORY_##CLASS_NAME##_##CATEGORY_NAME declare]; }
 
-#define ZUX_ENABLE_CATEGORY(name) [ZUX_CATEGORY_##name declare]
+#define category_interface(CLASS_NAME, CATEGORY_NAME)                           \
+interface ZUX_CATEGORY_##CLASS_NAME##_##CATEGORY_NAME : NSObject                \
++ (void)declare;                                                                \
+@end                                                                            \
+enable_category_constructor(CLASS_NAME, CATEGORY_NAME)                          \
+@interface CLASS_NAME (CATEGORY_NAME)
+
+#define category_interface_generic(CLASS_NAME, GENERIC_PARAM, CATEGORY_NAME)    \
+interface ZUX_CATEGORY_##CLASS_NAME##_##CATEGORY_NAME : NSObject                \
++ (void)declare;                                                                \
+@end                                                                            \
+enable_category_constructor(CLASS_NAME, CATEGORY_NAME)                          \
+@interface CLASS_NAME GENERIC_PARAM (CATEGORY_NAME)
+
+#define category_implementation(CLASS_NAME, CATEGORY_NAME)                      \
+implementation ZUX_CATEGORY_##CLASS_NAME##_##CATEGORY_NAME                      \
++ (void)declare { ; }                                                           \
+@end                                                                            \
+@implementation CLASS_NAME (CATEGORY_NAME)
 
 #endif /* ZUtilsX_ZUXCategory_h */

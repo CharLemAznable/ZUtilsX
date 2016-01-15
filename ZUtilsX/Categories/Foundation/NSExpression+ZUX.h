@@ -12,9 +12,7 @@
 #ifndef ZUtilsX_NSExpression_ZUX_h
 #define ZUtilsX_NSExpression_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_NSExpression)
-
-@interface NSExpression (ZUX)
+@category_interface(NSExpression, ZUX)
 
 /*
  * NSExpression keywords Array. Use in ExpressionFormat with prefix: # .

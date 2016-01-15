@@ -13,11 +13,9 @@
 #ifndef ZUtilsX_UINavigationController_ZUX_h
 #define ZUtilsX_UINavigationController_ZUX_h
 
-ZUX_CATEGORY_H(ZUX_UINavigationController)
-
 typedef void (^ZUXNavigationCallbackBlock)(UIViewController *viewController);
 
-@interface UINavigationController (ZUX)
+@category_interface(UINavigationController, ZUX)
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
           initialWithBlock:(ZUXNavigationCallbackBlock)initial
@@ -28,7 +26,7 @@ typedef void (^ZUXNavigationCallbackBlock)(UIViewController *viewController);
 
 @end // UINavigationController (ZUX)
 
-@interface UIViewController (ZUXNavigation)
+@category_interface(UIViewController, ZUXNavigation)
 
 @property (nonatomic, readonly) UINavigationBar *navigationBar;
 
