@@ -14,7 +14,9 @@
 
 #define singleton_interface(CLASS_NAME, SUPER_CLASS_NAME)       \
 interface CLASS_NAME : SUPER_CLASS_NAME                         \
-+ (ZUX_INSTANCETYPE)share##CLASS_NAME;
++ (ZUX_INSTANCETYPE)share##CLASS_NAME;                          \
+@end                                                            \
+@interface CLASS_NAME ()
 
 #define singleton_implementation(CLASS_NAME)                    \
 implementation CLASS_NAME                                       \
