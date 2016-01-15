@@ -1036,15 +1036,15 @@
     添加单例宏.
 
         // 定义单例类
-        @singletonface(CLASS_NAME, SUPER_CLASS_NAME)
+        @singleton_interface(CLASS_NAME, SUPER_CLASS_NAME)
 
         // 实现单例类
-        @singletonation(CLASS_NAME)
+        @singleton_implementation(CLASS_NAME)
 
         // 单例类定义示例
-        @singletonface(MySingleton, NSObject)
+        @singleton_interface(MySingleton, NSObject)
         @end
-        @singletonation(MySingleton)
+        @singleton_implementation(MySingleton)
         @end
 
         // 单例使用示例
