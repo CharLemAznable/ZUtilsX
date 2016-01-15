@@ -1021,12 +1021,12 @@
     添加Category工具宏, 用于定义Category并自动加载.
 
         // 定义Category
-        @category_interface(CLASS_NAME, CATEGORY_NAME)
+        @category_interface(className, categoryName)
         // 定义包含泛型的Category
-        @category_interface_generic(CLASS_NAME, GENERIC_PARAM, CATEGORY_NAME)
+        @category_interface_generic(className, genericParam, categoryName)
 
         // 实现Category
-        @category_implementation(CLASS_NAME, CATEGORY_NAME)
+        @category_implementation(className, categoryName)
 
         // 添加的分类将于__attribute__((constructor))时自动加载,
         // 所以可以省略Other Linker Flags: "-all_load -ObjC"
@@ -1036,10 +1036,10 @@
     添加单例宏.
 
         // 定义单例类
-        @singleton_interface(CLASS_NAME, SUPER_CLASS_NAME)
+        @singleton_interface(className, superClassName)
 
         // 实现单例类
-        @singleton_implementation(CLASS_NAME)
+        @singleton_implementation(className)
 
         // 单例类定义示例
         @singleton_interface(MySingleton, NSObject)
