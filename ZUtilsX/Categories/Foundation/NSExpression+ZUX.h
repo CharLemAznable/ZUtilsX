@@ -6,11 +6,11 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "ZUXCategory.h"
-
 #ifndef ZUtilsX_NSExpression_ZUX_h
 #define ZUtilsX_NSExpression_ZUX_h
+
+#import <Foundation/Foundation.h>
+#import "ZUXCategory.h"
 
 @category_interface(NSExpression, ZUX)
 

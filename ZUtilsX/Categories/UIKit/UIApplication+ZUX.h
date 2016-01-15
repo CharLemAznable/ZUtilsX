@@ -6,13 +6,13 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
+#ifndef ZUtilsX_UIApplication_ZUX_h
+#define ZUtilsX_UIApplication_ZUX_h
+
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 #import "zobjc.h"
 #import "zadapt.h"
-
-#ifndef ZUtilsX_UIApplication_ZUX_h
-#define ZUtilsX_UIApplication_ZUX_h
 
 @category_interface(UIApplication, ZUX)
 

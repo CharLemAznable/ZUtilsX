@@ -6,13 +6,13 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
+#ifndef ZUtilsX_NSDictionary_ZUX_h
+#define ZUtilsX_NSDictionary_ZUX_h
+
 #import <Foundation/Foundation.h>
 #import "ZUXCategory.h"
 #import "ZUXDirectory.h"
 #import "zobjc.h"
-
-#ifndef ZUtilsX_NSDictionary_ZUX_h
-#define ZUtilsX_NSDictionary_ZUX_h
 
 @category_interface_generic(NSDictionary, ZUX_COVARIANT_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE), ZUX)
 

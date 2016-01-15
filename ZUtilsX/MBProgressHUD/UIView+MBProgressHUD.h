@@ -6,11 +6,11 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
-#import "MBProgressHUD.h"
-#import "ZUXCategory.h"
-
 #ifndef ZUtilsX_UIView_MBProgressHUD_h
 #define ZUtilsX_UIView_MBProgressHUD_h
+
+#import "MBProgressHUD.h"
+#import "ZUXCategory.h"
 
 /**
  * MBProgressHUD for CURRENT view.

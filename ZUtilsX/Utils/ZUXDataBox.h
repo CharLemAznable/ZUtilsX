@@ -11,12 +11,15 @@
 
 #import "ZUXSingleton.h"
 
-#define databoxface(CLASS_NAME, SUPER_CLASS_NAME) \
+#define databox_interface(CLASS_NAME, SUPER_CLASS_NAME) \
 singleton_interface(CLASS_NAME, SUPER_CLASS_NAME) \
 extern NSString *const zuxAppEverLaunchedKey; \
-extern NSString *const zuxAppFirstLaunchKey;
+extern NSString *const zuxAppFirstLaunchKey; \
 
-#define databoxation(CLASS_NAME) \
-singleton_implementation(CLASS_NAME)
+#define databox_implementation(CLASS_NAME) \
+singleton_implementation(CLASS_NAME) \
+static NSUserDefaults *userDefault; \
+static NSString *appEverLaunchedKey; \
+static NSString *appFirstLaunchKey; \
 
 #endif

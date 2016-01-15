@@ -6,13 +6,13 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
+#ifndef ZUtilsX_NSNumber_ZUX_h
+#define ZUtilsX_NSNumber_ZUX_h
+
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import "zobjc.h"
 #import "ZUXCategory.h"
-
-#ifndef ZUtilsX_NSNumber_ZUX_h
-#define ZUtilsX_NSNumber_ZUX_h
 
 @category_interface(NSNumber, ZUX)
 

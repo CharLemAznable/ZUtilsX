@@ -6,12 +6,12 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
+#ifndef ZUtilsX_UINavigationBar_ZUX_h
+#define ZUtilsX_UINavigationBar_ZUX_h
+
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 #import "zarc.h"
-
-#ifndef ZUtilsX_UINavigationBar_ZUX_h
-#define ZUtilsX_UINavigationBar_ZUX_h
 
 @category_interface(UINavigationBar, ZUXAppearance)
 

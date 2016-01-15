@@ -6,12 +6,12 @@
 //  Copyright © 2016年 org.cuc.n3. All rights reserved.
 //
 
+#ifndef ZUtilsX_UINavigationController_ZUX_h
+#define ZUtilsX_UINavigationController_ZUX_h
+
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 #import "zobjc.h"
-
-#ifndef ZUtilsX_UINavigationController_ZUX_h
-#define ZUtilsX_UINavigationController_ZUX_h
 
 typedef void (^ZUXNavigationCallbackBlock)(UIViewController *viewController);
 

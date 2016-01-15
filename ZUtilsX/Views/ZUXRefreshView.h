@@ -6,11 +6,11 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
-#import "ZUXView.h"
-#import "zarc.h"
-
 #ifndef ZUtilsX_ZUXRefreshView_h
 #define ZUtilsX_ZUXRefreshView_h
+
+#import "ZUXView.h"
+#import "zarc.h"
 
 typedef NS_ENUM(NSInteger, ZUXRefreshState) {
     ZUXRefreshNormal,

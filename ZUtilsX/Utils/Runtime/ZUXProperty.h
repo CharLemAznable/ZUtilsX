@@ -6,12 +6,12 @@
 //  Copyright © 2016年 org.cuc.n3. All rights reserved.
 //
 
+#ifndef ZUtilsX_ZUXProperty_h
+#define ZUtilsX_ZUXProperty_h
+
 #import <Foundation/Foundation.h>
 #import "zobjc.h"
 #import <objc/runtime.h>
-
-#ifndef ZUtilsX_ZUXProperty_h
-#define ZUtilsX_ZUXProperty_h
 
 typedef NS_ENUM(NSUInteger, ZUXPropertyMemoryManagementPolicy) {
     ZUXPropertyMemoryManagementPolicyAssign = 0,

@@ -6,10 +6,10 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #ifndef ZUtilsX_ZUXDirectory_h
 #define ZUtilsX_ZUXDirectory_h
+
+#import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, ZUXDirectoryType) {
     ZUXDocument     = 0,

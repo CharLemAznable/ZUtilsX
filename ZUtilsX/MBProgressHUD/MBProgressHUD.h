@@ -26,12 +26,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#ifndef ZUtilsX_MBProgressHUD_h
+#define ZUtilsX_MBProgressHUD_h
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <CoreGraphics/CoreGraphics.h>
-
-#ifndef ZUtilsX_MBProgressHUD_h
-#define ZUtilsX_MBProgressHUD_h
 
 @protocol MBProgressHUDDelegate;
 

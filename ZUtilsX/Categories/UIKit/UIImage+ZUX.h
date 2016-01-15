@@ -6,12 +6,12 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
+#ifndef ZUtilsX_UIImage_ZUX_h
+#define ZUtilsX_UIImage_ZUX_h
+
 #import <UIKit/UIKit.h>
 #import "ZUXCategory.h"
 #import "ZUXDirectory.h"
-
-#ifndef ZUtilsX_UIImage_ZUX_h
-#define ZUtilsX_UIImage_ZUX_h
 
 @category_interface(UIImage, ZUX)
 

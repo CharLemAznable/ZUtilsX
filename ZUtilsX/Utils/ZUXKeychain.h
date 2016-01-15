@@ -6,10 +6,10 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #ifndef ZUtilsX_ZUXKeychain_h
 #define ZUtilsX_ZUXKeychain_h
+
+#import <Foundation/Foundation.h>
 
 @interface ZUXKeychain : NSObject
 

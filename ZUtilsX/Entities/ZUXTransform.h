@@ -6,12 +6,12 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
+#ifndef ZUtilsX_ZUXTransform_h
+#define ZUtilsX_ZUXTransform_h
+
 #import <UIKit/UIKit.h>
 #import "zobjc.h"
 #import "zarc.h"
-
-#ifndef ZUtilsX_ZUXTransform_h
-#define ZUtilsX_ZUXTransform_h
 
 @interface ZUXTransform : NSObject
 

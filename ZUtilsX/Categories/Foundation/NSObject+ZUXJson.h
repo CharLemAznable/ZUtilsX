@@ -6,12 +6,12 @@
 //  Copyright © 2015年 org.cuc.n3. All rights reserved.
 //
 
+#ifndef ZUtilsX_NSObject_ZUXJson_h
+#define ZUtilsX_NSObject_ZUXJson_h
+
 #import <Foundation/Foundation.h>
 #import "ZUXCategory.h"
 #import "zobjc.h"
-
-#ifndef ZUtilsX_NSObject_ZUXJson_h
-#define ZUtilsX_NSObject_ZUXJson_h
 
 #if NS_BLOCKS_AVAILABLE
 
