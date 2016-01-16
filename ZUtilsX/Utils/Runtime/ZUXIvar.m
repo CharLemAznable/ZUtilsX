@@ -36,6 +36,14 @@
     return ZUX_AUTORELEASE([[self alloc] initClassIvarWithName:name inClass:cls]);
 }
 
++ (ZUXIvar *)instanceIvarWithName:(NSString *)name inClassNamed:(NSString *)className {
+    return ZUX_AUTORELEASE([[self alloc] initInstanceIvarWithName:name inClassNamed:className]);
+}
+
++ (ZUXIvar *)classIvarWithName:(NSString *)name inClassNamed:(NSString *)className {
+    return ZUX_AUTORELEASE([[self alloc] initClassIvarWithName:name inClassNamed:className]);
+}
+
 + (ZUXIvar *)ivarWithName:(NSString *)name typeEncoding:(NSString *)typeEncoding {
     return ZUX_AUTORELEASE([[self alloc] initWithName:name typeEncoding:typeEncoding]);
 }
@@ -57,6 +65,16 @@
 - (ZUX_INSTANCETYPE)initClassIvarWithName:(NSString *)name inClass:(Class)cls {
     ZUX_RELEASE(self);
     return [[ZUXObjCIvarInternal alloc] initClassIvarWithName:name inClass:cls];
+}
+
+- (ZUX_INSTANCETYPE)initInstanceIvarWithName:(NSString *)name inClassNamed:(NSString *)className {
+    ZUX_RELEASE(self);
+    return [[ZUXObjCIvarInternal alloc] initInstanceIvarWithName:name inClassNamed:className];
+}
+
+- (ZUX_INSTANCETYPE)initClassIvarWithName:(NSString *)name inClassNamed:(NSString *)className {
+    ZUX_RELEASE(self);
+    return [[ZUXObjCIvarInternal alloc] initClassIvarWithName:name inClassNamed:className];
 }
 
 - (ZUX_INSTANCETYPE)initWithName:(NSString *)name typeEncoding:(NSString *)typeEncoding {
@@ -114,6 +132,14 @@
 
 - (ZUX_INSTANCETYPE)initClassIvarWithName:(NSString *)name inClass:(Class)cls {
     return [self initWithObjCIvar:class_getClassVariable(cls, name.UTF8String)];
+}
+
+- (ZUX_INSTANCETYPE)initInstanceIvarWithName:(NSString *)name inClassNamed:(NSString *)className {
+    return [self initWithObjCIvar:class_getInstanceVariable(objc_getClass(className.UTF8String), name.UTF8String)];
+}
+
+- (ZUX_INSTANCETYPE)initClassIvarWithName:(NSString *)name inClassNamed:(NSString *)className {
+    return [self initWithObjCIvar:class_getClassVariable(objc_getClass(className.UTF8String), name.UTF8String)];
 }
 
 - (NSString *)name {

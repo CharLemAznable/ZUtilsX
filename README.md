@@ -1082,12 +1082,16 @@
         +ivarWithObjCIvar:
         +instanceIvarWithName:inClass:
         +classIvarWithName:inClass:
+        +instanceIvarWithName:inClassNamed:
+        +classIvarWithName:inClassNamed:
         +ivarWithName:typeEncoding:
         +ivarWithName:encode:
 
         -initWithObjCIvar:
         -initInstanceIvarWithName:inClass:
         -initClassIvarWithName:inClass:
+        -initInstanceIvarWithName:inClassNamed:
+        -initClassIvarWithName:inClassNamed:
         -initWithName:typeEncoding:
 
         -name
@@ -1101,12 +1105,15 @@
 
         +propertyWithObjCProperty:
         +propertyWithName:inClass:
+        +propertyWithName:inClassNamed:
         +propertyWithName:attributes:
 
         -initWithObjCProperty:
         -initWithName:inClass:
+        -initWithName:inClassNamed:
         -initWithName:attributes:
 
+        -property
         -attributes
         -addToClass:
 
@@ -1135,11 +1142,15 @@
         +methodWithObjCMethod:
         +instanceMethodWithName:inClass:
         +classMethodWithName:inClass:
+        +instanceMethodWithName:inClassNamed:
+        +classMethodWithName:inClassNamed:
         +methodWithSelector:implementation:signature:
 
         -initWithObjCMethod:
         -initInstanceMethodWithName:inClass:
         -initClassMethodWithName:inClass:
+        -initInstanceMethodWithName:inClassNamed:
+        -initClassMethodWithName:inClassNamed:
         -initWithSelector:implementation:signature:
 
         -selector

@@ -37,6 +37,14 @@
     return ZUX_AUTORELEASE([[self alloc] initClassMethodWithName:name inClass:cls]);
 }
 
++ (ZUXMethod *)instanceMethodWithName:(NSString *)name inClassNamed:(NSString *)className {
+    return ZUX_AUTORELEASE([[self alloc] initInstanceMethodWithName:name inClassNamed:className]);
+}
+
++ (ZUXMethod *)classMethodWithName:(NSString *)name inClassNamed:(NSString *)className {
+    return ZUX_AUTORELEASE([[self alloc] initClassMethodWithName:name inClassNamed:className]);
+}
+
 + (ZUXMethod *)methodWithSelector:(SEL)sel implementation:(IMP)imp signature:(NSString *)signature {
     return ZUX_AUTORELEASE([[self alloc] initWithSelector:sel implementation:imp signature:signature]);
 }
@@ -54,6 +62,16 @@
 - (ZUX_INSTANCETYPE)initClassMethodWithName:(NSString *)name inClass:(Class)cls {
     ZUX_RELEASE(self);
     return [[ZUXObjCMethodInternal alloc] initClassMethodWithName:name inClass:cls];
+}
+
+- (ZUX_INSTANCETYPE)initInstanceMethodWithName:(NSString *)name inClassNamed:(NSString *)className {
+    ZUX_RELEASE(self);
+    return [[ZUXObjCMethodInternal alloc] initInstanceMethodWithName:name inClassNamed:className];
+}
+
+- (ZUX_INSTANCETYPE)initClassMethodWithName:(NSString *)name inClassNamed:(NSString *)className {
+    ZUX_RELEASE(self);
+    return [[ZUXObjCMethodInternal alloc] initClassMethodWithName:name inClassNamed:className];
 }
 
 - (ZUX_INSTANCETYPE)initWithSelector:(SEL)sel implementation:(IMP)imp signature:(NSString *)signature {
@@ -115,6 +133,16 @@
 
 - (ZUX_INSTANCETYPE)initClassMethodWithName:(NSString *)name inClass:(Class)cls {
     return [self initWithObjCMethod:class_getClassMethod(cls, NSSelectorFromString(name))];
+}
+
+- (ZUX_INSTANCETYPE)initInstanceMethodWithName:(NSString *)name inClassNamed:(NSString *)className {
+    return [self initWithObjCMethod:
+            class_getInstanceMethod(objc_getClass(className.UTF8String), NSSelectorFromString(name))];
+}
+
+- (ZUX_INSTANCETYPE)initClassMethodWithName:(NSString *)name inClassNamed:(NSString *)className {
+    return [self initWithObjCMethod:
+            class_getClassMethod(objc_getClass(className.UTF8String), NSSelectorFromString(name))];
 }
 
 - (SEL)selector {

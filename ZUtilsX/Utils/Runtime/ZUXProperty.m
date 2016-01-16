@@ -44,6 +44,10 @@ NSString *const ZUXPropertyTypeEncodingAttribute                    = @"T";
     return ZUX_AUTORELEASE([[self alloc] initWithName:name inClass:cls]);
 }
 
++ (ZUXProperty *)propertyWithName:(NSString *)name inClassNamed:(NSString *)className {
+    return ZUX_AUTORELEASE([[self alloc] initWithName:name inClassNamed:className]);
+}
+
 + (ZUXProperty *)propertyWithName:(NSString *)name attributes:(NSDictionary *)attributes {
     return ZUX_AUTORELEASE([[self alloc] initWithName:name attributes:attributes]);
 }
@@ -56,6 +60,11 @@ NSString *const ZUXPropertyTypeEncodingAttribute                    = @"T";
 - (ZUX_INSTANCETYPE)initWithName:(NSString *)name inClass:(Class)cls {
     ZUX_RELEASE(self);
     return [[ZUXPropertyInternal alloc] initWithName:name inClass:cls];
+}
+
+- (ZUX_INSTANCETYPE)initWithName:(NSString *)name inClassNamed:(NSString *)className {
+    ZUX_RELEASE(self);
+    return [[ZUXPropertyInternal alloc] initWithName:name inClassNamed:className];
 }
 
 - (ZUX_INSTANCETYPE)initWithName:(NSString *)name attributes:(NSDictionary *)attributes {
@@ -80,6 +89,11 @@ NSString *const ZUXPropertyTypeEncodingAttribute                    = @"T";
 
 - (NSUInteger)hash {
     return [[self name] hash] ^ [[self typeEncoding] hash];
+}
+
+- (objc_property_t)property {
+    [self doesNotRecognizeSelector:_cmd];
+    return NULL;
 }
 
 - (NSDictionary *)attributes {
@@ -190,6 +204,10 @@ NSString *const ZUXPropertyTypeEncodingAttribute                    = @"T";
     return [self initWithObjCProperty:class_getProperty(cls, name.UTF8String)];
 }
 
+- (ZUX_INSTANCETYPE)initWithName:(NSString *)name inClassNamed:(NSString *)className {
+    return [self initWithObjCProperty:class_getProperty(objc_getClass(className.UTF8String), name.UTF8String)];
+}
+
 - (ZUX_INSTANCETYPE)initWithName:(NSString *)name attributes:(NSDictionary *)attributes {
     if (ZUX_EXPECT_T(self = [self init])) {
         _name = [name copy];
@@ -202,6 +220,10 @@ NSString *const ZUXPropertyTypeEncodingAttribute                    = @"T";
     ZUX_RELEASE(_name);
     ZUX_RELEASE(_attrs);
     ZUX_SUPER_DEALLOC;
+}
+
+- (objc_property_t)property {
+    return _property;
 }
 
 - (NSDictionary *)attributes {

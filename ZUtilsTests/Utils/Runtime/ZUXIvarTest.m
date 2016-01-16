@@ -32,27 +32,27 @@
 @implementation ZUXIvarTest
 
 - (void)testZUXIvar {
-    ZUXIvar *ivar = [ZUXIvar instanceIvarWithName:@"name" inClass:[IvarTestBean class]];
+    ZUXIvar *ivar = [ZUXIvar instanceIvarWithName:@"name" inClassNamed:@"IvarTestBean"];
     XCTAssertEqualObjects([ivar name], @"name");
     XCTAssertEqualObjects([ivar typeName], @"NSString");
     XCTAssertEqualObjects([ivar typeEncoding], @"@\"NSString\"");
     
-    ivar = [ZUXIvar instanceIvarWithName:@"age" inClass:[IvarTestBean class]];
+    ivar = [ZUXIvar instanceIvarWithName:@"age" inClassNamed:@"IvarTestBean"];
     XCTAssertEqualObjects([ivar name], @"age");
     XCTAssertEqualObjects([ivar typeName], @"i");
     XCTAssertEqualObjects([ivar typeEncoding], @"i");
     
-    ivar = [ZUXIvar instanceIvarWithName:@"detail" inClass:[IvarTestBean class]];
+    ivar = [ZUXIvar instanceIvarWithName:@"detail" inClassNamed:@"IvarTestBean"];
     XCTAssertEqualObjects([ivar name], @"detail");
     XCTAssertEqualObjects([ivar typeName], @"IvarDetailBean");
     XCTAssertEqualObjects([ivar typeEncoding], @"@\"IvarDetailBean\"");
     
-    ivar = [ZUXIvar instanceIvarWithName:@"point" inClass:[IvarTestBean class]];
+    ivar = [ZUXIvar instanceIvarWithName:@"point" inClassNamed:@"IvarTestBean"];
     XCTAssertEqualObjects([ivar name], @"point");
     XCTAssertEqualObjects([ivar typeName], @"{CGPoint=\"x\"d\"y\"d}");
     XCTAssertEqualObjects([ivar typeEncoding], @"{CGPoint=\"x\"d\"y\"d}");
     
-    ivar = [ZUXIvar instanceIvarWithName:@"others" inClass:[IvarTestBean class]];
+    ivar = [ZUXIvar instanceIvarWithName:@"others" inClassNamed:@"IvarTestBean"];
     XCTAssertEqualObjects([ivar name], @"others");
     XCTAssertEqualObjects([ivar typeName], @"");
     XCTAssertEqualObjects([ivar typeEncoding], @"@");

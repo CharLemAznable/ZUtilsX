@@ -18,11 +18,15 @@
 + (ZUXMethod *)methodWithObjCMethod:(Method)method;
 + (ZUXMethod *)instanceMethodWithName:(NSString *)name inClass:(Class)cls;
 + (ZUXMethod *)classMethodWithName:(NSString *)name inClass:(Class)cls;
++ (ZUXMethod *)instanceMethodWithName:(NSString *)name inClassNamed:(NSString *)className;
++ (ZUXMethod *)classMethodWithName:(NSString *)name inClassNamed:(NSString *)className;
 + (ZUXMethod *)methodWithSelector:(SEL)sel implementation:(IMP)imp signature:(NSString *)signature;
 
 - (ZUX_INSTANCETYPE)initWithObjCMethod:(Method)method;
 - (ZUX_INSTANCETYPE)initInstanceMethodWithName:(NSString *)name inClass:(Class)cls;
 - (ZUX_INSTANCETYPE)initClassMethodWithName:(NSString *)name inClass:(Class)cls;
+- (ZUX_INSTANCETYPE)initInstanceMethodWithName:(NSString *)name inClassNamed:(NSString *)className;
+- (ZUX_INSTANCETYPE)initClassMethodWithName:(NSString *)name inClassNamed:(NSString *)className;
 - (ZUX_INSTANCETYPE)initWithSelector:(SEL)sel implementation:(IMP)imp signature:(NSString *)signature;
 
 - (SEL)selector;

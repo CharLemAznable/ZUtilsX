@@ -29,8 +29,8 @@
 @implementation ZUXMethodTest
 
 - (void)testZUXMethod {
-    ZUXMethod *method1 = [ZUXMethod classMethodWithName:@"classMethod1" inClass:[MethodTestBean class]];
-    ZUXMethod *method2 = [ZUXMethod classMethodWithName:@"classMethod2" inClass:[MethodTestBean class]];
+    ZUXMethod *method1 = [ZUXMethod classMethodWithName:@"classMethod1" inClassNamed:@"MethodTestBean"];
+    ZUXMethod *method2 = [ZUXMethod classMethodWithName:@"classMethod2" inClassNamed:@"MethodTestBean"];
     XCTAssertEqualObjects([method1 selectorName], @"classMethod1");
     XCTAssertEqualObjects([method2 selectorName], @"classMethod2");
     IMP imp1 = [method1 implementation];
@@ -41,8 +41,8 @@
     XCTAssertEqualObjects([MethodTestBean classMethod2], @"classMethod1");
     
     
-    method1 = [ZUXMethod instanceMethodWithName:@"instanceMethod1:" inClass:[MethodTestBean class]];
-    method2 = [ZUXMethod instanceMethodWithName:@"instanceMethod2:" inClass:[MethodTestBean class]];
+    method1 = [ZUXMethod instanceMethodWithName:@"instanceMethod1:" inClassNamed:@"MethodTestBean"];
+    method2 = [ZUXMethod instanceMethodWithName:@"instanceMethod2:" inClassNamed:@"MethodTestBean"];
     XCTAssertEqualObjects([method1 selectorName], @"instanceMethod1:");
     XCTAssertEqualObjects([method2 selectorName], @"instanceMethod2:");
     imp1 = [method1 implementation];

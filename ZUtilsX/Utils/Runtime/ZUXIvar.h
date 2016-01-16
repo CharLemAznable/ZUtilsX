@@ -18,12 +18,16 @@
 + (ZUXIvar *)ivarWithObjCIvar:(Ivar)ivar;
 + (ZUXIvar *)instanceIvarWithName:(NSString *)name inClass:(Class)cls;
 + (ZUXIvar *)classIvarWithName:(NSString *)name inClass:(Class)cls;
++ (ZUXIvar *)instanceIvarWithName:(NSString *)name inClassNamed:(NSString *)className;
++ (ZUXIvar *)classIvarWithName:(NSString *)name inClassNamed:(NSString *)className;
 + (ZUXIvar *)ivarWithName:(NSString *)name typeEncoding:(NSString *)typeEncoding;
 + (ZUXIvar *)ivarWithName:(NSString *)name encode:(const char *)encodeStr;
 
 - (ZUX_INSTANCETYPE)initWithObjCIvar:(Ivar)ivar;
 - (ZUX_INSTANCETYPE)initInstanceIvarWithName:(NSString *)name inClass:(Class)cls;
 - (ZUX_INSTANCETYPE)initClassIvarWithName:(NSString *)name inClass:(Class)cls;
+- (ZUX_INSTANCETYPE)initInstanceIvarWithName:(NSString *)name inClassNamed:(NSString *)className;
+- (ZUX_INSTANCETYPE)initClassIvarWithName:(NSString *)name inClassNamed:(NSString *)className;
 - (ZUX_INSTANCETYPE)initWithName:(NSString *)name typeEncoding:(NSString *)typeEncoding;
 
 - (NSString *)name;

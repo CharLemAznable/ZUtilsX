@@ -35,12 +35,15 @@ extern NSString *const ZUXPropertyTypeEncodingAttribute;
 
 + (ZUXProperty *)propertyWithObjCProperty:(objc_property_t)property;
 + (ZUXProperty *)propertyWithName:(NSString *)name inClass:(Class)cls;
++ (ZUXProperty *)propertyWithName:(NSString *)name inClassNamed:(NSString *)className;
 + (ZUXProperty *)propertyWithName:(NSString *)name attributes:(NSDictionary *)attributes;
 
 - (ZUX_INSTANCETYPE)initWithObjCProperty:(objc_property_t)property;
 - (ZUX_INSTANCETYPE)initWithName:(NSString *)name inClass:(Class)cls;
+- (ZUX_INSTANCETYPE)initWithName:(NSString *)name inClassNamed:(NSString *)className;
 - (ZUX_INSTANCETYPE)initWithName:(NSString *)name attributes:(NSDictionary *)attributes;
 
+- (objc_property_t)property;
 - (NSDictionary *)attributes;
 - (BOOL)addToClass:(Class)classToAddTo;
 

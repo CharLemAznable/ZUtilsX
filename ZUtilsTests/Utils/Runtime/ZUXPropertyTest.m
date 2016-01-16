@@ -31,7 +31,7 @@
 @implementation ZUXPropertyTest
 
 - (void)testZUXProperty {
-    ZUXProperty *property = [ZUXProperty propertyWithName:@"name" inClass:[PropertyTestBean class]];
+    ZUXProperty *property = [ZUXProperty propertyWithName:@"name" inClassNamed:@"PropertyTestBean"];
     XCTAssertFalse([property isReadOnly]);
     XCTAssertTrue([property isNonAtomic]);
     XCTAssertFalse([property isWeakReference]);
@@ -45,7 +45,7 @@
     XCTAssertEqualObjects([property typeEncoding], @"@\"NSString\"");
     XCTAssertEqualObjects([property objectClass], [NSString class]);
     
-    property = [ZUXProperty propertyWithName:@"age" inClass:[PropertyTestBean class]];
+    property = [ZUXProperty propertyWithName:@"age" inClassNamed:@"PropertyTestBean"];
     XCTAssertFalse([property isReadOnly]);
     XCTAssertTrue([property isNonAtomic]);
     XCTAssertFalse([property isWeakReference]);
@@ -59,7 +59,7 @@
     XCTAssertEqualObjects([property typeEncoding], @"i");
     XCTAssertNil([property objectClass]);
     
-    property = [ZUXProperty propertyWithName:@"detail" inClass:[PropertyTestBean class]];
+    property = [ZUXProperty propertyWithName:@"detail" inClassNamed:@"PropertyTestBean"];
     XCTAssertFalse([property isReadOnly]);
     XCTAssertTrue([property isNonAtomic]);
     XCTAssertFalse([property isWeakReference]);
@@ -73,7 +73,7 @@
     XCTAssertEqualObjects([property typeEncoding], @"@\"PropertyDetailBean\"");
     XCTAssertEqualObjects([property objectClass], [PropertyDetailBean class]);
     
-    property = [ZUXProperty propertyWithName:@"point" inClass:[PropertyTestBean class]];
+    property = [ZUXProperty propertyWithName:@"point" inClassNamed:@"PropertyTestBean"];
     XCTAssertFalse([property isReadOnly]);
     XCTAssertTrue([property isNonAtomic]);
     XCTAssertFalse([property isWeakReference]);
@@ -87,7 +87,7 @@
     XCTAssertEqualObjects([property typeEncoding], @"{CGPoint=dd}");
     XCTAssertEqualObjects([property objectClass], [NSValue class]);
     
-    property = [ZUXProperty propertyWithName:@"others" inClass:[PropertyTestBean class]];
+    property = [ZUXProperty propertyWithName:@"others" inClassNamed:@"PropertyTestBean"];
     XCTAssertFalse([property isReadOnly]);
     XCTAssertTrue([property isNonAtomic]);
     XCTAssertFalse([property isWeakReference]);
