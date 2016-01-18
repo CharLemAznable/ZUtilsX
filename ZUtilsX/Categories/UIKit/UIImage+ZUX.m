@@ -142,7 +142,7 @@
 
 #pragma mark - inline function -
 
-ZUX_STATIC_INLINE CGGradientRef CreateGradientWithColorsAndLocations(NSArray *colors, NSArray *locations) {
+ZUX_STATIC CGGradientRef CreateGradientWithColorsAndLocations(NSArray *colors, NSArray *locations) {
     NSUInteger colorsCount = [colors count];
     NSUInteger locationsCount = [locations count];
     

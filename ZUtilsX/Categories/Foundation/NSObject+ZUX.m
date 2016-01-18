@@ -36,7 +36,7 @@
     swizzleInstanceMethod(object_getClass(self), oriSelector, newSelector, clazz);
 }
 
-ZUX_STATIC_INLINE void swizzleInstanceMethod(Class swiClass, SEL oriSelector, SEL newSelector, Class impClass) {
+ZUX_STATIC void swizzleInstanceMethod(Class swiClass, SEL oriSelector, SEL newSelector, Class impClass) {
     Method oriMethod = class_getInstanceMethod(impClass, oriSelector);
     Method newMethod = class_getInstanceMethod(impClass, newSelector);
     class_addMethod(swiClass, oriSelector, method_getImplementation(oriMethod),

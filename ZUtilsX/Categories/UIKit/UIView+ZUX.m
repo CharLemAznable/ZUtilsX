@@ -412,7 +412,7 @@ ZUX_STATIC_INLINE void ZUXCGAffineTransformTranslate(CGAffineTransform *t, CGVec
 ZUX_STATIC_INLINE void ZUXCGAffineTransformScale(CGAffineTransform *t, CGFloat scale)
 { *t = CGAffineTransformScale(*t, scale, scale); }
 
-ZUX_STATIC_INLINE CGVector ZUXAnimateTranslateVector(UIView *view, ZUXAnimation animation) {
+ZUX_STATIC CGVector ZUXAnimateTranslateVector(UIView *view, ZUXAnimation animation) {
     CGSize relativeSize = view.frame.size;
     if (hasZUXAnimateType(animation, ZUXAnimateByWindow))
         relativeSize = [UIScreen mainScreen].bounds.size;

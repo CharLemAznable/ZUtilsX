@@ -160,7 +160,7 @@ ZUX_STATIC_INLINE CTTextAlignment CTTextAlignmentFromZUXLinesSpacingLabel(ZUXLab
     else return zkCTTextAlignmentNatural;
 }
 
-ZUX_STATIC_INLINE NSDictionary *NSAttributedStringAttributesFromZUXLinesSpacingLabel(ZUXLabel *label) {
+ZUX_STATIC NSDictionary *NSAttributedStringAttributesFromZUXLinesSpacingLabel(ZUXLabel *label) {
     NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionary];
     
     if ([NSMutableParagraphStyle class]) {

@@ -145,7 +145,7 @@
 
 #pragma mark - implementation functions -
 
-ZUX_STATIC_INLINE NSDictionary *buildColorDictionary(NSDictionary *srcDictionary) {
+ZUX_STATIC NSDictionary *buildColorDictionary(NSDictionary *srcDictionary) {
     if (ZUX_EXPECT_F(!srcDictionary)) return nil;
     NSMutableDictionary *dstDictionary = ZUX_AUTORELEASE([[NSMutableDictionary alloc] init]);
     [srcDictionary enumerateKeysAndObjectsUsingBlock:

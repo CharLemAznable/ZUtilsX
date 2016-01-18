@@ -99,7 +99,7 @@
 
 #pragma mark - transform implementation functions -
 
-ZUX_STATIC_INLINE void constraintOriginAndSize(UIView *view, CGFloat viewSize,
+ZUX_STATIC void constraintOriginAndSize(UIView *view, CGFloat viewSize,
                             id marginConstraint1, id marginConstraint2,
                             id sizeConstraint, id centerConstraint,
                             CGFloat *resultOrigin, CGFloat *resultSize) {
@@ -126,7 +126,7 @@ ZUX_STATIC_INLINE void constraintOriginAndSize(UIView *view, CGFloat viewSize,
     *resultOrigin = center - *resultSize / 2;
 }
 
-ZUX_STATIC_INLINE CGFloat constraintValue(UIView *view, id constraint) {
+ZUX_STATIC CGFloat constraintValue(UIView *view, id constraint) {
     if ([constraint isKindOfClass:[NSNumber class]]) {
         return [(NSNumber *)constraint cgfloatValue];
     } else if ([constraint isKindOfClass:[ZUXConstraint class]]) {
