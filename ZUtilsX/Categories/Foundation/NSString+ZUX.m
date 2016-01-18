@@ -35,6 +35,15 @@
     return [str isEmpty] ? nil : str;
 }
 
+#pragma mark - Case Methods -
+
+- (NSString *)capitalized {
+    if (self.length <= 1) return [self capitalizedString];
+    return [NSString stringWithFormat:@"%@%@",
+            [[self substringToIndex:1] uppercaseString],
+            [self substringFromIndex:1]];
+}
+
 #pragma mark - Compare Methods -
 
 - (BOOL)isCaseInsensitiveEqual:(id)object {

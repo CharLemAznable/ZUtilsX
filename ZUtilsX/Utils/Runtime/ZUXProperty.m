@@ -294,7 +294,7 @@ NSString *const ZUXPropertyTypeEncodingAttribute                    = @"T";
     dispatch_once(&once_setter, ^{
         if ([self isReadOnly]) return;
         _setter = sel_registerName(([self valueOfAttribute:ZUXPropertySetterAttribute] ?:
-                                    [NSString stringWithFormat:@"set%@:", [_name capitalizedString]]).UTF8String);
+                                    [NSString stringWithFormat:@"set%@:", [_name capitalized]]).UTF8String);
     });
     return _setter;
 }

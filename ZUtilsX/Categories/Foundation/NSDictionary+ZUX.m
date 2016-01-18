@@ -72,7 +72,7 @@
         [NSClassFromString(@"__NSDictionaryM")
          swizzleInstanceOriSelector:@selector(objectForKey:)
          withNewSelector:@selector(zux_objectForKey:)];
-        [NSClassFromString(@"__NSDictionaryI")
+        [NSClassFromString(@"__NSDictionaryM")
          swizzleInstanceOriSelector:@selector(objectForKeyedSubscript:)
          withNewSelector:@selector(zux_objectForKeyedSubscript:)];
         

@@ -21,6 +21,8 @@
 - (NSString *)trim;
 - (NSString *)trimToNil;
 
+- (NSString *)capitalized;
+
 - (BOOL)isCaseInsensitiveEqual:(id)object;
 - (BOOL)isCaseInsensitiveEqualToString:(NSString *)aString;
 

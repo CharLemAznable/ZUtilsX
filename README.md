@@ -205,6 +205,9 @@
         -trim
         -trimToNil
 
+        // 首字母大写, 其它字母不变. (-capitalizedString方法有此bug)
+        -capitalized
+
         //  判断字符串相等(忽略大小写).
         -isCaseInsensitiveEqual:
         -isCaseInsensitiveEqualToString:
