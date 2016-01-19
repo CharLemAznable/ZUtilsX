@@ -76,7 +76,7 @@ NSDictionary *userDataRef(NSDictionary *dataRef, NSString *userId) {
     return [dataRef objectForKey:userId];
 }
 
-NSDictionary *publicData(id instance, NSString *key) {
+NSDictionary *defaultData(id instance, NSString *key) {
     if (ZUX_EXPECT_F(![instance propertyForAssociateKey:key]))
         [instance setProperty:[NSMutableDictionary dictionaryWithDictionary:
                                [ShareUserDefaults objectForKey:key]]
@@ -84,7 +84,7 @@ NSDictionary *publicData(id instance, NSString *key) {
     return [instance propertyForAssociateKey:key];
 }
 
-NSDictionary *protectedData(id instance, NSString *key, NSString *domain) {
+NSDictionary *keychainData(id instance, NSString *key, NSString *domain) {
     if (ZUX_EXPECT_F(![instance propertyForAssociateKey:key])) {
         NSError *error = nil;
         NSString *dataStr = [ZUXKeychain passwordForUsername:key andService:domain error:&error] ?: @"{}";
@@ -96,33 +96,33 @@ NSDictionary *protectedData(id instance, NSString *key, NSString *domain) {
     return [instance propertyForAssociateKey:key];
 }
 
-NSDictionary *privateData(id instance, NSString *key, NSString *domain) {
+NSDictionary *geisKeychainData(id instance, NSString *key, NSString *domain) {
     if (ZUX_EXPECT_F(![instance propertyForAssociateKey:key])) {
         if ([ZUXDataBox appFirstLaunch]) {
             [ZUXKeychain deletePasswordForUsername:key andService:domain error:NULL];
             [instance setProperty:[NSMutableDictionary dictionary] forAssociateKey:key];
         }
     }
-    return protectedData(instance, key, domain);
+    return keychainData(instance, key, domain);
 }
 
-void publicDataSynchronize(id instance, NSString *key) {
-    [ShareUserDefaults setObject:publicData(instance, key) forKey:key];
+void defaultDataSynchronize(id instance, NSString *key) {
+    [ShareUserDefaults setObject:defaultData(instance, key) forKey:key];
     [ShareUserDefaults synchronize];
 }
 
-void protectedDataSynchronize(id instance, NSString *key, NSString *domain) {
-    NSString *dataStr = [ZUXJson jsonStringFromObject:protectedData(instance, key, domain)];
+void keychainDataSynchronize(id instance, NSString *key, NSString *domain) {
+    NSString *dataStr = [ZUXJson jsonStringFromObject:keychainData(instance, key, domain)];
     if (!dataStr) return;
     NSError *error = nil;
     [ZUXKeychain storePassword:dataStr forUsername:key andService:domain updateExisting:YES error:&error];
     if (error) ZLog(@"Keychain Synchronize Error: %@", error);
 }
 
-void privateDataSynchronize(id instance, NSString *key, NSString *domain) {
-    NSString *dataStr = [ZUXJson jsonStringFromObject:privateData(instance, key, domain)];
+void geisKeychainDataSynchronize(id instance, NSString *key, NSString *domain) {
+    NSString *dataStr = [ZUXJson jsonStringFromObject:geisKeychainData(instance, key, domain)];
     if (!dataStr) return;
     NSError *error = nil;
     [ZUXKeychain storePassword:dataStr forUsername:key andService:domain updateExisting:YES error:&error];
-    if (error) ZLog(@"Keychain Synchronize Error: %@", error);
+    if (error) ZLog(@"Geis Keychain Synchronize Error: %@", error);
 }

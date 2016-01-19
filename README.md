@@ -1249,3 +1249,92 @@
         +passwordForUsername:andService:error:
         +storePassword:forUsername:andService:updateExisting:error:
         +deletePasswordForUsername:andService:error:
+
+- ZUXDataBox
+
+    @interface ZUXDataBox
+
+        // 判断App运行历史信息
+        +appEverLaunched
+        +appFirstLaunch
+
+    @protocol ZUXDataBox
+
+        // 自定义用户数据存储在UserDefaults/Keychain中的键名
+        // default        : 数据存储在UserDefaults中, 随App卸载而清除
+        // keychain       : 数据存储在Keychain中, App卸载时仍保留
+        // geis_keychain  : 数据存储在Keychain中, 重装App后删除旧数据
+        // share          : 数据可被全局访问/修改
+        // users          : 数据读写与指定的关键字相关联
+
+        +defaultShareKey
+        +keychainShareKey
+        +keychainShareDomain
+        +geisKeychainShareKey
+        +geisKeychainShareDomain
+
+        +defaultUsersKey
+        +keychainUsersKey
+        +keychainUsersDomain
+        +geisKeychainUsersKey
+        +geisKeychainUsersDomain
+
+    DataBox工具宏
+
+        // 定义databox, 单例类, 遵循<ZUXDataBox>协议
+        @databox_interface(className, superClassName)
+        // 数据同步方法
+        -synchronize
+
+        // 实现databox
+        @databox_implementation(className)
+
+        // 合成全局存储属性
+        @default_share(className, property)
+        @keychain_share(className, property)
+        @geis_keychain_share(className, property)
+
+        // 合成关联关键字存储属性, userIdProperty指定关联的databox属性的关键字
+        @default_users(className, property, userIdProperty)
+        @keychain_users(className, property, userIdProperty)
+        @geis_keychain_users(className, property, userIdProperty)
+
+        // databox定义示例
+        @databox_interface(UserDefaults, NSObject)
+        @property (nonatomic, strong) NSString *userId;
+        @property (nonatomic, strong) NSString *name;
+        @property (nonatomic, strong) NSString *version;
+        @end
+
+        @databox_implementation(UserDefaults)
+        @default_share(UserDefaults, userId)
+        @keychain_users(UserDefaults, name, userId)
+        @geis_keychain_users(UserDefaults, version, userId)
+        @end
+
+        // databox调用示例
+        [UserDefaults shareUserDefaults].userId = @"111";
+        [UserDefaults shareUserDefaults].name = @"aaa";
+        [UserDefaults shareUserDefaults].version = @"0.0.1";
+        NSLog(@"%@", [UserDefaults shareUserDefaults].userId);  // output: 111
+        NSLog(@"%@", [UserDefaults shareUserDefaults].name);    // output: aaa
+        NSLog(@"%@", [UserDefaults shareUserDefaults].version); // output: 0.0.1
+        [[UserDefaults shareUserDefaults] synchronize];
+
+        [UserDefaults shareUserDefaults].userId = @"222";
+        [UserDefaults shareUserDefaults].name = @"bbb";
+        [UserDefaults shareUserDefaults].version = @"0.0.2";
+        NSLog(@"%@", [UserDefaults shareUserDefaults].userId);  // output: 222
+        NSLog(@"%@", [UserDefaults shareUserDefaults].name);    // output: bbb
+        NSLog(@"%@", [UserDefaults shareUserDefaults].version); // output: 0.0.2
+        [[UserDefaults shareUserDefaults] synchronize];
+
+        [UserDefaults shareUserDefaults].userId = @"111";
+        NSLog(@"%@", [UserDefaults shareUserDefaults].userId);  // output: 111
+        NSLog(@"%@", [UserDefaults shareUserDefaults].name);    // output: aaa
+        NSLog(@"%@", [UserDefaults shareUserDefaults].version); // output: 0.0.1
+
+        [UserDefaults shareUserDefaults].userId = @"222";
+        NSLog(@"%@", [UserDefaults shareUserDefaults].userId);  // output: 222
+        NSLog(@"%@", [UserDefaults shareUserDefaults].name);    // output: bbb
+        NSLog(@"%@", [UserDefaults shareUserDefaults].version); // output: 0.0.2
