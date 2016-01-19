@@ -171,8 +171,7 @@ synthesize_constructor(className, property) {                                   
 
 #define synthesize_constructor(className, property)                                             \
 dynamic property;                                                                               \
-__attribute__((constructor))                                                                    \
-static void synthesize_ZUX_DATABOX_##className##_##property() // synthesize_constructor
+ZUX_CONSTRUCTOR void synthesize_ZUX_DATABOX_##className##_##property() // synthesize_constructor
 
 #pragma mark - Implementation methods
 

@@ -12,8 +12,7 @@
 #import "zobjc.h"
 
 #define enable_category_constructor(className, categoryName)                    \
-__attribute__((constructor))                                                    \
-ZUX_STATIC void enable_ZUX_CATEGORY_##className##_##categoryName()              \
+ZUX_CONSTRUCTOR void enable_ZUX_CATEGORY_##className##_##categoryName()         \
 { [ZUX_CATEGORY_##className##_##categoryName declare]; }
 
 #define category_interface(className, categoryName)                             \
