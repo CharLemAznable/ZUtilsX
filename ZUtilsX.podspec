@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name          = "ZUtilsX"
-  s.version       = "0.1.0"
+  s.version       = "0.1.1"
   s.summary       = "Personal IOS Utils Code."
   s.description   = <<-DESC
                     工具代码集. 包含宏定义, 工具类, 向Foundation/UIKit添加的分类, 自定义工具视图, JSON工具类, MBProgressHUD工具类, Keychain工具类.
