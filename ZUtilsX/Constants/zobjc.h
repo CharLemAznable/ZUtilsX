@@ -15,6 +15,8 @@
 # define ZUX_EXTERN                     extern __attribute__((visibility ("default")))
 #endif
 
+#define ZUX_CONSTRUCTOR                 __attribute__((constructor)) static
+
 #define ZUX_STATIC                      static
 
 #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
