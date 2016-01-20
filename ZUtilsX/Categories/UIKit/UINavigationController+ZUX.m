@@ -51,7 +51,7 @@
 #pragma mark - Navigate callback implementation -
 
 - (void)zuxViewWillAppear:(BOOL)animated {
-    [[self class] swizzleZuxViewDidAppear:NO];
+    [[self class] swizzleZuxViewDidAppearSwizzled:NO];
     
     [self zuxViewWillAppearCallback];
     [self willNavigatePush:animated];
@@ -65,12 +65,12 @@
     
     [self setZuxViewWillAppearCallbackBlock:NULL];
     [self setZuxViewDidAppearCallbackBlock:NULL];
-    [[self class] swizzleZuxViewWillAppear:YES];
-    [[self class] swizzleZuxViewDidAppear:YES];
+    [[self class] swizzleZuxViewWillAppearSwizzled:YES];
+    [[self class] swizzleZuxViewDidAppearSwizzled:YES];
 }
 
 - (void)zuxViewWillDisappear:(BOOL)animated {
-    [[self class] swizzleZuxViewDidDisappear:NO];
+    [[self class] swizzleZuxViewDidDisappearSwizzled:NO];
     
     [self zuxViewWillDisappearCallback];
     [self willNavigatePop:animated];
@@ -84,8 +84,8 @@
     
     [self setZuxViewWillDisappearCallbackBlock:NULL];
     [self setZuxViewDidDisappearCallbackBlock:NULL];
-    [[self class] swizzleZuxViewWillDisappear:YES];
-    [[self class] swizzleZuxViewDidDisappear:YES];
+    [[self class] swizzleZuxViewWillDisappearSwizzled:YES];
+    [[self class] swizzleZuxViewDidDisappearSwizzled:YES];
 }
 
 #define ZUXCallbackBlockImplementation(blockKey)                                                            \
@@ -132,7 +132,7 @@ static NSString *const ZUXView##swizzleKey##SwizzledKey = @"zuxView" @#swizzleKe
 + (void)setZuxView##swizzleKey##Swizzled:(BOOL)swizzled {                                           \
     [self setProperty:@(swizzled) forAssociateKey:ZUXView##swizzleKey##SwizzledKey];                \
 }                                                                                                   \
-+ (void)swizzleZuxView##swizzleKey:(BOOL)swizzled {                                                 \
++ (void)swizzleZuxView##swizzleKey##Swizzled:(BOOL)swizzled {                                       \
     @synchronized(self) {                                                                           \
         if ([self zuxView##swizzleKey##Swizzled] == swizzled) {                                     \
             [self swizzleInstanceOriSelector:@selector(view##swizzleKey:)                           \
@@ -178,12 +178,12 @@ ZUXCallbackSwizzleImplementation(DidDisappear);
 }
 
 - (void)zuxPushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    [[viewController class] swizzleZuxViewWillAppear:NO];
+    [[viewController class] swizzleZuxViewWillAppearSwizzled:NO];
     [self zuxPushViewController:viewController animated:animated];
 }
 
 - (UIViewController *)zuxPopViewControllerAnimated:(BOOL)animated {
-    [[self.topViewController class] swizzleZuxViewWillDisappear:NO];
+    [[self.topViewController class] swizzleZuxViewWillDisappearSwizzled:NO];
     return [self zuxPopViewControllerAnimated:animated];
 }
 

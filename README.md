@@ -309,6 +309,14 @@
         // 字符串格式时间工具方法. (NSString)
         -dateWithDateFormat:
 
+        // 添加毫秒数据类型:
+        ZUXTimeIntervalMills
+
+        // 添加毫秒数据类型box/unbox方法. (NSNumber)
+        +numberWithMills:
+        -initWithMills:
+        -millsValue
+
 #####Category (UIKit)
 
 - UIDevice+ZUX
@@ -1300,6 +1308,7 @@
         @geis_keychain_users(className, property, userIdProperty)
 
         // databox定义示例
+        // 注: 字段类型要求为强引用
         @databox_interface(UserDefaults, NSObject)
         @property (nonatomic, strong) NSString *userId;
         @property (nonatomic, strong) NSString *name;
