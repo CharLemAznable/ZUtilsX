@@ -309,6 +309,14 @@
         // 字符串格式时间工具方法. (NSString)
         -dateWithDateFormat:
 
+        // 添加毫秒数据类型:
+        ZUXTimeIntervalMills
+
+        // 添加毫秒数据类型box/unbox方法. (NSNumber)
+        +numberWithMills:
+        -initWithMills:
+        -millsValue
+
 #####Category (UIKit)
 
 - UIDevice+ZUX

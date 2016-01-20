@@ -59,3 +59,19 @@ ZUXNSDateComponent_implement(ZUXCalendarUnitWeekday, weekday);
 }
 
 @end
+
+@category_implementation(NSNumber, ZUXDate)
+
++ (ZUX_INSTANCETYPE)numberWithMills:(ZUXTimeIntervalMills)value {
+    return ZUX_AUTORELEASE([[self alloc] initWithLongLong:value]);
+}
+
+- (ZUX_INSTANCETYPE)initWithMills:(ZUXTimeIntervalMills)value {
+    return [self initWithLongLong:value];
+}
+
+- (ZUXTimeIntervalMills)millsValue {
+    return [self longLongValue];
+}
+
+@end
