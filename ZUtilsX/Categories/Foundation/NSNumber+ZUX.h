@@ -20,6 +20,12 @@
 - (ZUX_INSTANCETYPE)initWithCGFloat:(CGFloat)value;
 - (CGFloat)cgfloatValue;
 
-@end
+@end // NSNumber (ZUX)
+
+@category_interface(NSString, ZUXNumber)
+
+- (CGFloat)cgfloatValue;
+
+@end // NSNumber (ZUX)
 
 #endif /* ZUtilsX_NSNumber_ZUX_h */

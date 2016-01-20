@@ -106,6 +106,9 @@
         -initWithCGFloat:
         -cgfloatValue
 
+        // 添加字符串数字化方法. (NSString)
+        -cgfloatValue
+
 * NSCoder+ZUX
 
         // 添加NSCoder与CGFloat兼容方法.
@@ -315,6 +318,9 @@
         // 添加毫秒数据类型box/unbox方法. (NSNumber)
         +numberWithMills:
         -initWithMills:
+        -millsValue
+
+        // 添加字符串数字化方法. (NSString)
         -millsValue
 
 #####Category (UIKit)
