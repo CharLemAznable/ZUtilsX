@@ -1300,6 +1300,7 @@
         @geis_keychain_users(className, property, userIdProperty)
 
         // databox定义示例
+        // 注: 字段类型要求为强引用
         @databox_interface(UserDefaults, NSObject)
         @property (nonatomic, strong) NSString *userId;
         @property (nonatomic, strong) NSString *name;

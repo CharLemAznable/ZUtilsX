@@ -56,7 +56,8 @@ void synthesizeZUXDataBoxProperty(NSString *className, NSString *propertyName,
     ZUXProperty *property = [ZUXProperty propertyWithName:propertyName inClass:cls];
     NSCAssert(property.property, @"Could not find property %@.%@", className, propertyName);
     NSCAssert(property.attributes.count != 0, @"Could not fetch property attributes for %@.%@", className, propertyName);
-    NSCAssert(!property.isWeakReference, @"Does not support weak-reference property %@.%@", className, propertyName);
+    NSCAssert(property.memoryManagementPolicy == ZUXPropertyMemoryManagementPolicyRetain,
+              @"Does not support un-strong-reference property %@.%@", className, propertyName);
     
     id getter = ^(id self) { return [dataRefBlock(self) objectForKey:propertyName]; };
     id setter = ^(id self, id value) { [(NSMutableDictionary *)dataRefBlock(self) setObject:value forKey:propertyName]; };
@@ -69,7 +70,7 @@ void synthesizeZUXDataBoxProperty(NSString *className, NSString *propertyName,
                       sel_getName(property.setter), className, propertyName);
 }
 
-NSDictionary *userDataRef(NSDictionary *dataRef, NSString *userId) {
+NSDictionary *userDataRef(NSDictionary *dataRef, id userId) {
     if (![[dataRef objectForKey:userId] isKindOfClass:NSClassFromString(@"__NSDictionaryM")])
         [(NSMutableDictionary *)dataRef setObject:[NSMutableDictionary dictionaryWithDictionary:
                                                    [dataRef objectForKey:userId]] forKey:userId];

@@ -177,7 +177,7 @@ ZUX_CONSTRUCTOR void synthesize_ZUX_DATABOX_##className##_##property() // synthe
 
 void synthesizeZUXDataBoxProperty(NSString *className, NSString *propertyName,
                                   NSDictionary *(^dataRefBlock)(id instance));
-NSDictionary *userDataRef(NSDictionary *dataRef, NSString *userId);
+NSDictionary *userDataRef(NSDictionary *dataRef, id userId);
 
 NSDictionary *defaultData(id instance, NSString *key);
 NSDictionary *keychainData(id instance, NSString *key, NSString *domain);
