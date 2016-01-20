@@ -38,3 +38,21 @@
 #endif // defined(__LP64__) && __LP64__
 
 @end
+
+@category_implementation(NSString, ZUXNumber)
+
+#if defined(__LP64__) && __LP64__
+
+- (CGFloat)cgfloatValue {
+    return [self doubleValue];
+}
+
+#else // defined(__LP64__) && __LP64__
+
+- (CGFloat)cgfloatValue {
+    return [self floatValue];
+}
+
+#endif // defined(__LP64__) && __LP64__
+
+@end

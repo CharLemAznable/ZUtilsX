@@ -51,4 +51,10 @@ typedef long long ZUXTimeIntervalMills;
 
 @end // NSNumber (ZUXDate)
 
+@category_interface(NSString, ZUXDate)
+
+- (ZUXTimeIntervalMills)millsValue;
+
+@end // NSString (ZUXDate)
+
 #endif /* ZUtilsX_NSDate_ZUX_h */

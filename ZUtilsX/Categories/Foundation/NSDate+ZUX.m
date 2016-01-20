@@ -75,3 +75,11 @@ ZUXNSDateComponent_implement(ZUXCalendarUnitWeekday, weekday);
 }
 
 @end
+
+@category_implementation(NSString, ZUXDate)
+
+- (ZUXTimeIntervalMills)millsValue {
+    return [self longLongValue];
+}
+
+@end
