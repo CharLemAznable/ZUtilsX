@@ -89,49 +89,35 @@ ZUX_CONSTRUCTOR void construct_ZUX_DATABOX_##className() {                      
 } // databox_implementation
 
 #define default_share(className, property)                                      \
-synthesize_constructor(className, property) {                                   \
-    synthesizeProperty(@#className, @#property, ^NSDictionary *(id instance) {  \
-        return defaultShareData(instance);                                      \
-    });                                                                         \
-} // default_share
+synthesize_constructor(className, property,                                     \
+defaultShareData(instance)) // default_share
 
 #define keychain_share(className, property)                                     \
-synthesize_constructor(className, property) {                                   \
-    synthesizeProperty(@#className, @#property, ^NSDictionary *(id instance) {  \
-        return keychainShareData(instance);                                     \
-    });                                                                         \
-} // keychain_share
+synthesize_constructor(className, property,                                     \
+keychainShareData(instance)) // keychain_share
 
 #define geis_keychain_share(className, property)                                \
-synthesize_constructor(className, property) {                                   \
-    synthesizeProperty(@#className, @#property, ^NSDictionary *(id instance) {  \
-        return geisKeychainShareData(instance);                                 \
-    });                                                                         \
-} // geis_keychain_share
+synthesize_constructor(className, property,                                     \
+geisKeychainShareData(instance)) // geis_keychain_share
 
 #define default_users(className, property, userIdProperty)                      \
-synthesize_constructor(className, property) {                                   \
-    synthesizeProperty(@#className, @#property, ^NSDictionary *(id instance) {  \
-        return defaultUsersData(instance, @#userIdProperty);                    \
-    });                                                                         \
-} // default_users
+synthesize_constructor(className, property,                                     \
+defaultUsersData(instance, @#userIdProperty)) // default_users
 
 #define keychain_users(className, property, userIdProperty)                     \
-synthesize_constructor(className, property) {                                   \
-    synthesizeProperty(@#className, @#property, ^NSDictionary *(id instance) {  \
-        return keychainUsersData(instance, @#userIdProperty);                   \
-    });                                                                         \
-} // keychain_users
+synthesize_constructor(className, property,                                     \
+keychainUsersData(instance, @#userIdProperty)) // keychain_users
 
 #define geis_keychain_users(className, property, userIdProperty)                \
-synthesize_constructor(className, property) {                                   \
-    synthesizeProperty(@#className, @#property, ^NSDictionary *(id instance) {  \
-        return geisKeychainUsersData(instance, @#userIdProperty);               \
-    });                                                                         \
-} // geis_keychain_users
+synthesize_constructor(className, property,                                     \
+geisKeychainUsersData(instance, @#userIdProperty)) // geis_keychain_users
 
-#define synthesize_constructor(className, property)                             \
+#define synthesize_constructor(className, property, dataRef)                    \
 dynamic property;                                                               \
-ZUX_CONSTRUCTOR void synthesize_ZUX_DATABOX_##className##_##property() // synthesize_constructor
+ZUX_CONSTRUCTOR void synthesize_ZUX_DATABOX_##className##_##property() {        \
+    synthesizeProperty(@#className, @#property, ^NSDictionary *(id instance) {  \
+        return dataRef;                                                         \
+    });                                                                         \
+} // synthesize_constructor
 
 #endif

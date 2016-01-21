@@ -17,14 +17,14 @@
 
 ZUX_STATIC NSString *const DataBoxDefaultShareKey = @"DataBoxDefaultShareKey";
 ZUX_STATIC NSString *const DataBoxKeychainShareKey = @"DataBoxKeychainShareKey";
-ZUX_STATIC NSString *const DataBoxKeychainShareDomain = @"DataBoxKeychainShareDomain";
+ZUX_STATIC NSString *const DataBoxKeychainShareDomainKey = @"DataBoxKeychainShareDomainKey";
 ZUX_STATIC NSString *const DataBoxGeisKeychainShareKey = @"DataBoxGeisKeychainShareKey";
-ZUX_STATIC NSString *const DataBoxGeisKeychainShareDomain = @"DataBoxGeisKeychainShareDomain";
+ZUX_STATIC NSString *const DataBoxGeisKeychainShareDomainKey = @"DataBoxGeisKeychainShareDomainKey";
 ZUX_STATIC NSString *const DataBoxDefaultUsersKey = @"DataBoxDefaultUsersKey";
 ZUX_STATIC NSString *const DataBoxKeychainUsersKey = @"DataBoxKeychainUsersKey";
-ZUX_STATIC NSString *const DataBoxKeychainUsersDomain = @"DataBoxKeychainUsersDomain";
+ZUX_STATIC NSString *const DataBoxKeychainUsersDomainKey = @"DataBoxKeychainUsersDomainKey";
 ZUX_STATIC NSString *const DataBoxGeisKeychainUsersKey = @"DataBoxGeisKeychainUsersKey";
-ZUX_STATIC NSString *const DataBoxGeisKeychainUsersDomain = @"DataBoxGeisKeychainUsersDomain";
+ZUX_STATIC NSString *const DataBoxGeisKeychainUsersDomainKey = @"DataBoxGeisKeychainUsersDomainKey";
 
 ZUX_STATIC void defaultDataSynchronize(id instance, NSString *key);
 ZUX_STATIC void keychainDataSynchronize(id instance, NSString *key, NSString *domain);
@@ -42,37 +42,20 @@ NSString *ZUXAppFirstLaunchKey = nil;
 void constructZUXDataBox(const char *className) {
     Class cls = objc_getClass(className);
     
-    [cls setProperty:[cls respondsToSelector:@selector(defaultShareKey)] ?
-     [cls defaultShareKey] : ClassKeyFormat(className, DefaultShare)
-     forAssociateKey:DataBoxDefaultShareKey];
-    [cls setProperty:[cls respondsToSelector:@selector(keychainShareKey)] ?
-     [cls keychainShareKey] : ClassKeyFormat(className, KeychainShare)
-     forAssociateKey:DataBoxKeychainShareKey];
-    [cls setProperty:[cls respondsToSelector:@selector(keychainShareDomain)] ?
-     [cls keychainShareDomain] : ClassKeyFormat(className, KeychainShareDomain)
-     forAssociateKey:DataBoxKeychainShareDomain];
-    [cls setProperty:[cls respondsToSelector:@selector(geisKeychainShareKey)] ?
-     [cls geisKeychainShareKey] : ClassKeyFormat(className, GeisKeychainShare)
-     forAssociateKey:DataBoxGeisKeychainShareKey];
-    [cls setProperty:[cls respondsToSelector:@selector(geisKeychainShareDomain)] ?
-     [cls geisKeychainShareDomain] : ClassKeyFormat(className, GeisKeychainShareDomain)
-     forAssociateKey:DataBoxGeisKeychainShareDomain];
-    
-    [cls setProperty:[cls respondsToSelector:@selector(defaultUsersKey)] ?
-     [cls defaultUsersKey] : ClassKeyFormat(className, DefaultUsers)
-     forAssociateKey:DataBoxDefaultUsersKey];
-    [cls setProperty:[cls respondsToSelector:@selector(keychainUsersKey)] ?
-     [cls keychainUsersKey] : ClassKeyFormat(className, KeychainUsers)
-     forAssociateKey:DataBoxKeychainUsersKey];
-    [cls setProperty:[cls respondsToSelector:@selector(keychainUsersDomain)] ?
-     [cls keychainUsersDomain] : ClassKeyFormat(className, KeychainUsersDomain)
-     forAssociateKey:DataBoxKeychainUsersDomain];
-    [cls setProperty:[cls respondsToSelector:@selector(geisKeychainUsersKey)] ?
-     [cls geisKeychainUsersKey] : ClassKeyFormat(className, GeisKeychainUsers)
-     forAssociateKey:DataBoxGeisKeychainUsersKey];
-    [cls setProperty:[cls respondsToSelector:@selector(geisKeychainUsersDomain)] ?
-     [cls geisKeychainUsersDomain] : ClassKeyFormat(className, GeisKeychainUsersDomain)
-     forAssociateKey:DataBoxGeisKeychainUsersDomain];
+#define setKeyProperty(sel, key)                            \
+[cls setProperty:[cls respondsToSelector:@selector(sel)] ?  \
+ [cls sel] : ClassKeyFormat(className, key)                 \
+ forAssociateKey:DataBox##key##Key]
+    setKeyProperty(defaultShareKey, DefaultShare);
+    setKeyProperty(keychainShareKey, KeychainShare);
+    setKeyProperty(keychainShareDomain, KeychainShareDomain);
+    setKeyProperty(geisKeychainShareKey, GeisKeychainShare);
+    setKeyProperty(geisKeychainShareDomain, GeisKeychainShareDomain);
+    setKeyProperty(defaultUsersKey, DefaultUsers);
+    setKeyProperty(keychainUsersKey, KeychainUsers);
+    setKeyProperty(keychainUsersDomain, KeychainUsersDomain);
+    setKeyProperty(geisKeychainUsersKey, GeisKeychainUsers);
+    setKeyProperty(geisKeychainUsersDomain, GeisKeychainUsersDomain);
 }
 
 void synchronizeAppLaunchData() {
@@ -91,62 +74,56 @@ void synchronizeAppLaunchData() {
     });
 }
 
+#define keyProperty(key) [[instance class] propertyForAssociateKey:DataBox##key##Key]
+
 void defaultShareDataSynchronize(id instance) {
-    defaultDataSynchronize(instance, [[instance class] propertyForAssociateKey:DataBoxDefaultShareKey]);
+    defaultDataSynchronize(instance, keyProperty(DefaultShare));
 }
 
 void keychainShareDataSynchronize(id instance) {
-    keychainDataSynchronize(instance, [[instance class] propertyForAssociateKey:DataBoxKeychainShareKey],
-                            [[instance class] propertyForAssociateKey:DataBoxKeychainShareDomain]);
+    keychainDataSynchronize(instance, keyProperty(KeychainShare), keyProperty(KeychainShareDomain));
 }
 
 void geisKeychainShareDataSynchronize(id instance) {
-    geisKeychainDataSynchronize(instance, [[instance class] propertyForAssociateKey:DataBoxGeisKeychainShareKey],
-                                [[instance class] propertyForAssociateKey:DataBoxGeisKeychainShareDomain]);
+    geisKeychainDataSynchronize(instance, keyProperty(GeisKeychainShare), keyProperty(GeisKeychainShareDomain));
 }
 
 void defaultUsersDataSynchronize(id instance) {
-    defaultDataSynchronize(instance, [[instance class] propertyForAssociateKey:DataBoxDefaultUsersKey]);
+    defaultDataSynchronize(instance, keyProperty(DefaultUsers));
 }
 
 void keychainUsersDataSynchronize(id instance) {
-    keychainDataSynchronize(instance, [[instance class] propertyForAssociateKey:DataBoxKeychainUsersKey],
-                            [[instance class] propertyForAssociateKey:DataBoxKeychainUsersDomain]);
+    keychainDataSynchronize(instance, keyProperty(KeychainUsers), keyProperty(KeychainUsersDomain));
 }
 
 void geisKeychainUsersDataSynchronize(id instance) {
-    geisKeychainDataSynchronize(instance, [[instance class] propertyForAssociateKey:DataBoxGeisKeychainUsersKey],
-                                [[instance class] propertyForAssociateKey:DataBoxGeisKeychainUsersDomain]);
+    geisKeychainDataSynchronize(instance, keyProperty(GeisKeychainUsers), keyProperty(GeisKeychainUsersDomain));
 }
 
 NSDictionary *defaultShareData(id instance) {
-    return defaultData(instance, [[instance class] propertyForAssociateKey:DataBoxDefaultShareKey]);
+    return defaultData(instance, keyProperty(DefaultShare));
 }
 
 NSDictionary *keychainShareData(id instance) {
-    return keychainData(instance, [[instance class] propertyForAssociateKey:DataBoxKeychainShareKey],
-                        [[instance class] propertyForAssociateKey:DataBoxKeychainShareDomain]);
+    return keychainData(instance, keyProperty(KeychainShare), keyProperty(KeychainShareDomain));
 }
 
 NSDictionary *geisKeychainShareData(id instance) {
-    return geisKeychainData(instance, [[instance class] propertyForAssociateKey:DataBoxGeisKeychainShareKey],
-                            [[instance class] propertyForAssociateKey:DataBoxGeisKeychainShareDomain]);
+    return geisKeychainData(instance, keyProperty(GeisKeychainShare), keyProperty(GeisKeychainShareDomain));
 }
 
 NSDictionary *defaultUsersData(id instance, NSString *userIdKey) {
-    return userDataRef(defaultData(instance, [[instance class] propertyForAssociateKey:DataBoxDefaultUsersKey]),
+    return userDataRef(defaultData(instance, keyProperty(DefaultUsers)),
                        [instance valueForKey:userIdKey]);
 }
 
 NSDictionary *keychainUsersData(id instance, NSString *userIdKey) {
-    return userDataRef(keychainData(instance, [[instance class] propertyForAssociateKey:DataBoxKeychainUsersKey],
-                                    [[instance class] propertyForAssociateKey:DataBoxKeychainUsersDomain]),
+    return userDataRef(keychainData(instance, keyProperty(KeychainUsers), keyProperty(KeychainUsersDomain)),
                        [instance valueForKey:userIdKey]);
 }
 
 NSDictionary *geisKeychainUsersData(id instance, NSString *userIdKey) {
-    return userDataRef(geisKeychainData(instance, [[instance class] propertyForAssociateKey:DataBoxGeisKeychainUsersKey],
-                                        [[instance class] propertyForAssociateKey:DataBoxGeisKeychainUsersDomain]),
+    return userDataRef(geisKeychainData(instance, keyProperty(GeisKeychainUsers), keyProperty(GeisKeychainUsersDomain)),
                        [instance valueForKey:userIdKey]);
 }
 
