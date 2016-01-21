@@ -13,46 +13,27 @@
 #import "ZUXSingleton.h"
 #import "zconstant.h"
 
-#define ShareUserDefaults               [NSUserDefaults standardUserDefaults]
-
 ZUX_EXTERN NSString *ZUXAppEverLaunchedKey;
 ZUX_EXTERN NSString *ZUXAppFirstLaunchKey;
 
-ZUX_EXTERN void constructZUXDataBox(const char *className);
-ZUX_EXTERN void synchronizeAppLaunchData();
+@interface ZUXDataBox : NSObject
 
-ZUX_EXTERN void defaultShareDataSynchronize(id instance);
-ZUX_EXTERN void keychainShareDataSynchronize(id instance);
-ZUX_EXTERN void geisKeychainShareDataSynchronize(id instance);
-ZUX_EXTERN void defaultUsersDataSynchronize(id instance);
-ZUX_EXTERN void keychainUsersDataSynchronize(id instance);
-ZUX_EXTERN void geisKeychainUsersDataSynchronize(id instance);
++ (BOOL)appEverLaunched;
++ (BOOL)appFirstLaunch;
 
-ZUX_EXTERN NSDictionary *defaultShareData(id instance);
-ZUX_EXTERN NSDictionary *keychainShareData(id instance);
-ZUX_EXTERN NSDictionary *geisKeychainShareData(id instance);
-ZUX_EXTERN NSDictionary *defaultUsersData(id instance, NSString *userIdKey);
-ZUX_EXTERN NSDictionary *keychainUsersData(id instance, NSString *userIdKey);
-ZUX_EXTERN NSDictionary *geisKeychainUsersData(id instance, NSString *userIdKey);
-
-ZUX_EXTERN void synthesizeProperty(NSString *className, NSString *propertyName, NSDictionary *(^dataRef)(id instance));
+@end // interface ZUXDataBox
 
 @protocol ZUXDataBox <NSObject>
 
 @required
-
-- (BOOL)appEverLaunched;
-- (BOOL)appFirstLaunch;
 - (void)synchronize;
 
 @optional
-
 + (NSString *)defaultShareKey;
 + (NSString *)keychainShareKey;
 + (NSString *)keychainShareDomain;
 + (NSString *)geisKeychainShareKey;
 + (NSString *)geisKeychainShareDomain;
-
 + (NSString *)defaultUsersKey;
 + (NSString *)keychainUsersKey;
 + (NSString *)keychainUsersDomain;
@@ -68,14 +49,6 @@ singleton_interface(className, superClassName) <ZUXDataBox> // databox_interface
 singleton_implementation(className)                                             \
 ZUX_CONSTRUCTOR void construct_ZUX_DATABOX_##className() {                      \
     constructZUXDataBox(#className);                                            \
-}                                                                               \
-- (BOOL)appEverLaunched {                                                       \
-    synchronizeAppLaunchData();                                                 \
-    return [ShareUserDefaults boolForKey:ZUXAppEverLaunchedKey];                \
-}                                                                               \
-- (BOOL)appFirstLaunch {                                                        \
-    synchronizeAppLaunchData();                                                 \
-    return [ShareUserDefaults boolForKey:ZUXAppFirstLaunchKey];                 \
 }                                                                               \
 - (void)synchronize {                                                           \
     @synchronized(self) {                                                       \
@@ -121,3 +94,21 @@ ZUX_CONSTRUCTOR void synthesize_ZUX_DATABOX_##className##_##property() {        
 } // synthesize_constructor
 
 #endif
+
+ZUX_EXTERN void constructZUXDataBox(const char *className);
+
+ZUX_EXTERN void defaultShareDataSynchronize(id instance);
+ZUX_EXTERN void keychainShareDataSynchronize(id instance);
+ZUX_EXTERN void geisKeychainShareDataSynchronize(id instance);
+ZUX_EXTERN void defaultUsersDataSynchronize(id instance);
+ZUX_EXTERN void keychainUsersDataSynchronize(id instance);
+ZUX_EXTERN void geisKeychainUsersDataSynchronize(id instance);
+
+ZUX_EXTERN NSDictionary *defaultShareData(id instance);
+ZUX_EXTERN NSDictionary *keychainShareData(id instance);
+ZUX_EXTERN NSDictionary *geisKeychainShareData(id instance);
+ZUX_EXTERN NSDictionary *defaultUsersData(id instance, NSString *userIdKey);
+ZUX_EXTERN NSDictionary *keychainUsersData(id instance, NSString *userIdKey);
+ZUX_EXTERN NSDictionary *geisKeychainUsersData(id instance, NSString *userIdKey);
+
+ZUX_EXTERN void synthesizeProperty(NSString *className, NSString *propertyName, NSDictionary *(^dataRef)(id instance));

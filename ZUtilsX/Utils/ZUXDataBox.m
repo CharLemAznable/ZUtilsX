@@ -12,8 +12,39 @@
 #import "ZUXKeychain.h"
 #import "ZUXJson.h"
 
+#define ShareUserDefaults               [NSUserDefaults standardUserDefaults]
 #define AppKeyFormat(key)               [NSString stringWithFormat:@"%@."@#key, appIdentifier]
 #define ClassKeyFormat(className, key)  [NSString stringWithFormat:@"%@."@#className@"."@#key, appIdentifier]
+
+NSString *ZUXAppEverLaunchedKey = nil;
+NSString *ZUXAppFirstLaunchKey = nil;
+
+@implementation ZUXDataBox
+
+ZUX_CONSTRUCTOR void construct_ZUX_DATABOX_launchData() {
+    ZUXAppEverLaunchedKey = ZUXAppEverLaunchedKey ?: ZUX_RETAIN(AppKeyFormat(AppEverLaunched));
+    ZUXAppFirstLaunchKey = ZUXAppFirstLaunchKey ?: ZUX_RETAIN(AppKeyFormat(AppFirstLaunch));
+    
+    if (![ShareUserDefaults boolForKey:ZUXAppEverLaunchedKey]) {
+        [ShareUserDefaults setBool:YES forKey:ZUXAppEverLaunchedKey];
+        [ShareUserDefaults setBool:YES forKey:ZUXAppFirstLaunchKey];
+    } else [ShareUserDefaults setBool:NO forKey:ZUXAppFirstLaunchKey];
+    NSLog(@"%@: %d", ZUXAppEverLaunchedKey, [ShareUserDefaults boolForKey:ZUXAppEverLaunchedKey]);
+    NSLog(@"%@: %d", ZUXAppFirstLaunchKey, [ShareUserDefaults boolForKey:ZUXAppFirstLaunchKey]);
+    [ShareUserDefaults synchronize];
+}
+
++ (BOOL)appEverLaunched {
+    return [ShareUserDefaults boolForKey:ZUXAppEverLaunchedKey];
+}
+
++ (BOOL)appFirstLaunch {
+    return [ShareUserDefaults boolForKey:ZUXAppFirstLaunchKey];
+}
+
+@end
+
+#pragma mark -
 
 ZUX_STATIC NSString *const DataBoxDefaultShareKey = @"DataBoxDefaultShareKey";
 ZUX_STATIC NSString *const DataBoxKeychainShareKey = @"DataBoxKeychainShareKey";
@@ -36,8 +67,7 @@ ZUX_STATIC NSDictionary *geisKeychainData(id instance, NSString *key, NSString *
 
 ZUX_STATIC NSDictionary *userDataRef(NSDictionary *dataRef, id userId);
 
-NSString *ZUXAppEverLaunchedKey = nil;
-NSString *ZUXAppFirstLaunchKey = nil;
+#pragma mark -
 
 void constructZUXDataBox(const char *className) {
     Class cls = objc_getClass(className);
@@ -56,22 +86,6 @@ void constructZUXDataBox(const char *className) {
     setKeyProperty(keychainUsersDomain, KeychainUsersDomain);
     setKeyProperty(geisKeychainUsersKey, GeisKeychainUsers);
     setKeyProperty(geisKeychainUsersDomain, GeisKeychainUsersDomain);
-}
-
-void synchronizeAppLaunchData() {
-    static dispatch_once_t once_t;
-    dispatch_once(&once_t, ^{
-        ZUXAppEverLaunchedKey = ZUXAppEverLaunchedKey ?: ZUX_RETAIN(AppKeyFormat(AppEverLaunched));
-        ZUXAppFirstLaunchKey = ZUXAppFirstLaunchKey ?: ZUX_RETAIN(AppKeyFormat(AppFirstLaunch));
-        
-        if (![ShareUserDefaults boolForKey:ZUXAppEverLaunchedKey]) {
-            [ShareUserDefaults setBool:YES forKey:ZUXAppEverLaunchedKey];
-            [ShareUserDefaults setBool:YES forKey:ZUXAppFirstLaunchKey];
-        } else [ShareUserDefaults setBool:NO forKey:ZUXAppFirstLaunchKey];
-        NSLog(@"%@: %d", ZUXAppEverLaunchedKey, [ShareUserDefaults boolForKey:ZUXAppEverLaunchedKey]);
-        NSLog(@"%@: %d", ZUXAppFirstLaunchKey, [ShareUserDefaults boolForKey:ZUXAppFirstLaunchKey]);
-        [ShareUserDefaults synchronize];
-    });
 }
 
 #define keyProperty(key) [[instance class] propertyForAssociateKey:DataBox##key##Key]
@@ -146,6 +160,8 @@ void synthesizeProperty(NSString *className, NSString *propertyName, NSDictionar
                       sel_getName(property.setter), className, propertyName);
 }
 
+#pragma mark -
+
 ZUX_STATIC void defaultDataSynchronize(id instance, NSString *key) {
     [ShareUserDefaults setObject:defaultData(instance, key) forKey:key];
     [ShareUserDefaults synchronize];
@@ -189,7 +205,7 @@ ZUX_STATIC NSDictionary *keychainData(id instance, NSString *key, NSString *doma
 
 ZUX_STATIC NSDictionary *geisKeychainData(id instance, NSString *key, NSString *domain) {
     if (ZUX_EXPECT_F(![instance propertyForAssociateKey:key])) {
-        if ([instance appFirstLaunch]) {
+        if ([ZUXDataBox appFirstLaunch]) {
             [ZUXKeychain deletePasswordForUsername:key andService:domain error:NULL];
             [instance setProperty:[NSMutableDictionary dictionary] forAssociateKey:key];
         }

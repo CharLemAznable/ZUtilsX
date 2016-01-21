@@ -1274,6 +1274,9 @@
 
     @protocol ZUXDataBox
 
+        // 数据同步方法
+        -synchronize
+
         // 自定义用户数据存储在UserDefaults/Keychain中的键名
         // default        : 数据存储在UserDefaults中, 随App卸载而清除
         // keychain       : 数据存储在Keychain中, App卸载时仍保留
@@ -1297,11 +1300,6 @@
 
         // 定义databox, 单例类, 遵循<ZUXDataBox>协议
         @databox_interface(className, superClassName)
-        // 应用程序运行信息
-        -appEverLaunched
-        -appFirstLaunch
-        // 数据同步方法
-        -synchronize
 
         // 实现databox
         @databox_implementation(className)
@@ -1319,9 +1317,9 @@
         // databox定义示例
         // 注: 字段类型要求为强引用
         @databox_interface(UserDefaults, NSObject)
-        @property (nonatomic, strong) NSString *userId;
-        @property (nonatomic, strong) NSString *name;
-        @property (nonatomic, strong) NSString *version;
+        @property (nonatomic, strong) NSString * userId;
+        @property (nonatomic, strong) NSString * name;
+        @property (nonatomic, strong) NSString * version;
         @end
 
         @databox_implementation(UserDefaults)
