@@ -29,8 +29,6 @@ ZUX_CONSTRUCTOR void construct_ZUX_DATABOX_launchData() {
         [ShareUserDefaults setBool:YES forKey:ZUXAppEverLaunchedKey];
         [ShareUserDefaults setBool:YES forKey:ZUXAppFirstLaunchKey];
     } else [ShareUserDefaults setBool:NO forKey:ZUXAppFirstLaunchKey];
-    NSLog(@"%@: %d", ZUXAppEverLaunchedKey, [ShareUserDefaults boolForKey:ZUXAppEverLaunchedKey]);
-    NSLog(@"%@: %d", ZUXAppFirstLaunchKey, [ShareUserDefaults boolForKey:ZUXAppFirstLaunchKey]);
     [ShareUserDefaults synchronize];
 }
 
@@ -163,12 +161,16 @@ void synthesizeProperty(NSString *className, NSString *propertyName, NSDictionar
 #pragma mark -
 
 ZUX_STATIC void defaultDataSynchronize(id instance, NSString *key) {
-    [ShareUserDefaults setObject:defaultData(instance, key) forKey:key];
+    NSDictionary *data = [instance propertyForAssociateKey:key];
+    if (!data) return;
+    [ShareUserDefaults setObject:data forKey:key];
     [ShareUserDefaults synchronize];
 }
 
 ZUX_STATIC void keychainDataSynchronize(id instance, NSString *key, NSString *domain) {
-    NSString *dataStr = [ZUXJson jsonStringFromObject:keychainData(instance, key, domain)];
+    NSDictionary *data = [instance propertyForAssociateKey:key];
+    if (!data) return;
+    NSString *dataStr = [ZUXJson jsonStringFromObject:data];
     if (!dataStr) return;
     NSError *error = nil;
     [ZUXKeychain storePassword:dataStr forUsername:key andService:domain updateExisting:YES error:&error];
@@ -176,11 +178,7 @@ ZUX_STATIC void keychainDataSynchronize(id instance, NSString *key, NSString *do
 }
 
 ZUX_STATIC void geisKeychainDataSynchronize(id instance, NSString *key, NSString *domain) {
-    NSString *dataStr = [ZUXJson jsonStringFromObject:geisKeychainData(instance, key, domain)];
-    if (!dataStr) return;
-    NSError *error = nil;
-    [ZUXKeychain storePassword:dataStr forUsername:key andService:domain updateExisting:YES error:&error];
-    if (error) ZLog(@"Geis Keychain Synchronize Error: %@", error);
+    keychainDataSynchronize(instance, key, domain);
 }
 
 ZUX_STATIC NSDictionary *defaultData(id instance, NSString *key) {

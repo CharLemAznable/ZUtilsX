@@ -35,6 +35,8 @@
 @implementation ZUXJsonTest
 
 - (void)testJson {
+    XCTAssertNil([ZUXJson jsonStringFromObject:nil]);
+    
     NSString *str = @"JSON";
     ZUX_USE_JSONKIT = YES;
     XCTAssertEqualObjects([ZUXJson jsonStringFromObject:str], @"\"JSON\"");
