@@ -20,6 +20,11 @@
     NSDate *stringDate = [string dateWithDateFormat:@"yyyy-MM-dd HH:mm"];
     NSString *dateString = [stringDate stringWithDateFormat:@"yyyy-MM-dd HH:mm"];
     XCTAssertEqualObjects(string, dateString);
+    
+    NSString *mills = nil;
+    XCTAssertEqual([mills millsValue], 0);
+    mills = @"123";
+    XCTAssertEqual([mills millsValue], 123);
 }
 
 @end
