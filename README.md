@@ -1297,6 +1297,9 @@
 
         // 定义databox, 单例类, 遵循<ZUXDataBox>协议
         @databox_interface(className, superClassName)
+        // 应用程序运行信息
+        -appEverLaunched
+        -appFirstLaunch
         // 数据同步方法
         -synchronize
 
