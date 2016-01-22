@@ -202,6 +202,10 @@
                                               options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
 }
 
+- (NSString *)stringByReplacingCharactersInSet:(NSCharacterSet *)set withString:(NSString *)replacement {
+    return [NSString stringWithArray:[self arraySplitedByCharactersInSet:set filterEmptyItem:NO] separator:replacement];
+}
+
 #pragma mark - Escape/Unescape Methods -
 
 - (NSString *)stringByEscapingForURLQuery {

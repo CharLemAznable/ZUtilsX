@@ -55,6 +55,8 @@
 - (NSString *)stringByReplacingString:(NSString *)searchString withString:(NSString *)replacement;
 - (NSString *)stringByCaseInsensitiveReplacingString:(NSString *)searchString withString:(NSString *)replacement;
 
+- (NSString *)stringByReplacingCharactersInSet:(NSCharacterSet *)set withString:(NSString *)replacement;
+
 - (NSString *)stringByEscapingForURLQuery;
 - (NSString *)stringByUnescapingFromURLQuery;
 

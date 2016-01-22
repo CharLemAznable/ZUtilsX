@@ -248,6 +248,7 @@
         // 替换字符串.
         -stringByReplacingString:withString:
         -stringByCaseInsensitiveReplacingString:withString:
+        -stringByReplacingCharactersInSet:withString:
 
         // URL字符串转义方法.
         -stringByEscapingForURLQuery

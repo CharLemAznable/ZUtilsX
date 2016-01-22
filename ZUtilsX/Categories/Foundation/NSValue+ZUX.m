@@ -15,7 +15,7 @@
     const char *objCType = [self objCType];
     if (strcmp(objCType, @encode(CGPoint)) == 0) {
         CGPoint p = [self CGPointValue];
-        if ([key isCaseInsensitiveEqualToString:@"x" ]) return @(p.x);
+        if ([key isCaseInsensitiveEqualToString:@"x"]) return @(p.x);
         else if ([key isCaseInsensitiveEqualToString:@"y"]) return @(p.y);
         
     } else if (strcmp(objCType, @encode(CGVector)) == 0) {
