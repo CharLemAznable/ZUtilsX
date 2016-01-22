@@ -45,13 +45,15 @@
     [[UserDefaults shareUserDefaults] synchronize];
     
     [UserDefaults shareUserDefaults].userId = @"111";
+    [UserDefaults shareUserDefaults].version = nil;
     XCTAssertEqualObjects([UserDefaults shareUserDefaults].userId, @"111");
     XCTAssertEqualObjects([UserDefaults shareUserDefaults].name, @"aaa");
-    XCTAssertEqualObjects([UserDefaults shareUserDefaults].version, @"0.0.1");
+    XCTAssertNil([UserDefaults shareUserDefaults].version);
     
     [UserDefaults shareUserDefaults].userId = @"222";
+    [UserDefaults shareUserDefaults].name = nil;
     XCTAssertEqualObjects([UserDefaults shareUserDefaults].userId, @"222");
-    XCTAssertEqualObjects([UserDefaults shareUserDefaults].name, @"bbb");
+    XCTAssertNil([UserDefaults shareUserDefaults].name);
     XCTAssertEqualObjects([UserDefaults shareUserDefaults].version, @"0.0.2");
 }
 
