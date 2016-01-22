@@ -32,13 +32,13 @@ ZUX_EXTERN NSString *ZUXAppFirstLaunchKey;
 + (NSString *)defaultShareKey;
 + (NSString *)keychainShareKey;
 + (NSString *)keychainShareDomain;
-+ (NSString *)geisKeychainShareKey;
-+ (NSString *)geisKeychainShareDomain;
++ (NSString *)restrictShareKey;
++ (NSString *)restrictShareDomain;
 + (NSString *)defaultUsersKey;
 + (NSString *)keychainUsersKey;
 + (NSString *)keychainUsersDomain;
-+ (NSString *)geisKeychainUsersKey;
-+ (NSString *)geisKeychainUsersDomain;
++ (NSString *)restrictUsersKey;
++ (NSString *)restrictUsersDomain;
 
 @end // protocol ZUXDataBox
 
@@ -54,10 +54,10 @@ ZUX_CONSTRUCTOR void construct_ZUX_DATABOX_##className() {                      
     @synchronized(self) {                                                       \
         defaultShareDataSynchronize(self);                                      \
         keychainShareDataSynchronize(self);                                     \
-        geisKeychainShareDataSynchronize(self);                                 \
+        restrictShareDataSynchronize(self);                                     \
         defaultUsersDataSynchronize(self);                                      \
         keychainUsersDataSynchronize(self);                                     \
-        geisKeychainUsersDataSynchronize(self);                                 \
+        restrictUsersDataSynchronize(self);                                     \
     }                                                                           \
 } // databox_implementation
 
@@ -69,9 +69,9 @@ defaultShareData(instance)) // default_share
 synthesize_constructor(className, property,                                     \
 keychainShareData(instance)) // keychain_share
 
-#define geis_keychain_share(className, property)                                \
+#define restrict_share(className, property)                                     \
 synthesize_constructor(className, property,                                     \
-geisKeychainShareData(instance)) // geis_keychain_share
+restrictShareData(instance)) // restrict_share
 
 #define default_users(className, property, userIdProperty)                      \
 synthesize_constructor(className, property,                                     \
@@ -81,9 +81,9 @@ defaultUsersData(instance, @#userIdProperty)) // default_users
 synthesize_constructor(className, property,                                     \
 keychainUsersData(instance, @#userIdProperty)) // keychain_users
 
-#define geis_keychain_users(className, property, userIdProperty)                \
+#define restrict_users(className, property, userIdProperty)                     \
 synthesize_constructor(className, property,                                     \
-geisKeychainUsersData(instance, @#userIdProperty)) // geis_keychain_users
+restrictUsersData(instance, @#userIdProperty)) // restrict_users
 
 #define synthesize_constructor(className, property, dataRef)                    \
 dynamic property;                                                               \
@@ -99,16 +99,16 @@ ZUX_EXTERN void constructZUXDataBox(const char *className);
 
 ZUX_EXTERN void defaultShareDataSynchronize(id instance);
 ZUX_EXTERN void keychainShareDataSynchronize(id instance);
-ZUX_EXTERN void geisKeychainShareDataSynchronize(id instance);
+ZUX_EXTERN void restrictShareDataSynchronize(id instance);
 ZUX_EXTERN void defaultUsersDataSynchronize(id instance);
 ZUX_EXTERN void keychainUsersDataSynchronize(id instance);
-ZUX_EXTERN void geisKeychainUsersDataSynchronize(id instance);
+ZUX_EXTERN void restrictUsersDataSynchronize(id instance);
 
 ZUX_EXTERN NSDictionary *defaultShareData(id instance);
 ZUX_EXTERN NSDictionary *keychainShareData(id instance);
-ZUX_EXTERN NSDictionary *geisKeychainShareData(id instance);
+ZUX_EXTERN NSDictionary *restrictShareData(id instance);
 ZUX_EXTERN NSDictionary *defaultUsersData(id instance, NSString *userIdKey);
 ZUX_EXTERN NSDictionary *keychainUsersData(id instance, NSString *userIdKey);
-ZUX_EXTERN NSDictionary *geisKeychainUsersData(id instance, NSString *userIdKey);
+ZUX_EXTERN NSDictionary *restrictUsersData(id instance, NSString *userIdKey);
 
 ZUX_EXTERN void synthesizeProperty(NSString *className, NSString *propertyName, NSDictionary *(^dataRef)(id instance));

@@ -18,7 +18,7 @@
 @databox_implementation(UserDefaults)
 @default_share(UserDefaults, userId)
 @keychain_users(UserDefaults, name, userId)
-@geis_keychain_users(UserDefaults, version, userId)
+@restrict_users(UserDefaults, version, userId)
 @end
 
 @interface ZUXDataBoxTest : XCTestCase

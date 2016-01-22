@@ -47,21 +47,21 @@ ZUX_CONSTRUCTOR void construct_ZUX_DATABOX_launchData() {
 ZUX_STATIC NSString *const DataBoxDefaultShareKey = @"DataBoxDefaultShareKey";
 ZUX_STATIC NSString *const DataBoxKeychainShareKey = @"DataBoxKeychainShareKey";
 ZUX_STATIC NSString *const DataBoxKeychainShareDomainKey = @"DataBoxKeychainShareDomainKey";
-ZUX_STATIC NSString *const DataBoxGeisKeychainShareKey = @"DataBoxGeisKeychainShareKey";
-ZUX_STATIC NSString *const DataBoxGeisKeychainShareDomainKey = @"DataBoxGeisKeychainShareDomainKey";
+ZUX_STATIC NSString *const DataBoxRestrictShareKey = @"DataBoxRestrictShareKey";
+ZUX_STATIC NSString *const DataBoxRestrictShareDomainKey = @"DataBoxRestrictShareDomainKey";
 ZUX_STATIC NSString *const DataBoxDefaultUsersKey = @"DataBoxDefaultUsersKey";
 ZUX_STATIC NSString *const DataBoxKeychainUsersKey = @"DataBoxKeychainUsersKey";
 ZUX_STATIC NSString *const DataBoxKeychainUsersDomainKey = @"DataBoxKeychainUsersDomainKey";
-ZUX_STATIC NSString *const DataBoxGeisKeychainUsersKey = @"DataBoxGeisKeychainUsersKey";
-ZUX_STATIC NSString *const DataBoxGeisKeychainUsersDomainKey = @"DataBoxGeisKeychainUsersDomainKey";
+ZUX_STATIC NSString *const DataBoxRestrictUsersKey = @"DataBoxRestrictUsersKey";
+ZUX_STATIC NSString *const DataBoxRestrictUsersDomainKey = @"DataBoxRestrictUsersDomainKey";
 
 ZUX_STATIC void defaultDataSynchronize(id instance, NSString *key);
 ZUX_STATIC void keychainDataSynchronize(id instance, NSString *key, NSString *domain);
-ZUX_STATIC void geisKeychainDataSynchronize(id instance, NSString *key, NSString *domain);
+ZUX_STATIC void restrictDataSynchronize(id instance, NSString *key, NSString *domain);
 
 ZUX_STATIC NSDictionary *defaultData(id instance, NSString *key);
 ZUX_STATIC NSDictionary *keychainData(id instance, NSString *key, NSString *domain);
-ZUX_STATIC NSDictionary *geisKeychainData(id instance, NSString *key, NSString *domain);
+ZUX_STATIC NSDictionary *restrictData(id instance, NSString *key, NSString *domain);
 
 ZUX_STATIC NSDictionary *userDataRef(NSDictionary *dataRef, id userId);
 
@@ -77,13 +77,13 @@ void constructZUXDataBox(const char *className) {
     setKeyProperty(defaultShareKey, DefaultShare);
     setKeyProperty(keychainShareKey, KeychainShare);
     setKeyProperty(keychainShareDomain, KeychainShareDomain);
-    setKeyProperty(geisKeychainShareKey, GeisKeychainShare);
-    setKeyProperty(geisKeychainShareDomain, GeisKeychainShareDomain);
+    setKeyProperty(restrictShareKey, RestrictShare);
+    setKeyProperty(restrictShareDomain, RestrictShareDomain);
     setKeyProperty(defaultUsersKey, DefaultUsers);
     setKeyProperty(keychainUsersKey, KeychainUsers);
     setKeyProperty(keychainUsersDomain, KeychainUsersDomain);
-    setKeyProperty(geisKeychainUsersKey, GeisKeychainUsers);
-    setKeyProperty(geisKeychainUsersDomain, GeisKeychainUsersDomain);
+    setKeyProperty(restrictUsersKey, RestrictUsers);
+    setKeyProperty(restrictUsersDomain, RestrictUsersDomain);
 }
 
 #define keyProperty(key) [[instance class] propertyForAssociateKey:DataBox##key##Key]
@@ -96,8 +96,8 @@ void keychainShareDataSynchronize(id instance) {
     keychainDataSynchronize(instance, keyProperty(KeychainShare), keyProperty(KeychainShareDomain));
 }
 
-void geisKeychainShareDataSynchronize(id instance) {
-    geisKeychainDataSynchronize(instance, keyProperty(GeisKeychainShare), keyProperty(GeisKeychainShareDomain));
+void restrictShareDataSynchronize(id instance) {
+    restrictDataSynchronize(instance, keyProperty(RestrictShare), keyProperty(RestrictShareDomain));
 }
 
 void defaultUsersDataSynchronize(id instance) {
@@ -108,8 +108,8 @@ void keychainUsersDataSynchronize(id instance) {
     keychainDataSynchronize(instance, keyProperty(KeychainUsers), keyProperty(KeychainUsersDomain));
 }
 
-void geisKeychainUsersDataSynchronize(id instance) {
-    geisKeychainDataSynchronize(instance, keyProperty(GeisKeychainUsers), keyProperty(GeisKeychainUsersDomain));
+void restrictUsersDataSynchronize(id instance) {
+    restrictDataSynchronize(instance, keyProperty(RestrictUsers), keyProperty(RestrictUsersDomain));
 }
 
 NSDictionary *defaultShareData(id instance) {
@@ -120,8 +120,8 @@ NSDictionary *keychainShareData(id instance) {
     return keychainData(instance, keyProperty(KeychainShare), keyProperty(KeychainShareDomain));
 }
 
-NSDictionary *geisKeychainShareData(id instance) {
-    return geisKeychainData(instance, keyProperty(GeisKeychainShare), keyProperty(GeisKeychainShareDomain));
+NSDictionary *restrictShareData(id instance) {
+    return restrictData(instance, keyProperty(RestrictShare), keyProperty(RestrictShareDomain));
 }
 
 NSDictionary *defaultUsersData(id instance, NSString *userIdKey) {
@@ -134,8 +134,8 @@ NSDictionary *keychainUsersData(id instance, NSString *userIdKey) {
                        [instance valueForKey:userIdKey]);
 }
 
-NSDictionary *geisKeychainUsersData(id instance, NSString *userIdKey) {
-    return userDataRef(geisKeychainData(instance, keyProperty(GeisKeychainUsers), keyProperty(GeisKeychainUsersDomain)),
+NSDictionary *restrictUsersData(id instance, NSString *userIdKey) {
+    return userDataRef(restrictData(instance, keyProperty(RestrictUsers), keyProperty(RestrictUsersDomain)),
                        [instance valueForKey:userIdKey]);
 }
 
@@ -177,7 +177,7 @@ ZUX_STATIC void keychainDataSynchronize(id instance, NSString *key, NSString *do
     if (error) ZLog(@"Keychain Synchronize Error: %@", error);
 }
 
-ZUX_STATIC void geisKeychainDataSynchronize(id instance, NSString *key, NSString *domain) {
+ZUX_STATIC void restrictDataSynchronize(id instance, NSString *key, NSString *domain) {
     keychainDataSynchronize(instance, key, domain);
 }
 
@@ -201,7 +201,7 @@ ZUX_STATIC NSDictionary *keychainData(id instance, NSString *key, NSString *doma
     return [instance propertyForAssociateKey:key];
 }
 
-ZUX_STATIC NSDictionary *geisKeychainData(id instance, NSString *key, NSString *domain) {
+ZUX_STATIC NSDictionary *restrictData(id instance, NSString *key, NSString *domain) {
     if (ZUX_EXPECT_F(![instance propertyForAssociateKey:key])) {
         if ([ZUXDataBox appFirstLaunch]) {
             [ZUXKeychain deletePasswordForUsername:key andService:domain error:NULL];

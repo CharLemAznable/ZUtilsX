@@ -1280,23 +1280,23 @@
         -synchronize
 
         // 自定义用户数据存储在UserDefaults/Keychain中的键名
-        // default        : 数据存储在UserDefaults中, 随App卸载而清除
-        // keychain       : 数据存储在Keychain中, App卸载时仍保留
-        // geis_keychain  : 数据存储在Keychain中, 重装App后删除旧数据
-        // share          : 数据可被全局访问/修改
-        // users          : 数据读写与指定的关键字相关联
+        // default  : 数据存储在UserDefaults中, 随App卸载而清除
+        // keychain : 数据存储在Keychain中, 重装App后仍保留旧数据
+        // restrict : 数据存储在Keychain中, 重装App后删除旧数据
+        // share    : 数据可被全局访问/修改
+        // users    : 数据读写与指定的关键字相关联
 
         +defaultShareKey
         +keychainShareKey
         +keychainShareDomain
-        +geisKeychainShareKey
-        +geisKeychainShareDomain
+        +restrictShareKey
+        +restrictShareDomain
 
         +defaultUsersKey
         +keychainUsersKey
         +keychainUsersDomain
-        +geisKeychainUsersKey
-        +geisKeychainUsersDomain
+        +restrictUsersKey
+        +restrictUsersDomain
 
     DataBox工具宏
 
@@ -1309,15 +1309,16 @@
         // 合成全局存储属性
         @default_share(className, property)
         @keychain_share(className, property)
-        @geis_keychain_share(className, property)
+        @restrict_share(className, property)
 
         // 合成关联关键字存储属性, userIdProperty指定关联的databox属性的关键字
         @default_users(className, property, userIdProperty)
         @keychain_users(className, property, userIdProperty)
-        @geis_keychain_users(className, property, userIdProperty)
+        @restrict_users(className, property, userIdProperty)
 
         // databox定义示例
-        // 注: 字段类型要求为强引用
+        // 注: 存储属性的内存管理类型要求为强引用.
+        // 注: 存储属性合成时机为App的main方法执行前, 所以在main方法执行前调用属性getter/setter会报错, e. g. , +load方法.
         @databox_interface(UserDefaults, NSObject)
         @property (nonatomic, strong) NSString * userId;
         @property (nonatomic, strong) NSString * name;
@@ -1327,7 +1328,7 @@
         @databox_implementation(UserDefaults)
         @default_share(UserDefaults, userId)
         @keychain_users(UserDefaults, name, userId)
-        @geis_keychain_users(UserDefaults, version, userId)
+        @restrict_users(UserDefaults, version, userId)
         @end
 
         // databox调用示例
