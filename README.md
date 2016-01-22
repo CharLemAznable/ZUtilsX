@@ -281,6 +281,22 @@
         -valueForKey:
         -valueForKeyPath:
 
+        // 增加自定义结构体boxed分类定义/实现宏.
+        struct_boxed_interface(structType)
+        struct_boxed_implementation(structType)
+
+        // 自定义结构体boxed示例
+        typedef struct {
+          ...
+        } CustomStruct;
+        @struct_boxed_interface(CustomStruct)
+        @struct_boxed_implementation(CustomStruct)
+
+        // 调用示例
+        CustomStruct customStruct = { ... };
+        NSValue * structValue = [NSValue valueWithCustomStruct:customStruct];
+        CustomStruct customStruct2 = [structValue CustomStructValue];
+
 - NSExpression+ZUX
 
         // NSExpression保留字列表.

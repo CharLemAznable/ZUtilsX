@@ -19,4 +19,24 @@
 
 @end
 
+#define struct_boxed_interface(structType)              \
+category_interface(NSValue, structType##Boxed)          \
++ (NSValue *)valueWith##structType:(structType)value;   \
+- (structType)structType##Value;                        \
+@end
+
+#define struct_boxed_implementation(structType)         \
+category_implementation(NSValue, structType##Boxed)     \
++ (NSValue *)valueWith##structType:(structType)value {  \
+    return [NSValue valueWithBytes:&value               \
+            objCType:@encode(structType)];              \
+}                                                       \
+- (structType)structType##Value {                       \
+    structType result;                                  \
+    [self getValue:&result];                            \
+    return result;                                      \
+}                                                       \
+@end
+
+
 #endif /* ZUtilsX_NSValue_ZUX_h */
