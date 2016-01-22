@@ -25,6 +25,7 @@
     
     NSString *oriString = @"Lorem<==>ipsum=dolar>=<sit<>amet.";
     XCTAssertEqualObjects([oriString stringByReplacingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"=><"] withString:@" "], @"Lorem    ipsum dolar   sit  amet.");
+    XCTAssertEqualObjects([oriString stringByReplacingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"=><"] withString:@" " mergeContinuous:YES], @"Lorem ipsum dolar sit amet.");
     XCTAssertEqualObjects([oriString stringByReplacingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"=><"] withString:@""], @"Loremipsumdolarsitamet.");
 }
 

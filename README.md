@@ -249,6 +249,7 @@
         -stringByReplacingString:withString:
         -stringByCaseInsensitiveReplacingString:withString:
         -stringByReplacingCharactersInSet:withString:
+        -stringByReplacingCharactersInSet:withString:mergeContinuous:
 
         // URL字符串转义方法.
         -stringByEscapingForURLQuery
