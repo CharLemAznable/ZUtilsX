@@ -13,178 +13,102 @@
 #import "ZUXSingleton.h"
 #import "zconstant.h"
 
-#define ShareUserDefaults               [NSUserDefaults standardUserDefaults]
-#define AppKeyFormat(key)               [NSString stringWithFormat:@"%@."@#key, appIdentifier]
-#define ClassKeyFormat(className, key)  [NSString stringWithFormat:@"%@."@#className@"."@#key, appIdentifier]
+ZUX_EXTERN NSString *ZUXAppEverLaunchedKey;
+ZUX_EXTERN NSString *ZUXAppFirstLaunchKey;
 
 @interface ZUXDataBox : NSObject
-
-extern NSString *const zuxAppEverLaunchedKey;
-extern NSString *const zuxAppFirstLaunchKey;
 
 + (BOOL)appEverLaunched;
 + (BOOL)appFirstLaunch;
 
-@end // ZUXDataBox: app launch info.
+@end // interface ZUXDataBox
 
 @protocol ZUXDataBox <NSObject>
 
-@optional
+@required
+- (void)synchronize;
 
+@optional
 + (NSString *)defaultShareKey;
 + (NSString *)keychainShareKey;
 + (NSString *)keychainShareDomain;
-+ (NSString *)geisKeychainShareKey;
-+ (NSString *)geisKeychainShareDomain;
-
++ (NSString *)restrictShareKey;
++ (NSString *)restrictShareDomain;
 + (NSString *)defaultUsersKey;
 + (NSString *)keychainUsersKey;
 + (NSString *)keychainUsersDomain;
-+ (NSString *)geisKeychainUsersKey;
-+ (NSString *)geisKeychainUsersDomain;
++ (NSString *)restrictUsersKey;
++ (NSString *)restrictUsersDomain;
 
 @end // protocol ZUXDataBox
 
-#define databox_interface(className, superClassName)                                            \
-singleton_interface(className, superClassName) <ZUXDataBox>                                     \
-- (void)synchronize; // databox_interface
+#define databox_interface(className, superClassName)                            \
+singleton_interface(className, superClassName) <ZUXDataBox> // databox_interface
 
-#define databox_implementation(className)                                                       \
-singleton_implementation(className)                                                             \
-static NSString *_defaultShare##className##Key;                                                 \
-static NSString *_keychainShare##className##Key;                                                \
-static NSString *_keychainShare##className##Domain;                                             \
-static NSString *_geisKeychainShare##className##Key;                                            \
-static NSString *_geisKeychainShare##className##Domain;                                         \
-static NSString *_defaultUsers##className##Key;                                                 \
-static NSString *_keychainUsers##className##Key;                                                \
-static NSString *_keychainUsers##className##Domain;                                             \
-static NSString *_geisKeychainUsers##className##Key;                                            \
-static NSString *_geisKeychainUsers##className##Domain;                                         \
-+ (void)load {                                                                                  \
-    static dispatch_once_t once_t;                                                              \
-    dispatch_once(&once_t, ^{                                                                   \
-        _defaultShare##className##Key = ZUX_RETAIN(                                             \
-        [self respondsToSelector:@selector(defaultShareKey)] ?                                  \
-        [self defaultShareKey] : ClassKeyFormat(className, DefaultShare));                      \
-                                                                                                \
-        _keychainShare##className##Key = ZUX_RETAIN(                                            \
-        [self respondsToSelector:@selector(keychainShareKey)] ?                                 \
-        [self keychainShareKey] : ClassKeyFormat(className, KeychainShare));                    \
-                                                                                                \
-        _keychainShare##className##Domain = ZUX_RETAIN(                                         \
-        [self respondsToSelector:@selector(keychainShareDomain)] ?                              \
-        [self keychainShareDomain] : ClassKeyFormat(className, KeychainShareDomain));           \
-                                                                                                \
-        _geisKeychainShare##className##Key = ZUX_RETAIN(                                        \
-        [self respondsToSelector:@selector(geisKeychainShareKey)] ?                             \
-        [self geisKeychainShareKey] : ClassKeyFormat(className, GeisKeychainShare));            \
-                                                                                                \
-        _geisKeychainShare##className##Domain = ZUX_RETAIN(                                     \
-        [self respondsToSelector:@selector(geisKeychainShareDomain)] ?                          \
-        [self geisKeychainShareDomain] : ClassKeyFormat(className, GeisKeychainShareDomain));   \
-                                                                                                \
-        _defaultUsers##className##Key = ZUX_RETAIN(                                             \
-        [self respondsToSelector:@selector(defaultUsersKey)] ?                                  \
-        [self defaultUsersKey] : ClassKeyFormat(className, DefaultUsers));                      \
-                                                                                                \
-        _keychainUsers##className##Key = ZUX_RETAIN(                                            \
-        [self respondsToSelector:@selector(keychainUsersKey)] ?                                 \
-        [self keychainUsersKey] : ClassKeyFormat(className, KeychainUsers));                    \
-                                                                                                \
-        _keychainUsers##className##Domain = ZUX_RETAIN(                                         \
-        [self respondsToSelector:@selector(keychainUsersDomain)] ?                              \
-        [self keychainUsersDomain] : ClassKeyFormat(className, KeychainUsersDomain));           \
-                                                                                                \
-        _geisKeychainUsers##className##Key = ZUX_RETAIN(                                        \
-        [self respondsToSelector:@selector(geisKeychainUsersKey)] ?                             \
-        [self geisKeychainUsersKey] : ClassKeyFormat(className, GeisKeychainUsers));            \
-                                                                                                \
-        _geisKeychainUsers##className##Domain = ZUX_RETAIN(                                     \
-        [self respondsToSelector:@selector(geisKeychainUsersDomain)] ?                          \
-        [self geisKeychainUsersDomain] : ClassKeyFormat(className, GeisKeychainUsersDomain));   \
-    });                                                                                         \
-}                                                                                               \
-- (void)synchronize {                                                                           \
-    @synchronized(self) {                                                                       \
-        defaultDataSynchronize(self, _defaultShare##className##Key);                            \
-        keychainDataSynchronize(self, _keychainShare##className##Key,                           \
-                                _keychainShare##className##Domain);                             \
-        geisKeychainDataSynchronize(self, _geisKeychainShare##className##Key,                   \
-                                    _geisKeychainShare##className##Domain);                     \
-        defaultDataSynchronize(self, _defaultUsers##className##Key);                            \
-        keychainDataSynchronize(self, _keychainUsers##className##Key,                           \
-                                _keychainUsers##className##Domain);                             \
-        geisKeychainDataSynchronize(self, _geisKeychainUsers##className##Key,                   \
-                                    _geisKeychainUsers##className##Domain);                     \
-    }                                                                                           \
+#define databox_implementation(className)                                       \
+singleton_implementation(className)                                             \
+ZUX_CONSTRUCTOR void construct_ZUX_DATABOX_##className() {                      \
+    constructZUXDataBox(#className);                                            \
+}                                                                               \
+- (void)synchronize {                                                           \
+    @synchronized(self) {                                                       \
+        defaultShareDataSynchronize(self);                                      \
+        keychainShareDataSynchronize(self);                                     \
+        restrictShareDataSynchronize(self);                                     \
+        defaultUsersDataSynchronize(self);                                      \
+        keychainUsersDataSynchronize(self);                                     \
+        restrictUsersDataSynchronize(self);                                     \
+    }                                                                           \
 } // databox_implementation
 
-#define default_share(className, property)                                                      \
-synthesize_constructor(className, property) {                                                   \
-    synthesizeZUXDataBoxProperty(@#className, @#property, ^NSDictionary *(id instance) {        \
-        return defaultData(instance, _defaultShare##className##Key);                            \
-    });                                                                                         \
-} // default_share
+#define default_share(className, property)                                      \
+synthesize_constructor(className, property,                                     \
+defaultShareData(instance)) // default_share
 
-#define keychain_share(className, property)                                                     \
-synthesize_constructor(className, property) {                                                   \
-    synthesizeZUXDataBoxProperty(@#className, @#property, ^NSDictionary *(id instance) {        \
-        return keychainData(instance, _keychainShare##className##Key,                           \
-                            _keychainShare##className##Domain);                                 \
-    });                                                                                         \
-} // keychain_share
+#define keychain_share(className, property)                                     \
+synthesize_constructor(className, property,                                     \
+keychainShareData(instance)) // keychain_share
 
-#define geis_keychain_share(className, property)                                                \
-synthesize_constructor(className, property) {                                                   \
-    synthesizeZUXDataBoxProperty(@#className, @#property, ^NSDictionary *(id instance) {        \
-        return geisKeychainData(instance, _geisKeychainShare##className##Key,                   \
-                                _geisKeychainShare##className##Domain);                         \
-    });                                                                                         \
-} // geis_keychain_share
+#define restrict_share(className, property)                                     \
+synthesize_constructor(className, property,                                     \
+restrictShareData(instance)) // restrict_share
 
-#define default_users(className, property, userIdProperty)                                      \
-synthesize_constructor(className, property) {                                                   \
-    synthesizeZUXDataBoxProperty(@#className, @#property, ^NSDictionary *(id instance) {        \
-        return userDataRef(defaultData(instance, _defaultUsers##className##Key),                \
-                           [instance valueForKey:@#userIdProperty]);                            \
-    });                                                                                         \
-} // default_users
+#define default_users(className, property, userIdProperty)                      \
+synthesize_constructor(className, property,                                     \
+defaultUsersData(instance, @#userIdProperty)) // default_users
 
-#define keychain_users(className, property, userIdProperty)                                     \
-synthesize_constructor(className, property) {                                                   \
-    synthesizeZUXDataBoxProperty(@#className, @#property, ^NSDictionary *(id instance) {        \
-        return userDataRef(keychainData(instance, _keychainUsers##className##Key,               \
-                                        _keychainUsers##className##Domain),                     \
-                           [instance valueForKey:@#userIdProperty]);                            \
-    });                                                                                         \
-} // keychain_users
+#define keychain_users(className, property, userIdProperty)                     \
+synthesize_constructor(className, property,                                     \
+keychainUsersData(instance, @#userIdProperty)) // keychain_users
 
-#define geis_keychain_users(className, property, userIdProperty)                                \
-synthesize_constructor(className, property) {                                                   \
-    synthesizeZUXDataBoxProperty(@#className, @#property, ^NSDictionary *(id instance) {        \
-        return userDataRef(geisKeychainData(instance, _geisKeychainUsers##className##Key,       \
-                                            _geisKeychainUsers##className##Domain),             \
-                           [instance valueForKey:@#userIdProperty]);                            \
-    });                                                                                         \
-} // geis_keychain_users
+#define restrict_users(className, property, userIdProperty)                     \
+synthesize_constructor(className, property,                                     \
+restrictUsersData(instance, @#userIdProperty)) // restrict_users
 
-#define synthesize_constructor(className, property)                                             \
-dynamic property;                                                                               \
-ZUX_CONSTRUCTOR void synthesize_ZUX_DATABOX_##className##_##property() // synthesize_constructor
-
-#pragma mark - Implementation methods
-
-void synthesizeZUXDataBoxProperty(NSString *className, NSString *propertyName,
-                                  NSDictionary *(^dataRefBlock)(id instance));
-NSDictionary *userDataRef(NSDictionary *dataRef, id userId);
-
-NSDictionary *defaultData(id instance, NSString *key);
-NSDictionary *keychainData(id instance, NSString *key, NSString *domain);
-NSDictionary *geisKeychainData(id instance, NSString *key, NSString *domain);
-
-void defaultDataSynchronize(id instance, NSString *key);
-void keychainDataSynchronize(id instance, NSString *key, NSString *domain);
-void geisKeychainDataSynchronize(id instance, NSString *key, NSString *domain);
+#define synthesize_constructor(className, property, dataRef)                    \
+dynamic property;                                                               \
+ZUX_CONSTRUCTOR void synthesize_ZUX_DATABOX_##className##_##property() {        \
+    synthesizeProperty(@#className, @#property, ^NSDictionary *(id instance) {  \
+        return dataRef;                                                         \
+    });                                                                         \
+} // synthesize_constructor
 
 #endif
+
+ZUX_EXTERN void constructZUXDataBox(const char *className);
+
+ZUX_EXTERN void defaultShareDataSynchronize(id instance);
+ZUX_EXTERN void keychainShareDataSynchronize(id instance);
+ZUX_EXTERN void restrictShareDataSynchronize(id instance);
+ZUX_EXTERN void defaultUsersDataSynchronize(id instance);
+ZUX_EXTERN void keychainUsersDataSynchronize(id instance);
+ZUX_EXTERN void restrictUsersDataSynchronize(id instance);
+
+ZUX_EXTERN NSDictionary *defaultShareData(id instance);
+ZUX_EXTERN NSDictionary *keychainShareData(id instance);
+ZUX_EXTERN NSDictionary *restrictShareData(id instance);
+ZUX_EXTERN NSDictionary *defaultUsersData(id instance, NSString *userIdKey);
+ZUX_EXTERN NSDictionary *keychainUsersData(id instance, NSString *userIdKey);
+ZUX_EXTERN NSDictionary *restrictUsersData(id instance, NSString *userIdKey);
+
+ZUX_EXTERN void synthesizeProperty(NSString *className, NSString *propertyName, NSDictionary *(^dataRef)(id instance));

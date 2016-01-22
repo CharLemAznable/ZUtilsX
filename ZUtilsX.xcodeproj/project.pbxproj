@@ -51,6 +51,7 @@
 		6A1794711C05D8A300FF5870 /* UITextField+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A1794651C05BB4300FF5870 /* UITextField+ZUX.h */; };
 		6A1794721C05D8A300FF5870 /* UITextView+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A1794621C05BB1300FF5870 /* UITextView+ZUX.h */; };
 		6A1794731C05D8A300FF5870 /* UITabBarItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */; };
+		6A273D001C520C8800D4E803 /* NSValueZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A273CFF1C520C8800D4E803 /* NSValueZUXTest.m */; };
 		6A29B3E81C3A14AE003DF51A /* ZUXJSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A29B3E71C3A14AE003DF51A /* ZUXJSONKit.m */; };
 		6A5024B21C1A70F6002A7E99 /* ZUXColorDictionaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5024B11C1A70F6002A7E99 /* ZUXColorDictionaryTest.m */; };
 		6A5024B41C1A72BE002A7E99 /* ZUXColorDictionaryTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A5024B31C1A72BE002A7E99 /* ZUXColorDictionaryTest.plist */; };
@@ -276,6 +277,7 @@
 		6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+ZUX.h"; sourceTree = "<group>"; };
 		6A17946C1C05D45800FF5870 /* UITabBarItem+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarItem+ZUX.m"; sourceTree = "<group>"; };
 		6A17946E1C05D58600FF5870 /* NSDateZUXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDateZUXTest.m; path = Categories/Foundation/NSDateZUXTest.m; sourceTree = "<group>"; };
+		6A273CFF1C520C8800D4E803 /* NSValueZUXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSValueZUXTest.m; path = Categories/Foundation/NSValueZUXTest.m; sourceTree = "<group>"; };
 		6A29B3E51C3A14AE003DF51A /* zappearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zappearance.h; path = Privates/zappearance.h; sourceTree = "<group>"; };
 		6A29B3E61C3A14AE003DF51A /* ZUXJSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXJSONKit.h; path = Privates/ZUXJSONKit.h; sourceTree = "<group>"; };
 		6A29B3E71C3A14AE003DF51A /* ZUXJSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXJSONKit.m; path = Privates/ZUXJSONKit.m; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 				6A1087E61C048D780062160C /* NSArrayZUXTest.m */,
 				6A1087E81C048D8B0062160C /* NSDictionaryZUXTest.m */,
 				6A1087EA1C0496110062160C /* NSStringZUXTest.m */,
+				6A273CFF1C520C8800D4E803 /* NSValueZUXTest.m */,
 				6A17946E1C05D58600FF5870 /* NSDateZUXTest.m */,
 			);
 			name = Foundation;
@@ -886,6 +889,7 @@
 				6A1087E91C048D8B0062160C /* NSDictionaryZUXTest.m in Sources */,
 				6A0F89731C0356B90003948C /* ZUXDirectoryTest.m in Sources */,
 				6A17637B1C06B83800EC52FE /* UIColorZUXTest.m in Sources */,
+				6A273D001C520C8800D4E803 /* NSValueZUXTest.m in Sources */,
 				6A1763801C06DAB600EC52FE /* ZUXConstraintTest.m in Sources */,
 				6A17637D1C06D85000EC52FE /* UIViewControllerZUXTest.m in Sources */,
 				6A7B861D1C29496E00FF864E /* UIImageZUXTest.m in Sources */,

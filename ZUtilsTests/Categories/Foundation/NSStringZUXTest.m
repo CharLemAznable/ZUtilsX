@@ -22,6 +22,11 @@
     
     NSArray *array = @[@1, @"is", @"name"];
     XCTAssertTrue([@"He's name is John·Doe. 1" containsAllOfStringInArray:array]);
+    
+    NSString *oriString = @"Lorem<==>ipsum=dolar>=<sit<>amet.";
+    XCTAssertEqualObjects([oriString stringByReplacingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"=><"] withString:@" "], @"Lorem    ipsum dolar   sit  amet.");
+    XCTAssertEqualObjects([oriString stringByReplacingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"=><"] withString:@" " mergeContinuous:YES], @"Lorem ipsum dolar sit amet.");
+    XCTAssertEqualObjects([oriString stringByReplacingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"=><"] withString:@""], @"Loremipsumdolarsitamet.");
 }
 
 @end
