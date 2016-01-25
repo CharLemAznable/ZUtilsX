@@ -62,26 +62,30 @@ static NSArray *NSObjectProperties = nil;
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
     if (ZUX_EXPECT_T(self = [self init])) {
-        [self enumerateZUXPropertiesWithBlock:^(id object, ZUXProperty *property) {
-            if ([property isReadOnly] || [property isWeakReference]
-                || [NSObjectProperties containsObject:[property name]]) return;
-            
-            id value = [jsonObject objectForKey:[property name]];
-            if (!value) return;
-            
-            Class propertyClass = [property objectClass];
-            if (propertyClass == [NSValue class]) value = [NSValue valueWithJsonObject:value];
-            else if (propertyClass) value = ZUX_AUTORELEASE([[propertyClass alloc] initWithJsonObject:value]);
-            
-            @try {
-                [object setValue:value forKey:[property name]];
-            }
-            @catch (NSException *exception) {
-                ZLog(@"%@", exception);
-            }
-        }];
+        [self setPropertiesWithJsonObject:jsonObject];
     }
     return self;
+}
+
+- (void)setPropertiesWithJsonObject:(id)jsonObject {
+    [self enumerateZUXPropertiesWithBlock:^(id object, ZUXProperty *property) {
+        if ([property isReadOnly] || [property isWeakReference]
+            || [NSObjectProperties containsObject:[property name]]) return;
+        
+        id value = [jsonObject objectForKey:[property name]];
+        if (!value) return;
+        
+        Class propertyClass = [property objectClass];
+        if (propertyClass == [NSValue class]) value = [NSValue valueWithJsonObject:value];
+        else if (propertyClass) value = ZUX_AUTORELEASE([[propertyClass alloc] initWithJsonObject:value]);
+        
+        @try {
+            [object setValue:value forKey:[property name]];
+        }
+        @catch (NSException *exception) {
+            ZLog(@"%@", exception);
+        }
+    }];
 }
 
 @end

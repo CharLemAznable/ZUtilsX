@@ -22,6 +22,7 @@
 - (NSData *)zuxJsonData;
 - (NSString *)zuxJsonString;
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject;
+- (void)setPropertiesWithJsonObject:(id)jsonObject;
 
 @end // ZUXJsonable
 
