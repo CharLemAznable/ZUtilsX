@@ -93,6 +93,27 @@
         // 如果指定的属性为弱引用, 则json化时默认忽略.
         // 如果指定的属性为弱引用/只读, 则反json化时默认忽略.
 
+        // 自定义结构体装箱为NSValue后, 可使用宏:
+        struct_jsonable_interface(structType)
+        struct_jsonable_implementation(structType)
+        // 添加结构体转换JSON对象的实现.
+
+        // 示例:
+        typedef struct {
+          ...
+        } CustomStruct;
+        @struct_jsonable_interface(CustomStruct)
+        @struct_jsonable_implementation(CustomStruct)
+        - (id)zuxJsonObjectForCustomStruct {
+            ...
+            return @{...};
+        }
+        + (NSValue * )valueWithJsonObjectForCustomStruct:(id)jsonObject {
+            ...
+            return [NSValue valueWith...];
+        }
+        @end
+
 * NSNull+ZUX
 
         //封装判断空对象方法.
