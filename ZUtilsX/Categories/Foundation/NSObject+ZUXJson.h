@@ -32,8 +32,25 @@
 @end // NSNull (ZUXJson)
 
 @category_interface(NSValue, ZUXJson)
++ (void)addSupportedObjCType:(const char *)objCType withName:(NSString *)typeName;
 + (NSValue *)valueWithJsonObject:(id)jsonObject;
 @end // NSValue (ZUXJson)
+
+#define struct_jsonable_interface(structType)                   \
+category_interface(NSValue, structType##JsonableDummy)          \
+@end                                                            \
+ZUX_CONSTRUCTOR void add_##structType##_jsonable_support()      \
+{ [NSValue addSupportedObjCType:@encode(structType)             \
+                       withName:@#structType]; }                \
+@interface NSValue (structType##Jsonable)                       \
+- (id)zuxJsonObjectFor##structType;                             \
++ (NSValue *)valueWithJsonObjectFor##structType:(id)jsonObject; \
+@end
+
+#define struct_jsonable_implementation(structType)              \
+category_implementation(NSValue, structType##JsonableDummy)     \
+@end                                                            \
+@implementation NSValue (structType##Jsonable)
 
 @category_interface(NSNumber, ZUXJson)
 @end // NSNumber (ZUXJson)

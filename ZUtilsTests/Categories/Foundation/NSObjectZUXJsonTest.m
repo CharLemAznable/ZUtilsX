@@ -31,6 +31,27 @@
 }
 @end
 
+typedef struct {
+    bool a;
+    bool b;
+} ZUXTestStructBool;
+@struct_boxed_interface(ZUXTestStructBool)
+@struct_boxed_implementation(ZUXTestStructBool)
+
+@struct_jsonable_interface(ZUXTestStructBool)
+@struct_jsonable_implementation(ZUXTestStructBool)
+- (id)zuxJsonObjectForZUXTestStructBool {
+    ZUXTestStructBool v = [self ZUXTestStructBoolValue];
+    return @{@"a": @(v.a), @"b": @(v.b)};
+}
++ (NSValue *)valueWithJsonObjectForZUXTestStructBool:(id)jsonObject {
+    BOOL a = [[jsonObject objectForKey:@"a"] boolValue];
+    BOOL b = [[jsonObject objectForKey:@"b"] boolValue];
+    ZUXTestStructBool v = {.a = a, .b = b};
+    return [NSValue valueWithZUXTestStructBool:v];
+}
+@end
+
 @interface NSObjectZUXJsonTest : XCTestCase
 
 @end
@@ -60,6 +81,23 @@
     
     NSArray *array = @[dict];
     XCTAssertEqualObjects([array zuxJsonString], @"[{\"json\":{\"field3\":0,\"field2\":\"JSON\",\"field1\":[]}}]");
+    
+    NSValue *pointValue = [NSValue valueWithCGPoint:CGPointMake(1, 1)];
+    id pointJson = [pointValue zuxJsonObject];
+    NSDictionary *expectDict = @{@"type":@"{CGPoint=dd}", @"x":@1, @"y":@1};
+    XCTAssertEqualObjects(pointJson, expectDict);
+    NSValue *pointValue2 = [NSValue valueWithJsonObject:pointJson];
+    XCTAssertEqual([pointValue2 CGPointValue].x, 1);
+    XCTAssertEqual([pointValue2 CGPointValue].y, 1);
+    
+    ZUXTestStructBool b = {.a = YES, .b = NO};
+    NSValue *boolValue = [NSValue valueWithZUXTestStructBool:b];
+    id boolJson = [boolValue zuxJsonObject];
+    expectDict = @{@"type":@"{?=BB}", @"a":@1, @"b":@0};
+    XCTAssertEqualObjects(boolJson, expectDict);
+    NSValue *boolValue2 = [NSValue valueWithJsonObject:boolJson];
+    XCTAssertEqual([boolValue2 ZUXTestStructBoolValue].a, YES);
+    XCTAssertEqual([boolValue2 ZUXTestStructBoolValue].b, NO);
 }
 
 @end
