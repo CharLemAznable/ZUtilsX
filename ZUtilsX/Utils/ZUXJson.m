@@ -18,6 +18,7 @@ BOOL ZUX_USE_JSONKIT = NO;
 @implementation ZUXJson
 
 + (id)objectFromJsonData:(NSData *)jsonData {
+    if (!jsonData) return nil;
     if (ZUX_USE_JSONKIT) {
         return [jsonData objectFromJSONData];
     } else {
@@ -57,6 +58,7 @@ BOOL ZUX_USE_JSONKIT = NO;
 }
 
 + (NSData *)jsonDataFromObject:(id)object {
+    if (!object) return nil;
     if (![self isValidJSONObject:object]) {
         id jsonObject = [object zuxJsonObject];
         if (ZUX_EXPECT_F(![self isValidJSONObject:jsonObject])) {

@@ -14,7 +14,7 @@
 
 #define ShareUserDefaults               [NSUserDefaults standardUserDefaults]
 #define AppKeyFormat(key)               [NSString stringWithFormat:@"%@."@#key, appIdentifier]
-#define ClassKeyFormat(className, key)  [NSString stringWithFormat:@"%@."@#className@"."@#key, appIdentifier]
+#define ClassKeyFormat(className, key)  [NSString stringWithFormat:@"%@.%s"@"."@#key, appIdentifier, className]
 
 NSString *ZUXAppEverLaunchedKey = nil;
 NSString *ZUXAppFirstLaunchKey = nil;
@@ -163,7 +163,7 @@ void synthesizeProperty(NSString *className, NSString *propertyName, NSDictionar
 ZUX_STATIC void defaultDataSynchronize(id instance, NSString *key) {
     NSDictionary *data = [instance propertyForAssociateKey:key];
     if (!data) return;
-    [ShareUserDefaults setObject:data forKey:key];
+    [ShareUserDefaults setObject:[ZUXJson jsonStringFromObject:data] forKey:key];
     [ShareUserDefaults synchronize];
 }
 
@@ -184,7 +184,7 @@ ZUX_STATIC void restrictDataSynchronize(id instance, NSString *key, NSString *do
 ZUX_STATIC NSDictionary *defaultData(id instance, NSString *key) {
     if (ZUX_EXPECT_F(![instance propertyForAssociateKey:key]))
         [instance setProperty:[NSMutableDictionary dictionaryWithDictionary:
-                               [ShareUserDefaults objectForKey:key]]
+                               [ZUXJson objectFromJsonString:[ShareUserDefaults objectForKey:key]]]
               forAssociateKey:key];
     return [instance propertyForAssociateKey:key];
 }
@@ -192,7 +192,7 @@ ZUX_STATIC NSDictionary *defaultData(id instance, NSString *key) {
 ZUX_STATIC NSDictionary *keychainData(id instance, NSString *key, NSString *domain) {
     if (ZUX_EXPECT_F(![instance propertyForAssociateKey:key])) {
         NSError *error = nil;
-        NSString *dataStr = [ZUXKeychain passwordForUsername:key andService:domain error:&error] ?: @"{}";
+        NSString *dataStr = [ZUXKeychain passwordForUsername:key andService:domain error:&error];
         if (error) ZLog(@"Keychain Error: %@", error);
         [instance setProperty:[NSMutableDictionary dictionaryWithDictionary:
                                [ZUXJson objectFromJsonString:dataStr]]
