@@ -15,6 +15,8 @@
 
 #if NS_BLOCKS_AVAILABLE
 
+ZUX_EXTERN NSString *const ZUXJSON_CLASS;
+
 @protocol ZUXJsonable <NSObject>
 
 @optional
@@ -31,6 +33,8 @@
 
 @category_interface(NSNull, ZUXJson)
 @end // NSNull (ZUXJson)
+
+ZUX_EXTERN NSString *const ZUXJSON_STRUCT;
 
 @category_interface(NSValue, ZUXJson)
 + (void)addSupportedObjCType:(const char *)objCType withName:(NSString *)typeName;

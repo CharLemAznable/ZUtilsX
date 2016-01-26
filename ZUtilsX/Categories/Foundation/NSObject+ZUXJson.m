@@ -20,6 +20,10 @@
 
 #if NS_BLOCKS_AVAILABLE
 
+ZUX_STATIC id parseZUXJsonObject(id jsonObject);
+
+NSString *const ZUXJSON_CLASS = @"ZUXClassName";
+
 @category_implementation(NSObject, ZUXJson)
 
 static NSArray *NSObjectProperties = nil;
@@ -36,7 +40,8 @@ static NSArray *NSObjectProperties = nil;
 }
 
 - (id)zuxJsonObject {
-    NSMutableDictionary *properties = [NSMutableDictionary dictionary];
+    NSMutableDictionary *properties = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       [[self class] description], ZUXJSON_CLASS, nil];
     [self enumerateZUXPropertiesWithBlock:^(id object, ZUXProperty *property) {
         if ([property isWeakReference] || [NSObjectProperties containsObject:[property name]]) return;
         
@@ -78,6 +83,7 @@ static NSArray *NSObjectProperties = nil;
         Class propertyClass = [property objectClass];
         if (propertyClass == [NSValue class]) value = [NSValue valueWithJsonObject:value];
         else if (propertyClass) value = ZUX_AUTORELEASE([[propertyClass alloc] initWithJsonObject:value]);
+        else value = parseZUXJsonObject(value);
         
         @try {
             [object setValue:value forKey:[property name]];
@@ -101,6 +107,8 @@ static NSArray *NSObjectProperties = nil;
 }
 
 @end
+
+NSString *const ZUXJSON_STRUCT = @"ZUXStructName";
 
 @category_implementation(NSValue, ZUXJson)
 
@@ -131,14 +139,14 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
     if (!typeName) return [super zuxJsonObject];
     SEL jsonSel = NSSelectorFromString([NSString stringWithFormat:@"zuxJsonObjectFor%@", typeName]);
     if (!jsonSel || ![self respondsToSelector:jsonSel]) return [super zuxJsonObject];
-    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:objCType, @"type", nil];
+    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:objCType, ZUXJSON_STRUCT, nil];
     [result addEntriesFromDictionary:[self performSelector:jsonSel]];
     return ZUX_AUTORELEASE([result copy]);
 }
 
 + (NSValue *)valueWithJsonObject:(id)jsonObject {
     if (![jsonObject isKindOfClass:[NSDictionary class]]) return nil;
-    NSString *typeName = [[NSValue propertyForAssociateKey:ZUXJsonableMappingKey] objectForKey:jsonObject[@"type"]];
+    NSString *typeName = [[NSValue propertyForAssociateKey:ZUXJsonableMappingKey] objectForKey:jsonObject[ZUXJSON_STRUCT]];
     if (!typeName) return nil;
     SEL jsonSel = NSSelectorFromString([NSString stringWithFormat:@"valueWithJsonObjectFor%@:", typeName]);
     if (!jsonSel || ![self respondsToSelector:jsonSel]) return nil;
@@ -154,7 +162,7 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
 }
 
 + (NSValue *)valueWithJsonObjectForCGPoint:(id)jsonObject {
-    if (strcmp([jsonObject[@"type"] UTF8String], @encode(CGPoint)) != 0) return nil;
+    if (strcmp([jsonObject[ZUXJSON_STRUCT] UTF8String], @encode(CGPoint)) != 0) return nil;
     CGFloat x = [[jsonObject objectForKey:@"x"] cgfloatValue];
     CGFloat y = [[jsonObject objectForKey:@"y"] cgfloatValue];
     return [NSValue valueWithCGPoint:CGPointMake(x, y)];
@@ -167,7 +175,7 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
 }
 
 + (NSValue *)valueWithJsonObjectForCGVector:(id)jsonObject {
-    if (strcmp([jsonObject[@"type"] UTF8String], @encode(CGVector)) != 0) return nil;
+    if (strcmp([jsonObject[ZUXJSON_STRUCT] UTF8String], @encode(CGVector)) != 0) return nil;
     CGFloat dx = [[jsonObject objectForKey:@"dx"] cgfloatValue];
     CGFloat dy = [[jsonObject objectForKey:@"dy"] cgfloatValue];
     return [NSValue valueWithCGVector:CGVectorMake(dx, dy)];
@@ -180,7 +188,7 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
 }
 
 + (NSValue *)valueWithJsonObjectForCGSize:(id)jsonObject {
-    if (strcmp([jsonObject[@"type"] UTF8String], @encode(CGSize)) != 0) return nil;
+    if (strcmp([jsonObject[ZUXJSON_STRUCT] UTF8String], @encode(CGSize)) != 0) return nil;
     CGFloat width = [[jsonObject objectForKey:@"width"] cgfloatValue];
     CGFloat height = [[jsonObject objectForKey:@"height"] cgfloatValue];
     return [NSValue valueWithCGSize:CGSizeMake(width, height)];
@@ -194,7 +202,7 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
 }
 
 + (NSValue *)valueWithJsonObjectForCGRect:(id)jsonObject {
-    if (strcmp([jsonObject[@"type"] UTF8String], @encode(CGRect)) != 0) return nil;
+    if (strcmp([jsonObject[ZUXJSON_STRUCT] UTF8String], @encode(CGRect)) != 0) return nil;
     NSValue *origin = [NSValue valueWithJsonObject:[jsonObject objectForKey:@"origin"]];
     NSValue *size = [NSValue valueWithJsonObject:[jsonObject objectForKey:@"size"]];
     return [NSValue valueWithCGRect:ZUX_CGRectMake([origin CGPointValue], [size CGSizeValue])];
@@ -208,7 +216,7 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
 }
 
 + (NSValue *)valueWithJsonObjectForCGAffineTransform:(id)jsonObject {
-    if (strcmp([jsonObject[@"type"] UTF8String], @encode(CGAffineTransform)) != 0) return nil;
+    if (strcmp([jsonObject[ZUXJSON_STRUCT] UTF8String], @encode(CGAffineTransform)) != 0) return nil;
     CGFloat a = [[jsonObject objectForKey:@"a"] cgfloatValue];
     CGFloat b = [[jsonObject objectForKey:@"b"] cgfloatValue];
     CGFloat c = [[jsonObject objectForKey:@"c"] cgfloatValue];
@@ -226,7 +234,7 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
 }
 
 + (NSValue *)valueWithJsonObjectForUIEdgeInsets:(id)jsonObject {
-    if (strcmp([jsonObject[@"type"] UTF8String], @encode(UIEdgeInsets)) != 0) return nil;
+    if (strcmp([jsonObject[ZUXJSON_STRUCT] UTF8String], @encode(UIEdgeInsets)) != 0) return nil;
     CGFloat top = [[jsonObject objectForKey:@"top"] cgfloatValue];
     CGFloat left = [[jsonObject objectForKey:@"left"] cgfloatValue];
     CGFloat bottom = [[jsonObject objectForKey:@"bottom"] cgfloatValue];
@@ -241,7 +249,7 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
 }
 
 + (NSValue *)valueWithJsonObjectForUIOffset:(id)jsonObject {
-    if (strcmp([jsonObject[@"type"] UTF8String], @encode(UIOffset)) != 0) return nil;
+    if (strcmp([jsonObject[ZUXJSON_STRUCT] UTF8String], @encode(UIOffset)) != 0) return nil;
     CGFloat horizontal = [[jsonObject objectForKey:@"horizontal"] cgfloatValue];
     CGFloat vertical = [[jsonObject objectForKey:@"vertical"] cgfloatValue];
     return [NSValue valueWithUIOffset:UIOffsetMake(horizontal, vertical)];
@@ -297,7 +305,12 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
     if ([jsonObject isKindOfClass:[NSArray class]]) {
-        return [self initWithArray:jsonObject copyItems:YES];
+        NSMutableArray *unjsonArray = [NSMutableArray array];
+        [jsonObject enumerateObjectsUsingBlock:
+         ^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+             [unjsonArray addObject:parseZUXJsonObject(obj)];
+         }];
+        return [self initWithArray:unjsonArray copyItems:YES];
     }
     return nil;
 }
@@ -321,11 +334,26 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
     if ([jsonObject isKindOfClass:[NSDictionary class]]) {
-        return [self initWithDictionary:jsonObject copyItems:YES];
+        NSMutableDictionary *unjsonDictionary = [NSMutableDictionary dictionary];
+        [jsonObject enumerateKeysAndObjectsUsingBlock:
+         ^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+             [unjsonDictionary setObject:parseZUXJsonObject(obj)
+                                  forKey:parseZUXJsonObject(key)];
+         }];
+        return [self initWithDictionary:unjsonDictionary copyItems:YES];
     }
     return nil;
 }
 
 @end
+
+ZUX_STATIC id parseZUXJsonObject(id jsonObject) {
+    if (![jsonObject isKindOfClass:[NSDictionary class]]) return jsonObject;
+    if ([jsonObject objectForKey:ZUXJSON_STRUCT]) return [NSValue valueWithJsonObject:jsonObject];
+    else if ([jsonObject objectForKey:ZUXJSON_CLASS]) {
+        Class clz = objc_getClass([[jsonObject objectForKey:ZUXJSON_CLASS] UTF8String]);
+        if (clz) return ZUX_AUTORELEASE([[clz alloc] initWithJsonObject:jsonObject]);
+    } return jsonObject;
+}
 
 #endif // NS_BLOCKS_AVAILABLE

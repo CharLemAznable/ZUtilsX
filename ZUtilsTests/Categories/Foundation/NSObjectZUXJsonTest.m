@@ -52,6 +52,12 @@ typedef struct ZUXTestStructBool {
 }
 @end
 
+@interface JsonBean2 : NSObject
+@property (nonatomic, strong) NSArray *array;
+@end
+@implementation JsonBean2
+@end
+
 @interface NSObjectZUXJsonTest : XCTestCase
 
 @end
@@ -65,26 +71,26 @@ typedef struct ZUXTestStructBool {
     XCTAssertEqualObjects([@"JSON" zuxJsonString], @"JSON");
     
     JsonBean *jsonBean = [[JsonBean alloc] initWithJsonObject:@{@"field1":@[]}];
-    XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field3\":0,\"field1\":[]}");
+    XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field3\":0,\"ZUXClassName\":\"JsonBean\",\"field1\":[]}");
     
     jsonBean.field1 = [NSNull null];
-    XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field3\":0}");
+    XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field3\":0,\"ZUXClassName\":\"JsonBean\"}");
     
     jsonBean.field2 = @"JSON";
-    XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field3\":0,\"field2\":\"JSON\"}");
+    XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field3\":0,\"field2\":\"JSON\",\"ZUXClassName\":\"JsonBean\"}");
     
     jsonBean.field1 = [NSArray array];
-    XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field3\":0,\"field2\":\"JSON\",\"field1\":[]}");
+    XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field1\":[],\"field2\":\"JSON\",\"ZUXClassName\":\"JsonBean\",\"field3\":0}");
     
     NSDictionary *dict = @{@"json":jsonBean};
-    XCTAssertEqualObjects([dict zuxJsonString], @"{\"json\":{\"field3\":0,\"field2\":\"JSON\",\"field1\":[]}}");
+    XCTAssertEqualObjects([dict zuxJsonString], @"{\"json\":{\"field1\":[],\"field2\":\"JSON\",\"ZUXClassName\":\"JsonBean\",\"field3\":0}}");
     
     NSArray *array = @[dict];
-    XCTAssertEqualObjects([array zuxJsonString], @"[{\"json\":{\"field3\":0,\"field2\":\"JSON\",\"field1\":[]}}]");
+    XCTAssertEqualObjects([array zuxJsonString], @"[{\"json\":{\"field1\":[],\"field2\":\"JSON\",\"ZUXClassName\":\"JsonBean\",\"field3\":0}}]");
     
     NSValue *pointValue = [NSValue valueWithCGPoint:CGPointMake(1, 1)];
     id pointJson = [pointValue zuxJsonObject];
-    NSDictionary *expectDict = @{@"type":@"{CGPoint=dd}", @"x":@1, @"y":@1};
+    NSDictionary *expectDict = @{@"ZUXStructName":@"{CGPoint=dd}", @"x":@1, @"y":@1};
     XCTAssertEqualObjects(pointJson, expectDict);
     NSValue *pointValue2 = [NSValue valueWithJsonObject:pointJson];
     XCTAssertEqual([pointValue2 CGPointValue].x, 1);
@@ -93,7 +99,7 @@ typedef struct ZUXTestStructBool {
     ZUXTestStructBool b = {.a = YES, .b = NO};
     NSValue *boolValue = [NSValue valueWithZUXTestStructBool:b];
     id boolJson = [boolValue zuxJsonObject];
-    expectDict = @{@"type":@(@encode(ZUXTestStructBool)), @"a":@1, @"b":@0};
+    expectDict = @{@"ZUXStructName":@(@encode(ZUXTestStructBool)), @"a":@1, @"b":@0};
     XCTAssertEqualObjects(boolJson, expectDict);
     NSValue *boolValue2 = [NSValue valueWithJsonObject:boolJson];
     XCTAssertEqual([boolValue2 ZUXTestStructBoolValue].a, YES);
