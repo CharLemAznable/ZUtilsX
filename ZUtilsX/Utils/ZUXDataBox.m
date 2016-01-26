@@ -8,13 +8,13 @@
 
 #import "ZUXDataBox.h"
 #import "NSObject+ZUX.h"
+#import "NSObject+ZUXJson.h"
 #import "ZUXProperty.h"
 #import "ZUXKeychain.h"
-#import "ZUXJson.h"
 
 #define ShareUserDefaults               [NSUserDefaults standardUserDefaults]
 #define AppKeyFormat(key)               [NSString stringWithFormat:@"%@."@#key, appIdentifier]
-#define ClassKeyFormat(className, key)  [NSString stringWithFormat:@"%@."@#className@"."@#key, appIdentifier]
+#define ClassKeyFormat(className, key)  [NSString stringWithFormat:@"%@.%s"@"."@#key, appIdentifier, className]
 
 NSString *ZUXAppEverLaunchedKey = nil;
 NSString *ZUXAppFirstLaunchKey = nil;
@@ -59,11 +59,10 @@ ZUX_STATIC void defaultDataSynchronize(id instance, NSString *key);
 ZUX_STATIC void keychainDataSynchronize(id instance, NSString *key, NSString *domain);
 ZUX_STATIC void restrictDataSynchronize(id instance, NSString *key, NSString *domain);
 
-ZUX_STATIC NSDictionary *defaultData(id instance, NSString *key);
-ZUX_STATIC NSDictionary *keychainData(id instance, NSString *key, NSString *domain);
-ZUX_STATIC NSDictionary *restrictData(id instance, NSString *key, NSString *domain);
-
-ZUX_STATIC NSDictionary *userDataRef(NSDictionary *dataRef, id userId);
+ZUX_STATIC BOOL initialShareData(id instance, NSString *key);
+ZUX_STATIC BOOL initialUsersData(id instance, NSString *key, id userId);
+ZUX_STATIC NSString *keychainDataString(NSString *key, NSString *domain);
+ZUX_STATIC void cleanKeychainData(NSString *key, NSString *domain);
 
 #pragma mark -
 
@@ -113,30 +112,65 @@ void restrictUsersDataSynchronize(id instance) {
 }
 
 NSDictionary *defaultShareData(id instance) {
-    return defaultData(instance, keyProperty(DefaultShare));
+    NSString *key = keyProperty(DefaultShare);
+    if (initialShareData(instance, key))
+        [instance setPropertiesWithJsonObject:
+         [[ShareUserDefaults objectForKey:key] objectFromJsonString]];
+    return [instance propertyForAssociateKey:key];
 }
 
 NSDictionary *keychainShareData(id instance) {
-    return keychainData(instance, keyProperty(KeychainShare), keyProperty(KeychainShareDomain));
+    NSString *key = keyProperty(KeychainShare);
+    NSString *domain = keyProperty(KeychainShareDomain);
+    if (initialShareData(instance, key))
+        [instance setPropertiesWithJsonObject:
+         [keychainDataString(key, domain) objectFromJsonString]];
+    return [instance propertyForAssociateKey:key];
 }
 
 NSDictionary *restrictShareData(id instance) {
-    return restrictData(instance, keyProperty(RestrictShare), keyProperty(RestrictShareDomain));
+    NSString *key = keyProperty(RestrictShare);
+    NSString *domain = keyProperty(RestrictShareDomain);
+    if (initialShareData(instance, key)) {
+        if ([ZUXDataBox appFirstLaunch]) cleanKeychainData(key, domain);
+        else [instance setPropertiesWithJsonObject:
+              [keychainDataString(key, domain) objectFromJsonString]];
+    }
+    return [instance propertyForAssociateKey:key];
 }
 
 NSDictionary *defaultUsersData(id instance, NSString *userIdKey) {
-    return userDataRef(defaultData(instance, keyProperty(DefaultUsers)),
-                       [instance valueForKey:userIdKey]);
+    NSString *key = keyProperty(DefaultUsers);
+    id userId = [instance valueForKey:userIdKey];
+    if (initialUsersData(instance, key, userId))
+        [instance setPropertiesWithJsonObject:
+         [[[ShareUserDefaults objectForKey:key]
+           objectFromJsonString] objectForKey:userId]];
+    return [[instance propertyForAssociateKey:key] objectForKey:userId];
 }
 
 NSDictionary *keychainUsersData(id instance, NSString *userIdKey) {
-    return userDataRef(keychainData(instance, keyProperty(KeychainUsers), keyProperty(KeychainUsersDomain)),
-                       [instance valueForKey:userIdKey]);
+    NSString *key = keyProperty(KeychainUsers);
+    NSString *domain = keyProperty(KeychainUsersDomain);
+    id userId = [instance valueForKey:userIdKey];
+    if (initialUsersData(instance, key, userId))
+        [instance setPropertiesWithJsonObject:
+         [[keychainDataString(key, domain)
+           objectFromJsonString] objectForKey:userId]];
+    return [[instance propertyForAssociateKey:key] objectForKey:userId];
 }
 
 NSDictionary *restrictUsersData(id instance, NSString *userIdKey) {
-    return userDataRef(restrictData(instance, keyProperty(RestrictUsers), keyProperty(RestrictUsersDomain)),
-                       [instance valueForKey:userIdKey]);
+    NSString *key = keyProperty(RestrictUsers);
+    NSString *domain = keyProperty(RestrictUsersDomain);
+    id userId = [instance valueForKey:userIdKey];
+    if (initialUsersData(instance, key, userId)) {
+        if ([ZUXDataBox appFirstLaunch]) cleanKeychainData(key, domain);
+        else [instance setPropertiesWithJsonObject:
+              [[keychainDataString(key, domain)
+                objectFromJsonString] objectForKey:userId]];
+    }
+    return [[instance propertyForAssociateKey:key] objectForKey:userId];
 }
 
 void synthesizeProperty(NSString *className, NSString *propertyName, NSDictionary *(^dataRef)(id instance)) {
@@ -163,14 +197,14 @@ void synthesizeProperty(NSString *className, NSString *propertyName, NSDictionar
 ZUX_STATIC void defaultDataSynchronize(id instance, NSString *key) {
     NSDictionary *data = [instance propertyForAssociateKey:key];
     if (!data) return;
-    [ShareUserDefaults setObject:data forKey:key];
+    [ShareUserDefaults setObject:[data zuxJsonStringWithOptions:ZUXJsonOptionWithType] forKey:key];
     [ShareUserDefaults synchronize];
 }
 
 ZUX_STATIC void keychainDataSynchronize(id instance, NSString *key, NSString *domain) {
     NSDictionary *data = [instance propertyForAssociateKey:key];
     if (!data) return;
-    NSString *dataStr = [ZUXJson jsonStringFromObject:data];
+    NSString *dataStr = [data zuxJsonStringWithOptions:ZUXJsonOptionWithType];
     if (!dataStr) return;
     NSError *error = nil;
     [ZUXKeychain storePassword:dataStr forUsername:key andService:domain updateExisting:YES error:&error];
@@ -181,39 +215,30 @@ ZUX_STATIC void restrictDataSynchronize(id instance, NSString *key, NSString *do
     keychainDataSynchronize(instance, key, domain);
 }
 
-ZUX_STATIC NSDictionary *defaultData(id instance, NSString *key) {
-    if (ZUX_EXPECT_F(![instance propertyForAssociateKey:key]))
-        [instance setProperty:[NSMutableDictionary dictionaryWithDictionary:
-                               [ShareUserDefaults objectForKey:key]]
-              forAssociateKey:key];
-    return [instance propertyForAssociateKey:key];
-}
-
-ZUX_STATIC NSDictionary *keychainData(id instance, NSString *key, NSString *domain) {
+ZUX_STATIC BOOL initialShareData(id instance, NSString *key) {
     if (ZUX_EXPECT_F(![instance propertyForAssociateKey:key])) {
-        NSError *error = nil;
-        NSString *dataStr = [ZUXKeychain passwordForUsername:key andService:domain error:&error] ?: @"{}";
-        if (error) ZLog(@"Keychain Error: %@", error);
-        [instance setProperty:[NSMutableDictionary dictionaryWithDictionary:
-                               [ZUXJson objectFromJsonString:dataStr]]
-              forAssociateKey:key];
+        [instance setProperty:[NSMutableDictionary dictionary] forAssociateKey:key];
+        return YES;
     }
-    return [instance propertyForAssociateKey:key];
+    return NO;
 }
 
-ZUX_STATIC NSDictionary *restrictData(id instance, NSString *key, NSString *domain) {
-    if (ZUX_EXPECT_F(![instance propertyForAssociateKey:key])) {
-        if ([ZUXDataBox appFirstLaunch]) {
-            [ZUXKeychain deletePasswordForUsername:key andService:domain error:NULL];
-            [instance setProperty:[NSMutableDictionary dictionary] forAssociateKey:key];
-        }
+ZUX_STATIC BOOL initialUsersData(id instance, NSString *key, id userId) {
+    initialShareData(instance, key);
+    if (ZUX_EXPECT_F(![[instance propertyForAssociateKey:key] objectForKey:userId])) {
+        [[instance propertyForAssociateKey:key] setObject:[NSMutableDictionary dictionary] forKey:userId];
+        return YES;
     }
-    return keychainData(instance, key, domain);
+    return NO;
 }
 
-ZUX_STATIC NSDictionary *userDataRef(NSDictionary *dataRef, id userId) {
-    if (![[dataRef objectForKey:userId] isKindOfClass:NSClassFromString(@"__NSDictionaryM")])
-        [(NSMutableDictionary *)dataRef setObject:[NSMutableDictionary dictionaryWithDictionary:
-                                                   [dataRef objectForKey:userId]] forKey:userId];
-    return [dataRef objectForKey:userId];
+ZUX_STATIC NSString *keychainDataString(NSString *key, NSString *domain) {
+    NSError *error = nil;
+    NSString *dataStr = [ZUXKeychain passwordForUsername:key andService:domain error:&error];
+    if (error) ZLog(@"Keychain Error: %@", error);
+    return dataStr;
+}
+
+ZUX_STATIC void cleanKeychainData(NSString *key, NSString *domain) {
+    [ZUXKeychain deletePasswordForUsername:key andService:domain error:NULL];
 }

@@ -15,13 +15,28 @@
 
 #if NS_BLOCKS_AVAILABLE
 
+typedef NS_OPTIONS(NSUInteger, ZUXJsonOptions) {
+    ZUXJsonOptionNone       = 0,
+    ZUXJsonOptionWithType   = 1 << 0
+};
+
+ZUX_EXTERN NSString *const ZUXJSON_CLASS;
+
 @protocol ZUXJsonable <NSObject>
 
 @optional
+
 - (id)zuxJsonObject;
+- (id)zuxJsonObjectWithOptions:(ZUXJsonOptions)options;
+
 - (NSData *)zuxJsonData;
+- (NSData *)zuxJsonDataWithOptions:(ZUXJsonOptions)options;
+
 - (NSString *)zuxJsonString;
+- (NSString *)zuxJsonStringWithOptions:(ZUXJsonOptions)options;
+
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject;
+- (void)setPropertiesWithJsonObject:(id)jsonObject;
 
 @end // ZUXJsonable
 
@@ -31,14 +46,38 @@
 @category_interface(NSNull, ZUXJson)
 @end // NSNull (ZUXJson)
 
+ZUX_EXTERN NSString *const ZUXJSON_STRUCT;
+
 @category_interface(NSValue, ZUXJson)
++ (void)addSupportedObjCType:(const char *)objCType withName:(NSString *)typeName;
 + (NSValue *)valueWithJsonObject:(id)jsonObject;
 @end // NSValue (ZUXJson)
+
+#define struct_jsonable_interface(structType)                   \
+category_interface(NSValue, structType##JsonableDummy)          \
+@end                                                            \
+ZUX_CONSTRUCTOR void add_##structType##_jsonable_support()      \
+{ [NSValue addSupportedObjCType:@encode(structType)             \
+                       withName:@#structType]; }                \
+@interface NSValue (structType##Jsonable)                       \
+- (id)zuxJsonObjectFor##structType;                             \
++ (NSValue *)valueWithJsonObjectFor##structType:(id)jsonObject; \
+@end
+
+#define struct_jsonable_implementation(structType)              \
+category_implementation(NSValue, structType##JsonableDummy)     \
+@end                                                            \
+@implementation NSValue (structType##Jsonable)
 
 @category_interface(NSNumber, ZUXJson)
 @end // NSNumber (ZUXJson)
 
+@category_interface(NSData, ZUXJson)
+- (id)objectFromJsonData;
+@end // NSString (ZUXJson)
+
 @category_interface(NSString, ZUXJson)
+- (id)objectFromJsonString;
 @end // NSString (ZUXJson)
 
 @category_interface(NSArray, ZUXJson)

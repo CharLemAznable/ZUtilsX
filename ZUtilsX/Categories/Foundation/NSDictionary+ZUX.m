@@ -16,6 +16,20 @@
 @end
 @category_implementation(NSDictionary, ZUXSafe)
 
+- (ZUX_INSTANCETYPE)zux_initWithObjects:(const id [])objects forKeys:(const id [])keys count:(NSUInteger)cnt {
+    if (cnt == 0) return [self zux_initWithObjects:objects forKeys:keys count:cnt];
+    id nonnull_objects[cnt];
+    id nonnull_keys[cnt];
+    int nonnull_index = 0;
+    for (int index = 0; index < cnt; index++) {
+        if (!objects[index] || !keys[index]) continue;
+        nonnull_objects[nonnull_index] = objects[index];
+        nonnull_keys[nonnull_index] = keys[index];
+        nonnull_index++;
+    }
+    return [self zux_initWithObjects:nonnull_objects forKeys:nonnull_keys count:nonnull_index];
+}
+
 - (id)zux_objectForKey:(id)key {
     if (!key) return nil;
     return [self zux_objectForKey:key];
@@ -29,6 +43,13 @@
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
+        [NSClassFromString(@"__NSPlaceholderDictionary")
+         swizzleInstanceOriSelector:@selector(initWithObjects:forKeys:count:)
+         withNewSelector:@selector(zux_initWithObjects:forKeys:count:)];
+        
+        [NSClassFromString(@"__NSDictionaryI")
+         swizzleInstanceOriSelector:@selector(initWithObjects:forKeys:count:)
+         withNewSelector:@selector(zux_initWithObjects:forKeys:count:)];
         [NSClassFromString(@"__NSDictionaryI")
          swizzleInstanceOriSelector:@selector(objectForKey:)
          withNewSelector:@selector(zux_objectForKey:)];
@@ -43,16 +64,6 @@
 @category_interface_generic(NSMutableDictionary, ZUX_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE), ZUXSafe)
 @end
 @category_implementation(NSMutableDictionary, ZUXSafe)
-
-- (id)zux_objectForKey:(id)key {
-    if (!key) return nil;
-    return [self zux_objectForKey:key];
-}
-
-- (id)zux_objectForKeyedSubscript:(id)key {
-    if (!key) return nil;
-    return [self zux_objectForKeyedSubscript:key];
-}
 
 - (void)zux_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
     if (!aKey) return;
@@ -69,6 +80,9 @@
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
+        [NSClassFromString(@"__NSDictionaryM")
+         swizzleInstanceOriSelector:@selector(initWithObjects:forKeys:count:)
+         withNewSelector:@selector(zux_initWithObjects:forKeys:count:)];
         [NSClassFromString(@"__NSDictionaryM")
          swizzleInstanceOriSelector:@selector(objectForKey:)
          withNewSelector:@selector(zux_objectForKey:)];

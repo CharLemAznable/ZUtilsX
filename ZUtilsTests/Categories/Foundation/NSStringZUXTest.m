@@ -15,6 +15,13 @@
 
 @implementation NSStringZUXTest
 
+- (void)testNSStringZUXSafe {
+    NSString *string = nil;
+    const char *cString = [string UTF8String];
+    XCTAssert(cString == NULL);
+    XCTAssertNil(@(cString));
+}
+
 - (void)testNSStringZUX {
     NSDictionary *dict = @{@"last name":@"Doe", @"first name":@"John"};
     NSString *parametric = @"He's name is ${first name}·${last name}.";

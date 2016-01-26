@@ -37,7 +37,6 @@ typedef struct {
     XCTAssertEqual(testStruct.identity, testStruct2.identity);
     XCTAssertEqual(testStruct.height, testStruct2.height);
     XCTAssertEqual(testStruct.flag, testStruct2.flag);
-    
 }
 
 @end

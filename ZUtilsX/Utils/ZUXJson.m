@@ -18,6 +18,7 @@ BOOL ZUX_USE_JSONKIT = NO;
 @implementation ZUXJson
 
 + (id)objectFromJsonData:(NSData *)jsonData {
+    if (!jsonData) return nil;
     if (ZUX_USE_JSONKIT) {
         return [jsonData objectFromJSONData];
     } else {
@@ -37,26 +38,15 @@ BOOL ZUX_USE_JSONKIT = NO;
 }
 
 + (id)objectFromJsonData:(NSData *)jsonData asClass:(Class)clazz {
-    id jsonObject;
-    if (ZUX_USE_JSONKIT) {
-        jsonObject = [jsonData objectFromJSONData];
-    } else {
-        jsonObject = [self objectFromJsonData:jsonData];
-    }
-    return ZUX_AUTORELEASE([[clazz alloc] initWithJsonObject:jsonObject]);
+    return ZUX_AUTORELEASE([[clazz alloc] initWithJsonObject:[self objectFromJsonData:jsonData]]);
 }
 
 + (id)objectFromJsonString:(NSString *)jsonString asClass:(Class)clazz {
-    id jsonObject;
-    if (ZUX_USE_JSONKIT) {
-        jsonObject = [jsonString objectFromJSONString];
-    } else {
-        jsonObject = [self objectFromJsonString:jsonString];
-    }
-    return ZUX_AUTORELEASE([[clazz alloc] initWithJsonObject:jsonObject]);
+    return ZUX_AUTORELEASE([[clazz alloc] initWithJsonObject:[self objectFromJsonString:jsonString]]);
 }
 
 + (NSData *)jsonDataFromObject:(id)object {
+    if (!object) return nil;
     if (![self isValidJSONObject:object]) {
         id jsonObject = [object zuxJsonObject];
         if (ZUX_EXPECT_F(![self isValidJSONObject:jsonObject])) {
