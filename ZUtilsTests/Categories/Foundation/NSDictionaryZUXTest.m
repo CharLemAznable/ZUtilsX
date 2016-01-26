@@ -45,7 +45,9 @@
 - (void)testNSDictionarySafe {
     NSString *nilStr = nil;
     
-    NSDictionary *dict = @{@"AAA":@"aaa", @"BBB":@"bbb", @"CCC":@"ccc", [NSNull null]:@"nil", @"nil":[NSNull null]};
+    NSDictionary *dict = @{@"Nil":nilStr, nilStr:@"Nil",
+                           @"AAA":@"aaa", @"BBB":@"bbb", @"CCC":@"ccc",
+                           [NSNull null]:@"nil", @"nil":[NSNull null]};
     XCTAssertNil([dict objectForKey:nilStr]);
     XCTAssertNil(dict[nilStr]);
     XCTAssertEqualObjects([dict objectForKey:nilStr defaultValue:@"bbb"], @"bbb");

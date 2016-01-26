@@ -16,6 +16,17 @@
 @end
 @category_implementation(NSArray, ZUXSafe)
 
+- (ZUX_INSTANCETYPE)zux_initWithObjects:(const id [])objects count:(NSUInteger)cnt {
+    id nonnull_objects[cnt];
+    int nonnull_index = 0;
+    for (int index = 0; index < cnt; index++) {
+        if (!objects[index]) continue;
+        nonnull_objects[nonnull_index] = objects[index];
+        nonnull_index++;
+    }
+    return [self zux_initWithObjects:nonnull_objects count:nonnull_index];
+}
+
 - (id)zux_objectAtIndex:(NSUInteger)index {
     if (index >= [self count]) return nil;
     return [self zux_objectAtIndex:index];
@@ -29,6 +40,13 @@
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
+        [NSClassFromString(@"__NSPlaceholderArray")
+         swizzleInstanceOriSelector:@selector(initWithObjects:count:)
+         withNewSelector:@selector(zux_initWithObjects:count:)];
+        
+        [NSClassFromString(@"__NSArrayI")
+         swizzleInstanceOriSelector:@selector(initWithObjects:count:)
+         withNewSelector:@selector(zux_initWithObjects:count:)];
         [NSClassFromString(@"__NSArrayI")
          swizzleInstanceOriSelector:@selector(objectAtIndex:)
          withNewSelector:@selector(zux_objectAtIndex:)];
@@ -43,16 +61,6 @@
 @category_interface_generic(NSMutableArray, ZUX_GENERIC(ZUX_OBJECT_TYPE), ZUXSafe)
 @end
 @category_implementation(NSMutableArray, ZUXSafe)
-
-- (id)zux_objectAtIndex:(NSUInteger)index {
-    if (index >= [self count]) return nil;
-    return [self zux_objectAtIndex:index];
-}
-
-- (id)zux_objectAtIndexedSubscript:(NSUInteger)index {
-    if (index >= [self count]) return nil;
-    return [self zux_objectAtIndexedSubscript:index];
-}
 
 - (void)zux_setObject:(id)anObject atIndexedSubscript:(NSUInteger)index {
     if (!anObject) { [self removeObjectAtIndex:index]; return; }
@@ -83,15 +91,18 @@
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
         [NSClassFromString(@"__NSArrayM")
+         swizzleInstanceOriSelector:@selector(initWithObjects:count:)
+         withNewSelector:@selector(zux_initWithObjects:count:)];
+        [NSClassFromString(@"__NSArrayM")
          swizzleInstanceOriSelector:@selector(objectAtIndex:)
          withNewSelector:@selector(zux_objectAtIndex:)];
         [NSClassFromString(@"__NSArrayM")
          swizzleInstanceOriSelector:@selector(objectAtIndexedSubscript:)
          withNewSelector:@selector(zux_objectAtIndexedSubscript:)];
+        
         [NSClassFromString(@"__NSArrayM")
          swizzleInstanceOriSelector:@selector(setObject:atIndexedSubscript:)
          withNewSelector:@selector(zux_setObject:atIndexedSubscript:)];
-        
         [NSClassFromString(@"__NSArrayM")
          swizzleInstanceOriSelector:@selector(addObject:)
          withNewSelector:@selector(zux_addObject:)];

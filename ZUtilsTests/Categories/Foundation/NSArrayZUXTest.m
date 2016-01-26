@@ -17,7 +17,6 @@
 
 - (void)testNSArrayZUX {
     NSArray *array = @[@"AAA"];
-    [ZUX_CATEGORY_NSArray_ZUX declare];
     NSArray *arrayCopy = [array deepCopy];
     NSArray *arrayMutableCopy = [array deepMutableCopy];
     
@@ -29,7 +28,8 @@
 }
 
 - (void)testNSArraySafe {
-    NSArray *array = @[@"AAA", [NSNull null]];
+    NSString *nilStr = nil;
+    NSArray *array = @[nilStr, @"AAA", [NSNull null]];
     
     XCTAssertNotNil([array objectAtIndex:1]);
     XCTAssertNotNil(array[1]);
