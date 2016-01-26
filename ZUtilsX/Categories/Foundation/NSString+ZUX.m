@@ -7,10 +7,51 @@
 //
 
 #import "NSString+ZUX.h"
+#import "NSObject+ZUX.h"
 #import "NSData+ZUX.h"
 #import "zarc.h"
 #import "zadapt.h"
 #include <CommonCrypto/CommonDigest.h>
+
+@category_interface(NSString, ZUXSafe)
+@end
+@category_implementation(NSString, ZUXSafe)
+
+- (ZUX_INSTANCETYPE)zux_initWithUTF8String:(const char *)nullTerminatedCString {
+    if (!nullTerminatedCString) return nil;
+    return [self zux_initWithUTF8String:nullTerminatedCString];
+}
+
++ (ZUX_INSTANCETYPE)zux_stringWithUTF8String:(const char *)nullTerminatedCString {
+    if (!nullTerminatedCString) return nil;
+    return [self zux_stringWithUTF8String:nullTerminatedCString];
+}
+
+- (ZUX_INSTANCETYPE)zux_initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding {
+    if (!nullTerminatedCString) return nil;
+    return [self zux_initWithCString:nullTerminatedCString encoding:encoding];
+}
+
++ (ZUX_INSTANCETYPE)zux_stringWithCString:(const char *)cString encoding:(NSStringEncoding)enc {
+    if (!cString) return nil;
+    return [self zux_stringWithCString:cString encoding:enc];
+}
+
++ (void)load {
+    static dispatch_once_t once_t;
+    dispatch_once(&once_t, ^{
+        [self swizzleInstanceOriSelector:@selector(initWithUTF8String:)
+                         withNewSelector:@selector(zux_initWithUTF8String:)];
+        [self swizzleClassOriSelector:@selector(stringWithUTF8String:)
+                      withNewSelector:@selector(zux_stringWithUTF8String:)];
+        [self swizzleInstanceOriSelector:@selector(initWithCString:encoding:)
+                         withNewSelector:@selector(zux_initWithCString:encoding:)];
+        [self swizzleClassOriSelector:@selector(stringWithCString:encoding:)
+                      withNewSelector:@selector(zux_stringWithCString:encoding:)];
+    });
+}
+
+@end // NSArray (ZUXSafe)
 
 @category_implementation(NSString, ZUX)
 

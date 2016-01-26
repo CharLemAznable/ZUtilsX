@@ -31,7 +31,7 @@
 }
 @end
 
-typedef struct {
+typedef struct ZUXTestStructBool {
     bool a;
     bool b;
 } ZUXTestStructBool;
@@ -93,7 +93,7 @@ typedef struct {
     ZUXTestStructBool b = {.a = YES, .b = NO};
     NSValue *boolValue = [NSValue valueWithZUXTestStructBool:b];
     id boolJson = [boolValue zuxJsonObject];
-    expectDict = @{@"type":@"{?=BB}", @"a":@1, @"b":@0};
+    expectDict = @{@"type":@(@encode(ZUXTestStructBool)), @"a":@1, @"b":@0};
     XCTAssertEqualObjects(boolJson, expectDict);
     NSValue *boolValue2 = [NSValue valueWithJsonObject:boolJson];
     XCTAssertEqual([boolValue2 ZUXTestStructBoolValue].a, YES);
