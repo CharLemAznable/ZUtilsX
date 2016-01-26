@@ -38,23 +38,11 @@ BOOL ZUX_USE_JSONKIT = NO;
 }
 
 + (id)objectFromJsonData:(NSData *)jsonData asClass:(Class)clazz {
-    id jsonObject;
-    if (ZUX_USE_JSONKIT) {
-        jsonObject = [jsonData objectFromJSONData];
-    } else {
-        jsonObject = [self objectFromJsonData:jsonData];
-    }
-    return ZUX_AUTORELEASE([[clazz alloc] initWithJsonObject:jsonObject]);
+    return ZUX_AUTORELEASE([[clazz alloc] initWithJsonObject:[self objectFromJsonData:jsonData]]);
 }
 
 + (id)objectFromJsonString:(NSString *)jsonString asClass:(Class)clazz {
-    id jsonObject;
-    if (ZUX_USE_JSONKIT) {
-        jsonObject = [jsonString objectFromJSONString];
-    } else {
-        jsonObject = [self objectFromJsonString:jsonString];
-    }
-    return ZUX_AUTORELEASE([[clazz alloc] initWithJsonObject:jsonObject]);
+    return ZUX_AUTORELEASE([[clazz alloc] initWithJsonObject:[self objectFromJsonString:jsonString]]);
 }
 
 + (NSData *)jsonDataFromObject:(id)object {

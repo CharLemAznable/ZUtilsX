@@ -11,7 +11,6 @@
 #import "NSObject+ZUXJson.h"
 #import "ZUXProperty.h"
 #import "ZUXKeychain.h"
-#import "ZUXJson.h"
 
 #define ShareUserDefaults               [NSUserDefaults standardUserDefaults]
 #define AppKeyFormat(key)               [NSString stringWithFormat:@"%@."@#key, appIdentifier]
@@ -116,8 +115,7 @@ NSDictionary *defaultShareData(id instance) {
     NSString *key = keyProperty(DefaultShare);
     if (initialShareData(instance, key))
         [instance setPropertiesWithJsonObject:
-         [ZUXJson objectFromJsonString:
-          [ShareUserDefaults objectForKey:key]]];
+         [[ShareUserDefaults objectForKey:key] objectFromJsonString]];
     return [instance propertyForAssociateKey:key];
 }
 
@@ -126,7 +124,7 @@ NSDictionary *keychainShareData(id instance) {
     NSString *domain = keyProperty(KeychainShareDomain);
     if (initialShareData(instance, key))
         [instance setPropertiesWithJsonObject:
-         [ZUXJson objectFromJsonString:keychainDataString(key, domain)]];
+         [keychainDataString(key, domain) objectFromJsonString]];
     return [instance propertyForAssociateKey:key];
 }
 
@@ -136,7 +134,7 @@ NSDictionary *restrictShareData(id instance) {
     if (initialShareData(instance, key)) {
         if ([ZUXDataBox appFirstLaunch]) cleanKeychainData(key, domain);
         else [instance setPropertiesWithJsonObject:
-              [ZUXJson objectFromJsonString:keychainDataString(key, domain)]];
+              [keychainDataString(key, domain) objectFromJsonString]];
     }
     return [instance propertyForAssociateKey:key];
 }
@@ -146,8 +144,8 @@ NSDictionary *defaultUsersData(id instance, NSString *userIdKey) {
     id userId = [instance valueForKey:userIdKey];
     if (initialUsersData(instance, key, userId))
         [instance setPropertiesWithJsonObject:
-         [[ZUXJson objectFromJsonString:
-           [ShareUserDefaults objectForKey:key]] objectForKey:userId]];
+         [[[ShareUserDefaults objectForKey:key]
+           objectFromJsonString] objectForKey:userId]];
     return [[instance propertyForAssociateKey:key] objectForKey:userId];
 }
 
@@ -157,7 +155,8 @@ NSDictionary *keychainUsersData(id instance, NSString *userIdKey) {
     id userId = [instance valueForKey:userIdKey];
     if (initialUsersData(instance, key, userId))
         [instance setPropertiesWithJsonObject:
-         [[ZUXJson objectFromJsonString:keychainDataString(key, domain)] objectForKey:userId]];
+         [[keychainDataString(key, domain)
+           objectFromJsonString] objectForKey:userId]];
     return [[instance propertyForAssociateKey:key] objectForKey:userId];
 }
 
@@ -168,7 +167,8 @@ NSDictionary *restrictUsersData(id instance, NSString *userIdKey) {
     if (initialUsersData(instance, key, userId)) {
         if ([ZUXDataBox appFirstLaunch]) cleanKeychainData(key, domain);
         else [instance setPropertiesWithJsonObject:
-              [[ZUXJson objectFromJsonString:keychainDataString(key, domain)] objectForKey:userId]];
+              [[keychainDataString(key, domain)
+                objectFromJsonString] objectForKey:userId]];
     }
     return [[instance propertyForAssociateKey:key] objectForKey:userId];
 }
@@ -197,14 +197,14 @@ void synthesizeProperty(NSString *className, NSString *propertyName, NSDictionar
 ZUX_STATIC void defaultDataSynchronize(id instance, NSString *key) {
     NSDictionary *data = [instance propertyForAssociateKey:key];
     if (!data) return;
-    [ShareUserDefaults setObject:[ZUXJson jsonStringFromObject:data] forKey:key];
+    [ShareUserDefaults setObject:[data zuxJsonStringWithOptions:ZUXJsonOptionWithType] forKey:key];
     [ShareUserDefaults synchronize];
 }
 
 ZUX_STATIC void keychainDataSynchronize(id instance, NSString *key, NSString *domain) {
     NSDictionary *data = [instance propertyForAssociateKey:key];
     if (!data) return;
-    NSString *dataStr = [ZUXJson jsonStringFromObject:data];
+    NSString *dataStr = [data zuxJsonStringWithOptions:ZUXJsonOptionWithType];
     if (!dataStr) return;
     NSError *error = nil;
     [ZUXKeychain storePassword:dataStr forUsername:key andService:domain updateExisting:YES error:&error];

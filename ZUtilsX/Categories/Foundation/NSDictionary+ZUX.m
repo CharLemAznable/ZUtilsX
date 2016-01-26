@@ -17,6 +17,7 @@
 @category_implementation(NSDictionary, ZUXSafe)
 
 - (ZUX_INSTANCETYPE)zux_initWithObjects:(const id [])objects forKeys:(const id [])keys count:(NSUInteger)cnt {
+    if (cnt == 0) return [self zux_initWithObjects:objects forKeys:keys count:cnt];
     id nonnull_objects[cnt];
     id nonnull_keys[cnt];
     int nonnull_index = 0;

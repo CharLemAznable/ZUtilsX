@@ -40,13 +40,19 @@ static NSArray *NSObjectProperties = nil;
 }
 
 - (id)zuxJsonObject {
-    NSMutableDictionary *properties = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       [[self class] description], ZUXJSON_CLASS, nil];
+    return [self zuxJsonObjectWithOptions:ZUXJsonOptionNone];
+}
+
+- (id)zuxJsonObjectWithOptions:(ZUXJsonOptions)options {
+    NSMutableDictionary *properties = options & ZUXJsonOptionWithType
+    ? [NSMutableDictionary dictionaryWithObjectsAndKeys:[[self class] description], ZUXJSON_CLASS, nil]
+    : [NSMutableDictionary dictionary];
+    
     [self enumerateZUXPropertiesWithBlock:^(id object, ZUXProperty *property) {
         if ([property isWeakReference] || [NSObjectProperties containsObject:[property name]]) return;
         
         @try {
-            id jsonObj = [[object valueForKey:[property name]] zuxJsonObject];
+            id jsonObj = [[object valueForKey:[property name]] zuxJsonObjectWithOptions:options];
             if (!jsonObj) return;
             [properties setObject:jsonObj forKey:[property name]];
         }
@@ -58,11 +64,19 @@ static NSArray *NSObjectProperties = nil;
 }
 
 - (NSData *)zuxJsonData {
-    return [ZUXJson jsonDataFromObject:[self zuxJsonObject]];
+    return [self zuxJsonDataWithOptions:ZUXJsonOptionNone];
+}
+
+- (NSData *)zuxJsonDataWithOptions:(ZUXJsonOptions)options {
+    return [ZUXJson jsonDataFromObject:[self zuxJsonObjectWithOptions:options]];
 }
 
 - (NSString *)zuxJsonString {
-    return [ZUXJson jsonStringFromObject:[self zuxJsonObject]];
+    return [self zuxJsonStringWithOptions:ZUXJsonOptionNone];
+}
+
+- (NSString *)zuxJsonStringWithOptions:(ZUXJsonOptions)options {
+    return [ZUXJson jsonStringFromObject:[self zuxJsonObjectWithOptions:options]];
 }
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
@@ -98,12 +112,15 @@ static NSArray *NSObjectProperties = nil;
 
 @category_implementation(NSNull, ZUXJson)
 
-- (id)zuxJsonObject {
+- (id)zuxJsonObjectWithOptions:(ZUXJsonOptions)options {
     return nil;
 }
 
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
     return [NSNull null];
+}
+
+- (void)setPropertiesWithJsonObject:(id)jsonObject {
 }
 
 @end
@@ -133,7 +150,7 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
     [[NSValue propertyForAssociateKey:ZUXJsonableMappingKey] setObject:typeName forKey:@(objCType)];
 }
 
-- (id)zuxJsonObject {
+- (id)zuxJsonObjectWithOptions:(ZUXJsonOptions)options {
     NSString *objCType = @([self objCType]);
     NSString *typeName = [[NSValue propertyForAssociateKey:ZUXJsonableMappingKey] objectForKey:objCType];
     if (!typeName) return [super zuxJsonObject];
@@ -151,6 +168,13 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
     SEL jsonSel = NSSelectorFromString([NSString stringWithFormat:@"valueWithJsonObjectFor%@:", typeName]);
     if (!jsonSel || ![self respondsToSelector:jsonSel]) return nil;
     return [self performSelector:jsonSel withObject:jsonObject];
+}
+
+- (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject {
+    return [self init];
+}
+
+- (void)setPropertiesWithJsonObject:(id)jsonObject {
 }
 
 #pragma mark - json encode/decode implementation
@@ -259,7 +283,7 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
 
 @category_implementation(NSNumber, ZUXJson)
 
-- (id)zuxJsonObject {
+- (id)zuxJsonObjectWithOptions:(ZUXJsonOptions)options {
     if (isnan([self doubleValue]) || isinf([self doubleValue])) return nil;
     return self;
 }
@@ -271,11 +295,22 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
     return nil;
 }
 
+- (void)setPropertiesWithJsonObject:(id)jsonObject {
+}
+
+@end
+
+@category_implementation(NSData, ZUXJson)
+
+- (id)objectFromJsonData {
+    return [ZUXJson objectFromJsonData:self];
+}
+
 @end
 
 @category_implementation(NSString, ZUXJson)
 
-- (id)zuxJsonObject {
+- (id)zuxJsonObjectWithOptions:(ZUXJsonOptions)options {
     return self;
 }
 
@@ -286,17 +321,24 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
     return nil;
 }
 
+- (void)setPropertiesWithJsonObject:(id)jsonObject {
+}
+
+- (id)objectFromJsonString {
+    return [ZUXJson objectFromJsonString:self];
+}
+
 @end
 
 @category_implementation(NSArray, ZUXJson)
 
-- (id)zuxJsonObject {
+- (id)zuxJsonObjectWithOptions:(ZUXJsonOptions)options {
     if ([NSJSONSerialization isValidJSONObject:self]) return self;
     
     NSMutableArray *array = [NSMutableArray array];
     [self enumerateObjectsUsingBlock:
      ^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-         id jsonObj = [obj zuxJsonObject];
+         id jsonObj = [obj zuxJsonObjectWithOptions:options];
          if (!jsonObj) return;
          [array addObject:jsonObj];
      }];
@@ -315,19 +357,21 @@ static NSString *const ZUXJsonableMappingKey = @"ZUXJsonableMapping";
     return nil;
 }
 
+- (void)setPropertiesWithJsonObject:(id)jsonObject {
+}
+
 @end
 
 @category_implementation(NSDictionary, ZUXJson)
 
-- (id)zuxJsonObject {
+- (id)zuxJsonObjectWithOptions:(ZUXJsonOptions)options {
     if ([NSJSONSerialization isValidJSONObject:self]) return self;
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     [self enumerateKeysAndObjectsUsingBlock:
      ^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-         id jsonObj = [obj zuxJsonObject];
-         if (!jsonObj) return;
-         [dictionary setObject:jsonObj forKey:[key description]];
+         [dictionary setObject:[obj zuxJsonObjectWithOptions:options]
+                        forKey:[key zuxJsonObjectWithOptions:options]];
      }];
     return ZUX_AUTORELEASE([dictionary copy]);
 }

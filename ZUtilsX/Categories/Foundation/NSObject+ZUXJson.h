@@ -15,14 +15,26 @@
 
 #if NS_BLOCKS_AVAILABLE
 
+typedef NS_OPTIONS(NSUInteger, ZUXJsonOptions) {
+    ZUXJsonOptionNone       = 0,
+    ZUXJsonOptionWithType   = 1 << 0
+};
+
 ZUX_EXTERN NSString *const ZUXJSON_CLASS;
 
 @protocol ZUXJsonable <NSObject>
 
 @optional
+
 - (id)zuxJsonObject;
+- (id)zuxJsonObjectWithOptions:(ZUXJsonOptions)options;
+
 - (NSData *)zuxJsonData;
+- (NSData *)zuxJsonDataWithOptions:(ZUXJsonOptions)options;
+
 - (NSString *)zuxJsonString;
+- (NSString *)zuxJsonStringWithOptions:(ZUXJsonOptions)options;
+
 - (ZUX_INSTANCETYPE)initWithJsonObject:(id)jsonObject;
 - (void)setPropertiesWithJsonObject:(id)jsonObject;
 
@@ -60,7 +72,12 @@ category_implementation(NSValue, structType##JsonableDummy)     \
 @category_interface(NSNumber, ZUXJson)
 @end // NSNumber (ZUXJson)
 
+@category_interface(NSData, ZUXJson)
+- (id)objectFromJsonData;
+@end // NSString (ZUXJson)
+
 @category_interface(NSString, ZUXJson)
+- (id)objectFromJsonString;
 @end // NSString (ZUXJson)
 
 @category_interface(NSArray, ZUXJson)

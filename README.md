@@ -81,11 +81,15 @@
 
         // 添加json化工具方法.
         -zuxJsonObject
+        -zuxJsonObjectWithOptions:
         -zuxJsonData
+        -zuxJsonDataWithOptions:
         -zuxJsonString
+        -zuxJsonStringWithOptions:
 
         // 添加反json化工具方法
         -initWithJsonObject:
+        -setPropertiesWithJsonObject:
         +valueWithJsonObject: // 仅NSValue类
 
         // 遍历对象属性列表, 生成JSON字符串.
@@ -113,6 +117,12 @@
             return [NSValue valueWith...];
         }
         @end
+
+        // NSData添加方法
+        -objectFromJsonData
+
+        // NSString添加方法
+        -objectFromJsonString
 
 * NSNull+ZUX
 

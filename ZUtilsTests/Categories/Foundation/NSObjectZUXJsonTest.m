@@ -71,22 +71,28 @@ typedef struct ZUXTestStructBool {
     XCTAssertEqualObjects([@"JSON" zuxJsonString], @"JSON");
     
     JsonBean *jsonBean = [[JsonBean alloc] initWithJsonObject:@{@"field1":@[]}];
-    XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field3\":0,\"ZUXClassName\":\"JsonBean\",\"field1\":[]}");
+    XCTAssertEqualObjects([jsonBean zuxJsonStringWithOptions:ZUXJsonOptionWithType],
+                          @"{\"field3\":0,\"ZUXClassName\":\"JsonBean\",\"field1\":[]}");
     
     jsonBean.field1 = [NSNull null];
-    XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field3\":0,\"ZUXClassName\":\"JsonBean\"}");
+    XCTAssertEqualObjects([jsonBean zuxJsonStringWithOptions:ZUXJsonOptionWithType],
+                          @"{\"field3\":0,\"ZUXClassName\":\"JsonBean\"}");
     
     jsonBean.field2 = @"JSON";
-    XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field3\":0,\"field2\":\"JSON\",\"ZUXClassName\":\"JsonBean\"}");
+    XCTAssertEqualObjects([jsonBean zuxJsonStringWithOptions:ZUXJsonOptionWithType],
+                          @"{\"field3\":0,\"field2\":\"JSON\",\"ZUXClassName\":\"JsonBean\"}");
     
     jsonBean.field1 = [NSArray array];
-    XCTAssertEqualObjects([jsonBean zuxJsonString], @"{\"field1\":[],\"field2\":\"JSON\",\"ZUXClassName\":\"JsonBean\",\"field3\":0}");
+    XCTAssertEqualObjects([jsonBean zuxJsonStringWithOptions:ZUXJsonOptionWithType],
+                          @"{\"field1\":[],\"field2\":\"JSON\",\"ZUXClassName\":\"JsonBean\",\"field3\":0}");
     
     NSDictionary *dict = @{@"json":jsonBean};
-    XCTAssertEqualObjects([dict zuxJsonString], @"{\"json\":{\"field1\":[],\"field2\":\"JSON\",\"ZUXClassName\":\"JsonBean\",\"field3\":0}}");
+    XCTAssertEqualObjects([dict zuxJsonStringWithOptions:ZUXJsonOptionWithType],
+                          @"{\"json\":{\"field1\":[],\"field2\":\"JSON\",\"ZUXClassName\":\"JsonBean\",\"field3\":0}}");
     
     NSArray *array = @[dict];
-    XCTAssertEqualObjects([array zuxJsonString], @"[{\"json\":{\"field1\":[],\"field2\":\"JSON\",\"ZUXClassName\":\"JsonBean\",\"field3\":0}}]");
+    XCTAssertEqualObjects([array zuxJsonStringWithOptions:ZUXJsonOptionWithType],
+                          @"[{\"json\":{\"field1\":[],\"field2\":\"JSON\",\"ZUXClassName\":\"JsonBean\",\"field3\":0}}]");
     
     NSValue *pointValue = [NSValue valueWithCGPoint:CGPointMake(1, 1)];
     id pointJson = [pointValue zuxJsonObject];

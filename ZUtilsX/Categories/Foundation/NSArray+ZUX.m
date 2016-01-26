@@ -17,6 +17,7 @@
 @category_implementation(NSArray, ZUXSafe)
 
 - (ZUX_INSTANCETYPE)zux_initWithObjects:(const id [])objects count:(NSUInteger)cnt {
+    if (cnt == 0) return [self zux_initWithObjects:objects count:cnt];
     id nonnull_objects[cnt];
     int nonnull_index = 0;
     for (int index = 0; index < cnt; index++) {

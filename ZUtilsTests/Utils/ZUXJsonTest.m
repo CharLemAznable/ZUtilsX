@@ -51,7 +51,7 @@
     People *people = [[People alloc] init];
     people.name = @"John";
     people.age = 10;
-    NSString *peopleJson = @"{\"name\":\"John\",\"age\":10,\"ZUXClassName\":\"People\"}";
+    NSString *peopleJson = @"{\"name\":\"John\",\"age\":10}";
     XCTAssertEqualObjects([ZUXJson jsonStringFromObject:people], peopleJson);
     XCTAssertEqualObjects([ZUXJson objectFromJsonString:peopleJson asClass:[People class]], people);
 }
