@@ -68,7 +68,6 @@
 		6A63FA221C02E0E000AB3891 /* NSNull+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9DA1C02E0E000AB3891 /* NSNull+ZUX.m */; };
 		6A63FA231C02E0E000AB3891 /* NSNumber+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9DC1C02E0E000AB3891 /* NSNumber+ZUX.m */; };
 		6A63FA241C02E0E000AB3891 /* NSObject+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9DE1C02E0E000AB3891 /* NSObject+ZUX.m */; };
-		6A63FA251C02E0E000AB3891 /* NSObject+ZUXJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9E01C02E0E000AB3891 /* NSObject+ZUXJson.m */; };
 		6A63FA261C02E0E000AB3891 /* NSString+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9E21C02E0E000AB3891 /* NSString+ZUX.m */; };
 		6A63FA271C02E0E000AB3891 /* NSValue+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9E41C02E0E000AB3891 /* NSValue+ZUX.m */; };
 		6A63FA281C02E0E000AB3891 /* UIColor+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9E71C02E0E000AB3891 /* UIColor+ZUX.m */; };
@@ -111,7 +110,6 @@
 		6A63FA531C02E2F400AB3891 /* NSNull+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9D91C02E0E000AB3891 /* NSNull+ZUX.h */; };
 		6A63FA541C02E2F400AB3891 /* NSNumber+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9DB1C02E0E000AB3891 /* NSNumber+ZUX.h */; };
 		6A63FA551C02E2F400AB3891 /* NSObject+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9DD1C02E0E000AB3891 /* NSObject+ZUX.h */; };
-		6A63FA561C02E2F400AB3891 /* NSObject+ZUXJson.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9DF1C02E0E000AB3891 /* NSObject+ZUXJson.h */; };
 		6A63FA571C02E2F400AB3891 /* NSString+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9E11C02E0E000AB3891 /* NSString+ZUX.h */; };
 		6A63FA581C02E2F400AB3891 /* NSValue+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9E31C02E0E000AB3891 /* NSValue+ZUX.h */; };
 		6A63FA591C02E2F400AB3891 /* UIColor+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9E61C02E0E000AB3891 /* UIColor+ZUX.h */; };
@@ -218,7 +216,6 @@
 				6A63FA531C02E2F400AB3891 /* NSNull+ZUX.h in CopyFiles */,
 				6A63FA541C02E2F400AB3891 /* NSNumber+ZUX.h in CopyFiles */,
 				6A63FA551C02E2F400AB3891 /* NSObject+ZUX.h in CopyFiles */,
-				6A63FA561C02E2F400AB3891 /* NSObject+ZUXJson.h in CopyFiles */,
 				6A63FA571C02E2F400AB3891 /* NSString+ZUX.h in CopyFiles */,
 				6A63FA581C02E2F400AB3891 /* NSValue+ZUX.h in CopyFiles */,
 				6A63FA591C02E2F400AB3891 /* UIColor+ZUX.h in CopyFiles */,
@@ -307,8 +304,6 @@
 		6A63F9DC1C02E0E000AB3891 /* NSNumber+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+ZUX.m"; sourceTree = "<group>"; };
 		6A63F9DD1C02E0E000AB3891 /* NSObject+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ZUX.h"; sourceTree = "<group>"; };
 		6A63F9DE1C02E0E000AB3891 /* NSObject+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ZUX.m"; sourceTree = "<group>"; };
-		6A63F9DF1C02E0E000AB3891 /* NSObject+ZUXJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ZUXJson.h"; sourceTree = "<group>"; };
-		6A63F9E01C02E0E000AB3891 /* NSObject+ZUXJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ZUXJson.m"; sourceTree = "<group>"; };
 		6A63F9E11C02E0E000AB3891 /* NSString+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZUX.h"; sourceTree = "<group>"; };
 		6A63F9E21C02E0E000AB3891 /* NSString+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ZUX.m"; sourceTree = "<group>"; };
 		6A63F9E31C02E0E000AB3891 /* NSValue+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+ZUX.h"; sourceTree = "<group>"; };
@@ -546,8 +541,6 @@
 			children = (
 				6A63F9DD1C02E0E000AB3891 /* NSObject+ZUX.h */,
 				6A63F9DE1C02E0E000AB3891 /* NSObject+ZUX.m */,
-				6A63F9DF1C02E0E000AB3891 /* NSObject+ZUXJson.h */,
-				6A63F9E01C02E0E000AB3891 /* NSObject+ZUXJson.m */,
 				6A63F9D91C02E0E000AB3891 /* NSNull+ZUX.h */,
 				6A63F9DA1C02E0E000AB3891 /* NSNull+ZUX.m */,
 				6A63F9DB1C02E0E000AB3891 /* NSNumber+ZUX.h */,
@@ -845,7 +838,6 @@
 				6A68BF431C3B678800C690E1 /* ZUXMethod.m in Sources */,
 				6A63FA361C02E0E000AB3891 /* ZUXControl.m in Sources */,
 				6A63FA2A1C02E0E000AB3891 /* UIImage+ZUX.m in Sources */,
-				6A63FA251C02E0E000AB3891 /* NSObject+ZUXJson.m in Sources */,
 				6A63FA241C02E0E000AB3891 /* NSObject+ZUX.m in Sources */,
 				6A63FA201C02E0E000AB3891 /* NSDictionary+ZUX.m in Sources */,
 				6A0E1AD21C3E5F0500995C70 /* UINavigationController+ZUX.m in Sources */,

@@ -9,21 +9,110 @@
 #ifndef ZUtilsX_ZUXJson_h
 #define ZUtilsX_ZUXJson_h
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "ZUXCategory.h"
+#import "zobjc.h"
 
+#if NS_BLOCKS_AVAILABLE
+
+typedef NS_OPTIONS(NSUInteger, ZUXJsonableOptions) {
+    ZUXJsonableNone             = 0,
+    ZUXJsonableWriteClassName   = 1 << 0
+};
+
+ZUX_EXTERN NSString *const ZUXJSONABLE_CLASS_NAME;
+ZUX_EXTERN NSString *const ZUXJSONABLE_STRUCT_NAME; // ZUXJsonable
 // You can set ZUX_USE_JSONKIT value TRUE/YES to use JSONKit, ZUX_USE_JSONKIT default FALSE/NO.
-extern BOOL ZUX_USE_JSONKIT;
+ZUX_EXTERN BOOL ZUX_USE_JSONKIT;
 
 @interface ZUXJson : NSObject
 
 + (id)objectFromJsonData:(NSData *)jsonData;
-+ (id)objectFromJsonString:(NSString *)jsonString;
 + (id)objectFromJsonData:(NSData *)jsonData asClass:(Class)clazz;
+
++ (id)objectFromJsonString:(NSString *)jsonString;
 + (id)objectFromJsonString:(NSString *)jsonString asClass:(Class)clazz;
 
 + (NSData *)jsonDataFromObject:(id)object;
-+ (NSString *)jsonStringFromObject:(id)object;
++ (NSData *)jsonDataFromObject:(id)object withOptions:(ZUXJsonableOptions)options;
 
++ (NSString *)jsonStringFromObject:(id)object;
++ (NSString *)jsonStringFromObject:(id)object withOptions:(ZUXJsonableOptions)options;
+
+@end // ZUXJson
+
+@category_interface(NSData, ZUXJson)
+
+- (id)zuxJsonObject;
+- (id)zuxJsonObjectAsClass:(Class)clazz;
+
+@end // NSData (ZUXJson)
+
+@category_interface(NSString, ZUXJson)
+
+- (id)zuxJsonObject;
+- (id)zuxJsonObjectAsClass:(Class)clazz;
+
+@end // NSString (ZUXJson)
+
+@category_interface(NSObject, ZUXJson)
+
+- (NSData *)zuxJsonData;
+- (NSData *)zuxJsonDataWithOptions:(ZUXJsonableOptions)options;
+
+- (NSString *)zuxJsonString;
+- (NSString *)zuxJsonStringWithOptions:(ZUXJsonableOptions)options;
+
+@end // NSObject (ZUXJson)
+
+@category_interface(NSObject, ZUXJsonable)
+
+- (id)validJsonObject;
+- (id)validJsonObjectWithOptions:(ZUXJsonableOptions)options;
+- (ZUX_INSTANCETYPE)initWithValidJsonObject:(id)jsonObject;
+- (void)setPropertiesWithValidJsonObject:(id)jsonObject;
+
+@end // NSObject (ZUXJsonable)
+
+@category_interface(NSValue, ZUXJsonable)
+
++ (void)addJsonableObjCType:(const char *)objCType withName:(NSString *)typeName;
++ (NSValue *)valueWithValidJsonObject:(id)jsonObject;
+
+@end // NSValue (ZUXJsonable)
+
+#define struct_jsonable_interface(structType)                           \
+category_interface(NSValue, structType##JsonableDummy)                  \
+@end                                                                    \
+ZUX_CONSTRUCTOR void add_##structType##_jsonable_support()              \
+{ [NSValue addJsonableObjCType:@encode(structType)                      \
+                      withName:@#structType]; }                         \
+@interface NSValue (structType##Jsonable)                               \
+- (id)validJsonObjectFor##structType;                                   \
++ (NSValue *)valueWithValidJsonObjectFor##structType:(id)jsonObject;    \
 @end
+
+#define struct_jsonable_implementation(structType)              \
+category_implementation(NSValue, structType##JsonableDummy)     \
+@end                                                            \
+@implementation NSValue (structType##Jsonable) // struct_jsonable
+
+@category_interface(NSArray, ZUXJsonable)
++ (NSArray *)arrayWithValidJsonObject:(id)jsonObject;
+@end // NSArray (ZUXJsonable)
+
+@category_interface(NSMutableArray, ZUXJsonable)
++ (NSMutableArray *)arrayWithValidJsonObject:(id)jsonObject;
+@end // NSMutableArray (ZUXJsonable)
+
+@category_interface(NSDictionary, ZUXJsonable)
++ (NSDictionary *)dictionaryWithValidJsonObject:(id)jsonObject;
+@end // NSDictionary (ZUXJsonable)
+
+@category_interface(NSMutableDictionary, ZUXJsonable)
++ (NSMutableDictionary *)dictionaryWithValidJsonObject:(id)jsonObject;
+@end // NSMutableDictionary (ZUXJsonable)
+
+#endif // NS_BLOCKS_AVAILABLE
 
 #endif /* ZUtilsX_ZUXJson_h */
