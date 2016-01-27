@@ -36,7 +36,6 @@
 #import "ZUXSearchBar.h"
 
 #import "NSObject+ZUX.h"
-#import "NSObject+ZUXJson.h"
 #import "NSNull+ZUX.h"
 #import "NSNumber+ZUX.h"
 #import "NSCoder+ZUX.h"
