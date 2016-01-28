@@ -447,6 +447,11 @@
         +badgeSize
         +setBadgeSize:
 
+- UIWindow+ZUX
+
+        // 启动画面结束时的动画设置.
+        -splashScreenAnimate:
+
 - UIControl+ZUX
 
         // 添加-(someAttribute)ForState:方法
@@ -523,6 +528,11 @@
         -writeToUserFile:
         -writeToUserFile:inDirectory:
         -writeToUserFile:inDirectory:subpath:
+
+- UIImageView+ZUX
+
+        // 简便初始化方法.
+        +imageViewWithImage:
 
 - UITextField+ZUX
 
@@ -1304,6 +1314,9 @@
     当不指定bundle参数或bundle参数为nil时, 在当前App Bundle中寻找资源文件; 否则在对应bundle中的子目录中寻找.
     当subpath参数为nil时, 在bundle根目录中寻找.
 
+        // 获取当前App Bundle.
+        +appBundle
+
         // 读入bundle中的图片对象.
         +imageWithName:
         +imageWithName:bundle:
@@ -1422,3 +1435,57 @@
         NSLog(@"%@", [UserDefaults shareUserDefaults].userId);  // output: 222
         NSLog(@"%@", [UserDefaults shareUserDefaults].name);    // output: bbb
         NSLog(@"%@", [UserDefaults shareUserDefaults].version); // output: 0.0.2
+
+- ZUXAppConfig
+
+    自动读取Bundle中的plist文件作为应用程序配置.
+
+        // 定义配置宏
+        @appconfig_interface(className, superClassName)
+
+        // 实现配置宏
+        @appconfig_implementation(className)
+
+        // 指定配置文件(.plist)所在Bundle, 默认为应用程序根Bundle
+        appconfig_bundle(className, bundleName)
+
+        // 合成配置属性宏
+        @appconfig(className, property)
+
+        // 定义示例
+        @appconfig_interface(AppConfig, NSObject)
+        @property (nonatomic, strong) NSString * key;
+        @property (nonatomic, strong) NSString * key1;
+        @end
+        @appconfig_implementation(AppConfig)
+        @appconfig(AppConfig, key)
+        @appconfig(AppConfig, key1)
+        @end
+
+        @appconfig_interface(BundleConfig, NSObject)
+        @property (nonatomic, strong) NSString * key;
+        @property (nonatomic, strong) NSString * key2;
+        @end
+        @appconfig_implementation(BundleConfig)
+        appconfig_bundle(BundleConfig, ZUXAppConfig)
+        @appconfig(BundleConfig, key)
+        @appconfig(BundleConfig, key2)
+        @end
+
+        // 使用示例
+
+        // 根目录新建plist文件, 文件名为当前应用的BundleID.
+        // 文件内容:
+        // <dict>
+        //    <key>key1</key>
+        //    <string>value1</string>
+        // </dict>
+        [AppConfig shareAppConfig].key1
+
+        // 新建ZUXAppConfig.Bundle, 在其中根路径新建plist文件, 文件名为当前应用的BundleID.
+        // 文件内容:
+        // <dict>
+        //    <key>key2</key>
+        //    <string>value2</string>
+        // </dict>
+        [BundleConfig shareBundleConfig].key2
