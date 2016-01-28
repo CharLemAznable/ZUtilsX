@@ -26,6 +26,7 @@
 #import "ZUXBundle.h"
 #import "ZUXKeychain.h"
 #import "ZUXDataBox.h"
+#import "ZUXAppConfig.h"
 
 #import "ZUXView.h"
 #import "ZUXControl.h"

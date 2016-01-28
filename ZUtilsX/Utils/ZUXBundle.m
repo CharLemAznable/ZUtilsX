@@ -7,9 +7,14 @@
 //
 
 #import "ZUXBundle.h"
+#import "NSString+ZUX.h"
 #import "UIImage+ZUX.h"
 
 @implementation ZUXBundle
+
++ (NSBundle *)appBundle {
+    return [NSBundle bundleForClass:[ZUXBundle class]];
+}
 
 + (UIImage *)imageWithName:(NSString *)imageName {
     return [self imageWithName:imageName bundle:nil];
@@ -62,9 +67,10 @@
 #pragma mark - private functions -
 
 NSString *bundleFilePath(NSString *fileName, NSString *fileType, NSString *bundleName, NSString *subpath) {
-    NSBundle *bundle = [NSBundle bundleForClass:[ZUXBundle class]];
-    // if bundleName is nil, search file in mainBundle, subpath defines sub folder reference.
-    if (!bundleName) return [bundle pathForResource:fileName ofType:fileType inDirectory:subpath];
+    NSBundle *bundle = [ZUXBundle appBundle];
+    // if bundleName is nil or empty, search file in mainBundle, subpath defines sub folder reference.
+    if (!bundleName || [bundleName isEmpty])
+        return [bundle pathForResource:fileName ofType:fileType inDirectory:subpath];
     
     return [[[[bundle resourcePath] stringByAppendingPathComponent:
               [NSString stringWithFormat:@"%@.bundle", bundleName]]

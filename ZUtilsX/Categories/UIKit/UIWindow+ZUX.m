@@ -10,11 +10,12 @@
 #import "NSDictionary+ZUX.h"
 #import "UIImage+ZUX.h"
 #import "UIImageView+ZUX.h"
+#import "ZUXBundle.h"
 
 @category_implementation(UIWindow, ZUX)
 
 - (void)splashScreenAnimate:(ZUXAnimation)animation {
-    NSString *launchImageName = [NSDictionary dictionaryWithContentsOfUserFile:@"Info"][@"UILaunchImageFile"];
+    NSString *launchImageName = [[ZUXBundle appBundle] infoDictionary][@"UILaunchImageFile"];
     UIImage *launchImage = [UIImage imageForCurrentDeviceNamed:launchImageName];
     if (!launchImage) return;
     

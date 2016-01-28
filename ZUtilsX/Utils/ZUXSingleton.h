@@ -12,12 +12,14 @@
 #import "zobjc.h"
 #import "zarc.h"
 
+// singleton_interface
 #define singleton_interface(className, superClassName)          \
 interface className : superClassName                            \
 + (ZUX_INSTANCETYPE)share##className;                           \
 @end                                                            \
 @interface className ()
 
+// singleton_implementation
 #define singleton_implementation(className)                     \
 implementation className                                        \
 static id _share##className;                                    \

@@ -42,9 +42,11 @@ ZUX_EXTERN NSString *ZUXAppFirstLaunchKey;
 
 @end // protocol ZUXDataBox
 
+// databox_interface
 #define databox_interface(className, superClassName)                            \
-singleton_interface(className, superClassName) <ZUXDataBox> // databox_interface
+singleton_interface(className, superClassName) <ZUXDataBox>
 
+// databox_implementation
 #define databox_implementation(className)                                       \
 singleton_implementation(className)                                             \
 ZUX_CONSTRUCTOR void construct_ZUX_DATABOX_##className() {                      \
@@ -59,41 +61,46 @@ ZUX_CONSTRUCTOR void construct_ZUX_DATABOX_##className() {                      
         keychainUsersDataSynchronize(self);                                     \
         restrictUsersDataSynchronize(self);                                     \
     }                                                                           \
-} // databox_implementation
+}
 
+// default_share
 #define default_share(className, property)                                      \
 synthesize_constructor(className, property,                                     \
-defaultShareData(instance)) // default_share
+defaultShareData(instance))
 
+// keychain_share
 #define keychain_share(className, property)                                     \
 synthesize_constructor(className, property,                                     \
-keychainShareData(instance)) // keychain_share
+keychainShareData(instance))
 
+// restrict_share
 #define restrict_share(className, property)                                     \
 synthesize_constructor(className, property,                                     \
-restrictShareData(instance)) // restrict_share
+restrictShareData(instance))
 
+// default_users
 #define default_users(className, property, userIdProperty)                      \
 synthesize_constructor(className, property,                                     \
-defaultUsersData(instance, @#userIdProperty)) // default_users
+defaultUsersData(instance, @#userIdProperty))
 
+// keychain_users
 #define keychain_users(className, property, userIdProperty)                     \
 synthesize_constructor(className, property,                                     \
-keychainUsersData(instance, @#userIdProperty)) // keychain_users
+keychainUsersData(instance, @#userIdProperty))
 
+// restrict_users
 #define restrict_users(className, property, userIdProperty)                     \
 synthesize_constructor(className, property,                                     \
-restrictUsersData(instance, @#userIdProperty)) // restrict_users
+restrictUsersData(instance, @#userIdProperty))
 
+// synthesize_constructor
 #define synthesize_constructor(className, property, dataRef)                    \
 dynamic property;                                                               \
 ZUX_CONSTRUCTOR void synthesize_ZUX_DATABOX_##className##_##property() {        \
-    synthesizeProperty(@#className, @#property, ^NSDictionary *(id instance) {  \
+    synthesizeDataBox(#className, @#property, ^NSDictionary *(id instance) {   \
         return dataRef;                                                         \
     });                                                                         \
-} // synthesize_constructor
-
-#endif
+}
 
 ZUX_EXTERN void constructZUXDataBox(const char *className);
 
@@ -111,4 +118,6 @@ ZUX_EXTERN NSDictionary *defaultUsersData(id instance, NSString *userIdKey);
 ZUX_EXTERN NSDictionary *keychainUsersData(id instance, NSString *userIdKey);
 ZUX_EXTERN NSDictionary *restrictUsersData(id instance, NSString *userIdKey);
 
-ZUX_EXTERN void synthesizeProperty(NSString *className, NSString *propertyName, NSDictionary *(^dataRef)(id instance));
+ZUX_EXTERN void synthesizeDataBox(const char *className, NSString *propertyName, NSDictionary *(^dataRef)(id instance));
+
+#endif /* ZUtilsX_ZUXDataBox_h */
