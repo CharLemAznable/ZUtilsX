@@ -152,6 +152,10 @@
 		6A7E83901C4E33E800E71014 /* ZUXDataBoxTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E838F1C4E33E800E71014 /* ZUXDataBoxTest.m */; };
 		6A869D071C489106001A9661 /* ZUXDataBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A869D061C489106001A9661 /* ZUXDataBox.m */; };
 		6A869D081C48DD74001A9661 /* ZUXDataBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A869D051C489106001A9661 /* ZUXDataBox.h */; };
+		6A9CB91B1C59C9BD0075FBF6 /* UIWindow+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CB91A1C59C9BD0075FBF6 /* UIWindow+ZUX.m */; };
+		6A9CB91E1C59F1200075FBF6 /* UIImageView+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CB91D1C59F1200075FBF6 /* UIImageView+ZUX.m */; };
+		6A9CB91F1C59F6C10075FBF6 /* UIWindow+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A9CB9191C59C9BD0075FBF6 /* UIWindow+ZUX.h */; };
+		6A9CB9201C59F6C10075FBF6 /* UIImageView+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A9CB91C1C59F1200075FBF6 /* UIImageView+ZUX.h */; };
 		6AE7ABEA1C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7ABE91C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m */; };
 		6AE7ABEB1C20006B0061A235 /* UIBarButtonItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6AE7ABE81C1FD8BE0061A235 /* UIBarButtonItem+ZUX.h */; };
 /* End PBXBuildFile section */
@@ -173,6 +177,8 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				6A9CB91F1C59F6C10075FBF6 /* UIWindow+ZUX.h in CopyFiles */,
+				6A9CB9201C59F6C10075FBF6 /* UIImageView+ZUX.h in CopyFiles */,
 				6A869D081C48DD74001A9661 /* ZUXDataBox.h in CopyFiles */,
 				6A0E1AD31C3E68C600995C70 /* UINavigationController+ZUX.h in CopyFiles */,
 				6A68BF471C3BC12D00C690E1 /* ZUXProtocol.h in CopyFiles */,
@@ -379,6 +385,10 @@
 		6A7E838F1C4E33E800E71014 /* ZUXDataBoxTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXDataBoxTest.m; path = Utils/ZUXDataBoxTest.m; sourceTree = "<group>"; };
 		6A869D051C489106001A9661 /* ZUXDataBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXDataBox.h; sourceTree = "<group>"; };
 		6A869D061C489106001A9661 /* ZUXDataBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXDataBox.m; sourceTree = "<group>"; };
+		6A9CB9191C59C9BD0075FBF6 /* UIWindow+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+ZUX.h"; sourceTree = "<group>"; };
+		6A9CB91A1C59C9BD0075FBF6 /* UIWindow+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+ZUX.m"; sourceTree = "<group>"; };
+		6A9CB91C1C59F1200075FBF6 /* UIImageView+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ZUX.h"; sourceTree = "<group>"; };
+		6A9CB91D1C59F1200075FBF6 /* UIImageView+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ZUX.m"; sourceTree = "<group>"; };
 		6AE7ABE81C1FD8BE0061A235 /* UIBarButtonItem+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+ZUX.h"; sourceTree = "<group>"; };
 		6AE7ABE91C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+ZUX.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -574,12 +584,16 @@
 				6A648B661C1EC5E40077F276 /* UIApplication+ZUX.m */,
 				6A63F9EE1C02E0E000AB3891 /* UIView+ZUX.h */,
 				6A63F9EF1C02E0E000AB3891 /* UIView+ZUX.m */,
+				6A9CB9191C59C9BD0075FBF6 /* UIWindow+ZUX.h */,
+				6A9CB91A1C59C9BD0075FBF6 /* UIWindow+ZUX.m */,
 				6A63F9E81C02E0E000AB3891 /* UIControl+ZUX.h */,
 				6A63F9E91C02E0E000AB3891 /* UIControl+ZUX.m */,
 				6A63F9EC1C02E0E000AB3891 /* UILabel+ZUX.h */,
 				6A63F9ED1C02E0E000AB3891 /* UILabel+ZUX.m */,
 				6A63F9EA1C02E0E000AB3891 /* UIImage+ZUX.h */,
 				6A63F9EB1C02E0E000AB3891 /* UIImage+ZUX.m */,
+				6A9CB91C1C59F1200075FBF6 /* UIImageView+ZUX.h */,
+				6A9CB91D1C59F1200075FBF6 /* UIImageView+ZUX.m */,
 				6A1794651C05BB4300FF5870 /* UITextField+ZUX.h */,
 				6A1794661C05BB4300FF5870 /* UITextField+ZUX.m */,
 				6A1794621C05BB1300FF5870 /* UITextView+ZUX.h */,
@@ -826,6 +840,7 @@
 				6A63FA371C02E0E000AB3891 /* ZUXImageView.m in Sources */,
 				6A63FA391C02E0E000AB3891 /* ZUXPageControl.m in Sources */,
 				6A29B3E81C3A14AE003DF51A /* ZUXJSONKit.m in Sources */,
+				6A9CB91E1C59F1200075FBF6 /* UIImageView+ZUX.m in Sources */,
 				6A63FA2F1C02E0E000AB3891 /* ZUXTransform.m in Sources */,
 				6A63FA291C02E0E000AB3891 /* UIControl+ZUX.m in Sources */,
 				6A63FA311C02E0E000AB3891 /* UIView+MBProgressHUD.m in Sources */,
@@ -857,6 +872,7 @@
 				6A6A3D861C191E9600847DEF /* UINavigationBar+ZUX.m in Sources */,
 				6A68BF3D1C3B676200C690E1 /* ZUXIvar.m in Sources */,
 				6A63FA2B1C02E0E000AB3891 /* UILabel+ZUX.m in Sources */,
+				6A9CB91B1C59C9BD0075FBF6 /* UIWindow+ZUX.m in Sources */,
 				6A63FA211C02E0E000AB3891 /* NSExpression+ZUX.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

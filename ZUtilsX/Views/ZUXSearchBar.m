@@ -109,7 +109,7 @@ CGSize searchBarTextFieldDefaultSize = {300, 30};
     [_searchTextField resignFirstResponder];
     [self addSubview:_searchTextField];
     _searchTextField.center = [_mask convertPoint:_searchTextField.center toView:self];
-    [_mask zuxAnimate:ZUXAnimationMake(ZUXAnimateOut|ZUXAnimateFade, ZUXAnimateNone, 0.1, 0)
+    [_mask zuxAnimate:ZUXAnimationMake(ZUXAnimateOut|ZUXAnimateFade, ZUXAnimateStay, 0.1, 0)
            completion:^{ [_mask removeFromSuperview]; }];
 }
 
