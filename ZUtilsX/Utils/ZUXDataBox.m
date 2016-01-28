@@ -162,22 +162,22 @@ NSDictionary *restrictUsersData(id instance, NSString *userIdKey) {
     return [[instance propertyForAssociateKey:key] objectForKey:userId];
 }
 
-void synthesizeProperty(NSString *className, NSString *propertyName, NSDictionary *(^dataRef)(id instance)) {
-    Class cls = objc_getClass(className.UTF8String);
+void synthesizeDataBox(const char *className, NSString *propertyName, NSDictionary *(^dataRef)(id instance)) {
+    Class cls = objc_getClass(className);
     ZUXProperty *property = [ZUXProperty propertyWithName:propertyName inClass:cls];
-    NSCAssert(property.property, @"Could not find property %@.%@", className, propertyName);
-    NSCAssert(property.attributes.count != 0, @"Could not fetch property attributes for %@.%@", className, propertyName);
+    NSCAssert(property.property, @"Could not find property %s.%@", className, propertyName);
+    NSCAssert(property.attributes.count != 0, @"Could not fetch property attributes for %s.%@", className, propertyName);
     NSCAssert(property.memoryManagementPolicy == ZUXPropertyMemoryManagementPolicyRetain,
-              @"Does not support un-strong-reference property %@.%@", className, propertyName);
+              @"Does not support un-strong-reference property %s.%@", className, propertyName);
     
     id getter = ^(id self) { return [dataRef(self) objectForKey:propertyName]; };
     id setter = ^(id self, id value) { [(NSMutableDictionary *)dataRef(self) setObject:value forKey:propertyName]; };
     if (!class_addMethod(cls, property.getter, imp_implementationWithBlock(getter), "@@:"))
-        NSCAssert(NO, @"Could not add getter %s for property %@.%@",
+        NSCAssert(NO, @"Could not add getter %s for property %s.%@",
                   sel_getName(property.getter), className, propertyName);
     if (!property.isReadOnly)
         if (!class_addMethod(cls, property.setter, imp_implementationWithBlock(setter), "v@:@"))
-            NSCAssert(NO, @"Could not add setter %s for property %@.%@",
+            NSCAssert(NO, @"Could not add setter %s for property %s.%@",
                       sel_getName(property.setter), className, propertyName);
 }
 

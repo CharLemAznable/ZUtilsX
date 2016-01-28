@@ -11,10 +11,12 @@
 
 #import "zobjc.h"
 
+// enable_category_constructor
 #define enable_category_constructor(className, categoryName)                    \
 ZUX_CONSTRUCTOR void enable_ZUX_CATEGORY_##className##_##categoryName()         \
 { [ZUX_CATEGORY_##className##_##categoryName declare]; }
 
+// category_interface
 #define category_interface(className, categoryName)                             \
 interface ZUX_CATEGORY_##className##_##categoryName : NSObject                  \
 + (void)declare;                                                                \
@@ -22,6 +24,7 @@ interface ZUX_CATEGORY_##className##_##categoryName : NSObject                  
 enable_category_constructor(className, categoryName)                            \
 @interface className (categoryName)
 
+// category_interface_generic
 #define category_interface_generic(className, genericParam, categoryName)       \
 interface ZUX_CATEGORY_##className##_##categoryName : NSObject                  \
 + (void)declare;                                                                \
@@ -29,6 +32,7 @@ interface ZUX_CATEGORY_##className##_##categoryName : NSObject                  
 enable_category_constructor(className, categoryName)                            \
 @interface className genericParam (categoryName)
 
+// category_implementation
 #define category_implementation(className, categoryName)                        \
 implementation ZUX_CATEGORY_##className##_##categoryName                        \
 + (void)declare { ; }                                                           \

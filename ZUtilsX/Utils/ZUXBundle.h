@@ -13,6 +13,8 @@
 
 @interface ZUXBundle : NSObject
 
++ (NSBundle *)appBundle;
+
 + (UIImage *)imageWithName:(NSString *)imageName;
 + (UIImage *)imageForCurrentDeviceWithName:(NSString *)imageName;
 + (NSString *)plistPathWithName:(NSString *)fileName;

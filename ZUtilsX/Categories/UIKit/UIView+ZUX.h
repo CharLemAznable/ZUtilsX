@@ -58,6 +58,7 @@
 @end // UIView (ZUXAutoLayout)
 
 typedef NS_OPTIONS(NSUInteger, ZUXAnimateType) {
+    ZUXAnimateNone      =       0, // none animate
     ZUXAnimateMove      = 1 <<  0, // animate by adjust self translate-transform
     ZUXAnimateFade      = 1 <<  1, // animate by adjust self alpha
     ZUXAnimateSlide     = 1 <<  2, // animate by adjust layer mask frame
@@ -77,7 +78,7 @@ ZUX_EXTERN CGFloat ZUXAnimateZoomRatio;
 
 // relative setting effective only when ZUXAnimateMove/ZUXAnimateSlide.
 typedef NS_OPTIONS(NSUInteger, ZUXAnimateDirection) {
-    ZUXAnimateNone      =       0, // default
+    ZUXAnimateStay      =       0, // default
     ZUXAnimateUp        = 1 <<  0,
     ZUXAnimateLeft      = 1 <<  1,
     ZUXAnimateDown      = 1 <<  2,

@@ -105,12 +105,13 @@
 }
 
 - (void)testNSDictionaryDirectory {
-    NSDictionary *dict = @{@"AAA":@"aaa"};
     XCTAssertFalse([ZUXDirectory fileExists:@"dictionaryfile.plist"]);
-    [dict writeToUserFile:@"dictionaryfile.plist"];
+    XCTAssertNil([NSDictionary dictionaryWithContentsOfUserFile:@"dictionaryfile.plist"]);
+    NSDictionary *dict1 = @{@"AAA":@"aaa"};
+    [dict1 writeToUserFile:@"dictionaryfile.plist"];
     XCTAssertTrue([ZUXDirectory fileExists:@"dictionaryfile.plist"]);
     NSDictionary *dict2 = [NSDictionary dictionaryWithContentsOfUserFile:@"dictionaryfile.plist"];
-    XCTAssertEqualObjects(dict, dict2);
+    XCTAssertEqualObjects(dict1, dict2);
     XCTAssertTrue([ZUXDirectory deleteAllFiles]);
 }
 
