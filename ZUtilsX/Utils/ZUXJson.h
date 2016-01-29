@@ -13,8 +13,6 @@
 #import "ZUXCategory.h"
 #import "zobjc.h"
 
-#if NS_BLOCKS_AVAILABLE
-
 typedef NS_OPTIONS(NSUInteger, ZUXJsonableOptions) {
     ZUXJsonableNone             = 0,
     ZUXJsonableWriteClassName   = 1 << 0
@@ -114,7 +112,5 @@ category_implementation(NSValue, structType##JsonableDummy)             \
 @category_interface(NSMutableDictionary, ZUXJsonable)
 + (NSMutableDictionary *)dictionaryWithValidJsonObject:(id)jsonObject;
 @end // NSMutableDictionary (ZUXJsonable)
-
-#endif // NS_BLOCKS_AVAILABLE
 
 #endif /* ZUtilsX_ZUXJson_h */

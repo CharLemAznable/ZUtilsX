@@ -12,8 +12,6 @@
 #import <UIKit/UIKit.h>
 #import "zobjc.h"
 
-#if NS_BLOCKS_AVAILABLE
-
 typedef CGFloat (^ZUXConstraintBlock)(UIView *view);
 
 // ZUXConstraint will copy its block.
@@ -45,7 +43,5 @@ typedef CGFloat (^ZUXConstraintBlock)(UIView *view);
 + (ZUXConstraint *)quarterHeightConstraint;
 
 @end
-
-#endif // NS_BLOCKS_AVAILABLE
 
 #endif /* ZUtilsX_ZUXConstraint_h */

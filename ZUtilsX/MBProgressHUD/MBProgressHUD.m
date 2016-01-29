@@ -106,9 +106,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 @synthesize progress;
 @synthesize size;
 @synthesize activityIndicatorColor;
-#if NS_BLOCKS_AVAILABLE
 @synthesize completionBlock;
-#endif
 
 #pragma mark - Class methods
 
@@ -235,9 +233,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
     [labelColor release];
     [detailsLabelFont release];
     [detailsLabelColor release];
-#if NS_BLOCKS_AVAILABLE
     [completionBlock release];
-#endif
     [super dealloc];
 #endif
 }
@@ -367,12 +363,10 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
     if (removeFromSuperViewOnHide) {
         [self removeFromSuperview];
     }
-#if NS_BLOCKS_AVAILABLE
     if (self.completionBlock) {
         self.completionBlock();
         self.completionBlock = NULL;
     }
-#endif
     if ([delegate respondsToSelector:@selector(hudWasHidden:)]) {
         [delegate performSelector:@selector(hudWasHidden:) withObject:self];
     }
@@ -390,8 +384,6 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
     // Show HUD view
     [self show:animated];
 }
-
-#if NS_BLOCKS_AVAILABLE
 
 - (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -419,8 +411,6 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
     });
     [self show:animated];
 }
-
-#endif
 
 - (void)launchExecution {
     @autoreleasepool {

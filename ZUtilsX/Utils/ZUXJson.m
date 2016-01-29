@@ -19,8 +19,6 @@
 #import <UIKit/UIGeometry.h>
 #import <objc/runtime.h>
 
-#if NS_BLOCKS_AVAILABLE
-
 NSString *const ZUXJSONABLE_CLASS_NAME = @"ZUXClassName";
 NSString *const ZUXJSONABLE_STRUCT_NAME = @"ZUXStructName";
 BOOL ZUX_USE_JSONKIT = NO;
@@ -528,5 +526,3 @@ ZUX_STATIC id parseZUXJsonObject(id jsonObject) {
         return [NSDictionary dictionaryWithValidJsonObject:jsonObject];
     } return jsonObject;
 }
-
-#endif

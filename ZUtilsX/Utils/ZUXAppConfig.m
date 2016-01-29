@@ -39,11 +39,9 @@ void synthesizeAppConfig(const char *className, NSString *propertyName) {
 }
 
 ZUX_STATIC NSDictionary *appConfigData(id instance) {
-    if (ZUX_EXPECT_F(![[instance class] propertyForAssociateKey:AppConfigDictionaryKey])) {
+    if (ZUX_EXPECT_F(![[instance class] propertyForAssociateKey:AppConfigDictionaryKey]))
         [[instance class] setProperty:[NSDictionary dictionaryWithContentsOfUserFile:appIdentifier bundle:
                                        [[instance class] propertyForAssociateKey:AppConfigBundleNameKey]] ?: @{}
                       forAssociateKey:AppConfigDictionaryKey];
-    }
     return [[instance class] propertyForAssociateKey:AppConfigDictionaryKey];
-    
 }
