@@ -30,7 +30,7 @@ ZUX_CONSTRUCTOR void init_ZUX_APPCONFIG_##className##_bundle() {            \
 #define appconfig(className, property)                                      \
 dynamic property;                                                           \
 ZUX_CONSTRUCTOR void synthesize_ZUX_APPCONFIG_##className##_##property() {  \
-    synthesizeAppConfig(#className, @#property);                           \
+    synthesizeAppConfig(#className, @#property);                            \
 }
 
 ZUX_EXTERN void specifyZUXAppConfigBundle(const char *className, NSString *bundleName);

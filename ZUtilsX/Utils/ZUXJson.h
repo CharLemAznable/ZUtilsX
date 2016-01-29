@@ -81,6 +81,7 @@ ZUX_EXTERN BOOL ZUX_USE_JSONKIT;
 
 @end // NSValue (ZUXJsonable)
 
+// struct_jsonable_interface
 #define struct_jsonable_interface(structType)                           \
 category_interface(NSValue, structType##JsonableDummy)                  \
 @end                                                                    \
@@ -92,10 +93,11 @@ ZUX_CONSTRUCTOR void add_##structType##_jsonable_support()              \
 + (NSValue *)valueWithValidJsonObjectFor##structType:(id)jsonObject;    \
 @end
 
-#define struct_jsonable_implementation(structType)              \
-category_implementation(NSValue, structType##JsonableDummy)     \
-@end                                                            \
-@implementation NSValue (structType##Jsonable) // struct_jsonable
+// struct_jsonable_implementation
+#define struct_jsonable_implementation(structType)                      \
+category_implementation(NSValue, structType##JsonableDummy)             \
+@end                                                                    \
+@implementation NSValue (structType##Jsonable)
 
 @category_interface(NSArray, ZUXJsonable)
 + (NSArray *)arrayWithValidJsonObject:(id)jsonObject;

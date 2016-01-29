@@ -97,7 +97,7 @@ restrictUsersData(instance, @#userIdProperty))
 #define synthesize_constructor(className, property, dataRef)                    \
 dynamic property;                                                               \
 ZUX_CONSTRUCTOR void synthesize_ZUX_DATABOX_##className##_##property() {        \
-    synthesizeDataBox(#className, @#property, ^NSDictionary *(id instance) {   \
+    synthesizeDataBox(#className, @#property, ^NSDictionary *(id instance) {    \
         return dataRef;                                                         \
     });                                                                         \
 }
