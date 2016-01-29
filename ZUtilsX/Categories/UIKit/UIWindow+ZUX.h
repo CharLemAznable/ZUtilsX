@@ -15,7 +15,9 @@
 
 @category_interface(UIWindow, ZUX)
 
-- (void)splashScreenAnimate:(ZUXAnimation)animation;
+- (void)showSplashLaunchWithAnimation:(ZUXAnimation)animation;
+- (void)showSplashImage:(UIImage *)splashImage withAnimation:(ZUXAnimation)animation;
+- (void)showSplashView:(UIView *)splashView withAnimation:(ZUXAnimation)animation;
 
 @end
 

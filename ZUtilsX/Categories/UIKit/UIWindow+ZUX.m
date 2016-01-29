@@ -14,12 +14,17 @@
 
 @category_implementation(UIWindow, ZUX)
 
-- (void)splashScreenAnimate:(ZUXAnimation)animation {
+- (void)showSplashLaunchWithAnimation:(ZUXAnimation)animation {
     NSString *launchImageName = [[ZUXBundle appBundle] infoDictionary][@"UILaunchImageFile"];
-    UIImage *launchImage = [UIImage imageForCurrentDeviceNamed:launchImageName];
-    if (!launchImage) return;
-    
-    UIImageView *splashView = [UIImageView imageViewWithImage:launchImage];
+    [self showSplashImage:[UIImage imageForCurrentDeviceNamed:launchImageName] withAnimation:animation];
+}
+
+- (void)showSplashImage:(UIImage *)splashImage withAnimation:(ZUXAnimation)animation {
+    if (!splashImage) return;
+    [self showSplashView:[UIImageView imageViewWithImage:splashImage] withAnimation:animation];
+}
+
+- (void)showSplashView:(UIView *)splashView withAnimation:(ZUXAnimation)animation {
     [self addSubview:splashView];
     splashView.frame = [self bounds];
     [splashView zuxAnimate:animation completion:^{ [splashView removeFromSuperview]; }];
