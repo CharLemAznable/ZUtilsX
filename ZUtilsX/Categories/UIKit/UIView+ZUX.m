@@ -403,13 +403,12 @@ ZUX_INLINE ZUXAnimation ZUXImmediateAnimationMake(ZUXAnimateType type,
             options |= UIViewAnimationOptionAutoreverse;
     }
     
-    NSLog(@"%@", NSStringFromCGAffineTransform(self.transform));
     [UIView animateWithDuration:animation.duration delay:animation.delay options:options
                      animations:^{
                          self.transform = selfFinalTrans;
                          self.alpha = selfFinalAlpha;
                          maskView.transform = maskFinalTrans;
-                     } completion:^(BOOL finished) { NSLog(@"%d", finished);completion(); }];
+                     } completion:^(BOOL finished) { completion(); }];
 }
 
 #pragma mark - ZUXAnimate Implement Methods -

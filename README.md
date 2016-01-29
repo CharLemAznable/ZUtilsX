@@ -450,7 +450,9 @@
 - UIWindow+ZUX
 
         // 启动画面结束时的动画设置.
-        -splashScreenAnimate:
+        -showSplashLaunchWithAnimation:
+        -showSplashImage:withAnimation:
+        -showSplashView:withAnimation:
 
 - UIControl+ZUX
 
