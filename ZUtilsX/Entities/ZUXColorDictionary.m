@@ -27,6 +27,40 @@
     ZUX_SUPER_DEALLOC;
 }
 
+#pragma mark - Conveniences -
+
++ (ZUXColorDictionary *)colorDictionaryWithDictionary:(NSDictionary *)dictionary {
+    return ZUX_AUTORELEASE([[self alloc] initWithDictionary:dictionary]);
+}
+
++ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName {
+    return [self colorDictionaryWithContentsOfUserFile:fileName subpath:nil];
+}
+
++ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath {
+    if ([ZUXDirectory fileExists:fileName inDirectory:ZUXDocument subpath:subpath])
+        return [self colorDictionaryWithContentsOfUserFile:fileName inDirectory:ZUXDocument subpath:subpath];
+    return [self colorDictionaryWithContentsOfUserFile:fileName bundle:nil subpath:subpath];
+}
+
++ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory {
+    return [self colorDictionaryWithContentsOfUserFile:fileName inDirectory:directory subpath:nil];
+}
+
++ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
+    return [self colorDictionaryWithDictionary:
+            [NSDictionary dictionaryWithContentsOfUserFile:fileName inDirectory:directory subpath:subpath]];
+}
+
++ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName {
+    return [self colorDictionaryWithContentsOfUserFile:fileName bundle:bundleName subpath:nil];
+}
+
++ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath {
+    return [self colorDictionaryWithDictionary:
+            [NSDictionary dictionaryWithContentsOfUserFile:fileName bundle:bundleName subpath:subpath]];
+}
+
 #pragma mark - initializations -
 
 - (ZUX_INSTANCETYPE)initWithDictionary:(NSDictionary *)dictionary {
@@ -61,40 +95,6 @@
 
 - (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath {
     return [self initWithDictionary:
-            [NSDictionary dictionaryWithContentsOfUserFile:fileName bundle:bundleName subpath:subpath]];
-}
-
-#pragma mark - Conveniences -
-
-+ (ZUXColorDictionary *)colorDictionaryWithDictionary:(NSDictionary *)dictionary {
-    return ZUX_AUTORELEASE([[self alloc] initWithDictionary:dictionary]);
-}
-
-+ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName {
-    return [self colorDictionaryWithContentsOfUserFile:fileName subpath:nil];
-}
-
-+ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath {
-    if ([ZUXDirectory fileExists:fileName inDirectory:ZUXDocument subpath:subpath])
-        return [self colorDictionaryWithContentsOfUserFile:fileName inDirectory:ZUXDocument subpath:subpath];
-    return [self colorDictionaryWithContentsOfUserFile:fileName bundle:nil subpath:subpath];
-}
-
-+ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory {
-    return [self colorDictionaryWithContentsOfUserFile:fileName inDirectory:directory subpath:nil];
-}
-
-+ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
-    return [self colorDictionaryWithDictionary:
-            [NSDictionary dictionaryWithContentsOfUserFile:fileName inDirectory:directory subpath:subpath]];
-}
-
-+ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName {
-    return [self colorDictionaryWithContentsOfUserFile:fileName bundle:bundleName subpath:nil];
-}
-
-+ (ZUXColorDictionary *)colorDictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath {
-    return [self colorDictionaryWithDictionary:
             [NSDictionary dictionaryWithContentsOfUserFile:fileName bundle:bundleName subpath:subpath]];
 }
 

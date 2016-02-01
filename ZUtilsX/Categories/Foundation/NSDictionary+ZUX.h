@@ -39,19 +39,19 @@
 
 @category_interface_generic(NSDictionary, ZUX_COVARIANT_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE), ZUXCreation)
 
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName;
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath;
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
-
 + (NSDictionary ZUX_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) *)dictionaryWithContentsOfUserFile:(NSString *)fileName;
 + (NSDictionary ZUX_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) *)dictionaryWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath;
 + (NSDictionary ZUX_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) *)dictionaryWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
 + (NSDictionary ZUX_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) *)dictionaryWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
 + (NSDictionary ZUX_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) *)dictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
 + (NSDictionary ZUX_GENERIC2(ZUX_KEY_TYPE, ZUX_OBJECT_TYPE) *)dictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
+
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
 
 @end // NSDictionary (ZUXCreation)
 
