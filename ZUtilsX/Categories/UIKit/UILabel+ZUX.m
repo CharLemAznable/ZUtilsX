@@ -14,7 +14,7 @@
 - (CGSize)sizeThatConstraintToSize:(CGSize)size {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    !IOS7_OR_LATER ? [self.text sizeWithFont:self.font
+    BEFORE_IOS7 ? [self.text sizeWithFont:self.font
                            constrainedToSize:size
                                lineBreakMode:self.lineBreakMode] :
 #endif

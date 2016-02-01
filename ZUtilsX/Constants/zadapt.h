@@ -16,10 +16,15 @@
 
 #define DeviceScale                     (IS_IPHONE6P ? 1.29375 : (IS_IPHONE6 ? 1.171875 : 1.0))
 
-#define IOS6_OR_LATER                   ([[[UIDevice currentDevice] systemVersion] compare:@"6.0"] != NSOrderedAscending)
-#define IOS7_OR_LATER                   ([[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending)
-#define IOS8_OR_LATER                   ([[[UIDevice currentDevice] systemVersion] compare:@"8.0"] != NSOrderedAscending)
-#define IOS9_OR_LATER                   ([[[UIDevice currentDevice] systemVersion] compare:@"9.0"] != NSOrderedAscending)
+#define BEFORE_IOS6                     ([[[UIDevice currentDevice] systemVersion] compare:@"6.0"] == NSOrderedAscending)
+#define BEFORE_IOS7                     ([[[UIDevice currentDevice] systemVersion] compare:@"7.0"] == NSOrderedAscending)
+#define BEFORE_IOS8                     ([[[UIDevice currentDevice] systemVersion] compare:@"8.0"] == NSOrderedAscending)
+#define BEFORE_IOS9                     ([[[UIDevice currentDevice] systemVersion] compare:@"9.0"] == NSOrderedAscending)
+
+#define IOS6_OR_LATER                   !BEFORE_IOS6
+#define IOS7_OR_LATER                   !BEFORE_IOS7
+#define IOS8_OR_LATER                   !BEFORE_IOS8
+#define IOS9_OR_LATER                   !BEFORE_IOS9
 
 #define statusBarHeight                 (IOS7_OR_LATER ? 20 : 0)
 #define statusBarFix                    (IOS7_OR_LATER ? 0 : 20)

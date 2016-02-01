@@ -48,7 +48,7 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 - (UIStatusBarStyle)statusBarStyle {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    !IOS7_OR_LATER ? [UIApplication sharedApplication].statusBarStyle :
+    BEFORE_IOS7 ? [UIApplication sharedApplication].statusBarStyle :
 #endif
     [controllerForStatusBarStyle() p_StatusBarStyle];
 }
@@ -59,7 +59,7 @@ ZUX_STATIC_INLINE UIViewController *controllerForStatusBarStyle() {
 
 - (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle animated:(BOOL)animated {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    if (!IOS7_OR_LATER) {
+    if (BEFORE_IOS7) {
         [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle animated:animated];
         return;
     }

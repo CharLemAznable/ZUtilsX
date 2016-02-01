@@ -35,7 +35,7 @@
 
 - (void)registerUserNotificationTypes:(ZUXUserNotificationType)types categories:(NSSet *)categories {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-    !IOS8_OR_LATER ? [self registerForRemoteNotificationTypes:types] :
+    BEFORE_IOS8 ? [self registerForRemoteNotificationTypes:types] :
 #endif
     [self registerUserNotificationSettings:
      [UIUserNotificationSettings settingsForTypes:userNotificationType(types)
@@ -43,7 +43,7 @@
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
     // registerForRemoteNotifications in IOS8.0+
-    if (!IOS8_OR_LATER) return;
+    if (BEFORE_IOS8) return;
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
         [[self.delegate class]
@@ -62,7 +62,7 @@
     return type != ZUXUserNotificationTypeNone &&
     (
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-     !IOS8_OR_LATER ? type == ([self enabledRemoteNotificationTypes] & type) :
+     BEFORE_IOS8 ? type == ([self enabledRemoteNotificationTypes] & type) :
 #endif
      userNotificationType(type) == ([self currentUserNotificationSettings].types & userNotificationType(type)));
 }
@@ -74,7 +74,7 @@
 - (BOOL)noneNotificationTypeRegisted {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 80000
-    !IOS8_OR_LATER ? UIRemoteNotificationTypeNone == [self enabledRemoteNotificationTypes] :
+    BEFORE_IOS8 ? UIRemoteNotificationTypeNone == [self enabledRemoteNotificationTypes] :
 #endif
     UIUserNotificationTypeNone == [self currentUserNotificationSettings].types;
 }
