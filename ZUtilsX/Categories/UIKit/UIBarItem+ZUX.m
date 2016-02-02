@@ -54,14 +54,14 @@
 - (UIColor *)textShadowColorForState:(UIControlState)state {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    !IOS6_OR_LATER ? titleTextAttributeForStateAndKey(self, state, UITextAttributeTextShadowColor) :
+    BEFORE_IOS6 ? titleTextAttributeForStateAndKey(self, state, UITextAttributeTextShadowColor) :
 #endif
     titleShadowAttributeForState(self, state).shadowColor;
 }
 
 - (void)setTextShadowColor:(UIColor *)textShadowColor forState:(UIControlState)state {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (!IOS6_OR_LATER) {
+    if (BEFORE_IOS6) {
         setTitleTextAttributeForStateAndKey(self, state, UITextAttributeTextShadowColor, textShadowColor);
         return;
     }
@@ -74,14 +74,14 @@
 + (UIColor *)textShadowColorForState:(UIControlState)state {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    !IOS6_OR_LATER ? titleTextAttributeForStateAndKey(APPEARANCE, state, UITextAttributeTextShadowColor) :
+    BEFORE_IOS6 ? titleTextAttributeForStateAndKey(APPEARANCE, state, UITextAttributeTextShadowColor) :
 #endif
     titleShadowAttributeForState(APPEARANCE, state).shadowColor;
 }
 
 + (void)setTextShadowColor:(UIColor *)textShadowColor forState:(UIControlState)state {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (!IOS6_OR_LATER) {
+    if (BEFORE_IOS6) {
         setTitleTextAttributeForStateAndKey(APPEARANCE, state, UITextAttributeTextShadowColor, textShadowColor);
         return;
     }
@@ -96,7 +96,7 @@
 - (CGSize)textShadowOffsetForState:(UIControlState)state {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    !IOS6_OR_LATER ? ZUX_CGSizeFromUIOffset
+    BEFORE_IOS6 ? ZUX_CGSizeFromUIOffset
     ([titleTextAttributeForStateAndKey(self, state, UITextAttributeTextShadowOffset) UIOffsetValue]) :
 #endif
     titleShadowAttributeForState(self, state).shadowOffset;
@@ -104,7 +104,7 @@
 
 - (void)setTextShadowOffset:(CGSize)textShadowOffset forState:(UIControlState)state {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (!IOS6_OR_LATER) {
+    if (BEFORE_IOS6) {
         setTitleTextAttributeForStateAndKey(self, state, UITextAttributeTextShadowOffset,
                                             [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)]);
         return;
@@ -118,7 +118,7 @@
 + (CGSize)textShadowOffsetForState:(UIControlState)state {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    !IOS6_OR_LATER ? ZUX_CGSizeFromUIOffset
+    BEFORE_IOS6 ? ZUX_CGSizeFromUIOffset
     ([titleTextAttributeForStateAndKey(APPEARANCE, state, UITextAttributeTextShadowOffset) UIOffsetValue]) :
 #endif
     titleShadowAttributeForState(APPEARANCE, state).shadowOffset;
@@ -126,7 +126,7 @@
 
 + (void)setTextShadowOffset:(CGSize)textShadowOffset forState:(UIControlState)state {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (!IOS6_OR_LATER) {
+    if (BEFORE_IOS6) {
         setTitleTextAttributeForStateAndKey(APPEARANCE, state, UITextAttributeTextShadowOffset,
                                             [NSValue valueWithUIOffset:ZUX_UIOffsetFromCGSize(textShadowOffset)]);
         return;
@@ -142,14 +142,14 @@
 - (CGFloat)textShadowSizeForState:(UIControlState)state {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    !IOS6_OR_LATER ? 0 :
+    BEFORE_IOS6 ? 0 :
 #endif
     titleShadowAttributeForState(self, state).shadowBlurRadius;
 }
 
 - (void)setTextShadowSize:(CGFloat)textShadowSize forState:(UIControlState)state {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (!IOS6_OR_LATER) return;
+    if (BEFORE_IOS6) return;
 #endif
     NSShadow *shadow = defaultTitleShadowAttributeForState(self, state);
     [shadow setShadowBlurRadius:textShadowSize];
@@ -159,14 +159,14 @@
 + (CGFloat)textShadowSizeForState:(UIControlState)state {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    !IOS6_OR_LATER ? 0 :
+    BEFORE_IOS6 ? 0 :
 #endif
     titleShadowAttributeForState(APPEARANCE, state).shadowBlurRadius;
 }
 
 + (void)setTextShadowSize:(CGFloat)textShadowSize forState:(UIControlState)state {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (!IOS6_OR_LATER) return;
+    if (BEFORE_IOS6) return;
 #endif
     NSShadow *shadow = defaultTitleShadowAttributeForState(APPEARANCE, state);
     [shadow setShadowBlurRadius:textShadowSize];

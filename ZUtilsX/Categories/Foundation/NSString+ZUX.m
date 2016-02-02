@@ -17,19 +17,14 @@
 @end
 @category_implementation(NSString, ZUXSafe)
 
-- (ZUX_INSTANCETYPE)zux_initWithUTF8String:(const char *)nullTerminatedCString {
-    if (!nullTerminatedCString) return nil;
-    return [self zux_initWithUTF8String:nullTerminatedCString];
-}
-
 + (ZUX_INSTANCETYPE)zux_stringWithUTF8String:(const char *)nullTerminatedCString {
     if (!nullTerminatedCString) return nil;
     return [self zux_stringWithUTF8String:nullTerminatedCString];
 }
 
-- (ZUX_INSTANCETYPE)zux_initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding {
+- (ZUX_INSTANCETYPE)zux_initWithUTF8String:(const char *)nullTerminatedCString {
     if (!nullTerminatedCString) return nil;
-    return [self zux_initWithCString:nullTerminatedCString encoding:encoding];
+    return [self zux_initWithUTF8String:nullTerminatedCString];
 }
 
 + (ZUX_INSTANCETYPE)zux_stringWithCString:(const char *)cString encoding:(NSStringEncoding)enc {
@@ -37,17 +32,22 @@
     return [self zux_stringWithCString:cString encoding:enc];
 }
 
+- (ZUX_INSTANCETYPE)zux_initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding {
+    if (!nullTerminatedCString) return nil;
+    return [self zux_initWithCString:nullTerminatedCString encoding:encoding];
+}
+
 + (void)load {
     static dispatch_once_t once_t;
     dispatch_once(&once_t, ^{
-        [self swizzleInstanceOriSelector:@selector(initWithUTF8String:)
-                         withNewSelector:@selector(zux_initWithUTF8String:)];
         [self swizzleClassOriSelector:@selector(stringWithUTF8String:)
                       withNewSelector:@selector(zux_stringWithUTF8String:)];
-        [self swizzleInstanceOriSelector:@selector(initWithCString:encoding:)
-                         withNewSelector:@selector(zux_initWithCString:encoding:)];
+        [self swizzleInstanceOriSelector:@selector(initWithUTF8String:)
+                         withNewSelector:@selector(zux_initWithUTF8String:)];
         [self swizzleClassOriSelector:@selector(stringWithCString:encoding:)
                       withNewSelector:@selector(zux_stringWithCString:encoding:)];
+        [self swizzleInstanceOriSelector:@selector(initWithCString:encoding:)
+                         withNewSelector:@selector(zux_initWithCString:encoding:)];
     });
 }
 
@@ -256,7 +256,7 @@
 
 - (NSString *)stringByEscapingForURLQuery {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    if (!IOS7_OR_LATER) {
+    if (BEFORE_IOS7) {
         static CFStringRef toEscape = CFSTR(":/=,!$&'()*+;[]@#?% ");
         return ZUX_AUTORELEASE((ZUX_BRIDGE_TRANSFER NSString *)
                                CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
@@ -274,7 +274,7 @@
 - (NSString *)stringByUnescapingFromURLQuery {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    !IOS7_OR_LATER ? [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] :
+    BEFORE_IOS7 ? [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] :
 #endif
     [self stringByRemovingPercentEncoding];
 }
@@ -370,7 +370,7 @@
 - (CGSize)zuxSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    !IOS7_OR_LATER ? [self sizeWithFont:font constrainedToSize:size] :
+    BEFORE_IOS7 ? [self sizeWithFont:font constrainedToSize:size] :
 #endif
     [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
                     attributes:@{ NSFontAttributeName:font } context:NULL].size;

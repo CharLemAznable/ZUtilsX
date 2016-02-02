@@ -19,6 +19,18 @@
                         width:nil height:nil centerX:nil centerY:nil];
 }
 
++ (ZUXTransform *)transformWithView:(UIView *)view left:(id)left right:(id)right top:(id)top bottom:(id)bottom {
+    return ZUX_AUTORELEASE([[self alloc] initWithView:view left:left right:right top:top bottom:bottom]);
+}
+
++ (ZUXTransform *)transformWithView:(UIView *)view width:(id)width height:(id)height centerX:(id)centerX centerY:(id)centerY {
+    return ZUX_AUTORELEASE([[self alloc] initWithView:view width:width height:height centerX:centerX centerY:centerY]);
+}
+
++ (ZUXTransform *)transformWithView:(UIView *)view left:(id)left right:(id)right top:(id)top bottom:(id)bottom width:(id)width height:(id)height centerX:(id)centerX centerY:(id)centerY {
+    return ZUX_AUTORELEASE([[self alloc] initWithView:view left:left right:right top:top bottom:bottom width:width height:height centerX:centerX centerY:centerY]);
+}
+
 - (ZUX_INSTANCETYPE)initWithView:(UIView *)view
                             left:(id)left right:(id)right
                              top:(id)top bottom:(id)bottom {

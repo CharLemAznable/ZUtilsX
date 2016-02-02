@@ -348,6 +348,12 @@ ZUX_INLINE ZUXAnimation ZUXImmediateAnimationMake(ZUXAnimateType type,
 }
 
 - (void)zuxAnimate:(ZUXAnimation)animation completion:(void (^)())completion {
+    if (!hasZUXAnimateType(animation, ZUXAnimateMove|ZUXAnimateFade|
+                           ZUXAnimateSlide|ZUXAnimateExpand|ZUXAnimateShrink)) {
+        if (!hasZUXAnimateType(animation, ZUXAnimateRepeat)) completion();
+        return;
+    } // none animation specify, return directly; if repeat, no completion.
+    
     CGAffineTransform selfStartTrans = self.transform;
     CGAffineTransform selfFinalTrans = self.transform;
     CGAffineTransform *selfTrans = &selfStartTrans;
@@ -390,7 +396,14 @@ ZUX_INLINE ZUXAnimation ZUXImmediateAnimationMake(ZUXAnimateType type,
     self.transform = selfStartTrans;
     self.alpha = selfStartAlpha;
     maskView.transform = maskStartTrans;
-    [UIView animateWithDuration:animation.duration delay:animation.delay options:0
+    UIViewAnimationOptions options = 0;
+    if (hasZUXAnimateType(animation, ZUXAnimateRepeat)) {
+        options |= UIViewAnimationOptionRepeat;
+        if (hasZUXAnimateType(animation, ZUXAnimateReverse))
+            options |= UIViewAnimationOptionAutoreverse;
+    }
+    
+    [UIView animateWithDuration:animation.duration delay:animation.delay options:options
                      animations:^{
                          self.transform = selfFinalTrans;
                          self.alpha = selfFinalAlpha;

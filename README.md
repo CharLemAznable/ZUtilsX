@@ -18,6 +18,7 @@
 
 * 判断当前系统版本.
 
+        BEFORE_IOSX
         IOSX_OR_LATER
 
 * IOS7及其后, 状态栏透明, 顶级视图需在顶部增加20个Point高度的空白.
@@ -117,19 +118,19 @@
         -setObject:atIndexedSubscript:
 
         // 读取应用程序沙盒/Bundle中的文件.
-        -initWithContentsOfUserFile:
-        -initWithContentsOfUserFile:subpath:
-        -initWithContentsOfUserFile:inDirectory:
-        -initWithContentsOfUserFile:inDirectory:subpath:
-        -initWithContentsOfUserFile:bundle:
-        -initWithContentsOfUserFile:bundle:subpath:
-
         +arrayWithContentsOfUserFile:
         +arrayWithContentsOfUserFile:subpath:
         +arrayWithContentsOfUserFile:inDirectory:
         +arrayWithContentsOfUserFile:inDirectory:subpath:
         +arrayWithContentsOfUserFile:bundle:
         +arrayWithContentsOfUserFile:bundle:subpath:
+
+        -initWithContentsOfUserFile:
+        -initWithContentsOfUserFile:subpath:
+        -initWithContentsOfUserFile:inDirectory:
+        -initWithContentsOfUserFile:inDirectory:subpath:
+        -initWithContentsOfUserFile:bundle:
+        -initWithContentsOfUserFile:bundle:subpath:
 
         // 写入应用程序沙盒中的文件.
         -writeToUserFile:
@@ -157,19 +158,19 @@
         -setObject:forKeyedSubscript:
 
         // 读取应用程序沙盒/Bundle中的文件.
-        -initWithContentsOfUserFile:
-        -initWithContentsOfUserFile:subpath:
-        -initWithContentsOfUserFile:inDirectory:
-        -initWithContentsOfUserFile:inDirectory:subpath:
-        -initWithContentsOfUserFile:bundle:
-        -initWithContentsOfUserFile:bundle:subpath:
-
         +dictionaryWithContentsOfUserFile:
         +dictionaryWithContentsOfUserFile:subpath:
         +dictionaryWithContentsOfUserFile:inDirectory:
         +dictionaryWithContentsOfUserFile:inDirectory:subpath:
         +dictionaryWithContentsOfUserFile:bundle:
         +dictionaryWithContentsOfUserFile:bundle:subpath:
+
+        -initWithContentsOfUserFile:
+        -initWithContentsOfUserFile:subpath:
+        -initWithContentsOfUserFile:inDirectory:
+        -initWithContentsOfUserFile:inDirectory:subpath:
+        -initWithContentsOfUserFile:bundle:
+        -initWithContentsOfUserFile:bundle:subpath:
 
         // 写入应用程序沙盒中的文件.
         -writeToUserFile:
@@ -450,7 +451,9 @@
 - UIWindow+ZUX
 
         // 启动画面结束时的动画设置.
-        -splashScreenAnimate:
+        -showSplashLaunchWithAnimation:
+        -showSplashImage:withAnimation:
+        -showSplashView:withAnimation:
 
 - UIControl+ZUX
 

@@ -87,9 +87,7 @@ typedef NS_ENUM(NSInteger, MBProgressHUDAnimation) {
 #endif
 #endif
 
-#if NS_BLOCKS_AVAILABLE
 typedef void (^MBProgressHUDCompletionBlock)();
-#endif
 
 
 /**
@@ -241,8 +239,6 @@ typedef void (^MBProgressHUDCompletionBlock)();
  */
 - (void)showWhileExecuting:(SEL)method onTarget:(id)target withObject:(id)object animated:(BOOL)animated;
 
-#if NS_BLOCKS_AVAILABLE
-
 /**
  * Shows the HUD while a block is executing on a background queue, then hides the HUD.
  *
@@ -282,8 +278,6 @@ typedef void (^MBProgressHUDCompletionBlock)();
  * A block that gets called after the HUD was completely hidden.
  */
 @property (copy) MBProgressHUDCompletionBlock completionBlock;
-
-#endif
 
 /**
  * MBProgressHUD operation mode. The default is MBProgressHUDModeIndeterminate.

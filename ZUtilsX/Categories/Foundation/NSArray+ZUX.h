@@ -38,19 +38,19 @@
 
 @category_interface_generic(NSArray, ZUX_COVARIANT_GENERIC(ZUX_OBJECT_TYPE), ZUXCreation)
 
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName;
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath;
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
-
 + (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)arrayWithContentsOfUserFile:(NSString *)fileName;
 + (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)arrayWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath;
 + (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)arrayWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
 + (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)arrayWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
 + (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)arrayWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
 + (NSArray ZUX_GENERIC(ZUX_OBJECT_TYPE) *)arrayWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
+
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName;
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath;
 
 @end // NSArray (ZUXCreation)
 

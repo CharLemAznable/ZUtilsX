@@ -148,33 +148,6 @@
 
 @category_implementation(NSDictionary, ZUXCreation)
 
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName {
-    return [self initWithContentsOfUserFile:fileName subpath:nil];
-}
-
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath {
-    if ([ZUXDirectory fileExists:fileName inDirectory:ZUXDocument subpath:subpath])
-        return [self initWithContentsOfUserFile:fileName inDirectory:ZUXDocument subpath:subpath];
-    return [self initWithContentsOfUserFile:fileName bundle:nil subpath:subpath];
-}
-
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory {
-    return [self initWithContentsOfUserFile:fileName inDirectory:directory subpath:nil];
-}
-
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
-    if (ZUX_EXPECT_F(![ZUXDirectory fileExists:fileName inDirectory:directory subpath:subpath])) return nil;
-    return [self initWithContentsOfFile:[ZUXDirectory fullFilePath:fileName inDirectory:directory subpath:subpath]];
-}
-
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName {
-    return [self initWithContentsOfUserFile:fileName bundle:bundleName subpath:nil];
-}
-
-- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath {
-    return [self initWithContentsOfFile:[ZUXBundle plistPathWithName:fileName bundle:bundleName subpath:subpath]];
-}
-
 + (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)fileName {
     return [self dictionaryWithContentsOfUserFile:fileName subpath:nil];
 }
@@ -200,6 +173,33 @@
 
 + (NSDictionary *)dictionaryWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath {
     return [self dictionaryWithContentsOfFile:[ZUXBundle plistPathWithName:fileName bundle:bundleName subpath:subpath]];
+}
+
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName {
+    return [self initWithContentsOfUserFile:fileName subpath:nil];
+}
+
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName subpath:(NSString *)subpath {
+    if ([ZUXDirectory fileExists:fileName inDirectory:ZUXDocument subpath:subpath])
+        return [self initWithContentsOfUserFile:fileName inDirectory:ZUXDocument subpath:subpath];
+    return [self initWithContentsOfUserFile:fileName bundle:nil subpath:subpath];
+}
+
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory {
+    return [self initWithContentsOfUserFile:fileName inDirectory:directory subpath:nil];
+}
+
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName inDirectory:(ZUXDirectoryType)directory subpath:(NSString *)subpath {
+    if (ZUX_EXPECT_F(![ZUXDirectory fileExists:fileName inDirectory:directory subpath:subpath])) return nil;
+    return [self initWithContentsOfFile:[ZUXDirectory fullFilePath:fileName inDirectory:directory subpath:subpath]];
+}
+
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName {
+    return [self initWithContentsOfUserFile:fileName bundle:bundleName subpath:nil];
+}
+
+- (ZUX_INSTANCETYPE)initWithContentsOfUserFile:(NSString *)fileName bundle:(NSString *)bundleName subpath:(NSString *)subpath {
+    return [self initWithContentsOfFile:[ZUXBundle plistPathWithName:fileName bundle:bundleName subpath:subpath]];
 }
 
 @end // NSDictionary (ZUXCreation)

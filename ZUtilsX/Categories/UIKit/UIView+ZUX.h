@@ -71,6 +71,13 @@ typedef NS_OPTIONS(NSUInteger, ZUXAnimateType) {
     // relative setting effective only when ZUXAnimateMove.
     ZUXAnimateBySelf    = 0 <<  9, // animate relative by self, default
     ZUXAnimateByWindow  = 1 <<  9, // animate relative by current window
+    
+    ZUXAnimateOnce      = 0 << 10, // default
+    ZUXAnimateRepeat    = 1 << 10, // repeat animation indefinitely
+    
+    // if ZUXAnimateRepeat
+    ZUXAnimateForward   = 0 << 11, // default
+    ZUXAnimateReverse   = 1 << 11, // repeat animation back and forth
 };
 
 // ZUXAnimateExpand/ZUXAnimateShrink parameter, at least 1

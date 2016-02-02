@@ -140,7 +140,7 @@ ZUX_STATIC_INLINE UIImage *backgroundImageForStateAndStyleAndBarMetrics
 (ZUX_KINDOF(UIBarButtonItem *) instance, UIControlState state, UIBarButtonItemStyle style, UIBarMetrics barMetrics) {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    !IOS6_OR_LATER ? [instance backgroundImageForState:state barMetrics:barMetrics] :
+    BEFORE_IOS6 ? [instance backgroundImageForState:state barMetrics:barMetrics] :
 #endif
     [instance backgroundImageForState:state style:style barMetrics:barMetrics];
 }
@@ -148,7 +148,7 @@ ZUX_STATIC_INLINE UIImage *backgroundImageForStateAndStyleAndBarMetrics
 ZUX_STATIC_INLINE void setBackgroundImageForStateAndStyleAndBarMetrics
 (ZUX_KINDOF(UIBarButtonItem *) instance, UIImage *backgroundImage, UIControlState state, UIBarButtonItemStyle style, UIBarMetrics barMetrics) {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    if (!IOS6_OR_LATER) [instance setBackgroundImage:backgroundImage forState:state barMetrics:barMetrics]; else
+    if (BEFORE_IOS6) [instance setBackgroundImage:backgroundImage forState:state barMetrics:barMetrics]; else
 #endif
     [instance setBackgroundImage:backgroundImage forState:state style:style barMetrics:barMetrics];
 }

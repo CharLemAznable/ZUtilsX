@@ -9,8 +9,6 @@
 #import "ZUXConstraint.h"
 #import "zarc.h"
 
-#if NS_BLOCKS_AVAILABLE
-
 @implementation ZUXConstraint
 
 + (ZUX_INSTANCETYPE)constraintWithBlock:(ZUXConstraintBlock)block {
@@ -110,5 +108,3 @@ static ZUXConstraintBlock quarterHeightBlock = ^CGFloat(UIView *view) {
 };
 
 @end
-
-#endif // NS_BLOCKS_AVAILABLE

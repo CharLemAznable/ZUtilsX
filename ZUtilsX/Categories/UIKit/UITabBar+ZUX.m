@@ -40,14 +40,14 @@
 + (BOOL)isTranslucent {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    !IOS7_OR_LATER ? NO :
+    BEFORE_IOS7 ? NO :
 #endif
     [APPEARANCE isTranslucent];
 }
 
 + (void)setTranslucent:(BOOL)translucent {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    if (!IOS7_OR_LATER) return;
+    if (BEFORE_IOS7) return;
 #endif
     [APPEARANCE setTranslucent:translucent];
 }
@@ -74,14 +74,14 @@
 + (UIColor *)barTintColor {
     return
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    !IOS7_OR_LATER ? nil :
+    BEFORE_IOS7 ? nil :
 #endif
     [APPEARANCE barTintColor];
 }
 
 + (void)setBarTintColor:(UIColor *)barTintColor {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
-    if (!IOS7_OR_LATER) return;
+    if (BEFORE_IOS7) return;
 #endif
     [APPEARANCE setBarTintColor:barTintColor];
 }
