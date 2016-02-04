@@ -22,17 +22,11 @@
 
 /* Begin PBXBuildFile section */
 		6A0E1AD21C3E5F0500995C70 /* UINavigationController+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0E1AD11C3E5F0500995C70 /* UINavigationController+ZUX.m */; };
-		6A0E1AD31C3E68C600995C70 /* UINavigationController+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A0E1AD01C3E5F0500995C70 /* UINavigationController+ZUX.h */; };
-		6A0F89651C0347620003948C /* zobjc.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A0F89621C0346900003948C /* zobjc.h */; };
-		6A0F89661C0347620003948C /* zarc.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A0F89601C0346900003948C /* zarc.h */; };
-		6A0F89671C0347620003948C /* zadapt.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A0F895F1C0346900003948C /* zadapt.h */; };
-		6A0F89681C0347620003948C /* zconstant.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A0F89611C0346900003948C /* zconstant.h */; };
 		6A0F896B1C0348C70003948C /* ZUXSingletonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F896A1C0348C70003948C /* ZUXSingletonTest.m */; };
 		6A0F896D1C034DA10003948C /* ZUXGeometryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F896C1C034DA10003948C /* ZUXGeometryTest.m */; };
 		6A0F89711C03528D0003948C /* ZUXJsonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F89701C03528D0003948C /* ZUXJsonTest.m */; };
 		6A0F89731C0356B90003948C /* ZUXDirectoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F89721C0356B90003948C /* ZUXDirectoryTest.m */; };
 		6A0F89791C0359C80003948C /* UIDevice+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F89781C0359C80003948C /* UIDevice+ZUX.m */; };
-		6A0F897A1C0361CB0003948C /* UIDevice+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A0F89771C0359C80003948C /* UIDevice+ZUX.h */; };
 		6A1087E31C047E870062160C /* NSObjectZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1087E21C047E870062160C /* NSObjectZUXTest.m */; };
 		6A1087E51C04871E0062160C /* NSObjectZUXJsonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1087E41C04871E0062160C /* NSObjectZUXJsonTest.m */; };
 		6A1087E71C048D780062160C /* NSArrayZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1087E61C048D780062160C /* NSArrayZUXTest.m */; };
@@ -47,10 +41,6 @@
 		6A17946A1C05CF0B00FF5870 /* NSDate+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1794691C05CF0B00FF5870 /* NSDate+ZUX.m */; };
 		6A17946D1C05D45800FF5870 /* UITabBarItem+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A17946C1C05D45800FF5870 /* UITabBarItem+ZUX.m */; };
 		6A17946F1C05D58600FF5870 /* NSDateZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A17946E1C05D58600FF5870 /* NSDateZUXTest.m */; };
-		6A1794701C05D8A300FF5870 /* NSDate+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A1794681C05CF0B00FF5870 /* NSDate+ZUX.h */; };
-		6A1794711C05D8A300FF5870 /* UITextField+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A1794651C05BB4300FF5870 /* UITextField+ZUX.h */; };
-		6A1794721C05D8A300FF5870 /* UITextView+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A1794621C05BB1300FF5870 /* UITextView+ZUX.h */; };
-		6A1794731C05D8A300FF5870 /* UITabBarItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */; };
 		6A273D001C520C8800D4E803 /* NSValueZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A273CFF1C520C8800D4E803 /* NSValueZUXTest.m */; };
 		6A29B3E81C3A14AE003DF51A /* ZUXJSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A29B3E71C3A14AE003DF51A /* ZUXJSONKit.m */; };
 		6A5024B21C1A70F6002A7E99 /* ZUXColorDictionaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5024B11C1A70F6002A7E99 /* ZUXColorDictionaryTest.m */; };
@@ -58,7 +48,6 @@
 		6A5024B61C1AB703002A7E99 /* ZUXColorDictionaryTest2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A5024B51C1AB703002A7E99 /* ZUXColorDictionaryTest2.plist */; };
 		6A5332571C108FF90088F2B0 /* ZUXJSONKitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5332561C108FF90088F2B0 /* ZUXJSONKitTest.m */; };
 		6A5B155B1C0C350F006B8673 /* ZUXBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5B155A1C0C350F006B8673 /* ZUXBundle.m */; };
-		6A5B155C1C0C3C2F006B8673 /* ZUXBundle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A5B15591C0C350F006B8673 /* ZUXBundle.h */; };
 		6A63F9C71C02E05400AB3891 /* libZUtilsX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A63F9B21C02E00D00AB3891 /* libZUtilsX.a */; };
 		6A63FA1D1C02E0E000AB3891 /* NSArray+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9D01C02E0E000AB3891 /* NSArray+ZUX.m */; };
 		6A63FA1E1C02E0E000AB3891 /* NSCoder+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63F9D21C02E0E000AB3891 /* NSCoder+ZUX.m */; };
@@ -90,79 +79,96 @@
 		6A63FA3A1C02E0E000AB3891 /* ZUXRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63FA181C02E0E000AB3891 /* ZUXRefreshView.m */; };
 		6A63FA3B1C02E0E000AB3891 /* ZUXSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63FA1A1C02E0E000AB3891 /* ZUXSearchBar.m */; };
 		6A63FA3C1C02E0E000AB3891 /* ZUXView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63FA1C1C02E0E000AB3891 /* ZUXView.m */; };
-		6A63FA411C02E2F400AB3891 /* ZUXCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63FA041C02E0E000AB3891 /* ZUXCategory.h */; };
-		6A63FA421C02E2F400AB3891 /* ZUXDirectory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63FA051C02E0E000AB3891 /* ZUXDirectory.h */; };
-		6A63FA431C02E2F400AB3891 /* ZUXGeometry.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63FA071C02E0E000AB3891 /* ZUXGeometry.h */; };
-		6A63FA441C02E2F400AB3891 /* ZUXJson.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63FA091C02E0E000AB3891 /* ZUXJson.h */; };
-		6A63FA461C02E2F400AB3891 /* ZUXSingleton.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63FA0D1C02E0E000AB3891 /* ZUXSingleton.h */; };
-		6A63FA471C02E2F400AB3891 /* ZUXControl.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63FA0F1C02E0E000AB3891 /* ZUXControl.h */; };
-		6A63FA481C02E2F400AB3891 /* ZUXImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63FA111C02E0E000AB3891 /* ZUXImageView.h */; };
-		6A63FA491C02E2F400AB3891 /* ZUXLabel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63FA131C02E0E000AB3891 /* ZUXLabel.h */; };
-		6A63FA4A1C02E2F400AB3891 /* ZUXPageControl.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63FA151C02E0E000AB3891 /* ZUXPageControl.h */; };
-		6A63FA4B1C02E2F400AB3891 /* ZUXRefreshView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63FA171C02E0E000AB3891 /* ZUXRefreshView.h */; };
-		6A63FA4C1C02E2F400AB3891 /* ZUXSearchBar.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63FA191C02E0E000AB3891 /* ZUXSearchBar.h */; };
-		6A63FA4D1C02E2F400AB3891 /* ZUXView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63FA1B1C02E0E000AB3891 /* ZUXView.h */; };
-		6A63FA4E1C02E2F400AB3891 /* NSArray+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9CF1C02E0E000AB3891 /* NSArray+ZUX.h */; };
-		6A63FA4F1C02E2F400AB3891 /* NSCoder+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9D11C02E0E000AB3891 /* NSCoder+ZUX.h */; };
-		6A63FA501C02E2F400AB3891 /* NSData+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9D31C02E0E000AB3891 /* NSData+ZUX.h */; };
-		6A63FA511C02E2F400AB3891 /* NSDictionary+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9D51C02E0E000AB3891 /* NSDictionary+ZUX.h */; };
-		6A63FA521C02E2F400AB3891 /* NSExpression+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9D71C02E0E000AB3891 /* NSExpression+ZUX.h */; };
-		6A63FA531C02E2F400AB3891 /* NSNull+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9D91C02E0E000AB3891 /* NSNull+ZUX.h */; };
-		6A63FA541C02E2F400AB3891 /* NSNumber+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9DB1C02E0E000AB3891 /* NSNumber+ZUX.h */; };
-		6A63FA551C02E2F400AB3891 /* NSObject+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9DD1C02E0E000AB3891 /* NSObject+ZUX.h */; };
-		6A63FA571C02E2F400AB3891 /* NSString+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9E11C02E0E000AB3891 /* NSString+ZUX.h */; };
-		6A63FA581C02E2F400AB3891 /* NSValue+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9E31C02E0E000AB3891 /* NSValue+ZUX.h */; };
-		6A63FA591C02E2F400AB3891 /* UIColor+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9E61C02E0E000AB3891 /* UIColor+ZUX.h */; };
-		6A63FA5A1C02E2F400AB3891 /* UIControl+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9E81C02E0E000AB3891 /* UIControl+ZUX.h */; };
-		6A63FA5B1C02E2F400AB3891 /* UIImage+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9EA1C02E0E000AB3891 /* UIImage+ZUX.h */; };
-		6A63FA5C1C02E2F400AB3891 /* UILabel+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9EC1C02E0E000AB3891 /* UILabel+ZUX.h */; };
-		6A63FA5D1C02E2F400AB3891 /* UIView+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9EE1C02E0E000AB3891 /* UIView+ZUX.h */; };
-		6A63FA5E1C02E2F400AB3891 /* UIViewController+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9F01C02E0E000AB3891 /* UIViewController+ZUX.h */; };
-		6A63FA5F1C02E2F400AB3891 /* ZUXConstraint.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9F81C02E0E000AB3891 /* ZUXConstraint.h */; };
-		6A63FA601C02E2F400AB3891 /* ZUXTransform.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9FA1C02E0E000AB3891 /* ZUXTransform.h */; };
-		6A63FA611C02E2F400AB3891 /* MBProgressHUD.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9FD1C02E0E000AB3891 /* MBProgressHUD.h */; };
-		6A63FA621C02E2F400AB3891 /* UIView+MBProgressHUD.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9FF1C02E0E000AB3891 /* UIView+MBProgressHUD.h */; };
-		6A63FA641C02E30B00AB3891 /* ZUtilsX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A63F9B51C02E00D00AB3891 /* ZUtilsX.h */; };
 		6A648B531C1E5C7A0077F276 /* UITabBar+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A648B521C1E5C7A0077F276 /* UITabBar+ZUX.m */; };
-		6A648B561C1E612E0077F276 /* UITabBar+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A648B511C1E5C7A0077F276 /* UITabBar+ZUX.h */; };
 		6A648B591C1E86CE0077F276 /* UIBarItem+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A648B581C1E86CE0077F276 /* UIBarItem+ZUX.m */; };
-		6A648B5A1C1E8C2F0077F276 /* UIBarItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A648B571C1E86CE0077F276 /* UIBarItem+ZUX.h */; };
 		6A648B5D1C1E94AD0077F276 /* ZUXKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A648B5C1C1E94AD0077F276 /* ZUXKeychain.m */; };
-		6A648B5E1C1EAF970077F276 /* ZUXKeychain.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A648B5B1C1E94AD0077F276 /* ZUXKeychain.h */; };
 		6A648B601C1EB3F10077F276 /* ZUXKeychainTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A648B5F1C1EB3F10077F276 /* ZUXKeychainTest.m */; };
 		6A648B671C1EC5E40077F276 /* UIApplication+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A648B661C1EC5E40077F276 /* UIApplication+ZUX.m */; };
-		6A648B681C1EE59A0077F276 /* UIApplication+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A648B651C1EC5E40077F276 /* UIApplication+ZUX.h */; };
 		6A68BF3A1C3B632200C690E1 /* ZUXProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A68BF391C3B632200C690E1 /* ZUXProtocol.m */; };
 		6A68BF3D1C3B676200C690E1 /* ZUXIvar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A68BF3C1C3B676200C690E1 /* ZUXIvar.m */; };
 		6A68BF401C3B677500C690E1 /* ZUXProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A68BF3F1C3B677500C690E1 /* ZUXProperty.m */; };
 		6A68BF431C3B678800C690E1 /* ZUXMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A68BF421C3B678800C690E1 /* ZUXMethod.m */; };
 		6A68BF461C3BB6B000C690E1 /* ZUXPropertyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A68BF451C3BB6B000C690E1 /* ZUXPropertyTest.m */; };
-		6A68BF471C3BC12D00C690E1 /* ZUXProtocol.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A68BF381C3B632200C690E1 /* ZUXProtocol.h */; };
-		6A68BF481C3BC12D00C690E1 /* ZUXIvar.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A68BF3B1C3B676200C690E1 /* ZUXIvar.h */; };
-		6A68BF491C3BC12D00C690E1 /* ZUXProperty.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A68BF3E1C3B677500C690E1 /* ZUXProperty.h */; };
-		6A68BF4A1C3BC12D00C690E1 /* ZUXMethod.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A68BF411C3B678800C690E1 /* ZUXMethod.h */; };
 		6A68BF4C1C3BC15800C690E1 /* ZUXMethodTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A68BF4B1C3BC15800C690E1 /* ZUXMethodTest.m */; };
 		6A68BF4E1C3BC67600C690E1 /* ZUXIvarTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A68BF4D1C3BC67600C690E1 /* ZUXIvarTest.m */; };
 		6A68BF501C3BCAB100C690E1 /* ZUXProtocolTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A68BF4F1C3BCAB100C690E1 /* ZUXProtocolTest.m */; };
 		6A6A3D861C191E9600847DEF /* UINavigationBar+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */; };
-		6A6A3D871C1961FB00847DEF /* UINavigationBar+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */; };
 		6A6A3D941C1983C700847DEF /* ZUXColorDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */; };
-		6A6A3D951C19840D00847DEF /* ZUXColorDictionary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */; };
+		6A722FD61C633BCF00295162 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A722FD51C633BCF00295162 /* Foundation.framework */; };
+		6A722FD81C633BEC00295162 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A722FD71C633BEC00295162 /* CoreGraphics.framework */; };
+		6A722FDA1C633BF200295162 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A722FD91C633BF200295162 /* UIKit.framework */; };
+		6A722FDC1C633BF600295162 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A722FDB1C633BF600295162 /* Security.framework */; };
+		6A722FDF1C633D0900295162 /* zobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0F89621C0346900003948C /* zobjc.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FE01C633D0900295162 /* zarc.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0F89601C0346900003948C /* zarc.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FE11C633D0900295162 /* zadapt.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0F895F1C0346900003948C /* zadapt.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FE21C633D0900295162 /* zconstant.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0F89611C0346900003948C /* zconstant.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FE31C633D0900295162 /* ZUXProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A68BF381C3B632200C690E1 /* ZUXProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FE41C633D0900295162 /* ZUXIvar.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A68BF3B1C3B676200C690E1 /* ZUXIvar.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FE51C633D0900295162 /* ZUXProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A68BF3E1C3B677500C690E1 /* ZUXProperty.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FE61C633D0900295162 /* ZUXMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A68BF411C3B678800C690E1 /* ZUXMethod.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FE71C633D0900295162 /* ZUXCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63FA041C02E0E000AB3891 /* ZUXCategory.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FE81C633D0900295162 /* ZUXSingleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63FA0D1C02E0E000AB3891 /* ZUXSingleton.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FE91C633D0900295162 /* ZUXGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63FA071C02E0E000AB3891 /* ZUXGeometry.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FEA1C633D0900295162 /* ZUXJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63FA091C02E0E000AB3891 /* ZUXJson.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FEB1C633D0900295162 /* ZUXDirectory.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63FA051C02E0E000AB3891 /* ZUXDirectory.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FEC1C633D0900295162 /* ZUXBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5B15591C0C350F006B8673 /* ZUXBundle.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FED1C633D0900295162 /* ZUXKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A648B5B1C1E94AD0077F276 /* ZUXKeychain.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FEE1C633D0900295162 /* ZUXDataBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A869D051C489106001A9661 /* ZUXDataBox.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FEF1C633D0900295162 /* ZUXAppConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A9CB95B1C5A0F2F0075FBF6 /* ZUXAppConfig.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FF01C633D0900295162 /* ZUXView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63FA1B1C02E0E000AB3891 /* ZUXView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FF11C633D0900295162 /* ZUXControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63FA0F1C02E0E000AB3891 /* ZUXControl.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FF21C633D0900295162 /* ZUXLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63FA131C02E0E000AB3891 /* ZUXLabel.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FF31C633D0900295162 /* ZUXImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63FA111C02E0E000AB3891 /* ZUXImageView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FF41C633D0900295162 /* ZUXRefreshView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63FA171C02E0E000AB3891 /* ZUXRefreshView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FF51C633D0900295162 /* ZUXPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63FA151C02E0E000AB3891 /* ZUXPageControl.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FF61C633D0A00295162 /* ZUXSearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63FA191C02E0E000AB3891 /* ZUXSearchBar.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FF71C633D0A00295162 /* NSObject+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9DD1C02E0E000AB3891 /* NSObject+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FF81C633D0A00295162 /* NSNull+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9D91C02E0E000AB3891 /* NSNull+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FF91C633D0A00295162 /* NSNumber+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9DB1C02E0E000AB3891 /* NSNumber+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FFA1C633D0A00295162 /* NSCoder+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9D11C02E0E000AB3891 /* NSCoder+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FFB1C633D0A00295162 /* NSArray+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9CF1C02E0E000AB3891 /* NSArray+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FFC1C633D0A00295162 /* NSDictionary+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9D51C02E0E000AB3891 /* NSDictionary+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FFD1C633D0A00295162 /* NSData+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9D31C02E0E000AB3891 /* NSData+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FFE1C633D0A00295162 /* NSString+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9E11C02E0E000AB3891 /* NSString+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A722FFF1C633D0A00295162 /* NSValue+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9E31C02E0E000AB3891 /* NSValue+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230001C633D0A00295162 /* NSExpression+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9D71C02E0E000AB3891 /* NSExpression+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230011C633D0A00295162 /* NSDate+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A1794681C05CF0B00FF5870 /* NSDate+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230021C633D0A00295162 /* UIDevice+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0F89771C0359C80003948C /* UIDevice+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230031C633D0A00295162 /* UIApplication+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A648B651C1EC5E40077F276 /* UIApplication+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230041C633D0B00295162 /* UIView+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9EE1C02E0E000AB3891 /* UIView+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230051C633D0B00295162 /* UIWindow+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A9CB9191C59C9BD0075FBF6 /* UIWindow+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230061C633D0B00295162 /* UIControl+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9E81C02E0E000AB3891 /* UIControl+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230071C633D0B00295162 /* UILabel+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9EC1C02E0E000AB3891 /* UILabel+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230081C633D0B00295162 /* UIImage+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9EA1C02E0E000AB3891 /* UIImage+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230091C633D0B00295162 /* UIImageView+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A9CB91C1C59F1200075FBF6 /* UIImageView+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A72300A1C633D0B00295162 /* UITextField+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A1794651C05BB4300FF5870 /* UITextField+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A72300B1C633D0B00295162 /* UITextView+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A1794621C05BB1300FF5870 /* UITextView+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A72300C1C633D0B00295162 /* UIColor+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9E61C02E0E000AB3891 /* UIColor+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A72300D1C633D0B00295162 /* UIViewController+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9F01C02E0E000AB3891 /* UIViewController+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A72300E1C633D0C00295162 /* UINavigationController+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0E1AD01C3E5F0500995C70 /* UINavigationController+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A72300F1C633D0C00295162 /* UINavigationBar+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A3D841C191E9600847DEF /* UINavigationBar+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230101C633D0C00295162 /* UITabBar+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A648B511C1E5C7A0077F276 /* UITabBar+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230111C633D0C00295162 /* UIBarItem+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A648B571C1E86CE0077F276 /* UIBarItem+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230121C633D0C00295162 /* UITabBarItem+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A17946B1C05D45800FF5870 /* UITabBarItem+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230131C633D0C00295162 /* UIBarButtonItem+ZUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AE7ABE81C1FD8BE0061A235 /* UIBarButtonItem+ZUX.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230141C633D0C00295162 /* ZUXConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9F81C02E0E000AB3891 /* ZUXConstraint.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230151C633D0D00295162 /* ZUXTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9FA1C02E0E000AB3891 /* ZUXTransform.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230161C633D0D00295162 /* ZUXColorDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230171C633D0D00295162 /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9FD1C02E0E000AB3891 /* MBProgressHUD.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230181C633D0D00295162 /* UIView+MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9FF1C02E0E000AB3891 /* UIView+MBProgressHUD.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6A7230191C633D0D00295162 /* ZUtilsX.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A63F9B51C02E00D00AB3891 /* ZUtilsX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A72301A1C633D3100295162 /* zappearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A29B3E51C3A14AE003DF51A /* zappearance.h */; };
+		6A72301B1C633D3100295162 /* ZUXJSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A29B3E61C3A14AE003DF51A /* ZUXJSONKit.h */; };
 		6A7B861D1C29496E00FF864E /* UIImageZUXTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B861C1C29496E00FF864E /* UIImageZUXTest.m */; };
 		6A7E83901C4E33E800E71014 /* ZUXDataBoxTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E838F1C4E33E800E71014 /* ZUXDataBoxTest.m */; };
 		6A869D071C489106001A9661 /* ZUXDataBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A869D061C489106001A9661 /* ZUXDataBox.m */; };
-		6A869D081C48DD74001A9661 /* ZUXDataBox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A869D051C489106001A9661 /* ZUXDataBox.h */; };
 		6A9CB91B1C59C9BD0075FBF6 /* UIWindow+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CB91A1C59C9BD0075FBF6 /* UIWindow+ZUX.m */; };
 		6A9CB91E1C59F1200075FBF6 /* UIImageView+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CB91D1C59F1200075FBF6 /* UIImageView+ZUX.m */; };
-		6A9CB91F1C59F6C10075FBF6 /* UIWindow+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A9CB9191C59C9BD0075FBF6 /* UIWindow+ZUX.h */; };
-		6A9CB9201C59F6C10075FBF6 /* UIImageView+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A9CB91C1C59F1200075FBF6 /* UIImageView+ZUX.h */; };
 		6A9CB95D1C5A0F2F0075FBF6 /* ZUXAppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CB95C1C5A0F2F0075FBF6 /* ZUXAppConfig.m */; };
 		6A9CB95F1C5A31170075FBF6 /* ZUXAppConfigTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CB95E1C5A31170075FBF6 /* ZUXAppConfigTest.m */; };
 		6A9CB9611C5A35860075FBF6 /* org.cuc.n3.ZUtilsTests.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A9CB9601C5A35860075FBF6 /* org.cuc.n3.ZUtilsTests.plist */; };
 		6A9CB9631C5A35CC0075FBF6 /* ZUXAppConfig.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6A9CB9621C5A35CC0075FBF6 /* ZUXAppConfig.bundle */; };
-		6A9CB9641C5A37470075FBF6 /* ZUXAppConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6A9CB95B1C5A0F2F0075FBF6 /* ZUXAppConfig.h */; };
 		6AE7ABEA1C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7ABE91C1FD8BE0061A235 /* UIBarButtonItem+ZUX.m */; };
-		6AE7ABEB1C20006B0061A235 /* UIBarButtonItem+ZUX.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6AE7ABE81C1FD8BE0061A235 /* UIBarButtonItem+ZUX.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,86 +180,6 @@
 			remoteInfo = ZUtilsX;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		6A63F9B01C02E00D00AB3891 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Headers;
-			dstSubfolderSpec = 16;
-			files = (
-				6A9CB9641C5A37470075FBF6 /* ZUXAppConfig.h in CopyFiles */,
-				6A9CB91F1C59F6C10075FBF6 /* UIWindow+ZUX.h in CopyFiles */,
-				6A9CB9201C59F6C10075FBF6 /* UIImageView+ZUX.h in CopyFiles */,
-				6A869D081C48DD74001A9661 /* ZUXDataBox.h in CopyFiles */,
-				6A0E1AD31C3E68C600995C70 /* UINavigationController+ZUX.h in CopyFiles */,
-				6A68BF471C3BC12D00C690E1 /* ZUXProtocol.h in CopyFiles */,
-				6A68BF481C3BC12D00C690E1 /* ZUXIvar.h in CopyFiles */,
-				6A68BF491C3BC12D00C690E1 /* ZUXProperty.h in CopyFiles */,
-				6A68BF4A1C3BC12D00C690E1 /* ZUXMethod.h in CopyFiles */,
-				6AE7ABEB1C20006B0061A235 /* UIBarButtonItem+ZUX.h in CopyFiles */,
-				6A648B681C1EE59A0077F276 /* UIApplication+ZUX.h in CopyFiles */,
-				6A648B5E1C1EAF970077F276 /* ZUXKeychain.h in CopyFiles */,
-				6A648B5A1C1E8C2F0077F276 /* UIBarItem+ZUX.h in CopyFiles */,
-				6A648B561C1E612E0077F276 /* UITabBar+ZUX.h in CopyFiles */,
-				6A6A3D951C19840D00847DEF /* ZUXColorDictionary.h in CopyFiles */,
-				6A6A3D871C1961FB00847DEF /* UINavigationBar+ZUX.h in CopyFiles */,
-				6A5B155C1C0C3C2F006B8673 /* ZUXBundle.h in CopyFiles */,
-				6A1794701C05D8A300FF5870 /* NSDate+ZUX.h in CopyFiles */,
-				6A1794711C05D8A300FF5870 /* UITextField+ZUX.h in CopyFiles */,
-				6A1794721C05D8A300FF5870 /* UITextView+ZUX.h in CopyFiles */,
-				6A1794731C05D8A300FF5870 /* UITabBarItem+ZUX.h in CopyFiles */,
-				6A0F897A1C0361CB0003948C /* UIDevice+ZUX.h in CopyFiles */,
-				6A0F89651C0347620003948C /* zobjc.h in CopyFiles */,
-				6A0F89661C0347620003948C /* zarc.h in CopyFiles */,
-				6A0F89671C0347620003948C /* zadapt.h in CopyFiles */,
-				6A0F89681C0347620003948C /* zconstant.h in CopyFiles */,
-				6A63FA411C02E2F400AB3891 /* ZUXCategory.h in CopyFiles */,
-				6A63FA421C02E2F400AB3891 /* ZUXDirectory.h in CopyFiles */,
-				6A63FA431C02E2F400AB3891 /* ZUXGeometry.h in CopyFiles */,
-				6A63FA441C02E2F400AB3891 /* ZUXJson.h in CopyFiles */,
-				6A63FA461C02E2F400AB3891 /* ZUXSingleton.h in CopyFiles */,
-				6A63FA471C02E2F400AB3891 /* ZUXControl.h in CopyFiles */,
-				6A63FA481C02E2F400AB3891 /* ZUXImageView.h in CopyFiles */,
-				6A63FA491C02E2F400AB3891 /* ZUXLabel.h in CopyFiles */,
-				6A63FA4A1C02E2F400AB3891 /* ZUXPageControl.h in CopyFiles */,
-				6A63FA4B1C02E2F400AB3891 /* ZUXRefreshView.h in CopyFiles */,
-				6A63FA4C1C02E2F400AB3891 /* ZUXSearchBar.h in CopyFiles */,
-				6A63FA4D1C02E2F400AB3891 /* ZUXView.h in CopyFiles */,
-				6A63FA4E1C02E2F400AB3891 /* NSArray+ZUX.h in CopyFiles */,
-				6A63FA4F1C02E2F400AB3891 /* NSCoder+ZUX.h in CopyFiles */,
-				6A63FA501C02E2F400AB3891 /* NSData+ZUX.h in CopyFiles */,
-				6A63FA511C02E2F400AB3891 /* NSDictionary+ZUX.h in CopyFiles */,
-				6A63FA521C02E2F400AB3891 /* NSExpression+ZUX.h in CopyFiles */,
-				6A63FA531C02E2F400AB3891 /* NSNull+ZUX.h in CopyFiles */,
-				6A63FA541C02E2F400AB3891 /* NSNumber+ZUX.h in CopyFiles */,
-				6A63FA551C02E2F400AB3891 /* NSObject+ZUX.h in CopyFiles */,
-				6A63FA571C02E2F400AB3891 /* NSString+ZUX.h in CopyFiles */,
-				6A63FA581C02E2F400AB3891 /* NSValue+ZUX.h in CopyFiles */,
-				6A63FA591C02E2F400AB3891 /* UIColor+ZUX.h in CopyFiles */,
-				6A63FA5A1C02E2F400AB3891 /* UIControl+ZUX.h in CopyFiles */,
-				6A63FA5B1C02E2F400AB3891 /* UIImage+ZUX.h in CopyFiles */,
-				6A63FA5C1C02E2F400AB3891 /* UILabel+ZUX.h in CopyFiles */,
-				6A63FA5D1C02E2F400AB3891 /* UIView+ZUX.h in CopyFiles */,
-				6A63FA5E1C02E2F400AB3891 /* UIViewController+ZUX.h in CopyFiles */,
-				6A63FA5F1C02E2F400AB3891 /* ZUXConstraint.h in CopyFiles */,
-				6A63FA601C02E2F400AB3891 /* ZUXTransform.h in CopyFiles */,
-				6A63FA611C02E2F400AB3891 /* MBProgressHUD.h in CopyFiles */,
-				6A63FA621C02E2F400AB3891 /* UIView+MBProgressHUD.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6A63FA631C02E30300AB3891 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 7;
-			files = (
-				6A63FA641C02E30B00AB3891 /* ZUtilsX.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6A0E1AD01C3E5F0500995C70 /* UINavigationController+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+ZUX.h"; sourceTree = "<group>"; };
@@ -387,6 +313,10 @@
 		6A6A3D851C191E9600847DEF /* UINavigationBar+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ZUX.m"; sourceTree = "<group>"; };
 		6A6A3D921C1983C700847DEF /* ZUXColorDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXColorDictionary.h; sourceTree = "<group>"; };
 		6A6A3D931C1983C700847DEF /* ZUXColorDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUXColorDictionary.m; sourceTree = "<group>"; };
+		6A722FD51C633BCF00295162 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6A722FD71C633BEC00295162 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6A722FD91C633BF200295162 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6A722FDB1C633BF600295162 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6A7B861C1C29496E00FF864E /* UIImageZUXTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageZUXTest.m; path = Categories/UIKit/UIImageZUXTest.m; sourceTree = "<group>"; };
 		6A7E838F1C4E33E800E71014 /* ZUXDataBoxTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXDataBoxTest.m; path = Utils/ZUXDataBoxTest.m; sourceTree = "<group>"; };
 		6A869D051C489106001A9661 /* ZUXDataBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUXDataBox.h; sourceTree = "<group>"; };
@@ -409,6 +339,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A722FDC1C633BF600295162 /* Security.framework in Frameworks */,
+				6A722FDA1C633BF200295162 /* UIKit.framework in Frameworks */,
+				6A722FD81C633BEC00295162 /* CoreGraphics.framework in Frameworks */,
+				6A722FD61C633BCF00295162 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +446,7 @@
 			children = (
 				6A63F9B41C02E00D00AB3891 /* ZUtilsX */,
 				6A63F9C31C02E05400AB3891 /* ZUtilsTests */,
+				6A722FDE1C633C4900295162 /* Frameworks */,
 				6A63F9B31C02E00D00AB3891 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -727,7 +662,89 @@
 			name = Runtime;
 			sourceTree = "<group>";
 		};
+		6A722FDE1C633C4900295162 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6A722FDB1C633BF600295162 /* Security.framework */,
+				6A722FD91C633BF200295162 /* UIKit.framework */,
+				6A722FD71C633BEC00295162 /* CoreGraphics.framework */,
+				6A722FD51C633BCF00295162 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6A722FDD1C633C2900295162 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A7230191C633D0D00295162 /* ZUtilsX.h in Headers */,
+				6A722FDF1C633D0900295162 /* zobjc.h in Headers */,
+				6A722FE01C633D0900295162 /* zarc.h in Headers */,
+				6A722FE11C633D0900295162 /* zadapt.h in Headers */,
+				6A722FE21C633D0900295162 /* zconstant.h in Headers */,
+				6A722FE31C633D0900295162 /* ZUXProtocol.h in Headers */,
+				6A722FE41C633D0900295162 /* ZUXIvar.h in Headers */,
+				6A722FE51C633D0900295162 /* ZUXProperty.h in Headers */,
+				6A722FE61C633D0900295162 /* ZUXMethod.h in Headers */,
+				6A722FE71C633D0900295162 /* ZUXCategory.h in Headers */,
+				6A722FE81C633D0900295162 /* ZUXSingleton.h in Headers */,
+				6A722FE91C633D0900295162 /* ZUXGeometry.h in Headers */,
+				6A722FEA1C633D0900295162 /* ZUXJson.h in Headers */,
+				6A722FEB1C633D0900295162 /* ZUXDirectory.h in Headers */,
+				6A722FEC1C633D0900295162 /* ZUXBundle.h in Headers */,
+				6A722FED1C633D0900295162 /* ZUXKeychain.h in Headers */,
+				6A722FEE1C633D0900295162 /* ZUXDataBox.h in Headers */,
+				6A722FEF1C633D0900295162 /* ZUXAppConfig.h in Headers */,
+				6A722FF01C633D0900295162 /* ZUXView.h in Headers */,
+				6A722FF11C633D0900295162 /* ZUXControl.h in Headers */,
+				6A722FF21C633D0900295162 /* ZUXLabel.h in Headers */,
+				6A722FF31C633D0900295162 /* ZUXImageView.h in Headers */,
+				6A722FF41C633D0900295162 /* ZUXRefreshView.h in Headers */,
+				6A722FF51C633D0900295162 /* ZUXPageControl.h in Headers */,
+				6A722FF61C633D0A00295162 /* ZUXSearchBar.h in Headers */,
+				6A722FF71C633D0A00295162 /* NSObject+ZUX.h in Headers */,
+				6A722FF81C633D0A00295162 /* NSNull+ZUX.h in Headers */,
+				6A722FF91C633D0A00295162 /* NSNumber+ZUX.h in Headers */,
+				6A722FFA1C633D0A00295162 /* NSCoder+ZUX.h in Headers */,
+				6A722FFB1C633D0A00295162 /* NSArray+ZUX.h in Headers */,
+				6A722FFC1C633D0A00295162 /* NSDictionary+ZUX.h in Headers */,
+				6A722FFD1C633D0A00295162 /* NSData+ZUX.h in Headers */,
+				6A722FFE1C633D0A00295162 /* NSString+ZUX.h in Headers */,
+				6A722FFF1C633D0A00295162 /* NSValue+ZUX.h in Headers */,
+				6A7230001C633D0A00295162 /* NSExpression+ZUX.h in Headers */,
+				6A7230011C633D0A00295162 /* NSDate+ZUX.h in Headers */,
+				6A7230021C633D0A00295162 /* UIDevice+ZUX.h in Headers */,
+				6A7230031C633D0A00295162 /* UIApplication+ZUX.h in Headers */,
+				6A7230041C633D0B00295162 /* UIView+ZUX.h in Headers */,
+				6A7230051C633D0B00295162 /* UIWindow+ZUX.h in Headers */,
+				6A7230061C633D0B00295162 /* UIControl+ZUX.h in Headers */,
+				6A7230071C633D0B00295162 /* UILabel+ZUX.h in Headers */,
+				6A7230081C633D0B00295162 /* UIImage+ZUX.h in Headers */,
+				6A7230091C633D0B00295162 /* UIImageView+ZUX.h in Headers */,
+				6A72300A1C633D0B00295162 /* UITextField+ZUX.h in Headers */,
+				6A72300B1C633D0B00295162 /* UITextView+ZUX.h in Headers */,
+				6A72300C1C633D0B00295162 /* UIColor+ZUX.h in Headers */,
+				6A72300D1C633D0B00295162 /* UIViewController+ZUX.h in Headers */,
+				6A72300E1C633D0C00295162 /* UINavigationController+ZUX.h in Headers */,
+				6A72300F1C633D0C00295162 /* UINavigationBar+ZUX.h in Headers */,
+				6A7230101C633D0C00295162 /* UITabBar+ZUX.h in Headers */,
+				6A7230111C633D0C00295162 /* UIBarItem+ZUX.h in Headers */,
+				6A7230121C633D0C00295162 /* UITabBarItem+ZUX.h in Headers */,
+				6A7230131C633D0C00295162 /* UIBarButtonItem+ZUX.h in Headers */,
+				6A7230141C633D0C00295162 /* ZUXConstraint.h in Headers */,
+				6A7230151C633D0D00295162 /* ZUXTransform.h in Headers */,
+				6A7230161C633D0D00295162 /* ZUXColorDictionary.h in Headers */,
+				6A7230171C633D0D00295162 /* MBProgressHUD.h in Headers */,
+				6A7230181C633D0D00295162 /* UIView+MBProgressHUD.h in Headers */,
+				6A72301A1C633D3100295162 /* zappearance.h in Headers */,
+				6A72301B1C633D3100295162 /* ZUXJSONKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		6A63F9B11C02E00D00AB3891 /* ZUtilsX */ = {
@@ -736,8 +753,7 @@
 			buildPhases = (
 				6A63F9AE1C02E00D00AB3891 /* Sources */,
 				6A63F9AF1C02E00D00AB3891 /* Frameworks */,
-				6A63F9B01C02E00D00AB3891 /* CopyFiles */,
-				6A63FA631C02E30300AB3891 /* CopyFiles */,
+				6A722FDD1C633C2900295162 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -831,7 +847,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Step 1. Build Device and Simulator versions\nxcodebuild -target ${PROJECT_NAME} ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target ${PROJECT_NAME} -configuration ${CONFIGURATION} -sdk iphonesimulator ARCHS='i386 x86_64' VALID_ARCHS='i386 x86_64' BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy files.\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/Headers\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\ncp \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/ZUtilsX.h\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\ncp \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}-device.a\"\ncp \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\" \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}-simulator.a\"\n";
+			shellScript = "# Step 1. Build Device and Simulator versions\nxcodebuild -target ${PROJECT_NAME} ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target ${PROJECT_NAME} -configuration ${CONFIGURATION} -sdk iphonesimulator ARCHS='i386 x86_64' VALID_ARCHS='i386 x86_64' BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Step 3. copy files.\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/ZUtilsX\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# Last touch. create framework.\nFRAMEWORK_LOCATION=${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework\nmkdir -p \"${FRAMEWORK_LOCATION}/Headers\"\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/ZUtilsX/\" \"${FRAMEWORK_LOCATION}/Headers\"\ncp \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${FRAMEWORK_LOCATION}/${PROJECT_NAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -973,6 +989,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -994,6 +1011,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = "non-global";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
@@ -1018,6 +1036,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1033,6 +1052,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = "non-global";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -1043,7 +1063,9 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = "${PROJECT_NAME}/ZUtilsX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "${PROJECT_NAME}/";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1053,7 +1075,9 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = "${PROJECT_NAME}/ZUtilsX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "${PROJECT_NAME}/";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
