@@ -2,9 +2,10 @@
 
 收集日常开发中积累的工具代码.
 
-        pod "ZUtilsX", "~> 0.1.5"
+        pod "ZUtilsX", "~> 0.1.6"
 
-[压缩包下载](https://raw.githubusercontent.com/CharLemAznable/ZUtilsX/master/ZUtilsX.tar.gz)
+[静态库压缩包下载](https://raw.githubusercontent.com/CharLemAznable/ZUtilsX/master/Products/libZUtilsX.zip)
+[Framework压缩包下载](https://raw.githubusercontent.com/CharLemAznable/ZUtilsX/master/Products/ZUtilsX.zip)
 
 #####Constant
 
